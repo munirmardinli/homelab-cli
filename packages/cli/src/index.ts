@@ -1,11 +1,13 @@
 import { Command } from 'commander';
-import { FileUtil, SshUtil } from './utils.js';
 import * as fs from 'fs';
 import fetch from 'node-fetch';
 import { Readable } from 'stream';
 import 'dotenv/config';
+
+import { FileUtil } from './utils/file.js';
 import { ParseUtil } from './utils/parse.js';
 import { StringQuoter } from './utils/quote.js';
+import { SshUtil } from './utils/ssh.js';
 
 const program = new Command();
 
