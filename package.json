@@ -72,7 +72,8 @@
 		"start:cli": "node packages/cli/src/lib/index.js -- setup",
 		"start:cli:dev": "tsx packages/cli/src/index.ts -- setup",
 		"prelint": "prettier --write packages/*/src/**/*.{ts,js,tsx,jsx}",
-		"lint": "npx eslint \"packages/*/src/**/*.{ts,js,tsx,jsx}\" --fix"
+		"lint": "npx eslint \"packages/*/src/**/*.{ts,js,tsx,jsx}\" --fix",
+		"postinstall": "npm run build --workspaces"
 	},
 	"dependencies": {
 		"dotenv": "^17.0.1",
