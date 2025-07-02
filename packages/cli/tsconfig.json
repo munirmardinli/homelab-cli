@@ -3,6 +3,10 @@
   "compilerOptions": {
     "outDir": "lib",
     "rootDir": "src",
+		"baseUrl": ".",
+		"sourceMap": true,
+		"declarationMap": true,
+		"allowSyntheticDefaultImports": true,
     "declaration": true,
     "declarationDir": "lib",
     "emitDeclarationOnly": false

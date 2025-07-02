@@ -6,22 +6,6 @@
   "type": "module",
   "private": false,
   "sideEffects": false,
-  "homepage": "https://munirmardinli.github.io/homelab-cli",
-  "bugs": {
-    "url": "https://github.com/munirmardinli/homelab-cli/issues",
-    "email": "Munir@Mardinli.de"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/munirmardinli/homelab-cli.git",
-    "directory": "Munir Mardinli DevOps Tools",
-    "homepage": "https://github.com/munirmardinli/homelab-cli#readme"
-  },
-  "author": {
-    "name": "Munir Mardinli",
-    "email": "Munir@Mardinli.de",
-    "url": "https://linktr.ee/munirmardinli"
-  },
   "bin": {
     "homelab-cli": "lib/index.js"
   },
@@ -38,30 +22,6 @@
     "./*": {
       "import": "./lib/*.js",
       "require": "./lib/*.js"
-    },
-    "./utils/ssh.js": {
-      "import": "./lib/utils/ssh.js",
-      "require": "./lib/utils/ssh.js"
-    },
-    "./utils/file.js": {
-      "import": "./lib/utils/file.js",
-      "require": "./lib/utils/file.js"
-    },
-    "./utils/parse.js": {
-      "import": "./lib/utils/parse.js",
-      "require": "./lib/utils/parse.js"
-    },
-    "./utils/quote.js": {
-      "import": "./lib/utils/quote.js",
-      "require": "./lib/utils/quote.js"
-    },
-    "./types/types.js": {
-      "import": "./lib/types/types.js",
-      "require": "./lib/types/types.js"
-    },
-    "./cli.js": {
-      "import": "./lib/cli.js",
-      "require": "./lib/cli.js"
     }
   },
   "scripts": {
@@ -71,18 +31,6 @@
     "start": "node lib/index.js -- setup",
     "prestart": "if [ ! -d lib ]; then exit 1; fi"
   },
-  "keywords": ["cli", "setup", "ssh"],
-  "funding": {
-    "type": "individual",
-    "url": "https://linktr.ee/munirmardinli"
-  },
-  "contributors": [
-    {
-      "name": "Munir Mardinli",
-      "email": "Munir@Mardinli.de",
-      "url": "https://linktr.ee/munirmardinli"
-    }
-  ],
   "dependencies": {
     "commander": "^11.1.0",
     "dotenv": "^17.0.1",
@@ -91,11 +39,5 @@
   "devDependencies": {
     "@types/node": "^24.0.10",
     "typescript": "^5.3.3"
-  },
-  "engines": {
-    "node": ">=18"
-  },
-  "tsdocsOptions": {
-    "changelog": true
   }
 }
