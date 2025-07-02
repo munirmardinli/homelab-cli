@@ -6,6 +6,7 @@
   "type": "module",
   "private": false,
   "sideEffects": false,
+	"types": "lib/index.d.ts",
   "bin": {
     "homelab-cli": "lib/index.js"
   },
