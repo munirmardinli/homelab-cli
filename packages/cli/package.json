@@ -38,6 +38,7 @@
   "scripts": {
     "postinstall": "tsc",
     "build": "tsc",
+		"prebuild": "rm -rf lib",
     "start": "node lib/index.js -- setup"
   },
   "keywords": ["cli", "setup", "ssh"],

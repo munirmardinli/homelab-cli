@@ -1,6 +1,6 @@
 {
 	"name": "@homelab/core",
-	"version": "1.0.14",
+	"version": "0.0.1",
 	"sideEffects": false,
 	"private": true,
 	"license": "MIT",
@@ -64,7 +64,6 @@
 	},
 	"scripts": {
 		"build": "npm run build --workspaces",
-		"clean": "tsc -b packages/* --clean",
 		"start:cli": "node packages/cli/lib/index.js",
 		"format": "prettier --write 'packages/*/src/**/*.{ts,js,tsx,jsx}'"
 	},
