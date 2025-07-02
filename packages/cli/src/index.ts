@@ -64,6 +64,8 @@ program
       );
       const quoted = StringQuoter.quote(filtered);
       await SshUtil.runRemoteCommand(host, user, password, quoted, port);
+    } else {
+      await SshUtil.runRemoteCommand(host, user, password, undefined, port);
     }
   });
 

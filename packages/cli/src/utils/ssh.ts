@@ -5,7 +5,7 @@ class SshUtil {
     host: string,
     user: string,
     password: string,
-    command: string,
+    command?: string,
     port?: string,
   ) {
     return new Promise<void>((resolve, reject) => {
@@ -13,7 +13,10 @@ class SshUtil {
       if (port) {
         sshArgs.push('-p', port);
       }
-      sshArgs.push(`${user}@${host}`, command);
+      sshArgs.push(`${user}@${host}`);
+      if (command) {
+        sshArgs.push(command);
+      }
       const ssh = spawn('ssh', sshArgs, {
         stdio: 'inherit',
       });
