@@ -1,31 +1,52 @@
 {
-	"name": "@munirmardinli_org/cli",
-	"version": "1.0.0",
-	"description": "CLI-Tool für Setup-Skripte auf Synology, Windows, Mac.",
-	"main": "dist/index.js",
-	"bin": {
-		"synology-cli": "dist/index.js"
-	},
-	"scripts": {
-		"build": "tsc",
-		"start": "node dist/index.js"
-	},
-	"keywords": [
-		"cli",
-		"synology",
-		"setup",
-		"ssh"
-	],
-	"author": "",
-	"license": "MIT",
-	"type": "module",
-	"dependencies": {
-		"commander": "^11.1.0",
-		"dotenv": "^17.0.1",
-		"node-fetch": "^3.3.2"
-	},
-	"devDependencies": {
-		"@types/node": "^20.11.17",
-		"typescript": "^5.3.3"
-	}
+  "name": "@homelab/cli",
+  "version": "1.0.0",
+  "description": "CLI-Tool für Setup-Skripte auf Synology, Windows, Mac.",
+  "main": "lib/index.js",
+  "author": "Munir Mardinli",
+  "license": "MIT",
+  "type": "module",
+  "private": false,
+  "sideEffects": false,
+  "bin": {
+    "synology-cli": "lib/index.js"
+  },
+  "files": ["lib"],
+  "publishConfig": {
+    "access": "public",
+    "homelab-cli": "lib/index.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./lib/index.js"
+    }
+  },
+  "scripts": {
+    "postinstall": "tsc",
+    "start": "node lib/index.js"
+  },
+  "keywords": ["cli", "synology", "setup", "ssh"],
+  "funding": {
+    "type": "individual",
+    "url": "https://linktr.ee/munirmardinli"
+  },
+  "contributors": [
+    {
+      "name": "Munir Mardinli",
+      "email": "Munir@Mardinli.de",
+      "url": "https://linktr.ee/munirmardinli"
+    }
+  ],
+  "dependencies": {
+    "commander": "^11.1.0",
+    "dotenv": "^17.0.1",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.17",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
 }
