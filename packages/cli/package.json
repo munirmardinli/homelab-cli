@@ -1,0 +1,31 @@
+{
+	"name": "@munirmardinli_org/cli",
+	"version": "1.0.0",
+	"description": "CLI-Tool für Setup-Skripte auf Synology, Windows, Mac.",
+	"main": "dist/index.js",
+	"bin": {
+		"synology-cli": "dist/index.js"
+	},
+	"scripts": {
+		"build": "tsc",
+		"start": "node dist/index.js"
+	},
+	"keywords": [
+		"cli",
+		"synology",
+		"setup",
+		"ssh"
+	],
+	"author": "",
+	"license": "MIT",
+	"type": "module",
+	"dependencies": {
+		"commander": "^11.1.0",
+		"dotenv": "^17.0.1",
+		"node-fetch": "^3.3.2"
+	},
+	"devDependencies": {
+		"@types/node": "^20.11.17",
+		"typescript": "^5.3.3"
+	}
+}

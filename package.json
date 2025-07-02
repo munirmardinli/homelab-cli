@@ -1,0 +1,26 @@
+{
+	"name": "@munirmardinli_org/synology",
+	"version": "1.0.14",
+	"sideEffects": false,
+	"private": true,
+	"license": "MIT",
+	"description": "A collection of TypeScript packages for Synology NAS devices.",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/munirmardinli/synology.git"
+	},
+	"workspaces": [
+		"packages/*"
+	],
+	"devDependencies": {
+		"@types/node": "^20.11.17",
+		"typescript": "^5.3.3"
+	},
+	"scripts": {
+		"build": "tsc -b packages/*",
+		"clean": "tsc -b packages/* --clean"
+	},
+	"dependencies": {
+		"dotenv": "^17.0.1"
+	}
+}
