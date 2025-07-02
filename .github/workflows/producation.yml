@@ -54,6 +54,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Typecheck
         run: npx tsc --noEmit
+        working-directory: ${{ github.workspace }}
 
   quality-assurance:
     needs: prepare
@@ -68,6 +69,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Run npm audit
         run: npm audit --audit-level=moderate
+        working-directory: ${{ github.workspace }}
 
   build-prod:
     needs:
@@ -180,18 +182,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm ci
+      - uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Generate TypeDoc
         run: npx typedoc --options typedoc.json
-      - name: Download coverage artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: test-results
-          path: coverage
-      - name: Copy Jest coverage to docs
-        run: |
-          mkdir -p docs/coverage
-          cp -r coverage/coverage/* docs/coverage/
+        working-directory: ${{ github.workspace }}
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:
