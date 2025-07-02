@@ -59,7 +59,7 @@
 		"eslint-plugin-unicorn": "^59.0.1",
 		"eslint-plugin-yml": "^1.17.0",
 		"eslint-watch": "^8.0.0",
-		"npm-run-all2": "^5.0.0",
+		"npm-run-all2": "^8.0.0",
 		"prettier": "^3.4.2"
 	},
 	"scripts": {
