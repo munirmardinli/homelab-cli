@@ -10,7 +10,11 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "lib": ["ES2020", "DOM"]
+    "lib": ["ES2020", "DOM"],
+		"paths": {
+			"@/*": ["./packages/cli/lib/index.js"],
+			"dotenv": ["./node_modules/dotenv/types"]
+		}
   },
   "include": ["src/**/*", "dotenv.d.ts"]
 }

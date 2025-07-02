@@ -1,41 +1,45 @@
 {
-  "name": "@homelab/cli",
-  "version": "1.0.0",
-  "main": "lib/index.js",
-  "license": "MIT",
-  "type": "module",
-  "private": false,
-  "sideEffects": false,
+	"name": "@homelab/cli",
+	"version": "1.0.0",
+	"main": "lib/index.js",
+	"license": "MIT",
+	"type": "module",
+	"private": false,
+	"sideEffects": false,
 	"types": "lib/index.d.ts",
-  "bin": {
-    "homelab-cli": "lib/index.js"
-  },
-  "files": ["lib"],
-  "publishConfig": {
-    "access": "public",
-    "homelab-cli": "lib/index.js"
-  },
-  "exports": {
-    ".": {
-      "import": "./lib/index.js",
-      "require": "./lib/index.js"
-    },
-    "./*": {
-      "import": "./lib/*.js",
-      "require": "./lib/*.js"
-    }
-  },
-  "scripts": {
-    "build": "tsc",
+	"bin": {
+		"homelab-cli": "lib/index.js"
+	},
+	"files": [
+		"lib"
+	],
+	"publishConfig": {
+		"access": "public",
+		"homelab-cli": "lib/index.js"
+	},
+	"exports": {
+		".": {
+			"import": "./lib/index.js",
+			"require": "./lib/index.js",
+			"types": "./lib/index.d.ts"
+		},
+		"./*": {
+			"import": "./lib/index.js",
+			"require": "./lib/index.js",
+			"types": "./lib/index.d.ts"
+		}
+	},
+	"scripts": {
+		"build": "tsc",
 		"postinstall": "tsc"
-  },
-  "dependencies": {
-    "commander": "^11.1.0",
-    "dotenv": "^17.0.1",
-    "node-fetch": "^3.3.2"
-  },
-  "devDependencies": {
-    "@types/node": "^24.0.10",
-    "typescript": "^5.7.3"
-  }
+	},
+	"dependencies": {
+		"commander": "^11.1.0",
+		"dotenv": "^17.0.1",
+		"node-fetch": "^3.3.2"
+	},
+	"devDependencies": {
+		"@types/node": "^24.0.10",
+		"typescript": "^5.7.3"
+	}
 }
