@@ -24,7 +24,7 @@ export default [
       parserOptions: {
         ecmaVersion: 2021,
         sourceType: 'module',
-        project: ['config/tsconfig.eslint.json'],
+        project: ['config/tsconfig.eslint.json', 'tsconfig.json'],
       },
       globals: {
         window: 'readonly',
@@ -37,7 +37,7 @@ export default [
     settings: {
       'import/resolver': {
         typescript: {
-          project: ['config/tsconfig.eslint.json'],
+          project: ['config/tsconfig.eslint.json', 'tsconfig.json'],
         },
         node: {
           extensions: ['.ts'],

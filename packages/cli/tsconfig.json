@@ -2,7 +2,10 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "lib",
-    "rootDir": "src"
+    "rootDir": "src",
+    "declaration": true,
+    "declarationDir": "lib",
+    "emitDeclarationOnly": false
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "dotenv.d.ts"]
 }

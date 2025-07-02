@@ -1,41 +1,31 @@
 documentation:
- - changed-files:
-    - any-glob-to-any-file: "**/*.md"
- - changed-files:
-    - any-glob-to-any-file: alertmanager-gotify.postman_collection.json
- - changed-files:
-    - any-glob-to-any-file: "README.md"
+  - changed-files:
+      - any-glob-to-any-file: "**/*.md"
 
 codeing:
- - changed-files:
-    - any-glob-to-any-file: "src/index.ts"
+  - changed-files:
+      - any-glob-to-any-file: "**/*.ts"
 
 tests:
- - changed-files:
-    - any-glob-to-any-file: "**/*.test.*"
+  - changed-files:
+      - any-glob-to-any-file: "**/*.test.*"
 
 dependencies:
- - changed-files:
-    - any-glob-to-any-file: "package.json"
- - changed-files:
-    - any-glob-to-any-file: "package-lock.json"
+  - changed-files:
+      - any-glob-to-any-file: "**/*package.json"
+  - changed-files:
+      - any-glob-to-any-file: "**/*package-lock.json"
 
 configuration:
- - changed-files:
-    - any-glob-to-any-file: "*.config.*"
- - changed-files:
-    - any-glob-to-any-file: "tsconfig.json"
- - changed-files:
-    - any-glob-to-any-file: ".env*"
- - changed-files:
-    - any-glob-to-any-file: "dotenv.d.ts"
+  - changed-files:
+      - any-glob-to-any-file: "*.config.*"
+  - changed-files:
+      - any-glob-to-any-file: "**/*.json"
+  - changed-files:
+      - any-glob-to-any-file: "**/*.d.ts"
 
 workflow:
- - changed-files:
-    - any-glob-to-any-file: ".github/workflows/**"
- - changed-files:
-    - any-glob-to-any-file: ".github/actions/**"
- - changed-files:
-    - any-glob-to-any-file: "Dockerfile*"
- - changed-files:
-    - any-glob-to-any-file: "server.yml"
+  - changed-files:
+      - any-glob-to-any-file: "**/workflows/**.yml"
+  - changed-files:
+      - any-glob-to-any-file: "**/Dockerfile*"

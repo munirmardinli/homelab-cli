@@ -1,18 +1,34 @@
-import fetch from 'node-fetch';
 import { spawn } from 'node:child_process';
 import * as fs from 'node:fs';
+import * as http from 'node:http';
+import * as https from 'node:https';
 
 class FileUtil {
   static async downloadFile(url: string, dest: string) {
-    const res = await fetch(url);
-    if (!res.body) {
-      throw new Error('Download response has no body');
-    }
-    const fileStream = fs.createWriteStream(dest);
-    await new Promise<void>((resolve, reject) => {
-      res.body?.pipe(fileStream);
-      res.body?.on('error', reject);
-      fileStream.on('finish', () => resolve(undefined));
+    const proto = url.startsWith('https') ? https : http;
+    return new Promise<void>((resolve, reject) => {
+      const file = fs.createWriteStream(dest);
+      const request = proto.get(url, (response) => {
+        if (response.statusCode && response.statusCode >= 400) {
+          reject(
+            new Error(
+              'Download fehlgeschlagen, Statuscode: ' + response.statusCode,
+            ),
+          );
+          return;
+        }
+        response.pipe(file);
+        file.on('finish', () => {
+          file.close();
+          resolve();
+        });
+      });
+      request.on('error', (err) => {
+        fs.unlink(dest, () => reject(err));
+      });
+      file.on('error', (err) => {
+        fs.unlink(dest, () => reject(err));
+      });
     });
   }
 

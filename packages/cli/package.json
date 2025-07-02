@@ -32,14 +32,44 @@
   },
   "exports": {
     ".": {
-      "import": "./lib/index.js"
+      "import": "./lib/index.js",
+      "require": "./lib/index.js"
+    },
+    "./*": {
+      "import": "./lib/*.js",
+      "require": "./lib/*.js"
+    },
+    "./utils/ssh.js": {
+      "import": "./lib/utils/ssh.js",
+      "require": "./lib/utils/ssh.js"
+    },
+    "./utils/file.js": {
+      "import": "./lib/utils/file.js",
+      "require": "./lib/utils/file.js"
+    },
+    "./utils/parse.js": {
+      "import": "./lib/utils/parse.js",
+      "require": "./lib/utils/parse.js"
+    },
+    "./utils/quote.js": {
+      "import": "./lib/utils/quote.js",
+      "require": "./lib/utils/quote.js"
+    },
+    "./types/types.js": {
+      "import": "./lib/types/types.js",
+      "require": "./lib/types/types.js"
+    },
+    "./cli.js": {
+      "import": "./lib/cli.js",
+      "require": "./lib/cli.js"
     }
   },
   "scripts": {
     "postinstall": "tsc",
     "build": "tsc",
-		"prebuild": "rm -rf lib",
-    "start": "node lib/index.js -- setup"
+    "prebuild": "rm -rf lib",
+    "start": "node lib/index.js -- setup",
+    "prestart": "if [ ! -d lib ]; then exit 1; fi"
   },
   "keywords": ["cli", "setup", "ssh"],
   "funding": {

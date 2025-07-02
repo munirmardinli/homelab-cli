@@ -7,6 +7,12 @@ on:
     branches:
       - main
 
+env:
+  DOCKER_USERNAME: mardinlimunir
+  DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
+  DOCKER_IMAGE_NAME: mardinlimunir/${{ github.event.repository.name }}
+  NODE_ENV: production
+
 permissions:
   contents: write
   packages: write
@@ -80,11 +86,14 @@ jobs:
         run: |
           npm run build
         env:
-          NODE_ENV: production
+          NODE_ENV: ${{ env.NODE_ENV }}
 
-  release:
+  docker-prod:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build-prod
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/cache@v4
@@ -93,18 +102,99 @@ jobs:
             node_modules
             .npm
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-      - name: Set up Node.js
+      - name: Build application
+        run: |
+          npm run build
+      - name: Prune production dependencies
+        run: npm prune --production
+      - name: Cache Docker layers
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ env.DOCKER_USERNAME }}
+          password: ${{ env.DOCKER_PASSWORD }}
+      - name: Push Docker Hub description
+        uses: peter-evans/dockerhub-description@v4
+        with:
+          username: ${{ env.DOCKER_USERNAME }}
+          password: ${{ env.DOCKER_PASSWORD }}
+          repository: ${{ env.DOCKER_IMAGE_NAME }}
+          readme-filepath: ./README.md
+          short-description: |
+            ${{ github.event.repository.description }}
+            Category: ${{ github.event.repository.topics }}
+      - name: Extract metadata for Docker Hub
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.DOCKER_IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest
+          flavor: |
+            latest=true
+      - name: Build and push Docker image to Docker Hub
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: .github/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
+          build-args: |
+            NODE_ENV=${{ env.NODE_ENV }}
+            BRANCH=${{ github.ref_name }}
+            BUILD_TIMESTAMP=${{ github.event.repository.updated_at }}
+            GITHUB_REPO=${{ github.repository }}
+            IMAGE_TITLE=${{ github.event.repository.name }}
+            GITHUB_OWNER=${{ github.repository_owner }}
+            GITHUB_REF_NAME=${{ github.ref_name }}
+            IMAGE_DESCRIPTION=${{ github.event.repository.description }}
+            GITHUB_SHA=${{ github.sha }}
+            REPO_LICENSE=${{ github.event.repository.license }}
+            REPO_CATEGORIES=${{ github.event.repository.topics }}
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
+  deploy-docs:
+    needs: build-prod
+    runs-on: ubuntu-latest
+    if: >
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      !startsWith(github.event.head_commit.message, 'chore(release):')
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
-      - name: Build application
-        run: npm run build
-      - name: Create Release
-        uses: softprops/action-gh-release@v2
+          node-version: 20
+      - run: npm ci
+      - name: Generate TypeDoc
+        run: npx typedoc --options typedoc.json
+      - name: Download coverage artifact
+        uses: actions/download-artifact@v4
         with:
-          tag_name: v${{ github.run_number }}
-          name: Release v${{ github.run_number }}
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          name: test-results
+          path: coverage
+      - name: Copy Jest coverage to docs
+        run: |
+          mkdir -p docs/coverage
+          cp -r coverage/coverage/* docs/coverage/
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          publish_branch: gh-pages
