@@ -27,7 +27,7 @@ jobs:
           path: |
             node_modules
             .npm
-            node_modules/@homelab/*
+            node_modules/@homelab/cli
             lib
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
           restore-keys: ${{ runner.os }}-node-
