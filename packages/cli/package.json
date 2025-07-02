@@ -25,11 +25,8 @@
     }
   },
   "scripts": {
-    "postinstall": "tsc",
-    "build": "tsc",
-    "prebuild": "rm -rf lib",
-    "start": "node lib/index.js -- setup",
-    "prestart": "if [ ! -d lib ]; then exit 1; fi"
+    "postinstall": "ls",
+    "build": "tsc"
   },
   "dependencies": {
     "commander": "^11.1.0",
