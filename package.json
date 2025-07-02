@@ -1,77 +1,76 @@
 {
-	"name": "@homelab/core",
-	"version": "1.0.14",
-	"sideEffects": false,
-	"private": true,
-	"license": "MIT",
-	"homepage": "https://munirmardinli.github.io/homelab-cli",
-	"bugs": {
-		"url": "https://github.com/munirmardinli/homelab-cli/issues",
-		"email": "Munir@Mardinli.de"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/munirmardinli/homelab-cli.git",
-		"directory": "Munir Mardinli",
-		"homepage": "https://github.com/munirmardinli/homelab-cli#readme"
-	},
-	"author": {
-		"name": "Munir Mardinli",
-		"email": "Munir@Mardinli.de",
-		"url": "https://linktr.ee/munirmardinli"
-	},
-	"funding": {
-		"type": "individual",
-		"url": "https://linktr.ee/munirmardinli"
-	},
-	"contributors": [
-		{
-			"name": "Munir Mardinli",
-			"email": "Munir@Mardinli.de",
-			"url": "https://linktr.ee/munirmardinli"
-		}
-	],
-	"config": {
-		"commitizen": {
-			"path": "./node_modules/cz-conventional-changelog"
-		}
-	},
-	"workspaces": [
-		"packages/*"
-	],
-	"devDependencies": {
-		"@types/node": "^24.0.3",
-		"ts-node": "^10.9.1",
-		"typedoc": "^0.28.5",
-		"typescript": "^5.7.3",
-		"husky": "^9.1.7",
-		"run-script-os": "^1.1.6",
-		"eslint": "^9.28.0",
-		"eslint-config-next": "15.3.3",
-		"eslint-config-prettier": "^10.0.2",
-		"eslint-plugin-filenames": "^1.3.2",
-		"eslint-plugin-import": "^2.31.0",
-		"eslint-plugin-json": "^4.0.1",
-		"eslint-plugin-node": "^11.1.0",
-		"eslint-plugin-prettier": "^5.4.1",
-		"eslint-plugin-security": "^3.0.1",
-		"eslint-plugin-sonarjs": "^3.0.2",
-		"eslint-plugin-unicorn": "^59.0.1",
-		"eslint-plugin-yml": "^1.17.0",
-		"eslint-watch": "^8.0.0",
-		"npm-run-all": "^4.1.5",
-		"prettier": "^3.4.2"
-	},
-	"scripts": {
-		"build": "npm run build --workspaces",
-		"clean": "tsc -b packages/* --clean",
-		"start:cli": "node packages/cli/lib/index.js",
-		"format": "prettier --write 'packages/*/src/**/*.{ts,js,tsx,jsx}'"
-	},
-	"dependencies": {
-		"dotenv": "^17.0.1"
-	},
-	"engines": {
-		"node": ">=18"
-	}
+  "name": "@homelab/core",
+  "version": "1.0.14",
+  "sideEffects": false,
+  "private": true,
+  "license": "MIT",
+  "homepage": "https://munirmardinli.github.io/homelab-cli",
+  "bugs": {
+    "url": "https://github.com/munirmardinli/homelab-cli/issues",
+    "email": "Munir@Mardinli.de"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/munirmardinli/homelab-cli.git",
+    "directory": "Munir Mardinli",
+    "homepage": "https://github.com/munirmardinli/homelab-cli#readme"
+  },
+  "author": {
+    "name": "Munir Mardinli",
+    "email": "Munir@Mardinli.de",
+    "url": "https://linktr.ee/munirmardinli"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://linktr.ee/munirmardinli"
+  },
+  "contributors": [
+    {
+      "name": "Munir Mardinli",
+      "email": "Munir@Mardinli.de",
+      "url": "https://linktr.ee/munirmardinli"
+    }
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "workspaces": ["packages/*"],
+  "devDependencies": {
+    "@types/node": "^24.0.3",
+    "ts-node": "^10.9.1",
+    "typedoc": "^0.28.5",
+    "typescript": "^5.7.3",
+    "husky": "^9.1.7",
+    "run-script-os": "^1.1.6",
+    "eslint": "^9.28.0",
+    "eslint-config-next": "15.3.3",
+    "eslint-config-prettier": "^10.0.2",
+    "eslint-plugin-filenames": "^1.3.2",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-json": "^4.0.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.4.1",
+    "eslint-plugin-security": "^3.0.1",
+    "eslint-plugin-sonarjs": "^3.0.2",
+    "eslint-plugin-unicorn": "^59.0.1",
+    "eslint-plugin-yml": "^1.17.0",
+    "eslint-watch": "^8.0.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.4.2"
+  },
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "start": "npm run start --workspaces",
+    "clean": "tsc -b packages/* --clean",
+    "start:cli": "node packages/cli/lib/index.js -- setup",
+    "format": "prettier --write 'packages/*/src/**/*.{ts,js,tsx,jsx}'"
+  },
+  "dependencies": {
+    "dotenv": "^17.0.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
 }
