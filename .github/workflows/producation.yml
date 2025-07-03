@@ -48,7 +48,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Typecheck
-        run: ls && npx tsc --noEmit
+        run: npx tsc --noEmit -p ./config/tsconfig.typecheck.json
         working-directory: ${{ github.workspace }}
       - name: Lint
         run: npx eslint '.' --fix

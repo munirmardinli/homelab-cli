@@ -2,10 +2,8 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "noEmit": true,
-    "declaration": false,
-    "declarationMap": false,
-    "sourceMap": false
+		"rootDirs": ["../src"],
   },
   "include": ["../src","../dotenv.d.ts"],
-  "exclude": ["node_modules", "lib"]
+  "exclude": ["../node_modules", "../lib"]
 }

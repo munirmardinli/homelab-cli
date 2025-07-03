@@ -27,7 +27,6 @@
     "emitDeclarationOnly": false,
     //"allowImportingTsExtensions": true,
     "noEmit": false,
-    "types": ["node"],
     "removeComments": true
   }
 }
