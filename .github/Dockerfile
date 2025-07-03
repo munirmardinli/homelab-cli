@@ -7,7 +7,7 @@ WORKDIR /home/node/app
 
 COPY --chown=node:node package.json /home/node/app/package.json
 COPY --chown=node:node node_modules /home/node/app/node_modules
-COPY --chown=node:node dist /home/node/app/dist
+COPY --chown=node:node lib /home/node/app/lib
 
 EXPOSE 9094
 

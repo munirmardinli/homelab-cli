@@ -219,9 +219,7 @@ export default [
       parser: yamlParser,
       parserOptions: {
         defaultYAMLVersion: '1.2',
-        project: [
-          './config/tsconfig.eslint.json',
-        ],
+        project: ['./config/tsconfig.eslint.json'],
       },
     },
     plugins: {

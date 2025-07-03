@@ -52,10 +52,10 @@ jobs:
             .npm
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Typecheck
-        run: npx tsc --noEmit
+        run: ls && npx tsc --noEmit
         working-directory: ${{ github.workspace }}
       - name: Lint
-        run: npm run lint
+        run: npx eslint '.' --fix
         working-directory: ${{ github.workspace }}
   quality-assurance:
     needs: prepare
@@ -86,7 +86,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Build application
         run: |
-          npm run build
+          npx tsc
         env:
           NODE_ENV: ${{ env.NODE_ENV }}
   docker-prod:
@@ -105,7 +105,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Build application
         run: |
-          npm run build
+          npx tsc
       - name: Prune production dependencies
         run: npm prune --production
       - name: Cache Docker layers
