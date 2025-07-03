@@ -9,8 +9,6 @@ COPY --chown=node:node package.json /home/node/app/package.json
 COPY --chown=node:node node_modules /home/node/app/node_modules
 COPY --chown=node:node lib /home/node/app/lib
 
-EXPOSE 9094
-
 ARG NODE_ENV
 ARG BUILD_TIMESTAMP
 ARG BRANCH
@@ -35,16 +33,19 @@ LABEL org.opencontainers.image.version="${BRANCH}"
 LABEL org.opencontainers.image.revision="${GITHUB_SHA}"
 LABEL org.opencontainers.image.created="${BUILD_TIMESTAMP}"
 LABEL org.opencontainers.image.licenses="${REPO_LICENSE}"
-LABEL com.docker.desktop.extension.api.version=">= 1.0.0"
+
+LABEL com.docker.desktop.extension.api.version="1.0.0"
 
 LABEL com.docker.extension.additional-urls="https://${GITHUB_OWNER}.github.io/${IMAGE_TITLE}"
+
 LABEL com.docker.extension.categories="${REPO_CATEGORIES}"
 LABEL com.docker.extension.screenshots="https://profile-images.xing.com/images/22b60162f0c35aafb7f44323785a5616-4/munir-mardinli.1024x1024.jpg"
 
 LABEL com.docker.extension.publisher-url="https://mardinli.de"
 LABEL com.docker.extension.changelog-url="https://github.com/${GITHUB_REPO}/releases"
+
 LABEL com.docker.extension.legal-url="https://github.com/${GITHUB_REPO}/blob/${BRANCH}/LICENSE"
 
 LABEL com.centurylinklabs.watchtower.enable="true"
 
-CMD ["sh", "-c", "node lib/index.js"]
+CMD ["sh", "-c", "node lib/index.js -- setup"]

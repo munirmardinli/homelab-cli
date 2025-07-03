@@ -11,7 +11,6 @@ env:
   DOCKER_USERNAME: mardinlimunir
   DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
   DOCKER_IMAGE_NAME: mardinlimunir/${{ github.event.repository.name }}
-  NODE_ENV: production
 
 permissions:
   contents: write
@@ -68,7 +67,7 @@ jobs:
         run: |
           npx tsc
         env:
-          NODE_ENV: ${{ env.NODE_ENV }}
+          NODE_ENV: production
   docker-prod:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build-prod
@@ -121,14 +120,14 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: .github/Dockerfile
+          file: .docker/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
           build-args: |
-            NODE_ENV=${{ env.NODE_ENV }}
+            NODE_ENV=production
             BRANCH=${{ github.ref_name }}
             BUILD_TIMESTAMP=${{ github.event.repository.updated_at }}
             GITHUB_REPO=${{ github.repository }}
