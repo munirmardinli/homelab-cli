@@ -26,6 +26,7 @@ services:
     image: mardinlimunir/homelab-cli:latest
     container_name: homelab-cli
     restart: always
+    tty: true
     <<: *resource-limits
     logging:
       <<: *default-logging
@@ -37,6 +38,12 @@ services:
       USER: ${USER}
       HOST: ${HOST}
       PASSWORD: ${PASSWORD}
+    volumes:
+      - type: bind
+        source: ~/.ssh
+        target: /home/node/.ssh
+        read_only: true
+
     networks:
       dockerization:
     labels:

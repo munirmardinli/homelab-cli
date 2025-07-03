@@ -27,13 +27,24 @@ class SshUtil {
         sshArgs.push('-p', port);
       }
       sshArgs.push('-o', 'StrictHostKeyChecking=no');
+      sshArgs.push('-o', 'UserKnownHostsFile=/dev/null');
       sshArgs.push(`${user}@${host}`);
       if (command) {
         sshArgs.push(command);
       }
-      const ssh = spawn('ssh', sshArgs, {
+
+      let sshCmd = 'ssh';
+      let args = sshArgs;
+
+      if (password) {
+        sshCmd = 'sshpass';
+        args = ['-p', password, 'ssh', ...sshArgs];
+      }
+
+      const ssh = spawn(sshCmd, args, {
         stdio: 'inherit',
       });
+
       ssh.on('close', (code) => {
         if (code === 0) {
           resolve();
