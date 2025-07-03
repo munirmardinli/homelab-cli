@@ -43,14 +43,21 @@ class SshUtil {
           );
         }
         sshCmd = 'sshpass';
-        args = ['-p', password, 'ssh', ...sshArgs];
+        args = ['-e', 'ssh', ...sshArgs];
       }
 
       const ssh = spawn(sshCmd, args, {
         stdio: 'inherit',
+        env: {
+          ...process.env,
+          PASSWORD: password || '',
+        },
       });
 
-      ssh.on('close', (code) => {
+      console.log('Executing:', sshCmd, args.join(' '));
+
+      ssh.on('close', (code: number | null) => {
+        console.log('SSH process exited with code:', code);
         if (code === 0) {
           resolve();
         } else {
