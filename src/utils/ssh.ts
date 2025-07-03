@@ -51,13 +51,11 @@ class SshUtil {
         env: {
           ...process.env,
           PASSWORD: password || '',
+          SSHPASS: password || '',
         },
       });
 
-      console.log('Executing:', sshCmd, args.join(' '));
-
       ssh.on('close', (code: number | null) => {
-        console.log('SSH process exited with code:', code);
         if (code === 0) {
           resolve();
         } else {
