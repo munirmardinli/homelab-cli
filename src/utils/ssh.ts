@@ -26,6 +26,7 @@ class SshUtil {
       if (port) {
         sshArgs.push('-p', port);
       }
+      sshArgs.push('-o', 'StrictHostKeyChecking=no');
       sshArgs.push(`${user}@${host}`);
       if (command) {
         sshArgs.push(command);

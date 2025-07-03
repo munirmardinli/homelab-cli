@@ -10,6 +10,7 @@ COPY --chown=node:node node_modules /home/node/app/node_modules
 COPY --chown=node:node lib /home/node/app/lib
 
 RUN apk add --no-cache openssh
+RUN ssh-keyscan -H $HOST >> /home/node/.ssh/known_hosts
 
 ARG NODE_ENV
 ARG BUILD_TIMESTAMP
