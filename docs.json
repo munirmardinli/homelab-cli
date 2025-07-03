@@ -1200,14 +1200,14 @@
 					},
 					"children": [
 						{
-							"id": 96,
+							"id": 102,
 							"name": "constructor",
 							"variant": "declaration",
 							"kind": 512,
 							"flags": {},
 							"signatures": [
 								{
-									"id": 97,
+									"id": 103,
 									"name": "SshUtil",
 									"variant": "signature",
 									"kind": 16384,
@@ -1333,19 +1333,120 @@
 									}
 								}
 							]
+						},
+						{
+							"id": 96,
+							"name": "startInteractiveSession",
+							"variant": "declaration",
+							"kind": 2048,
+							"flags": {
+								"isStatic": true
+							},
+							"sources": [
+								{
+									"fileName": "utils/ssh.ts",
+									"line": 69,
+									"character": 15,
+									"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L69"
+								}
+							],
+							"signatures": [
+								{
+									"id": 97,
+									"name": "startInteractiveSession",
+									"variant": "signature",
+									"kind": 4096,
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "utils/ssh.ts",
+											"line": 69,
+											"character": 15,
+											"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L69"
+										}
+									],
+									"parameters": [
+										{
+											"id": 98,
+											"name": "host",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "string"
+											}
+										},
+										{
+											"id": 99,
+											"name": "user",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "string"
+											}
+										},
+										{
+											"id": 100,
+											"name": "password",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {
+												"isOptional": true
+											},
+											"type": {
+												"type": "intrinsic",
+												"name": "string"
+											}
+										},
+										{
+											"id": 101,
+											"name": "port",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {
+												"isOptional": true
+											},
+											"type": {
+												"type": "intrinsic",
+												"name": "string"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"target": {
+											"packageName": "typescript",
+											"packagePath": "lib/lib.es5.d.ts",
+											"qualifiedName": "Promise"
+										},
+										"typeArguments": [
+											{
+												"type": "intrinsic",
+												"name": "void"
+											}
+										],
+										"name": "Promise",
+										"package": "typescript"
+									}
+								}
+							]
 						}
 					],
 					"groups": [
 						{
 							"title": "Constructors",
 							"children": [
-								96
+								102
 							]
 						},
 						{
 							"title": "Methods",
 							"children": [
-								89
+								89,
+								96
 							]
 						}
 					],
@@ -1675,6 +1776,36 @@
 			"qualifiedName": "command"
 		},
 		"95": {
+			"packageName": "homelab-cli",
+			"packagePath": "src/utils/ssh.ts",
+			"qualifiedName": "port"
+		},
+		"96": {
+			"packageName": "homelab-cli",
+			"packagePath": "src/utils/ssh.ts",
+			"qualifiedName": "SshUtil.startInteractiveSession"
+		},
+		"97": {
+			"packageName": "homelab-cli",
+			"packagePath": "src/utils/ssh.ts",
+			"qualifiedName": "SshUtil.startInteractiveSession"
+		},
+		"98": {
+			"packageName": "homelab-cli",
+			"packagePath": "src/utils/ssh.ts",
+			"qualifiedName": "host"
+		},
+		"99": {
+			"packageName": "homelab-cli",
+			"packagePath": "src/utils/ssh.ts",
+			"qualifiedName": "user"
+		},
+		"100": {
+			"packageName": "homelab-cli",
+			"packagePath": "src/utils/ssh.ts",
+			"qualifiedName": "password"
+		},
+		"101": {
 			"packageName": "homelab-cli",
 			"packagePath": "src/utils/ssh.ts",
 			"qualifiedName": "port"
