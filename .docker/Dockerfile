@@ -50,4 +50,4 @@ LABEL com.docker.extension.legal-url="https://github.com/${GITHUB_REPO}/blob/${B
 
 LABEL com.centurylinklabs.watchtower.enable="true"
 
-CMD sh -c "mkdir -p /home/node/.ssh && ssh-keyscan -H \"$HOST\" >> /home/node/.ssh/known_hosts && node lib/index.js -- setup"
+CMD ["sh", "-c", "node lib/index.js -- setup"]
