@@ -14,7 +14,7 @@ import globals from 'globals';
 
 export default [
   {
-    ignores: ['node_modules/', 'lib/', 'docs/'],
+    ignores: ['node_modules/', 'lib/', 'docs/','eslint.config.mjs'],
   },
   js.configs.recommended,
   {
