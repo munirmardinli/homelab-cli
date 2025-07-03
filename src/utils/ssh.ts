@@ -31,17 +31,30 @@ class SshUtil {
       if (command) {
         sshArgs.push(command);
       }
-      const ssh = spawn('ssh', sshArgs, {
-        stdio: 'inherit',
-      });
-      ssh.on('close', (code) => {
-        if (code === 0) {
-          resolve();
-        } else {
-          reject(new Error('SSH failed with code ' + code));
-        }
-      });
-      ssh.on('error', reject);
+      const args = [];
+      if (password) {
+        args.push('-p', password, 'ssh');
+        args.push(...sshArgs);
+        const ssh = spawn('sshpass', args, { stdio: 'inherit' });
+        ssh.on('close', (code) => {
+          if (code === 0) {
+            resolve();
+          } else {
+            reject(new Error('SSH failed with code ' + code));
+          }
+        });
+        ssh.on('error', reject);
+      } else {
+        const ssh = spawn('ssh', sshArgs, { stdio: 'inherit' });
+        ssh.on('close', (code) => {
+          if (code === 0) {
+            resolve();
+          } else {
+            reject(new Error('SSH failed with code ' + code));
+          }
+        });
+        ssh.on('error', reject);
+      }
     });
   }
 }

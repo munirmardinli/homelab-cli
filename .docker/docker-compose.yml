@@ -33,7 +33,7 @@ services:
         <<: *default-logging-options
     hostname: homelab-cli
     environment:
-      PORT: ${PORT:-22}
+      PORT: ${PORT} # default 22
       USER: ${USER}
       HOST: ${HOST}
       PASSWORD: ${PASSWORD}

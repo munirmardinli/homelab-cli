@@ -11,7 +11,6 @@ COPY --chown=node:node lib /home/node/app/lib
 
 RUN apk add --no-cache openssh-client sshpass
 
-ARG NODE_ENV
 ARG BUILD_TIMESTAMP
 ARG BRANCH
 ARG GITHUB_REPO
@@ -21,8 +20,6 @@ ARG IMAGE_TITLE
 ARG IMAGE_DESCRIPTION
 ARG REPO_LICENSE
 ARG REPO_CATEGORIES
-
-ENV NODE_ENV=${NODE_ENV}
 
 LABEL org.opencontainers.image.title="${IMAGE_TITLE}"
 LABEL org.opencontainers.image.description="${IMAGE_DESCRIPTION}"
