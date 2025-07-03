@@ -9,7 +9,7 @@ COPY --chown=node:node package.json /home/node/app/package.json
 COPY --chown=node:node node_modules /home/node/app/node_modules
 COPY --chown=node:node lib /home/node/app/lib
 
-RUN apt-get update && apt-get install -y openssh-client && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache openssh
 
 ARG NODE_ENV
 ARG BUILD_TIMESTAMP
