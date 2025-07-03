@@ -220,7 +220,6 @@ export default [
       parserOptions: {
         defaultYAMLVersion: '1.2',
         project: [
-          './packages/cli/tsconfig.json',
           './config/tsconfig.eslint.json',
         ],
       },

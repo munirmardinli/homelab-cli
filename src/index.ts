@@ -1,5 +1,5 @@
-import { Cli } from '@homelab/cli';
 import 'dotenv/config';
+import { Cli } from './utils/cli';
 
 const cli = new Cli();
 
