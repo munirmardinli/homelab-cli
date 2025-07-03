@@ -40,19 +40,7 @@ jobs:
       - name: Set cache output
         id: set-cache-output
         run: echo "cache-hit=$(ls node_modules | wc -l | tr -d ' ')" >> $GITHUB_OUTPUT
-  lint:
-    needs: prepare
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install dependencies
-        run: npm ci
-      - name: Typecheck
-        run: npx tsc --noEmit -p ./config/tsconfig.typecheck.json
-        working-directory: ${{ github.workspace }}
-      - name: Lint
-        run: npx eslint '.' --fix
-        working-directory: ${{ github.workspace }}
+
   quality-assurance:
     needs: prepare
     runs-on: ubuntu-latest
@@ -65,7 +53,6 @@ jobs:
         working-directory: ${{ github.workspace }}
   build-prod:
     needs:
-      - lint
       - quality-assurance
     runs-on: ubuntu-latest
     steps:

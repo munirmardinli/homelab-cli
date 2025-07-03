@@ -4,5 +4,7 @@
   "compilerOptions": {
     "allowJs": true,
     "noEmit": true
-  }
+  },
+  "include": ["../src/**/*", "../dotenv.d.ts"],
+  "exclude": []
 }

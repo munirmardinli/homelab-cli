@@ -2,8 +2,13 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "noEmit": true,
-		"rootDirs": ["../src"],
+    "rootDirs": ["../src"],
+    "types": ["node"],
+    "baseUrl": "./",
+    "paths": {
+      "dotenv": ["node_modules/dotenv"]
+    }
   },
-  "include": ["../src","../dotenv.d.ts"],
+  "include": ["../src", "../dotenv.d.ts"],
   "exclude": ["../node_modules", "../lib"]
 }

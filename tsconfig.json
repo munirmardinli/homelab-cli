@@ -3,8 +3,10 @@
   "compilerOptions": {
     "rootDirs": ["src"],
     "outDir": "lib",
-    "types": ["node"],
-    "typeRoots": ["./node_modules/@types", "./src/types"]
+    "baseUrl": "./",
+    "paths": {
+      "dotenv": ["node_modules/dotenv"]
+    }
   },
   "include": ["src/**/*", "dotenv.d.ts"],
   "exclude": ["node_modules", "lib"]
