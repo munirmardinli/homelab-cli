@@ -26,6 +26,11 @@ jobs:
       node_modules_cache: ${{ steps.set-cache-output.outputs.cache-hit }}
     steps:
       - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
       - name: Cache node modules
         id: cache-node-modules
         uses: actions/cache@v4

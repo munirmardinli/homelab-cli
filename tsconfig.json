@@ -6,7 +6,8 @@
     "baseUrl": "./",
     "paths": {
       "dotenv": ["node_modules/dotenv"]
-    }
+    },
+    "types": ["node"]
   },
   "include": ["src/**/*", "dotenv.d.ts"],
   "exclude": ["node_modules", "lib"]
