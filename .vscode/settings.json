@@ -230,7 +230,7 @@
 		"editor.defaultFormatter": "Prisma.prisma"
 	},
 	"[dockerfile]": {
-		"editor.defaultFormatter": "ms-azuretools.vscode-docker"
+		"editor.defaultFormatter": "trunk.io"
 	},
 	"[log]": {
 		"editor.defaultFormatter": "log-formatter.log-formatter"

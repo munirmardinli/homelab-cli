@@ -1,0 +1,7 @@
+{
+  "name": "Homelab CLI Dev Container",
+  "dockerComposeFile": "./docker-compose.yml",
+  "service": "homelab-cli-dev",
+  "workspaceFolder": "/home/node/app",
+  "remoteUser": "node"
+}

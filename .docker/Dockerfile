@@ -9,8 +9,7 @@ COPY --chown=node:node package.json /home/node/app/package.json
 COPY --chown=node:node node_modules /home/node/app/node_modules
 COPY --chown=node:node lib /home/node/app/lib
 
-RUN apk add --no-cache openssh
-RUN ssh-keyscan -H $HOST >> /home/node/.ssh/known_hosts
+RUN apk add --no-cache openssh-client
 
 ARG NODE_ENV
 ARG BUILD_TIMESTAMP
@@ -51,4 +50,4 @@ LABEL com.docker.extension.legal-url="https://github.com/${GITHUB_REPO}/blob/${B
 
 LABEL com.centurylinklabs.watchtower.enable="true"
 
-CMD ["sh", "-c", "node lib/index.js -- setup"]
+CMD sh -c "mkdir -p /home/node/.ssh && ssh-keyscan -H \"$HOST\" >> /home/node/.ssh/known_hosts && node lib/index.js -- setup"
