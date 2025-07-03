@@ -22,6 +22,34 @@ class Cli {
       .version('1.0.0');
 
     program
+      .command('session')
+      .description(
+        'Starte eine interaktive SSH-Session mit automatischem Root-Login',
+      )
+      .option('-h, --host <host>', 'SSH Host')
+      .option('-u, --user <user>', 'SSH User')
+      .option('-p, --password <password>', 'SSH Passwort')
+      .option('-P, --port <port>', 'SSH Port')
+      .action(async (opts) => {
+        const host = opts.host || process.env.HOST;
+        const user = opts.user || process.env.USER;
+        const password = opts.password || process.env.PASSWORD;
+        const port = opts.port || process.env.PORT || '22';
+
+        if (!host || !user) {
+          throw new Error(
+            'Host und User müssen entweder als Option oder in der .env angegeben werden!',
+          );
+        }
+
+        console.log(`Verbinde mit ${user}@${host}:${port}...`);
+        console.log('Automatischer Root-Login wird ausgeführt...');
+        console.log('Drücke Ctrl+C zum Beenden der Session.');
+
+        await SshUtil.startInteractiveSession(host, user, password, port);
+      });
+
+    program
       .command('setup')
       .description('Führe ein Setup-Skript auf einem Zielsystem aus')
       .option('-h, --host <host>', 'SSH Host')

@@ -65,6 +65,57 @@ class SshUtil {
       ssh.on('error', reject);
     });
   }
+
+  static async startInteractiveSession(
+    host: string,
+    user: string,
+    password?: string,
+    port?: string,
+  ) {
+    return new Promise<void>((resolve, reject) => {
+      const sshArgs = [];
+      if (port) {
+        sshArgs.push('-p', port);
+      }
+      sshArgs.push('-o', 'StrictHostKeyChecking=no');
+      sshArgs.push('-o', 'UserKnownHostsFile=/dev/null');
+      sshArgs.push('-t');
+      sshArgs.push(`${user}@${host}`);
+
+      sshArgs.push('sudo -i');
+
+      let sshCmd = 'ssh';
+      let args = sshArgs;
+
+      if (password) {
+        if (process.platform === 'win32') {
+          throw new Error(
+            'sshpass wird unter Windows nicht unterstützt. Bitte SSH-Key-Authentifizierung verwenden.',
+          );
+        }
+        sshCmd = 'sshpass';
+        args = ['-e', 'ssh', ...sshArgs];
+      }
+
+      const ssh = spawn(sshCmd, args, {
+        stdio: 'inherit',
+        env: {
+          ...process.env,
+          PASSWORD: password || '',
+          SSHPASS: password || '',
+        },
+      });
+
+      ssh.on('close', (code: number | null) => {
+        if (code === 0) {
+          resolve();
+        } else {
+          reject(new Error('SSH session failed with code ' + code));
+        }
+      });
+      ssh.on('error', reject);
+    });
+  }
 }
 
 export { SshUtil };
