@@ -45,12 +45,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v4
-        with:
-          path: |
-            node_modules
-            .npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Install dependencies
+        run: npm ci
       - name: Typecheck
         run: ls && npx tsc --noEmit
         working-directory: ${{ github.workspace }}
@@ -62,12 +58,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v4
-        with:
-          path: |
-            node_modules
-            .npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Install dependencies
+        run: npm ci
       - name: Run npm audit
         run: npm audit --audit-level=moderate
         working-directory: ${{ github.workspace }}
@@ -78,12 +70,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v4
-        with:
-          path: |
-            node_modules
-            .npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Install dependencies
+        run: npm ci
       - name: Build application
         run: |
           npx tsc
@@ -97,12 +85,8 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v4
-        with:
-          path: |
-            node_modules
-            .npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Install dependencies
+        run: npm ci
       - name: Build application
         run: |
           npx tsc
@@ -180,14 +164,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - uses: actions/cache@v4
-        with:
-          path: |
-            node_modules
-            .npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Install dependencies
+        run: npm ci
       - name: Generate TypeDoc
-        run: npx typedoc --options typedoc.json
+        run: npx typedoc
         working-directory: ${{ github.workspace }}
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
