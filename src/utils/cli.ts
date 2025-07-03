@@ -31,7 +31,7 @@ class Cli {
       .option('-z, --unzip <file>', 'Datei entpacken')
       .option('-c, --cmd <command>', 'Befehl ausführen')
       .option('-P, --port <port>', 'SSH Port')
-      .action(async (opts: NodeJS.ProcessEnv) => {
+      .action(async (opts) => {
         const host = opts.host || process.env.HOST;
         const user = opts.user || process.env.USER;
         const password = opts.password || process.env.PASSWORD;

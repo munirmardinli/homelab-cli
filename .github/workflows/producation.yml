@@ -7,12 +7,6 @@ on:
     branches:
       - main
 
-env:
-  DOCKER_USERNAME: mardinlimunir
-  DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
-  DOCKER_IMAGE_NAME: mardinlimunir/${{ github.event.repository.name }}
-  NODE_ENV: production
-
 permissions:
   contents: write
   packages: write
@@ -40,6 +34,7 @@ jobs:
       - name: Set cache output
         id: set-cache-output
         run: echo "cache-hit=$(ls node_modules | wc -l | tr -d ' ')" >> $GITHUB_OUTPUT
+
   lint:
     needs: prepare
     runs-on: ubuntu-latest
@@ -51,20 +46,9 @@ jobs:
             node_modules
             .npm
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-      - name: Check node_modules and install if needed
-        run: |
-          if [ ! -d "node_modules/@types/node" ]; then
-            echo "node_modules/@types/node fehlt, führe npm ci aus..."
-            npm ci
-          else
-            echo "node_modules/@types/node gefunden, npm ci wird übersprungen."
-          fi
       - name: Typecheck
-        run: ls && npx tsc --noEmit
-        working-directory: ${{ github.workspace }}
-      - name: Lint
-        run: npx eslint '.' --fix
-        working-directory: ${{ github.workspace }}
+        run: npx tsc --noEmit
+
   quality-assurance:
     needs: prepare
     runs-on: ubuntu-latest
@@ -78,7 +62,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Run npm audit
         run: npm audit --audit-level=moderate
-        working-directory: ${{ github.workspace }}
+
   build-prod:
     needs:
       - lint
@@ -94,15 +78,13 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Build application
         run: |
-          npx tsc
+          npm run build
         env:
-          NODE_ENV: ${{ env.NODE_ENV }}
-  docker-prod:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+          NODE_ENV: production
+
+  release:
     needs: build-prod
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/cache@v4
@@ -111,95 +93,18 @@ jobs:
             node_modules
             .npm
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-      - name: Build application
-        run: |
-          npx tsc
-      - name: Prune production dependencies
-        run: npm prune --production
-      - name: Cache Docker layers
-        uses: actions/cache@v4
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ env.DOCKER_USERNAME }}
-          password: ${{ env.DOCKER_PASSWORD }}
-      - name: Push Docker Hub description
-        uses: peter-evans/dockerhub-description@v4
-        with:
-          username: ${{ env.DOCKER_USERNAME }}
-          password: ${{ env.DOCKER_PASSWORD }}
-          repository: ${{ env.DOCKER_IMAGE_NAME }}
-          readme-filepath: ./README.md
-          short-description: |
-            ${{ github.event.repository.description }}
-            Category: ${{ github.event.repository.topics }}
-      - name: Extract metadata for Docker Hub
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.DOCKER_IMAGE_NAME }}
-          tags: |
-            type=raw,value=latest
-          flavor: |
-            latest=true
-      - name: Build and push Docker image to Docker Hub
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: .github/Dockerfile
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
-          build-args: |
-            NODE_ENV=${{ env.NODE_ENV }}
-            BRANCH=${{ github.ref_name }}
-            BUILD_TIMESTAMP=${{ github.event.repository.updated_at }}
-            GITHUB_REPO=${{ github.repository }}
-            IMAGE_TITLE=${{ github.event.repository.name }}
-            GITHUB_OWNER=${{ github.repository_owner }}
-            GITHUB_REF_NAME=${{ github.ref_name }}
-            IMAGE_DESCRIPTION=${{ github.event.repository.description }}
-            GITHUB_SHA=${{ github.sha }}
-            REPO_LICENSE=${{ github.event.repository.license }}
-            REPO_CATEGORIES=${{ github.event.repository.topics }}
-      - name: Move cache
-        run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
-  deploy-docs:
-    needs: build-prod
-    runs-on: ubuntu-latest
-    if: >
-      github.event_name == 'push' &&
-      github.ref == 'refs/heads/main' &&
-      !startsWith(github.event.head_commit.message, 'chore(release):')
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-      - uses: actions/cache@v4
+          node-version: "22"
+      - name: Build application
+        run: npm run build
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
         with:
-          path: |
-            node_modules
-            .npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-      - name: Generate TypeDoc
-        run: npx typedoc --options typedoc.json
-        working-directory: ${{ github.workspace }}
-      - name: Deploy to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
-          publish_branch: gh-pages
+          tag_name: v${{ github.run_number }}
+          name: Release v${{ github.run_number }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

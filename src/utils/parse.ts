@@ -1,4 +1,4 @@
-import { Env, ParsedToken } from '../types/types.js';
+import { type Env, type ParsedToken } from '../types/types.js';
 
 export class ParseUtil {
   private static readonly CONTROL =
@@ -249,11 +249,16 @@ export class ParseUtil {
           RegExp('(' + ParseUtil.TOKEN + '.*?' + ParseUtil.TOKEN + ')', 'g'),
         );
         if (xs.length === 1) {
-          result.push(xs[0]);
+          if (typeof xs[0] !== 'undefined') {
+            result.push(xs[0]);
+          }
         } else {
           for (const x of xs.filter(Boolean)) {
             if (ParseUtil.startsWithToken.test(x)) {
-              result.push(JSON.parse(x.split(ParseUtil.TOKEN)[1]));
+              const tokenSplit = x.split(ParseUtil.TOKEN)[1];
+              if (typeof tokenSplit !== 'undefined') {
+                result.push(JSON.parse(tokenSplit));
+              }
             } else {
               result.push(x);
             }

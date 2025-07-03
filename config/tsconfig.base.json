@@ -1,13 +1,33 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
+    "lib": ["es2022", "dom"],
+    "target": "es2022",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "noImplicitAny": true,
     "strict": true,
-    "skipLibCheck": true
-  },
-  "exclude": ["../node_modules", "**/__tests__/*", "**/lib/*"]
+    "esModuleInterop": true,
+    "verbatimModuleSyntax": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "skipLibCheck": true,
+    "useUnknownInCatchVariables": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "allowArbitraryExtensions": true,
+    "allowSyntheticDefaultImports": true,
+    "declaration": false,
+    "declarationMap": false,
+    "pretty": true,
+    "newLine": "lf",
+    "erasableSyntaxOnly": true,
+    "emitDeclarationOnly": false,
+    //"allowImportingTsExtensions": true,
+    "noEmit": false,
+    "types": ["node"],
+    "removeComments": true
+  }
 }

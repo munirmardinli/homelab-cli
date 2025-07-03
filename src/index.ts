@@ -1,5 +1,6 @@
 import 'dotenv/config';
-import { Cli } from './utils/cli';
+
+import { Cli } from './utils/cli.js';
 
 const cli = new Cli();
 
