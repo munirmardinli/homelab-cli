@@ -26,11 +26,24 @@ services:
     image: mardinlimunir/homelab-cli:latest
     container_name: homelab-cli
     restart: always
+    <<: *resource-limits
+    logging:
+      <<: *default-logging
+      options:
+        <<: *default-logging-options
     hostname: homelab-cli
     environment:
       PORT: ${PORT:-22}
       USER: ${USER}
       HOST: ${HOST}
       PASSWORD: ${PASSWORD}
+    networks:
+      dockerization:
     labels:
+      <<: *default-labels
+      monitoring: homelab-cli
       description: Homelab CLI
+
+networks:
+  dockerization:
+    external: true
