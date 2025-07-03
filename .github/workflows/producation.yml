@@ -51,6 +51,14 @@ jobs:
             node_modules
             .npm
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Check node_modules and install if needed
+        run: |
+          if [ ! -d "node_modules/@types/node" ]; then
+            echo "node_modules/@types/node fehlt, führe npm ci aus..."
+            npm ci
+          else
+            echo "node_modules/@types/node gefunden, npm ci wird übersprungen."
+          fi
       - name: Typecheck
         run: ls && npx tsc --noEmit
         working-directory: ${{ github.workspace }}
