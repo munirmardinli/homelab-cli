@@ -31,6 +31,7 @@ class Cli {
       .option('-z, --unzip <file>', 'Datei entpacken')
       .option('-c, --cmd <command>', 'Befehl ausführen')
       .option('-P, --port <port>', 'SSH Port')
+      .option('-s, --sudo', 'Führe das Kommando mit sudo aus', true)
       .action(async (opts) => {
         const host = opts.host || process.env.HOST;
         const user = opts.user || process.env.USER;
@@ -68,7 +69,11 @@ class Cli {
                 typeof (x as { op: unknown }).op === 'string'),
           );
           const quoted = StringQuoter.quote(filtered);
-          await SshUtil.runRemoteCommand(host, user, password, quoted, port);
+          let remoteCmd = quoted;
+          if (opts.sudo !== false) {
+            remoteCmd = `sudo -i -- ${quoted}`;
+          }
+          await SshUtil.runRemoteCommand(host, user, password, remoteCmd, port);
         } else {
           await SshUtil.runRemoteCommand(host, user, password, undefined, port);
         }

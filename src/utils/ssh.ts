@@ -37,6 +37,11 @@ class SshUtil {
       let args = sshArgs;
 
       if (password) {
+        if (process.platform === 'win32') {
+          throw new Error(
+            'sshpass wird unter Windows nicht unterstützt. Bitte SSH-Key-Authentifizierung verwenden.',
+          );
+        }
         sshCmd = 'sshpass';
         args = ['-p', password, 'ssh', ...sshArgs];
       }
