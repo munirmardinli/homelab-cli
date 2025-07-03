@@ -11,10 +11,12 @@
     "strict": true,
     "skipLibCheck": true,
     "lib": ["ES2020", "DOM"],
-		"paths": {
-			"@/homelab/*": ["./src/*"],
-			"dotenv": ["./node_modules/dotenv/types"]
-		}
+    "types": ["node"],
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "paths": {
+      "@/homelab/*": ["./src/*"],
+      "dotenv": ["./node_modules/dotenv/types"]
+    }
   },
   "include": ["src/**/*", "dotenv.d.ts"]
 }
