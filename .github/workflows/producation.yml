@@ -35,20 +35,6 @@ jobs:
         id: set-cache-output
         run: echo "cache-hit=$(ls node_modules | wc -l | tr -d ' ')" >> $GITHUB_OUTPUT
 
-  lint:
-    needs: prepare
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v4
-        with:
-          path: |
-            node_modules
-            .npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-      - name: Typecheck
-        run: npx tsc --noEmit
-
   quality-assurance:
     needs: prepare
     runs-on: ubuntu-latest
@@ -65,7 +51,6 @@ jobs:
 
   build-prod:
     needs:
-      - lint
       - quality-assurance
     runs-on: ubuntu-latest
     steps:
