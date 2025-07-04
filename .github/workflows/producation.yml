@@ -58,7 +58,6 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Run eslint tool
         run: npx eslint '.' --fix
-
   prettier:
     needs: prepare
     runs-on: ubuntu-latest
@@ -193,7 +192,7 @@ jobs:
           --ignore-unfixed \
           --format table \
           --exit-code 1
-  quality-assurance:
+  check-audit-prod:
     needs: build-prod
     runs-on: ubuntu-latest
     steps:
@@ -213,7 +212,7 @@ jobs:
       - trivy-scans-prod
       - git_guardian-prod
       - deploy-docs
-      - quality-assurance
+      - check-audit-prod
     runs-on: ubuntu-latest
     permissions:
       contents: read
