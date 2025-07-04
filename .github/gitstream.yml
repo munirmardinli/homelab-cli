@@ -1,0 +1,116 @@
+# gitstream.yml
+cm_rules:
+  # Automatische Label für Änderungstypen
+  - name: Label based on changed files
+    actions:
+      - type: add-label
+        value: 
+          - "dependencies" when: any-glob-match(files, ["package.json", "package-lock.json"])
+          - "documentation" when: any-glob-match(files, ["**/*.md", "typedoc.json"])
+          - "docker" when: any-glob-match(files, [".docker/**", ".devcontainer/**"])
+          - "typescript" when: any-glob-match(files, ["src/**", "lib/**", "**/*.ts"])
+          - "config" when: any-glob-match(files, ["tsconfig*.json", "eslint.config.js"])
+          - "github" when: any-glob-match(files, [".github/**"])
+
+  # Automatische Review-Zuweisung für CLI-spezifische Änderungen
+  - name: Assign reviewers based on file changes
+    actions:
+      - type: add-reviewers
+        reviewers:
+          - "team-cli" when: any-glob-match(files, ["src/**", "lib/**"])
+          - "team-devops" when: any-glob-match(files, [".docker/**", ".devcontainer/**", "Dockerfile"])
+          - "team-security" when: any-glob-match(files, ["package.json", "package-lock.json"])
+
+  # PR-Beschreibung validieren
+  - name: Validate PR description
+    if:
+      - not: pr.description
+    actions:
+      - type: comment
+        content: |
+          ⚠️ Bitte füge eine Beschreibung zu deinem Pull Request hinzu, die folgendes enthält:
+          - Zweck der Änderung
+          - Betroffene CLI-Befehle
+          - Breaking Changes (falls vorhanden)
+
+  # Größenbeschränkung für PRs
+  - name: Warn for large PRs
+    if:
+      - lines.added > 300
+    actions:
+      - type: comment
+        content: "⚠️ Dieser PR ist sehr groß (+{{lines.added}} Zeilen). Für CLI-Änderungen empfehlen wir kleinere, fokussierte PRs."
+
+  # Automatische Approvals für Dokumentationsänderungen
+  - name: Auto-approve docs changes
+    if:
+      - all-glob-match(files, ["**/*.md", "typedoc.json"])
+      - lines.added < 50
+    actions:
+      - type: add-label
+        value: "auto-approved"
+      - type: approve
+      - type: comment
+        content: "✅ Automatisch approved, da es sich nur um Dokumentationsänderungen handelt."
+
+  # Blockieren wenn Sicherheitstests fehlschlagen
+  - name: Block if security checks failed
+    if:
+      - check-failed: "GitGuardian scan"
+      - check-failed: "Trivy scans"
+    actions:
+      - type: comment
+        content: "🚨 Sicherheitschecks fehlgeschlagen! Bitte behebe die Probleme bevor du fortfährst."
+      - type: block
+
+  # Besondere Aufmerksamkeit für Docker-Änderungen
+  - name: Highlight Docker changes
+    if:
+      - any-glob-match(files, [".docker/**", ".devcontainer/**"])
+    actions:
+      - type: add-label
+        value: "infrastructure"
+      - type: comment
+        content: "🐳 Docker-Änderungen erkannt - bitte @team-devops zur Review hinzufügen."
+
+  # Warnung bei Änderungen an Hauptdateien
+  - name: Warn for core changes
+    if:
+      - any-glob-match(files, ["src/index.ts", "lib/**"])
+    actions:
+      - type: add-label
+        value: "core-change"
+      - type: comment
+        content: "⚠️ Wichtige Kernänderung - bitte sorgfältig reviewen!"
+
+pr_defaults:
+  # Standard-Reviewer für CLI-Änderungen
+  required_reviewers:
+    - "cli-maintainer" when: any-glob-match(files, ["src/**", "lib/**"])
+    - "devops-lead" when: any-glob-match(files, [".docker/**", ".devcontainer/**"])
+
+  # Standard-Labels
+  labels:
+    - "cli"
+    - "needs-review"
+
+  # PR-Template für CLI-Änderungen
+  description: |
+    ## CLI-Änderungsbeschreibung
+    [Welche CLI-Funktionalität wird hinzugefügt/geändert?]
+
+    ### Betroffene Befehle:
+    - [ ] Befehl 1
+    - [ ] Befehl 2
+
+    ### Breaking Changes:
+    - [ ] Ja (bitte dokumentieren)
+    - [ ] Nein
+
+    ### Tests durchgeführt:
+    - [ ] Unit Tests
+    - [ ] Manuelle Tests
+    - [ ] Beides
+
+    ## Sicherheitsüberlegungen
+    [Gibt es Auswirkungen auf Berechtigungen oder Sicherheit?]
