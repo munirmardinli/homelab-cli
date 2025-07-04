@@ -7,7 +7,7 @@ on:
       - "src/**"
       - "package.json"
       - "tsconfig.json"
-      - ".github/workflows/codeql.yml"
+      - ".github/**"
   pull_request:
     branches: [main]
   schedule:
