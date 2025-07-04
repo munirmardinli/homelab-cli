@@ -129,7 +129,7 @@ jobs:
           publish_branch: gh-pages
   git_guardian:
     name: GitGuardian scan
-    needs: deploy-docs
+    needs: build-prod
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -146,7 +146,7 @@ jobs:
           GITGUARDIAN_API_KEY: ${{ env.GITGUARDIAN_API }}
   security-scans:
     runs-on: ubuntu-latest
-    needs: deploy-docs
+    needs: build-prod
     steps:
       - uses: actions/checkout@v4
       - name: Set up Node.js
