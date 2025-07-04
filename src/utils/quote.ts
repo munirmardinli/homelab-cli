@@ -18,7 +18,7 @@ class StringQuoter {
         const str = String(s);
         // prettier-ignore
         if (/["]\s\\]/.test(str) && !str.includes('\'')) {
-					return '\'' + str.replace(/(['])/g, '\\$1') + '\'';
+					return `'${str.replace(/'/g, "\\'")}'`;
 				}
         // prettier-ignore
         if (/["]'\s]/.test(str)) {
