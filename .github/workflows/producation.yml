@@ -104,7 +104,6 @@ jobs:
         run: |
           npx tsc
   docker-prod:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build-prod
     runs-on: ubuntu-latest
     permissions:

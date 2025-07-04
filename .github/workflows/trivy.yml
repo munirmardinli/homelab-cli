@@ -1,0 +1,50 @@
+# trunk-ignore-all(checkov/CKV2_GHA_1)
+name: Security Scan with Trivy
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  trivy-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Install Trivy
+      - name: Install Trivy
+        uses: aquasecurity/trivy-action@0.28.0
+
+      # Filesystem Scan (includes TypeScript files)
+      - name: Filesystem Scan
+        run: |
+          trivy fs --security-checks vuln,config --severity HIGH,CRITICAL \
+          --ignore-unfixed --format table --exit-code 1 \
+          --skip-files package-lock.json \
+          .
+
+      # NPM dependencies Scan
+      - name: npm dependencies Scan
+        run: |
+          trivy npm --security-checks vuln --severity HIGH,CRITICAL \
+          --ignore-unfixed --format table --exit-code 1 \
+          package-lock.json
+
+      # Config Scan (checks for misconfigurations)
+      - name: Config Scan
+        run: |
+          trivy config --severity HIGH,CRITICAL \
+          --format table --exit-code 1 \
+          .
