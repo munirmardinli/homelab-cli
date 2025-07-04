@@ -1,18 +1,8 @@
 import { spawn } from 'node:child_process';
-/**
- *
- *
- * @class SshUtil
- *
- * @static
- * @param {string} host
- * @param {string} user
- * @param {string} password
- * @param {string} [command]
- * @param {string} [port]
- * @return {*}
- * @memberof SshUtil
- */
++/**
++ * SSH utility class for running remote commands
++ * @class SshUtil
++ */
 class SshUtil {
   static async runRemoteCommand({
     host,
