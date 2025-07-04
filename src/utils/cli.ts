@@ -1,6 +1,6 @@
 import { Command } from 'commander';
-import fetch from 'node-fetch';
-import * as fs from 'node:fs';
+import fs from 'node:fs';
+import https from 'node:https';
 
 import { FileUtil } from './file.js';
 import { ParseUtil } from './parse.js';
@@ -71,16 +71,24 @@ class Cli {
           );
         }
         if (opts.download) {
-          const res = await fetch(opts.download);
-          if (!res.body) {
-            throw new Error('Download response has no body');
-          }
-          const nodeStream = res.body;
-          const fileStream = fs.createWriteStream('/tmp/downloaded.zip');
           await new Promise<void>((resolve, reject) => {
-            nodeStream.pipe(fileStream);
-            nodeStream.on('error', reject);
-            fileStream.on('finish', () => resolve(undefined));
+            https
+              .get(opts.download, (res) => {
+                if (res.statusCode !== 200) {
+                  reject(
+                    new Error(
+                      `Download fehlgeschlagen: Status ${res.statusCode}`,
+                    ),
+                  );
+                  return;
+                }
+                const fileStream = fs.createWriteStream('/tmp/downloaded.zip');
+                res.pipe(fileStream);
+                res.on('error', reject);
+                fileStream.on('finish', () => resolve(undefined));
+                fileStream.on('error', reject);
+              })
+              .on('error', reject);
           });
         }
         if (opts.unzip) {

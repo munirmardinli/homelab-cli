@@ -61,7 +61,6 @@ Thumbs.db
 *.pdf
 
 # Personal/local config files
-.vscode/
 .idea/
 *.swp
 *.swo

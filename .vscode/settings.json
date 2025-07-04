@@ -234,5 +234,14 @@
 	},
 	"[log]": {
 		"editor.defaultFormatter": "log-formatter.log-formatter"
-	}
+	},
+	"[ignore]": {
+		"editor.defaultFormatter": "trunk.io"
+	},
+	"terminal.integrated.env.windows": {
+		"LANG": "de_DE.UTF-8",
+		"LC_ALL": "de_DE.UTF-8"
+	},
+	"files.encoding": "utf8",
+	"terminal.integrated.fontFamily": "Cascadia Mono, Fira Code, Consolas, DejaVu Sans Mono, monospace"
 }

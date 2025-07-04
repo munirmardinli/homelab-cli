@@ -1,7 +1,7 @@
 import { spawn } from 'node:child_process';
-import * as fs from 'node:fs';
-import * as http from 'node:http';
-import * as https from 'node:https';
+import fs from 'node:fs';
+import http from 'node:http';
+import https from 'node:https';
 
 class FileUtil {
   static async downloadFile(url: string, dest: string) {
