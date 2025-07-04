@@ -1,0 +1,16 @@
+---
+services:
+  homelab-cli-dev:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile.Dev
+    container_name: homelab-cli-dev
+    restart: always
+    tty: true
+    environment:
+      HOST: ${HOST}
+      PORT: ${PORT}
+      USER: ${USER}
+      PASSWORD: ${PASSWORD}
+    # env_file:
+    #   - .env.development

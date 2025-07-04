@@ -1,7 +1,19 @@
 {
   "name": "Homelab CLI Dev Container",
-  "dockerComposeFile": "./docker-compose.yml",
+  "dockerComposeFile": "sandbox.yml",
   "service": "homelab-cli-dev",
   "workspaceFolder": "/home/node/app",
+  "runArgs": [
+    "--volume",
+    "${localWorkspaceFolder}/lib:/home/node/app/lib",
+    "--env",
+    "USER=${localEnv:USER}",
+    "--env",
+    "PORT=${localEnv:PORT}",
+    "--env",
+    "PASSWORD=${localEnv:PASSWORD}",
+    "--env",
+    "PORT=${localEnv:PORT}"
+  ],
   "remoteUser": "node"
 }
