@@ -21,6 +21,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+      - name: Build application for Trivy
+        run: |
+          npx tsc
 
       # Install Trivy
       - name: Install Trivy
