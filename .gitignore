@@ -11,11 +11,8 @@ node_modules/
 
 # build
 lib
-assets
-npm
 
 # documentation
 docs
-coverage
 .qodo
-prd.md
+.cursor/PRD/index.md

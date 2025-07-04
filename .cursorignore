@@ -1,17 +1,8 @@
 # Build directories
-/build/
-/dist/
-/out/
-/.next/
-/.nuxt/
-/.output/
+/lib/
 
 # Dependencies
 /node_modules/
-/bower_components/
-/.pnp/
-/.pnp.js
-/vendor/
 
 # Environment variables and secrets
 .env
@@ -50,21 +41,8 @@ yarn-error.log*
 .DS_Store
 Thumbs.db
 
-# Test coverage and reports
-/coverage/
-/.nyc_output/
-/test-results/
-/cypress/screenshots/
-/cypress/videos/
-
-# Generated files
-*.min.js
-*.min.css
-*.generated.*
-
 # Documentation
 /docs/
-/documentation/
 *.md
 *.mdx
 /README.md
