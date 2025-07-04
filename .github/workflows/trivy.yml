@@ -45,10 +45,10 @@ jobs:
       - name: Update Trivy DB
         run: trivy image --download-db-only
 
-      # 1. Scan npm dependencies
+      # 1. Scan npm dependencies (neue Syntax)
       - name: Scan npm vulnerabilities
         run: |
-          trivy npm --security-checks vuln \
+          trivy sbom --scanners vuln \
           --severity HIGH,CRITICAL \
           --ignore-unfixed \
           --format table \
@@ -58,7 +58,7 @@ jobs:
       # 2. Scan filesystem (TypeScript files)
       - name: Scan filesystem
         run: |
-          trivy fs --security-checks vuln,config,secret \
+          trivy fs --scanners vuln,config,secret \
           --severity HIGH,CRITICAL \
           --ignore-unfixed \
           --format table \
@@ -69,7 +69,8 @@ jobs:
       # 3. Scan Dockerfile
       - name: Scan Dockerfile
         run: |
-          trivy config --severity HIGH,CRITICAL \
+          trivy config --scanners misconfig \
+          --severity HIGH,CRITICAL \
           --format table \
           --exit-code 1 \
           .docker/Dockerfile
@@ -80,7 +81,8 @@ jobs:
 
       - name: Scan Docker image
         run: |
-          trivy image --severity HIGH,CRITICAL \
+          trivy image --scanners vuln \
+          --severity HIGH,CRITICAL \
           --ignore-unfixed \
           --format table \
           --exit-code 1 \
