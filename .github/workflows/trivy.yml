@@ -22,11 +22,24 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Setup Trivy using the setup action instead
+      # Install latest Trivy version
       - name: Install Trivy
         uses: aquasecurity/setup-trivy@v0.2.1
         with:
-          version: '0.56.1'
+          version: 'v0.64.1'
+
+      # Cache Trivy DB for better performance
+      - name: Cache Trivy DB
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/trivy
+          key: trivy-db-${{ steps.get-date.outputs.date }}
+          restore-keys: |
+            trivy-db-
+
+      - name: Get current date
+        id: get-date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
 
       # Update vulnerability database
       - name: Update Trivy DB
