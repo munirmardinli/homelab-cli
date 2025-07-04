@@ -1,10 +1,12 @@
 documentation:
   - changed-files:
       - any-glob-to-any-file: "**/*.md"
+  - changed-files:
+      - any-glob-to-any-file: "README.md"
 
 codeing:
   - changed-files:
-      - any-glob-to-any-file: "**/*.ts"
+      - any-glob-to-any-file: "src/index.ts"
 
 tests:
   - changed-files:
@@ -12,20 +14,26 @@ tests:
 
 dependencies:
   - changed-files:
-      - any-glob-to-any-file: "**/*package.json"
+      - any-glob-to-any-file: "package.json"
   - changed-files:
-      - any-glob-to-any-file: "**/*package-lock.json"
+      - any-glob-to-any-file: "package-lock.json"
 
 configuration:
   - changed-files:
       - any-glob-to-any-file: "*.config.*"
   - changed-files:
-      - any-glob-to-any-file: "**/*.json"
+      - any-glob-to-any-file: "tsconfig.json"
   - changed-files:
-      - any-glob-to-any-file: "**/*.d.ts"
+      - any-glob-to-any-file: ".env*"
+  - changed-files:
+      - any-glob-to-any-file: "dotenv.d.ts"
 
 workflow:
   - changed-files:
-      - any-glob-to-any-file: "**/workflows/**.yml"
+      - any-glob-to-any-file: ".github/workflows/**"
   - changed-files:
-      - any-glob-to-any-file: "**/Dockerfile*"
+      - any-glob-to-any-file: ".github/actions/**"
+  - changed-files:
+      - any-glob-to-any-file: "Dockerfile*"
+  - changed-files:
+      - any-glob-to-any-file: "server.yml"

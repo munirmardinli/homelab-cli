@@ -1,6 +1,6 @@
-import { type Env, type ParsedToken } from '../types/types.js';
-
 import crypto from 'node:crypto';
+
+import { type Env, type ParsedToken } from '../types/types.js';
 
 export class ParseUtil {
   private static readonly CONTROL =
