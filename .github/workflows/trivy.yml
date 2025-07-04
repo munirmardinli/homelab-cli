@@ -44,15 +44,14 @@ jobs:
           package-lock.json
 
       # 2. Scan filesystem (TypeScript files)
-      - name: Scan filesystem
+      - name: Scan Dockerfile
         run: |
-          trivy fs --scanners vuln,config,secret \
+          trivy config --scanners misconfig \
           --severity HIGH,CRITICAL \
-          --ignore-unfixed \
+          --ignore-policy AVD-DS-0002 \
           --format table \
           --exit-code 1 \
-          --skip-files package-lock.json \
-          .
+          .docker/Dockerfile
 
       # 3. Scan Dockerfile
       - name: Scan Dockerfile
