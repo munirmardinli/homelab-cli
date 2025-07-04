@@ -45,12 +45,9 @@ jobs:
       - name: Set cache output
         id: set-cache-output
         run: echo "cache-hit=$(ls node_modules | wc -l | tr -d ' ')" >> $GITHUB_OUTPUT
-  lint:
+  eslint:
     needs: prepare
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        tool: [eslint, prettier, typecheck]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/cache@v4
@@ -59,22 +56,40 @@ jobs:
             node_modules
             .npm
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-      - name: Run lint tool
-        run: |
-          case ${{ matrix.tool }} in
-            eslint)
-              npx eslint '.' --fix
-              ;;
-            prettier)
-              npx prettier --write . --check
-              ;;
-            typecheck)
-              npx tsc --noEmit
-              ;;
-          esac
+      - name: Run eslint tool
+        run: npx eslint '.' --fix
+
+  prettier:
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Run prettier tool
+        run: npx prettier --write . --check
+  typecheck:
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Run typecheck tool
+        run: npx tsc --noEmit
   build-prod:
     needs:
-      - lint
+      - eslint
+      - prettier
+      - typecheck
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
