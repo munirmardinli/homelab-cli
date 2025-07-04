@@ -1,3 +1,4 @@
+# trunk-ignore-all(checkov/CKV_DOCKER_2)
 FROM node:22-alpine
 
 RUN mkdir -p \

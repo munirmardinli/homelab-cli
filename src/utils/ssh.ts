@@ -1,26 +1,22 @@
 import { spawn } from 'node:child_process';
 /**
- *
- *
+ * SSH utility class for running remote commands
  * @class SshUtil
- *
- * @static
- * @param {string} host
- * @param {string} user
- * @param {string} password
- * @param {string} [command]
- * @param {string} [port]
- * @return {*}
- * @memberof SshUtil
  */
 class SshUtil {
-  static async runRemoteCommand(
-    host: string,
-    user: string,
-    password?: string,
-    command?: string,
-    port?: string,
-  ) {
+  static async runRemoteCommand({
+    host,
+    user,
+    password,
+    command,
+    port,
+  }: {
+    host: string;
+    user: string;
+    password?: string;
+    command?: string;
+    port?: string;
+  }) {
     return new Promise<void>((resolve, reject) => {
       const sshArgs = [];
       if (port) {

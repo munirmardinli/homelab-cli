@@ -109,9 +109,15 @@ class Cli {
           if (opts.sudo !== false) {
             remoteCmd = `sudo -i -- ${quoted}`;
           }
-          await SshUtil.runRemoteCommand(host, user, password, remoteCmd, port);
+          await SshUtil.runRemoteCommand({
+            host,
+            user,
+            password,
+            command: remoteCmd,
+            port,
+          });
         } else {
-          await SshUtil.runRemoteCommand(host, user, password, undefined, port);
+          await SshUtil.runRemoteCommand({ host, user, password, port });
         }
       });
 
