@@ -1200,14 +1200,14 @@
 					},
 					"children": [
 						{
-							"id": 102,
+							"id": 104,
 							"name": "constructor",
 							"variant": "declaration",
 							"kind": 512,
 							"flags": {},
 							"signatures": [
 								{
-									"id": 103,
+									"id": 105,
 									"name": "SshUtil",
 									"variant": "signature",
 									"kind": 16384,
@@ -1255,63 +1255,142 @@
 									"parameters": [
 										{
 											"id": 91,
-											"name": "host",
+											"name": "__namedParameters",
 											"variant": "param",
 											"kind": 32768,
 											"flags": {},
 											"type": {
-												"type": "intrinsic",
-												"name": "string"
-											}
-										},
-										{
-											"id": 92,
-											"name": "user",
-											"variant": "param",
-											"kind": 32768,
-											"flags": {},
-											"type": {
-												"type": "intrinsic",
-												"name": "string"
-											}
-										},
-										{
-											"id": 93,
-											"name": "password",
-											"variant": "param",
-											"kind": 32768,
-											"flags": {
-												"isOptional": true
-											},
-											"type": {
-												"type": "intrinsic",
-												"name": "string"
-											}
-										},
-										{
-											"id": 94,
-											"name": "command",
-											"variant": "param",
-											"kind": 32768,
-											"flags": {
-												"isOptional": true
-											},
-											"type": {
-												"type": "intrinsic",
-												"name": "string"
-											}
-										},
-										{
-											"id": 95,
-											"name": "port",
-											"variant": "param",
-											"kind": 32768,
-											"flags": {
-												"isOptional": true
-											},
-											"type": {
-												"type": "intrinsic",
-												"name": "string"
+												"type": "reflection",
+												"declaration": {
+													"id": 92,
+													"name": "__type",
+													"variant": "declaration",
+													"kind": 65536,
+													"flags": {},
+													"children": [
+														{
+															"id": 93,
+															"name": "host",
+															"variant": "declaration",
+															"kind": 1024,
+															"flags": {},
+															"sources": [
+																{
+																	"fileName": "utils/ssh.ts",
+																	"line": 24,
+																	"character": 4,
+																	"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L24"
+																}
+															],
+															"type": {
+																"type": "intrinsic",
+																"name": "string"
+															}
+														},
+														{
+															"id": 94,
+															"name": "user",
+															"variant": "declaration",
+															"kind": 1024,
+															"flags": {},
+															"sources": [
+																{
+																	"fileName": "utils/ssh.ts",
+																	"line": 25,
+																	"character": 4,
+																	"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L25"
+																}
+															],
+															"type": {
+																"type": "intrinsic",
+																"name": "string"
+															}
+														},
+														{
+															"id": 96,
+															"name": "command",
+															"variant": "declaration",
+															"kind": 1024,
+															"flags": {
+																"isOptional": true
+															},
+															"sources": [
+																{
+																	"fileName": "utils/ssh.ts",
+																	"line": 27,
+																	"character": 4,
+																	"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L27"
+																}
+															],
+															"type": {
+																"type": "intrinsic",
+																"name": "string"
+															}
+														},
+														{
+															"id": 95,
+															"name": "password",
+															"variant": "declaration",
+															"kind": 1024,
+															"flags": {
+																"isOptional": true
+															},
+															"sources": [
+																{
+																	"fileName": "utils/ssh.ts",
+																	"line": 26,
+																	"character": 4,
+																	"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L26"
+																}
+															],
+															"type": {
+																"type": "intrinsic",
+																"name": "string"
+															}
+														},
+														{
+															"id": 97,
+															"name": "port",
+															"variant": "declaration",
+															"kind": 1024,
+															"flags": {
+																"isOptional": true
+															},
+															"sources": [
+																{
+																	"fileName": "utils/ssh.ts",
+																	"line": 28,
+																	"character": 4,
+																	"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L28"
+																}
+															],
+															"type": {
+																"type": "intrinsic",
+																"name": "string"
+															}
+														}
+													],
+													"groups": [
+														{
+															"title": "Properties",
+															"children": [
+																93,
+																94,
+																96,
+																95,
+																97
+															]
+														}
+													],
+													"sources": [
+														{
+															"fileName": "utils/ssh.ts",
+															"line": 23,
+															"character": 5,
+															"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L23"
+														}
+													]
+												}
 											}
 										}
 									],
@@ -1335,7 +1414,7 @@
 							]
 						},
 						{
-							"id": 96,
+							"id": 98,
 							"name": "startInteractiveSession",
 							"variant": "declaration",
 							"kind": 2048,
@@ -1345,14 +1424,14 @@
 							"sources": [
 								{
 									"fileName": "utils/ssh.ts",
-									"line": 69,
+									"line": 75,
 									"character": 15,
-									"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L69"
+									"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L75"
 								}
 							],
 							"signatures": [
 								{
-									"id": 97,
+									"id": 99,
 									"name": "startInteractiveSession",
 									"variant": "signature",
 									"kind": 4096,
@@ -1360,14 +1439,14 @@
 									"sources": [
 										{
 											"fileName": "utils/ssh.ts",
-											"line": 69,
+											"line": 75,
 											"character": 15,
-											"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L69"
+											"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L75"
 										}
 									],
 									"parameters": [
 										{
-											"id": 98,
+											"id": 100,
 											"name": "host",
 											"variant": "param",
 											"kind": 32768,
@@ -1378,7 +1457,7 @@
 											}
 										},
 										{
-											"id": 99,
+											"id": 101,
 											"name": "user",
 											"variant": "param",
 											"kind": 32768,
@@ -1389,7 +1468,7 @@
 											}
 										},
 										{
-											"id": 100,
+											"id": 102,
 											"name": "password",
 											"variant": "param",
 											"kind": 32768,
@@ -1402,7 +1481,7 @@
 											}
 										},
 										{
-											"id": 101,
+											"id": 103,
 											"name": "port",
 											"variant": "param",
 											"kind": 32768,
@@ -1439,14 +1518,14 @@
 						{
 							"title": "Constructors",
 							"children": [
-								102
+								104
 							]
 						},
 						{
 							"title": "Methods",
 							"children": [
 								89,
-								96
+								98
 							]
 						}
 					],
@@ -1758,54 +1837,64 @@
 		"91": {
 			"packageName": "homelab-cli",
 			"packagePath": "src/utils/ssh.ts",
-			"qualifiedName": "host"
+			"qualifiedName": "__0"
 		},
 		"92": {
 			"packageName": "homelab-cli",
 			"packagePath": "src/utils/ssh.ts",
-			"qualifiedName": "user"
+			"qualifiedName": "__type"
 		},
 		"93": {
 			"packageName": "homelab-cli",
 			"packagePath": "src/utils/ssh.ts",
-			"qualifiedName": "password"
+			"qualifiedName": "__type.host"
 		},
 		"94": {
 			"packageName": "homelab-cli",
 			"packagePath": "src/utils/ssh.ts",
-			"qualifiedName": "command"
+			"qualifiedName": "__type.user"
 		},
 		"95": {
 			"packageName": "homelab-cli",
 			"packagePath": "src/utils/ssh.ts",
-			"qualifiedName": "port"
+			"qualifiedName": "__type.password"
 		},
 		"96": {
 			"packageName": "homelab-cli",
 			"packagePath": "src/utils/ssh.ts",
-			"qualifiedName": "SshUtil.startInteractiveSession"
+			"qualifiedName": "__type.command"
 		},
 		"97": {
 			"packageName": "homelab-cli",
 			"packagePath": "src/utils/ssh.ts",
-			"qualifiedName": "SshUtil.startInteractiveSession"
+			"qualifiedName": "__type.port"
 		},
 		"98": {
 			"packageName": "homelab-cli",
 			"packagePath": "src/utils/ssh.ts",
-			"qualifiedName": "host"
+			"qualifiedName": "SshUtil.startInteractiveSession"
 		},
 		"99": {
 			"packageName": "homelab-cli",
 			"packagePath": "src/utils/ssh.ts",
-			"qualifiedName": "user"
+			"qualifiedName": "SshUtil.startInteractiveSession"
 		},
 		"100": {
 			"packageName": "homelab-cli",
 			"packagePath": "src/utils/ssh.ts",
-			"qualifiedName": "password"
+			"qualifiedName": "host"
 		},
 		"101": {
+			"packageName": "homelab-cli",
+			"packagePath": "src/utils/ssh.ts",
+			"qualifiedName": "user"
+		},
+		"102": {
+			"packageName": "homelab-cli",
+			"packagePath": "src/utils/ssh.ts",
+			"qualifiedName": "password"
+		},
+		"103": {
 			"packageName": "homelab-cli",
 			"packagePath": "src/utils/ssh.ts",
 			"qualifiedName": "port"
