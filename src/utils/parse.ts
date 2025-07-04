@@ -1,5 +1,7 @@
 import { type Env, type ParsedToken } from '../types/types.js';
 
+import crypto from 'node:crypto';
+
 export class ParseUtil {
   private static readonly CONTROL =
     '(?:' +
@@ -27,12 +29,8 @@ export class ParseUtil {
   private static readonly DQ = '"';
   private static readonly DS = '$';
   private static readonly TOKEN = (() => {
-    let token = '';
-    const mult = 0x100000000;
-    for (let i = 0; i < 4; i++) {
-      token += (mult * Math.random()).toString(16);
-    }
-    return token;
+    const tokenBuffer = crypto.randomBytes(16); // Generate 16 secure random bytes
+    return tokenBuffer.toString('hex');
   })();
   private static readonly startsWithToken = new RegExp('^' + ParseUtil.TOKEN);
 
