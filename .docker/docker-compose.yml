@@ -38,11 +38,6 @@ services:
       USER: ${USER}
       HOST: ${HOST}
       PASSWORD: ${PASSWORD}
-    volumes:
-      - type: bind
-        source: ~/.ssh
-        target: /home/node/.ssh
-        read_only: true
 
     networks:
       dockerization:
