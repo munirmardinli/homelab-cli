@@ -72,24 +72,8 @@ jobs:
               npx tsc --noEmit
               ;;
           esac
-  quality-assurance:
-    needs: prepare
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v4
-        with:
-          path: |
-            node_modules
-            .npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-      - name: Run npm audit
-        run: npm audit --audit-level=moderate
-        working-directory: ${{ github.workspace }}
   build-prod:
     needs:
-      - quality-assurance
       - lint
     runs-on: ubuntu-latest
     steps:
@@ -194,11 +178,27 @@ jobs:
           --ignore-unfixed \
           --format table \
           --exit-code 1
+  quality-assurance:
+    needs: build-prod
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Run npm audit
+        run: npm audit --audit-level=moderate
+        working-directory: ${{ github.workspace }}
   docker-prod:
     needs:
       - trivy-scans-prod
       - git_guardian-prod
       - deploy-docs
+      - quality-assurance
     runs-on: ubuntu-latest
     permissions:
       contents: read
