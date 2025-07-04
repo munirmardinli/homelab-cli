@@ -1152,49 +1152,10 @@
 					"kind": 128,
 					"flags": {},
 					"comment": {
-						"summary": [],
-						"blockTags": [
+						"summary": [
 							{
-								"tag": "@static",
-								"content": []
-							},
-							{
-								"tag": "@param",
-								"name": "host",
-								"content": []
-							},
-							{
-								"tag": "@param",
-								"name": "user",
-								"content": []
-							},
-							{
-								"tag": "@param",
-								"name": "password",
-								"content": []
-							},
-							{
-								"tag": "@param",
-								"name": "command",
-								"content": []
-							},
-							{
-								"tag": "@param",
-								"name": "port",
-								"content": []
-							},
-							{
-								"tag": "@returns",
-								"content": []
-							},
-							{
-								"tag": "@memberof",
-								"content": [
-									{
-										"kind": "text",
-										"text": "SshUtil"
-									}
-								]
+								"kind": "text",
+								"text": "SSH utility class for running remote commands"
 							}
 						]
 					},
@@ -1232,9 +1193,9 @@
 							"sources": [
 								{
 									"fileName": "utils/ssh.ts",
-									"line": 17,
+									"line": 7,
 									"character": 15,
-									"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L17"
+									"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L7"
 								}
 							],
 							"signatures": [
@@ -1247,9 +1208,9 @@
 									"sources": [
 										{
 											"fileName": "utils/ssh.ts",
-											"line": 17,
+											"line": 7,
 											"character": 15,
-											"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L17"
+											"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L7"
 										}
 									],
 									"parameters": [
@@ -1277,9 +1238,9 @@
 															"sources": [
 																{
 																	"fileName": "utils/ssh.ts",
-																	"line": 24,
+																	"line": 14,
 																	"character": 4,
-																	"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L24"
+																	"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L14"
 																}
 															],
 															"type": {
@@ -1296,9 +1257,9 @@
 															"sources": [
 																{
 																	"fileName": "utils/ssh.ts",
-																	"line": 25,
+																	"line": 15,
 																	"character": 4,
-																	"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L25"
+																	"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L15"
 																}
 															],
 															"type": {
@@ -1317,9 +1278,9 @@
 															"sources": [
 																{
 																	"fileName": "utils/ssh.ts",
-																	"line": 27,
+																	"line": 17,
 																	"character": 4,
-																	"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L27"
+																	"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L17"
 																}
 															],
 															"type": {
@@ -1338,9 +1299,9 @@
 															"sources": [
 																{
 																	"fileName": "utils/ssh.ts",
-																	"line": 26,
+																	"line": 16,
 																	"character": 4,
-																	"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L26"
+																	"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L16"
 																}
 															],
 															"type": {
@@ -1359,9 +1320,9 @@
 															"sources": [
 																{
 																	"fileName": "utils/ssh.ts",
-																	"line": 28,
+																	"line": 18,
 																	"character": 4,
-																	"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L28"
+																	"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L18"
 																}
 															],
 															"type": {
@@ -1385,9 +1346,9 @@
 													"sources": [
 														{
 															"fileName": "utils/ssh.ts",
-															"line": 23,
+															"line": 13,
 															"character": 5,
-															"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L23"
+															"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L13"
 														}
 													]
 												}
@@ -1424,9 +1385,9 @@
 							"sources": [
 								{
 									"fileName": "utils/ssh.ts",
-									"line": 75,
+									"line": 65,
 									"character": 15,
-									"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L75"
+									"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L65"
 								}
 							],
 							"signatures": [
@@ -1439,9 +1400,9 @@
 									"sources": [
 										{
 											"fileName": "utils/ssh.ts",
-											"line": 75,
+											"line": 65,
 											"character": 15,
-											"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L75"
+											"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L65"
 										}
 									],
 									"parameters": [
@@ -1532,9 +1493,9 @@
 					"sources": [
 						{
 							"fileName": "utils/ssh.ts",
-							"line": 16,
+							"line": 6,
 							"character": 6,
-							"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L16"
+							"url": "https://github.com/munirmardinli/homelab-cli/blob/main/src/utils/ssh.ts#L6"
 						}
 					]
 				}
