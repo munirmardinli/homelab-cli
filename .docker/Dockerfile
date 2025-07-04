@@ -47,4 +47,6 @@ LABEL com.docker.extension.legal-url="https://github.com/${GITHUB_REPO}/blob/${B
 
 LABEL com.centurylinklabs.watchtower.enable="true"
 
+USER node
+
 CMD ["sh", "-c", "node lib/index.js session"]

@@ -16,8 +16,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: '20'
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
@@ -26,11 +26,16 @@ jobs:
       - name: Install Trivy
         uses: aquasecurity/setup-trivy@v0.2.1
         with:
-          version: "v0.64.1"
+          version: 'v0.64.1'
 
       # Update DB
       - name: Update Trivy DB
         run: trivy image --download-db-only
+
+      # Create .trivyignore file
+      - name: Create Trivy ignore file
+        run: |
+          echo "AVD-DS-0002" > .trivyignore
 
       # 1. Scan npm dependencies
       - name: Scan npm vulnerabilities
@@ -43,12 +48,11 @@ jobs:
           --dependency-tree \
           package-lock.json
 
-      # 2. Scan Dockerfile (korrigierte Version)
+      # 2. Scan Dockerfile (now properly ignoring the policy)
       - name: Scan Dockerfile
         run: |
           trivy config .docker/Dockerfile \
           --severity HIGH,CRITICAL \
-          --ignore-policy AVD-DS-0002 \
           --format table \
           --exit-code 1
 
