@@ -227,22 +227,18 @@ jobs:
         run: npm install -g codesandbox
       - name: Deploy to CodeSandbox
         run: |
-          # Create a temporary directory for deployment
-          mkdir -p ./deploy
-
-          # Copy only necessary files for production
-          cp -r dist package.json package-lock.json ./deploy/
-
-          # Navigate to the deployment directory
-          cd ./deploy
-
-          # Deploy to CodeSandbox
-          echo "Deploying to CodeSandbox..."
+          mkdir -p ./deploy-temp
+          cp -r lib package.json package-lock.json ./deploy-temp/
+          if [ -f "./deploy-temp/package.json" ]; then
+          echo "Patching package.json für CodeSandbox..."
+          jq '.main = (if .main then .main | sub("^dist/"; "lib/") else "lib/index.js" end)' \
+            ./deploy-temp/package.json > ./deploy-temp/package.tmp.json
+          mv ./deploy-temp/package.tmp.json ./deploy-temp/package.json
+          fi
+          cd ./deploy-temp
           csb deploy --token ${{ env.CODESANDBOX_TOKEN }} --name ${{ github.event.repository.name }}
-
-          # Clean up
           cd ..
-          rm -rf ./deploy
+          rm -rf ./deploy-temp
         env:
           CODESANDBOX_TOKEN: ${{ env.CODESANDBOX_TOKEN }}
   docker-prod:
