@@ -14,13 +14,19 @@ import { spawn } from 'node:child_process';
  * @memberof SshUtil
  */
 class SshUtil {
-  static async runRemoteCommand(
-    host: string,
-    user: string,
-    password?: string,
-    command?: string,
-    port?: string,
-  ) {
+  static async runRemoteCommand({
+    host,
+    user,
+    password,
+    command,
+    port,
+  }: {
+    host: string;
+    user: string;
+    password?: string;
+    command?: string;
+    port?: string;
+  }) {
     return new Promise<void>((resolve, reject) => {
       const sshArgs = [];
       if (port) {
