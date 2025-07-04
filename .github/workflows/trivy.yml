@@ -1,5 +1,4 @@
-# trunk-ignore-all(checkov/CKV2_GHA_1)
-name: Security Scan with Trivy
+name: Security Scans
 
 on:
   push:
@@ -8,7 +7,7 @@ on:
     branches: [main, master]
 
 jobs:
-  trivy-scan:
+  security-scans:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,33 +17,58 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: npm
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
 
-      # Install Trivy
+      # Setup Trivy
       - name: Install Trivy
         uses: aquasecurity/trivy-action@0.28.0
+        with:
+          install-only: true
 
-      # Filesystem Scan (includes TypeScript files)
-      - name: Filesystem Scan
+      # Update vulnerability database
+      - name: Update Trivy DB
+        run: trivy image --download-db-only
+
+      # 1. Scan npm dependencies
+      - name: Scan npm vulnerabilities
         run: |
-          trivy fs --security-checks vuln,config --severity HIGH,CRITICAL \
-          --ignore-unfixed --format table --exit-code 1 \
+          trivy npm --security-checks vuln \
+          --severity HIGH,CRITICAL \
+          --ignore-unfixed \
+          --format table \
+          --exit-code 1 \
+          package-lock.json
+
+      # 2. Scan filesystem (TypeScript files)
+      - name: Scan filesystem
+        run: |
+          trivy fs --security-checks vuln,config,secret \
+          --severity HIGH,CRITICAL \
+          --ignore-unfixed \
+          --format table \
+          --exit-code 1 \
           --skip-files package-lock.json \
           .
 
-      # NPM dependencies Scan
-      - name: npm dependencies Scan
-        run: |
-          trivy npm --security-checks vuln --severity HIGH,CRITICAL \
-          --ignore-unfixed --format table --exit-code 1 \
-          package-lock.json
-
-      # Config Scan (checks for misconfigurations)
-      - name: Config Scan
+      # 3. Scan Dockerfile
+      - name: Scan Dockerfile
         run: |
           trivy config --severity HIGH,CRITICAL \
-          --format table --exit-code 1 \
-          .
+          --format table \
+          --exit-code 1 \
+          .docker/Dockerfile
+
+      # 4. Optional: Build and scan Docker image
+      - name: Build Docker image
+        run: docker build -f .docker/Dockerfile -t homelab-cli .
+
+      - name: Scan Docker image
+        run: |
+          trivy image --severity HIGH,CRITICAL \
+          --ignore-unfixed \
+          --format table \
+          --exit-code 1 \
+          homelab-cli
