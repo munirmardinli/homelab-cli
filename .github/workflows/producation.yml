@@ -12,6 +12,7 @@ env:
   DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
   DOCKER_IMAGE_NAME: mardinlimunir/${{ github.event.repository.name }}
   GITGUARDIAN_API: ${{ secrets.GITGUARDIAN_API_KEY }}
+  CODESANDBOX_TOKEN: ${{ secrets.CODESANDBOX_TOKEN }}
 
 permissions:
   contents: write
@@ -207,12 +208,50 @@ jobs:
       - name: Run npm audit
         run: npm audit --audit-level=moderate
         working-directory: ${{ github.workspace }}
+  deploy-codesandbox-prod:
+    needs: build-prod
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install CodeSandbox CLI
+        run: npm install -g codesandbox
+      - name: Deploy to CodeSandbox
+        run: |
+          # Create a temporary directory for deployment
+          mkdir -p ./deploy
+
+          # Copy only necessary files for production
+          cp -r dist package.json package-lock.json ./deploy/
+
+          # Navigate to the deployment directory
+          cd ./deploy
+
+          # Deploy to CodeSandbox
+          echo "Deploying to CodeSandbox..."
+          csb deploy --token ${{ env.CODESANDBOX_TOKEN }} --name ${{ github.event.repository.name }}
+
+          # Clean up
+          cd ..
+          rm -rf ./deploy
+        env:
+          CODESANDBOX_TOKEN: ${{ env.CODESANDBOX_TOKEN }}
   docker-prod:
     needs:
       - trivy-scans-prod
       - git_guardian-prod
       - deploy-docs
       - check-audit-prod
+      - deploy-codesandbox-prod
     runs-on: ubuntu-latest
     permissions:
       contents: read
