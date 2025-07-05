@@ -84,12 +84,12 @@ export class ParseUtil {
       [
         '(' + ParseUtil.CONTROL + ')',
         '(' +
-        BAREWORD +
-        '|' +
-        ParseUtil.SINGLE_QUOTE +
-        '|' +
-        ParseUtil.DOUBLE_QUOTE +
-        ')+',
+          BAREWORD +
+          '|' +
+          ParseUtil.SINGLE_QUOTE +
+          '|' +
+          ParseUtil.DOUBLE_QUOTE +
+          ')+',
       ].join('|'),
       'g',
     );
@@ -173,8 +173,8 @@ export class ParseUtil {
                 const nextChar = s.charAt(i);
                 out +=
                   nextChar === ParseUtil.DQ ||
-                    nextChar === BS ||
-                    nextChar === ParseUtil.DS
+                  nextChar === BS ||
+                  nextChar === ParseUtil.DS
                     ? nextChar
                     : BS + nextChar;
               } else if (c === ParseUtil.DS) {
