@@ -1,15 +1,56 @@
 {
  "recommendations": [
-  "CodeSandbox-io.codesandbox-projects",
-  "ms-vscode-remote.remote-containers",
+  //ApollographQL autocomplete for GraphQL queries
+  "apollographql.vscode-apollo",
+  //Auto Import for automatic import statements
+  "steoates.autoimport",
+  //CodeQL for Code analysis
+  "GitHub.vscode-codeql",
+  //CodeSnap for code snapshots
+  "adpyke.codesnap",
+  // Docker for Dockerfile and container support
   "ms-azuretools.vscode-docker",
+  // Document This for documentation generation
+  "oouo-diogo-perdigao.docthis",
+  // Dracula Theme for a dark theme
+  "dracula-theme.theme-dracula",
+  // Error Lens for error highlighting and quick fixes
+  "usernamehw.errorlens",
+  // Eslint for JavaScript and TypeScript linting
+  "dbaeumer.vscode-eslint",
+  // German language pack for VS Code
+  "MS-CEINTL.vscode-language-pack-de",
+  // Github Actions for GitHub Actions support
+  "GitHub.vscode-github-actions",
+  // Github Copilot for AI-powered code suggestions
+  "GitHub.copilot",
+  // Github Chat for AI-powered chat support
+  "GitHub.copilot-chat",
+  // GraphQl support for GraphQL queries and schemas
+  "mquandalle.graphql",
+  // Halcyon Theme for a modern theme
   "brittanychiang.halcyon-vscode",
-  "ms-vscode-remote.remote-ssh",
-  "psulek-solo.typedoc-live-preview",
-  "yedhat.vscode-yaml",
-  "streetsidesoftware.code-spell-checker",
+  // Import Cost for displaying import sizes
+  "wix.vscode-import-cost",
+  // IntelliCode for AI-assisted code suggestions
+  "VisualStudioExptTeam.intellicode-api-usage-examples",
+  // Typescript Error Lens for TypeScript error highlighting
+  "yoavbls.pretty-ts-errors",
+  // Prisma for Prisma schema support
+  "Prisma.prisma",
+  // Rainbow CSV for CSV file support
+  "mechatroner.rainbow-csv",
+  // Snyk for security scanning
+  "snyk-security.snyk-vulnerability-scanner",
+  // Tabnine for AI-powered code completion
+  "TabNine.tabnine-vscode",
+  // Visual Studio Icons for file icons
   "vscode-icons-team.vscode-icons",
-  "yzhang.markdown-all-in-one",
-  "log-formatter.log-formatter"
+  // Codeium for AI-powered code suggestions
+  "Codeium.codeium",
+  // WSL for Windows Subsystem for Linux support
+  "ms-vscode-remote.remote-wsl",
+  // YAML support for YAML files
+  "redhat.vscode-yaml"
  ]
 }
