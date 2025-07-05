@@ -50,4 +50,4 @@ LABEL com.centurylinklabs.watchtower.enable="true"
 
 USER node
 
-CMD ["sh", "-c", "node lib/index.js session"]
+CMD ["sh", "-c", "node lib/index.js --version"]

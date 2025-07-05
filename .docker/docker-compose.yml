@@ -38,6 +38,7 @@ services:
       USER: ${USER}
       HOST: ${HOST}
       PASSWORD: ${PASSWORD}
+      SYNOLOGY: ${SYNOLOGY:-false}
     networks:
       dockerization:
     labels:

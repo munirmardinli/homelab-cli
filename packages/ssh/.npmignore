@@ -1,19 +1,6 @@
-# Source files
 src/
 *.ts
-*.tsx
+*.d.ts
 
-# Config files
 tsconfig.json
 eslint.config.js
-.prettierrc*
-.editorconfig
-
-# Development files
-.gitignore
-README.md
-*.log
-
-# Keep only build output
-!lib/
-!package.json
