@@ -6,7 +6,7 @@
   "out": "docs",
   "theme": "default",
   "logLevel": "Info",
-  "entryPoints": ["src", "packages/cli/src"],
+  "entryPoints": ["packages/cli/src/index.ts"],
   "tsconfig": "config/tsconfig.docs.json",
   "hostedBaseUrl": "https://munirmardinli.github.io/homelab-cli",
   "titleLink": "https://munirmardinli.github.io/homelab-cli",
