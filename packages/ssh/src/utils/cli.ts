@@ -1,19 +1,21 @@
-import { Command } from 'commander';
 import fs from 'node:fs';
 import https from 'node:https';
+
+import { Command } from 'commander';
+
+import { type Env } from '../types/types.js';
 
 import { FileUtil } from './file.js';
 import { ParseUtil } from './parse.js';
 import { StringQuoter } from './quote.js';
 import { SshUtil } from './ssh.js';
-import { type Env } from '../types/types.js';
 /**
  *
  *
  * @class Cli
  */
 class Cli {
-  public async run() {
+  public run(): void {
     const program = new Command();
 
     program
@@ -31,10 +33,10 @@ class Cli {
       .option('-p, --password <password>', 'SSH Passwort')
       .option('-P, --port <port>', 'SSH Port')
       .action(async (opts) => {
-        const host = opts.host || process.env.HOST;
-        const user = opts.user || process.env.USER;
-        const password = opts.password || process.env.PASSWORD;
-        const port = opts.port || process.env.PORT || '22';
+        const host = opts.host ?? process.env.HOST;
+        const user = opts.user ?? process.env.USER;
+        const password = opts.password ?? process.env.PASSWORD;
+        const port = opts.port ?? process.env.PORT ?? '22';
 
         if (!host || !user) {
           throw new Error(
@@ -61,10 +63,10 @@ class Cli {
       .option('-P, --port <port>', 'SSH Port')
       .option('-s, --sudo', 'Führe das Kommando mit sudo aus', true)
       .action(async (opts) => {
-        const host = opts.host || process.env.HOST;
-        const user = opts.user || process.env.USER;
-        const password = opts.password || process.env.PASSWORD;
-        const port = opts.port || process.env.PORT || '22';
+        const host = opts.host ?? process.env.HOST;
+        const user = opts.user ?? process.env.USER;
+        const password = opts.password ?? process.env.PASSWORD;
+        const port = opts.port ?? process.env.PORT ?? '22';
         if (!host || !user) {
           throw new Error(
             'Host und User müssen entweder als Option oder in der .env angegeben werden!',

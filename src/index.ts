@@ -1,11 +1,11 @@
-import 'dotenv/config';
+import { Cli } from '@homelab-cli/ssh';
 
-import { Cli } from './utils/cli.js';
+import 'dotenv/config';
 
 const cli = new Cli();
 
-async function main() {
-  await cli.run();
+function main() {
+  cli.run();
 }
 
 main();

@@ -51,6 +51,9 @@
   // WSL for Windows Subsystem for Linux support
   "ms-vscode-remote.remote-wsl",
   // YAML support for YAML files
-  "redhat.vscode-yaml"
+  "redhat.vscode-yaml",
+  "Trunk.io",
+  "CodeRabbit.coderabbit-vscode",
+  "drcika.apc-extension"
  ]
 }

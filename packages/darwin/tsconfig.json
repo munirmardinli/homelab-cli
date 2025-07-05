@@ -1,5 +1,5 @@
 {
-  "extends": "./config/tsconfig.build.json",
+  "extends": "../../config/tsconfig.workspace.json",
   "compilerOptions": {
     "rootDirs": ["src"],
     "outDir": "lib",

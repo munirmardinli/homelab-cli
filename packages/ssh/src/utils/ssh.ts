@@ -46,8 +46,8 @@ class SshUtil {
         stdio: 'inherit',
         env: {
           ...process.env,
-          PASSWORD: password || '',
-          SSHPASS: password || '',
+          PASSWORD: password ?? '',
+          SSHPASS: password ?? '',
         },
       });
 
@@ -97,8 +97,8 @@ class SshUtil {
         stdio: 'inherit',
         env: {
           ...process.env,
-          PASSWORD: password || '',
-          SSHPASS: password || '',
+          PASSWORD: password ?? '',
+          SSHPASS: password ?? '',
         },
       });
 

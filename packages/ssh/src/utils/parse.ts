@@ -70,7 +70,7 @@ export class ParseUtil {
     env: Env,
     opts: { escape?: string } = {},
   ): ParsedToken[] {
-    const BS = opts.escape || '\\';
+    const BS = opts.escape ?? '\\';
     const BAREWORD =
       '(\\' +
       BS +
@@ -171,15 +171,12 @@ export class ParseUtil {
               if (c === BS) {
                 i += 1;
                 const nextChar = s.charAt(i);
-                if (
+                out +=
                   nextChar === ParseUtil.DQ ||
                   nextChar === BS ||
                   nextChar === ParseUtil.DS
-                ) {
-                  out += nextChar;
-                } else {
-                  out += BS + nextChar;
-                }
+                    ? nextChar
+                    : BS + nextChar;
               } else if (c === ParseUtil.DS) {
                 const result = parseEnvVar(i);
                 out += result.value;
