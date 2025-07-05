@@ -4,7 +4,6 @@ import https from 'node:https';
 import { Command } from 'commander';
 
 import { type Env } from './types/index.js';
-
 import { FileUtil } from './utils/file.js';
 import { ParseUtil } from './utils/parse.js';
 import { StringQuoter } from './utils/quote.js';
