@@ -3,7 +3,7 @@ import https from 'node:https';
 
 import { Command } from 'commander';
 
-import { type Env } from '../types/types.js';
+import { type Env } from '../types/index.js';
 
 import { FileUtil } from './file.js';
 import { ParseUtil } from './parse.js';
