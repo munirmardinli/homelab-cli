@@ -58,7 +58,6 @@
     "postprettier": "prettier --write src",
     "lint": "npm run lint --workspaces && eslint src --fix",
     "postlint": "eslint src --fix",
-    "posttypecheck": "tsc --noEmit",
     "typecheck": "npm run typecheck --workspaces"
   },
   "engines": {

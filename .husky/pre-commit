@@ -3,9 +3,3 @@
 
 git pull
 
-echo "Check npm dependencies... "
-npm i
-echo "Checking TypeScript errors..."
-npm ecex tsc --noEmit
-echo "Building Project..."
-npm ecex tsc
