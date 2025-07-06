@@ -85,9 +85,9 @@
   "dependencies": {
     "commander": "^14.0.0",
     "dotenv": "^17.0.1",
-    "@homelab-cli/core": "file:packages/cli",
+    "@homelab-cli/cli": "file:packages/cli",
     "@homelab-cli/darwin": "file:packages/darwin",
-    "@homelab-cli/eslint-config": "file:packages/eslint",
+    "@homelab-cli/eslint": "file:packages/eslint",
     "@homelab-cli/ssh": "file:packages/ssh"
   },
   "tsdocsOptions": {

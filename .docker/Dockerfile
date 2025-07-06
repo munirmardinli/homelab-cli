@@ -2,15 +2,13 @@
 FROM node:22-alpine
 
 RUN mkdir -p \
-	/home/node/app/node_modules \
-	/home/node/app/packages
+	/home/node/app/node_modules
 
 WORKDIR /home/node/app
 
 COPY --chown=node:node package.json /home/node/app/package.json
 COPY --chown=node:node node_modules /home/node/app/node_modules
 COPY --chown=node:node lib /home/node/app/lib
-COPY --chown=node:node packages/ /home/node/app/packages/
 
 RUN apk add --no-cache openssh-client sshpass
 
