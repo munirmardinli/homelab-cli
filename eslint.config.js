@@ -117,7 +117,7 @@ export default [
       'no-trailing-spaces': 'error',
       'no-underscore-dangle': ['error', { allow: ['_id', '_key'] }],
       'no-param-reassign': ['error', { props: false }],
-      'no-useless-escape': 'error',
+      'no-useless-escape': 'off',
       'no-useless-return': 'error',
       'no-useless-concat': 'error',
       '@typescript-eslint/no-unused-vars': [

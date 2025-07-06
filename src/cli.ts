@@ -10,6 +10,10 @@ export class PackageManagerCLI {
     this.options = options;
   }
 
+  private isValidPackageName(pkg: string): boolean {
+    return /^[a-zA-Z0-9_\-\.]+$/.test(pkg);
+  }
+
   public start() {
     if (process.platform !== this.options.platform) {
       console.log(this.options.onlyPlatformMsg);
@@ -30,8 +34,15 @@ export class PackageManagerCLI {
     rl.question('Bitte wähle (1/2/3): ', (antwort) => {
       if (antwort === '1') {
         rl.question('Welches Paket soll installiert werden? ', (paket) => {
+          if (!this.isValidPackageName(paket)) {
+            console.error('Ungültiger Paketname!');
+            rl.close();
+            return;
+          }
+
           try {
-            execSync(this.options.installCmd(paket), { stdio: 'inherit' });
+            const cmd = `${this.options.installCmd} ${JSON.stringify(paket)}`;
+            execSync(cmd, { stdio: 'inherit' });
             console.log(`${paket} wurde (ggf.) installiert.`);
           } catch (err) {
             if (
