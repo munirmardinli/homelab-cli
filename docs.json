@@ -46,7 +46,7 @@
 								"type": "reference",
 								"target": 1,
 								"name": "HomelabCli",
-								"package": "@homelab-cli/core"
+								"package": "@homelab-cli/cli"
 							}
 						}
 					]
@@ -103,12 +103,12 @@
 									"type": {
 										"type": "reference",
 										"target": {
-											"packageName": "@homelab-cli/core",
+											"packageName": "@homelab-cli/cli",
 											"packagePath": "dotenv.d.ts",
 											"qualifiedName": "__global.CommandHandler"
 										},
 										"name": "CommandHandler",
-										"package": "@homelab-cli/core",
+										"package": "@homelab-cli/cli",
 										"qualifiedName": "__global.CommandHandler"
 									}
 								},
@@ -220,66 +220,66 @@
 			]
 		}
 	],
-	"packageName": "@homelab-cli/core",
+	"packageName": "@homelab-cli/cli",
 	"packageVersion": "0.0.1",
 	"symbolIdMap": {
 		"0": {
-			"packageName": "@homelab-cli/core",
+			"packageName": "@homelab-cli/cli",
 			"packagePath": "src/index.ts",
 			"qualifiedName": ""
 		},
 		"1": {
-			"packageName": "@homelab-cli/core",
+			"packageName": "@homelab-cli/cli",
 			"packagePath": "src/index.ts",
 			"qualifiedName": "HomelabCli"
 		},
 		"2": {
-			"packageName": "@homelab-cli/core",
+			"packageName": "@homelab-cli/cli",
 			"packagePath": "src/index.ts",
 			"qualifiedName": "HomelabCli.__constructor"
 		},
 		"3": {
-			"packageName": "@homelab-cli/core",
+			"packageName": "@homelab-cli/cli",
 			"packagePath": "src/index.ts",
 			"qualifiedName": "HomelabCli"
 		},
 		"8": {
-			"packageName": "@homelab-cli/core",
+			"packageName": "@homelab-cli/cli",
 			"packagePath": "src/index.ts",
 			"qualifiedName": "HomelabCli.registerCommand"
 		},
 		"9": {
-			"packageName": "@homelab-cli/core",
+			"packageName": "@homelab-cli/cli",
 			"packagePath": "src/index.ts",
 			"qualifiedName": "HomelabCli.registerCommand"
 		},
 		"10": {
-			"packageName": "@homelab-cli/core",
+			"packageName": "@homelab-cli/cli",
 			"packagePath": "src/index.ts",
 			"qualifiedName": "name"
 		},
 		"11": {
-			"packageName": "@homelab-cli/core",
+			"packageName": "@homelab-cli/cli",
 			"packagePath": "src/index.ts",
 			"qualifiedName": "handler"
 		},
 		"12": {
-			"packageName": "@homelab-cli/core",
+			"packageName": "@homelab-cli/cli",
 			"packagePath": "src/index.ts",
 			"qualifiedName": "description"
 		},
 		"13": {
-			"packageName": "@homelab-cli/core",
+			"packageName": "@homelab-cli/cli",
 			"packagePath": "src/index.ts",
 			"qualifiedName": "HomelabCli.run"
 		},
 		"14": {
-			"packageName": "@homelab-cli/core",
+			"packageName": "@homelab-cli/cli",
 			"packagePath": "src/index.ts",
 			"qualifiedName": "HomelabCli.run"
 		},
 		"15": {
-			"packageName": "@homelab-cli/core",
+			"packageName": "@homelab-cli/cli",
 			"packagePath": "src/index.ts",
 			"qualifiedName": "argv"
 		}
