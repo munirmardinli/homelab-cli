@@ -247,5 +247,5 @@
 	"cursor.diffs.useCharacterLevelDiffs": true,
 	"cursor.terminal.usePreviewBox": true,
 	"cursor.cpp.enablePartialAccepts": true,
-	"editor.codeActions.triggerOnFocusChange": true,
+	"editor.codeActions.triggerOnFocusChange": true
 }

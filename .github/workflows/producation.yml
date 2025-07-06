@@ -57,7 +57,7 @@ jobs:
             .npm
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Run eslint tool
-        run: npm run lint
+        run: npx eslint 'src/**/*.ts' --fix
   prettier:
     needs: prepare
     runs-on: ubuntu-latest
@@ -70,7 +70,7 @@ jobs:
             .npm
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Run prettier tool
-        run: npm run prettier
+        run: npx prettier '**/*.{ts,tsx}' --write
   typecheck:
     needs: prepare
     runs-on: ubuntu-latest
@@ -83,7 +83,7 @@ jobs:
             .npm
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Run typecheck tool
-        run: npm run typecheck
+        run: npx tsc --noEmit
   build-prod:
     needs:
       - eslint
@@ -100,7 +100,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Build application
         run: |
-          npm run build
+          npx tsc
   deploy-docs:
     needs: build-prod
     runs-on: ubuntu-latest
@@ -160,7 +160,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Build application for Trivy
         run: |
-          npm run build
+          npx tsc
       - name: Install Trivy
         uses: aquasecurity/setup-trivy@v0.2.3
         with:
@@ -226,7 +226,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Build application
         run: |
-          npm run build
+          npx tsc
       - name: Prune production dependencies
         run: npm prune --production
       - name: Cache Docker layers
