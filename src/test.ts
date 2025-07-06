@@ -1,4 +1,4 @@
-import { HomelabCli } from '@homelab-cli/core';
+import { HomelabCli } from '@homelab-cli/cli';
 
 const cli = new HomelabCli();
 
