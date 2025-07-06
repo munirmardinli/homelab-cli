@@ -7,10 +7,3 @@ services:
     container_name: homelab-cli-dev
     restart: always
     tty: true
-    environment:
-      HOST: ${HOST}
-      PORT: ${PORT}
-      USER: ${USER}
-      PASSWORD: ${PASSWORD}
-    # env_file:
-    #   - .env.development

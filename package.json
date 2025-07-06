@@ -1,8 +1,27 @@
 {
   "name": "homelab-cli",
   "description": "A CLI for managing your homelab infrastructure",
+  "private": true,
+  "version": "0.0.1",
+  "sideEffects": false,
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "homepage": "https://munirmardinli.github.io/homelab-cli",
   "bin": {
     "homelab-cli": "bin/homelab-cli"
+  },
+  "packageManager": "npm@10.0.0",
+  "sponsor": {
+    "url": "https://linktr.ee/munirmardinli",
+    "type": "individual",
+    "name": "Munir Mardinli"
+  },
+  "publisher": "Munir Mardinli",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "keywords": [
     "cli",
@@ -12,14 +31,15 @@
     "typescript",
     "nodejs"
   ],
-  "files": ["lib"],
-  "version": "0.0.1",
-  "sideEffects": false,
-  "private": false,
-  "license": "MIT",
-  "type": "module",
-  "main": "lib/index.js",
-  "homepage": "https://munirmardinli.github.io/homelab-cli",
+  "files": [
+    "lib"
+  ],
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib/index.js"
+    }
+  },
   "bugs": {
     "url": "https://github.com/munirmardinli/homelab-cli/issues",
     "email": "Munir@Mardinli.de"
@@ -58,8 +78,13 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,json,yml,md}": ["prettier --write", "eslint --fix"],
-    "*.ts": ["tsc --noEmit"]
+    "*.{js,ts,json,yml,md}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.ts": [
+      "tsc --noEmit"
+    ]
   },
   "engines": {
     "node": ">=18.0.0"

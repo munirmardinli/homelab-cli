@@ -5,15 +5,7 @@
   "workspaceFolder": "/home/node/app",
   "runArgs": [
     "--volume",
-    "${localWorkspaceFolder}/lib:/home/node/app/lib",
-    "--env",
-    "USER=${localEnv:USER}",
-    "--env",
-    "PORT=${localEnv:PORT}",
-    "--env",
-    "PASSWORD=${localEnv:PASSWORD}",
-    "--env",
-    "PORT=${localEnv:PORT}"
+    "${localWorkspaceFolder}/lib:/home/node/app/lib"
   ],
   "remoteUser": "node"
 }
