@@ -13,6 +13,10 @@ export class HomelabCli {
     'date',
     'git',
     'docker',
+    'unzip',
+    'curl',
+    'wget',
+    'info',
   ]);
 
   constructor() {
