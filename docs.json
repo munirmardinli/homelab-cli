@@ -22,9 +22,9 @@
 					"sources": [
 						{
 							"fileName": "index.ts",
-							"line": 18,
+							"line": 22,
 							"character": 2,
-							"url": "https://github.com/munirmardinli/homelab-cli/blob/main/packages/cli/src/index.ts#L18"
+							"url": "https://github.com/munirmardinli/homelab-cli/blob/main/packages/cli/src/index.ts#L22"
 						}
 					],
 					"signatures": [
@@ -37,9 +37,9 @@
 							"sources": [
 								{
 									"fileName": "index.ts",
-									"line": 18,
+									"line": 22,
 									"character": 2,
-									"url": "https://github.com/munirmardinli/homelab-cli/blob/main/packages/cli/src/index.ts#L18"
+									"url": "https://github.com/munirmardinli/homelab-cli/blob/main/packages/cli/src/index.ts#L22"
 								}
 							],
 							"type": {
@@ -62,9 +62,9 @@
 					"sources": [
 						{
 							"fileName": "index.ts",
-							"line": 39,
+							"line": 43,
 							"character": 9,
-							"url": "https://github.com/munirmardinli/homelab-cli/blob/main/packages/cli/src/index.ts#L39"
+							"url": "https://github.com/munirmardinli/homelab-cli/blob/main/packages/cli/src/index.ts#L43"
 						}
 					],
 					"signatures": [
@@ -77,9 +77,9 @@
 							"sources": [
 								{
 									"fileName": "index.ts",
-									"line": 39,
+									"line": 43,
 									"character": 9,
-									"url": "https://github.com/munirmardinli/homelab-cli/blob/main/packages/cli/src/index.ts#L39"
+									"url": "https://github.com/munirmardinli/homelab-cli/blob/main/packages/cli/src/index.ts#L43"
 								}
 							],
 							"parameters": [
@@ -142,9 +142,9 @@
 					"sources": [
 						{
 							"fileName": "index.ts",
-							"line": 50,
+							"line": 54,
 							"character": 9,
-							"url": "https://github.com/munirmardinli/homelab-cli/blob/main/packages/cli/src/index.ts#L50"
+							"url": "https://github.com/munirmardinli/homelab-cli/blob/main/packages/cli/src/index.ts#L54"
 						}
 					],
 					"signatures": [
@@ -157,9 +157,9 @@
 							"sources": [
 								{
 									"fileName": "index.ts",
-									"line": 50,
+									"line": 54,
 									"character": 9,
-									"url": "https://github.com/munirmardinli/homelab-cli/blob/main/packages/cli/src/index.ts#L50"
+									"url": "https://github.com/munirmardinli/homelab-cli/blob/main/packages/cli/src/index.ts#L54"
 								}
 							],
 							"parameters": [
