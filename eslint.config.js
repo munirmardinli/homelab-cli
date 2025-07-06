@@ -1,4 +1,4 @@
-import baseConfig from './packages/eslint/index.js';
+import baseConfig from '@homelab-cli/eslint';
 
 export default [
   ...baseConfig,

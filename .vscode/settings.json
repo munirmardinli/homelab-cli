@@ -243,5 +243,9 @@
 		"LC_ALL": "de_DE.UTF-8"
 	},
 	"files.encoding": "utf8",
-	"terminal.integrated.fontFamily": "Cascadia Mono, Fira Code, Consolas, DejaVu Sans Mono, monospace"
+	"terminal.integrated.fontFamily": "Cascadia Mono, Fira Code, Consolas, DejaVu Sans Mono, monospace",
+	"eslint.workingDirectories": [
+    { "directory": "packages/cli", "changeProcessCWD": true },
+    { "directory": "packages/ssh", "changeProcessCWD": true }
+  ]
 }
