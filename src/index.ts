@@ -1,53 +1,30 @@
-import inquirer from 'inquirer';
-import { execSync } from 'node:child_process';
+/**
+ * Hauptmodul für das CLI-Tool.
+ *
+ * Importiert plattformspezifische Funktionen und startet das Hauptprogramm.
+ * Unterstützte Plattformen: macOS (brew), Windows (choco).
+ *
+ * @module index
+ */
+import { darwin } from './darwin.js';
+import { windows } from './windows.js';
 
-async function main() {
-  if (process.platform !== 'darwin') {
-    console.log('Dieses Skript funktioniert nur auf macOS!');
-    return;
-  }
-
-  while (true) {
-    const { action } = await inquirer.prompt([
-      {
-        type: 'list',
-        name: 'action',
-        message: 'Was möchtest du tun?',
-        choices: [
-          { name: 'Paket installieren', value: 'install' },
-          { name: 'Homebrew updaten', value: 'update' },
-          { name: 'Beenden', value: 'exit' },
-        ],
-      },
-    ]);
-
-    if (action === 'install') {
-      const { paket } = await inquirer.prompt([
-        {
-          type: 'input',
-          name: 'paket',
-          message: 'Welches Paket soll installiert werden?',
-        },
-      ]);
-      try {
-        execSync(`brew list ${paket} || brew install ${paket}`, {
-          stdio: 'inherit',
-        });
-        console.log(`${paket} wurde (ggf.) installiert.`);
-      } catch (err) {
-        console.error(`Fehler bei der Installation von ${paket}:`, err);
-      }
-    } else if (action === 'update') {
-      try {
-        execSync('brew update && brew upgrade', { stdio: 'inherit' });
-        console.log('Homebrew und alle Pakete wurden aktualisiert.');
-      } catch (err) {
-        console.error('Fehler beim Updaten:', err);
-      }
-    } else if (action === 'exit') {
-      console.log('Tschüss!');
-      break;
-    }
+/**
+ * Startet das Hauptprogramm und ruft die plattformspezifische Funktion auf.
+ *
+ * @function main
+ * @returns {void}
+ */
+function main() {
+  if (process.platform === 'darwin') {
+    darwin();
+  } else if (process.platform === 'win32') {
+    windows();
+  } else {
+    console.log(
+      'Dieses Skript unterstützt nur macOS (brew) und Windows (choco).',
+    );
+    process.exit(0);
   }
 }
 

@@ -14,7 +14,7 @@ import globals from 'globals';
 
 export default [
   {
-    ignores: ['node_modules/','lib/'],
+    ignores: ['node_modules/', 'lib/', 'docs/'],
   },
   js.configs.recommended,
   {

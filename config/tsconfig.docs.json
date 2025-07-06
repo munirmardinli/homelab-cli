@@ -6,10 +6,6 @@
     "declarationMap": false,
     "sourceMap": false
   },
-  "include": [
-    "../dotenv.d.ts",
-    "../packages/cli/src/**/*",
-    "../packages/cli/dotenv.d.ts"
-  ],
+  "include": ["../src/**/*"],
   "exclude": ["node_modules", "lib"]
 }

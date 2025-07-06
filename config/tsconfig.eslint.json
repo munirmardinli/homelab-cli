@@ -5,6 +5,6 @@
     "allowJs": true,
     "noEmit": true
   },
-  "include": ["../src/**/*", "../dotenv.d.ts", "../packages/**/*"],
+  "include": ["../src/**/*"],
   "exclude": []
 }
