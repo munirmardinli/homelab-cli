@@ -52,4 +52,4 @@ LABEL com.centurylinklabs.watchtower.enable="true"
 
 USER node
 
-CMD ["node", "lib/index.js"]
+CMD ["sh", "-c", "echo '🚀 Homelab CLI Container gestartet!' && echo 'Verwende: docker exec -it <container_name> node lib/index.js <command>' && echo 'Beispiel: docker exec -it <container_name> node lib/index.js session -h <host> -u <user>' && echo 'Drücke Ctrl+C zum Beenden des Containers' && tail -f /dev/null"]
