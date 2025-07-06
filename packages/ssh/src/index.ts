@@ -1,5 +1,8 @@
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import https from 'node:https';
+import os from 'node:os';
+import path from 'node:path';
 
 import { Command } from 'commander';
 
@@ -8,12 +11,27 @@ import { FileUtil } from './utils/file.js';
 import { ParseUtil } from './utils/parse.js';
 import { StringQuoter } from './utils/quote.js';
 import { SshUtil } from './utils/ssh.js';
-/**
- *
- *
- * @class Cli
- */
+
 class Cli {
+  private getSecureTempDir(): string {
+    const baseTempDir = os.tmpdir();
+    const randomString = crypto.randomBytes(8).toString('hex');
+    const secureTempDir = path.join(
+      baseTempDir,
+      `synology-cli-${randomString}`,
+    );
+    fs.mkdirSync(secureTempDir, { mode: 0o700 });
+    return secureTempDir;
+  }
+
+  private cleanupTempDir(tempDir: string): void {
+    try {
+      fs.rmSync(tempDir, { recursive: true, force: true });
+    } catch (error) {
+      console.error(`Failed to cleanup temp directory: ${error}`);
+    }
+  }
+
   public run(): void {
     const program = new Command();
 
@@ -66,59 +84,73 @@ class Cli {
         const user = opts.user ?? process.env.USER;
         const password = opts.password ?? process.env.PASSWORD;
         const port = opts.port ?? process.env.PORT ?? '22';
+
         if (!host || !user) {
           throw new Error(
             'Host und User müssen entweder als Option oder in der .env angegeben werden!',
           );
         }
-        if (opts.download) {
-          await new Promise<void>((resolve, reject) => {
-            https
-              .get(opts.download, (res) => {
-                if (res.statusCode !== 200) {
-                  reject(
-                    new Error(
-                      `Download fehlgeschlagen: Status ${res.statusCode}`,
-                    ),
-                  );
-                  return;
-                }
-                const fileStream = fs.createWriteStream('/tmp/downloaded.zip');
-                res.pipe(fileStream);
-                res.on('error', reject);
-                fileStream.on('finish', () => resolve(undefined));
-                fileStream.on('error', reject);
-              })
-              .on('error', reject);
-          });
-        }
-        if (opts.unzip) {
-          await FileUtil.unzipFile('/tmp/downloaded.zip', '/tmp/unzipped');
-        }
-        if (opts.cmd) {
-          const parsed = ParseUtil.parse(opts.cmd, process.env as Env);
-          const filtered = parsed.filter(
-            (x): x is string | { op: string } =>
-              typeof x === 'string' ||
-              (typeof x === 'object' &&
-                x !== null &&
-                'op' in x &&
-                typeof (x as { op: unknown }).op === 'string'),
-          );
-          const quoted = StringQuoter.quote(filtered);
-          let remoteCmd = quoted;
-          if (opts.sudo !== false) {
-            remoteCmd = `sudo -i -- ${quoted}`;
+
+        const tempDir = this.getSecureTempDir();
+        try {
+          if (opts.download) {
+            const downloadPath = path.join(tempDir, 'downloaded.zip');
+            await new Promise<void>((resolve, reject) => {
+              https
+                .get(opts.download, (res) => {
+                  if (res.statusCode !== 200) {
+                    reject(
+                      new Error(
+                        `Download fehlgeschlagen: Status ${res.statusCode}`,
+                      ),
+                    );
+                    return;
+                  }
+                  const fileStream = fs.createWriteStream(downloadPath, {
+                    mode: 0o600,
+                  });
+                  res.pipe(fileStream);
+                  res.on('error', reject);
+                  fileStream.on('finish', () => resolve(undefined));
+                  fileStream.on('error', reject);
+                })
+                .on('error', reject);
+            });
+
+            if (opts.unzip) {
+              const unzipDir = path.join(tempDir, 'unzipped');
+              fs.mkdirSync(unzipDir, { mode: 0o700 });
+              await FileUtil.unzipFile(downloadPath, unzipDir);
+            }
           }
-          await SshUtil.runRemoteCommand({
-            host,
-            user,
-            password,
-            command: remoteCmd,
-            port,
-          });
-        } else {
-          await SshUtil.runRemoteCommand({ host, user, password, port });
+
+          if (opts.cmd) {
+            const parsed = ParseUtil.parse(opts.cmd, process.env as Env);
+            const filtered = parsed.filter(
+              (x): x is string | { op: string } =>
+                typeof x === 'string' ||
+                (typeof x === 'object' &&
+                  x !== null &&
+                  'op' in x &&
+                  typeof (x as { op: unknown }).op === 'string'),
+            );
+            const quoted = StringQuoter.quote(filtered);
+            let remoteCmd = quoted;
+            if (opts.sudo !== false) {
+              remoteCmd = `sudo -i -- ${quoted}`;
+            }
+            await SshUtil.runRemoteCommand({
+              host,
+              user,
+              password,
+              command: remoteCmd,
+              port,
+            });
+          } else {
+            await SshUtil.runRemoteCommand({ host, user, password, port });
+          }
+        } finally {
+          this.cleanupTempDir(tempDir);
         }
       });
 
