@@ -1,5 +1,5 @@
 {
-  "name": "@homelab-cli/core",
+  "name": "@homelab-cli/cli",
   "version": "0.0.1",
   "sideEffects": false,
   "private": false,
@@ -7,9 +7,6 @@
   "type": "module",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
-  "bin": {
-    "homelab-cli": "./lib/index.js"
-  },
   "scripts": {
     "build": "tsc",
     "postinstall": "tsc",

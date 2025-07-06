@@ -6,9 +6,6 @@
   "license": "MIT",
   "type": "module",
   "homepage": "https://munirmardinli.github.io/homelab-cli",
-  "packageManager": "npm@11.4.2",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
   "bugs": {
     "url": "https://github.com/munirmardinli/homelab-cli/issues",
     "email": "Munir@Mardinli.de"
@@ -96,5 +93,10 @@
   "tsdocsOptions": {
     "changelog": true
   },
-  "workspaces": ["packages/*"]
+  "workspaces": [
+    "packages/ssh",
+    "packages/cli",
+    "packages/darwin",
+    "packages/eslint"
+  ]
 }

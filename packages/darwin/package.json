@@ -11,12 +11,6 @@
       "import": "./lib/index.js"
     }
   },
-  "publishConfig": {
-    "access": "public"
-  },
-  "bin": {
-    "homelab-cli-darwin": "lib/index.js"
-  },
   "scripts": {
     "build": "tsc",
     "postinstall": "tsc",

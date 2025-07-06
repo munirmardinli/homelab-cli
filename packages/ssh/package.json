@@ -6,9 +6,6 @@
   "type": "module",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
-  "bin": {
-    "homelab-ssh": "./lib/index.js"
-  },
   "scripts": {
     "build": "tsc",
     "postinstall": "tsc",
@@ -26,9 +23,6 @@
       "import": "./lib/index.js",
       "types": "./lib/index.d.ts"
     }
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",

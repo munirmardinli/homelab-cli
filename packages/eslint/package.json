@@ -1,5 +1,5 @@
 {
-  "name": "@homelab-cli/eslint-config",
+  "name": "@homelab-cli/eslint",
   "version": "0.0.1",
   "sideEffects": false,
   "private": false,
@@ -14,9 +14,6 @@
     "./json": "./json.js"
   },
   "files": ["index.js", "typescript.js", "javascript.js", "yaml.js", "json.js"],
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
     "prettier": "prettier --write .",
     "eslint": "eslint . --fix",
