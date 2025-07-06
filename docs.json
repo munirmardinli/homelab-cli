@@ -5,291 +5,43 @@
 	"variant": "project",
 	"kind": 1,
 	"flags": {},
-	"children": [
-		{
-			"id": 1,
-			"name": "HomelabCli",
-			"variant": "declaration",
-			"kind": 128,
-			"flags": {},
-			"children": [
-				{
-					"id": 2,
-					"name": "constructor",
-					"variant": "declaration",
-					"kind": 512,
-					"flags": {},
-					"sources": [
-						{
-							"fileName": "index.ts",
-							"line": 22,
-							"character": 2,
-							"url": "https://github.com/munirmardinli/homelab-cli/blob/main/packages/cli/src/index.ts#L22"
-						}
-					],
-					"signatures": [
-						{
-							"id": 3,
-							"name": "HomelabCli",
-							"variant": "signature",
-							"kind": 16384,
-							"flags": {},
-							"sources": [
-								{
-									"fileName": "index.ts",
-									"line": 22,
-									"character": 2,
-									"url": "https://github.com/munirmardinli/homelab-cli/blob/main/packages/cli/src/index.ts#L22"
-								}
-							],
-							"type": {
-								"type": "reference",
-								"target": 1,
-								"name": "HomelabCli",
-								"package": "@homelab-cli/cli"
-							}
-						}
-					]
-				},
-				{
-					"id": 9,
-					"name": "registerCommand",
-					"variant": "declaration",
-					"kind": 2048,
-					"flags": {
-						"isPublic": true
-					},
-					"sources": [
-						{
-							"fileName": "index.ts",
-							"line": 43,
-							"character": 9,
-							"url": "https://github.com/munirmardinli/homelab-cli/blob/main/packages/cli/src/index.ts#L43"
-						}
-					],
-					"signatures": [
-						{
-							"id": 10,
-							"name": "registerCommand",
-							"variant": "signature",
-							"kind": 4096,
-							"flags": {},
-							"sources": [
-								{
-									"fileName": "index.ts",
-									"line": 43,
-									"character": 9,
-									"url": "https://github.com/munirmardinli/homelab-cli/blob/main/packages/cli/src/index.ts#L43"
-								}
-							],
-							"parameters": [
-								{
-									"id": 11,
-									"name": "name",
-									"variant": "param",
-									"kind": 32768,
-									"flags": {},
-									"type": {
-										"type": "intrinsic",
-										"name": "string"
-									}
-								},
-								{
-									"id": 12,
-									"name": "handler",
-									"variant": "param",
-									"kind": 32768,
-									"flags": {},
-									"type": {
-										"type": "reference",
-										"target": {
-											"packageName": "@homelab-cli/cli",
-											"packagePath": "dotenv.d.ts",
-											"qualifiedName": "__global.CommandHandler"
-										},
-										"name": "CommandHandler",
-										"package": "@homelab-cli/cli",
-										"qualifiedName": "__global.CommandHandler"
-									}
-								},
-								{
-									"id": 13,
-									"name": "description",
-									"variant": "param",
-									"kind": 32768,
-									"flags": {},
-									"type": {
-										"type": "intrinsic",
-										"name": "string"
-									}
-								}
-							],
-							"type": {
-								"type": "intrinsic",
-								"name": "void"
-							}
-						}
-					]
-				},
-				{
-					"id": 14,
-					"name": "run",
-					"variant": "declaration",
-					"kind": 2048,
-					"flags": {
-						"isPublic": true
-					},
-					"sources": [
-						{
-							"fileName": "index.ts",
-							"line": 54,
-							"character": 9,
-							"url": "https://github.com/munirmardinli/homelab-cli/blob/main/packages/cli/src/index.ts#L54"
-						}
-					],
-					"signatures": [
-						{
-							"id": 15,
-							"name": "run",
-							"variant": "signature",
-							"kind": 4096,
-							"flags": {},
-							"sources": [
-								{
-									"fileName": "index.ts",
-									"line": 54,
-									"character": 9,
-									"url": "https://github.com/munirmardinli/homelab-cli/blob/main/packages/cli/src/index.ts#L54"
-								}
-							],
-							"parameters": [
-								{
-									"id": 16,
-									"name": "argv",
-									"variant": "param",
-									"kind": 32768,
-									"flags": {},
-									"type": {
-										"type": "array",
-										"elementType": {
-											"type": "intrinsic",
-											"name": "string"
-										}
-									},
-									"defaultValue": "..."
-								}
-							],
-							"type": {
-								"type": "intrinsic",
-								"name": "void"
-							}
-						}
-					]
-				}
-			],
-			"groups": [
-				{
-					"title": "Constructors",
-					"children": [
-						2
-					]
-				},
-				{
-					"title": "Methods",
-					"children": [
-						9,
-						14
-					]
-				}
-			],
-			"sources": [
-				{
-					"fileName": "index.ts",
-					"line": 7,
-					"character": 13,
-					"url": "https://github.com/munirmardinli/homelab-cli/blob/main/packages/cli/src/index.ts#L7"
-				}
-			]
-		}
-	],
-	"groups": [
-		{
-			"title": "Classes",
-			"children": [
-				1
-			]
-		}
-	],
-	"packageName": "@homelab-cli/cli",
+	"comment": {
+		"summary": [
+			{
+				"kind": "text",
+				"text": "Hauptmodul für das CLI-Tool.\n\nImportiert plattformspezifische Funktionen und startet das Hauptprogramm.\nUnterstützte Plattformen: macOS (brew), Windows (choco)."
+			}
+		]
+	},
+	"packageName": "homelab-cli",
 	"packageVersion": "0.0.1",
+	"readme": [
+		{
+			"kind": "text",
+			"text": "# Usage\n\n"
+		},
+		{
+			"kind": "code",
+			"text": "```bash\nnode lib/index.js setup --cmd ls\n```"
+		}
+	],
 	"symbolIdMap": {
 		"0": {
-			"packageName": "@homelab-cli/cli",
+			"packageName": "homelab-cli",
 			"packagePath": "src/index.ts",
 			"qualifiedName": ""
-		},
-		"1": {
-			"packageName": "@homelab-cli/cli",
-			"packagePath": "src/index.ts",
-			"qualifiedName": "HomelabCli"
-		},
-		"2": {
-			"packageName": "@homelab-cli/cli",
-			"packagePath": "src/index.ts",
-			"qualifiedName": "HomelabCli.__constructor"
-		},
-		"3": {
-			"packageName": "@homelab-cli/cli",
-			"packagePath": "src/index.ts",
-			"qualifiedName": "HomelabCli"
-		},
-		"9": {
-			"packageName": "@homelab-cli/cli",
-			"packagePath": "src/index.ts",
-			"qualifiedName": "HomelabCli.registerCommand"
-		},
-		"10": {
-			"packageName": "@homelab-cli/cli",
-			"packagePath": "src/index.ts",
-			"qualifiedName": "HomelabCli.registerCommand"
-		},
-		"11": {
-			"packageName": "@homelab-cli/cli",
-			"packagePath": "src/index.ts",
-			"qualifiedName": "name"
-		},
-		"12": {
-			"packageName": "@homelab-cli/cli",
-			"packagePath": "src/index.ts",
-			"qualifiedName": "handler"
-		},
-		"13": {
-			"packageName": "@homelab-cli/cli",
-			"packagePath": "src/index.ts",
-			"qualifiedName": "description"
-		},
-		"14": {
-			"packageName": "@homelab-cli/cli",
-			"packagePath": "src/index.ts",
-			"qualifiedName": "HomelabCli.run"
-		},
-		"15": {
-			"packageName": "@homelab-cli/cli",
-			"packagePath": "src/index.ts",
-			"qualifiedName": "HomelabCli.run"
-		},
-		"16": {
-			"packageName": "@homelab-cli/cli",
-			"packagePath": "src/index.ts",
-			"qualifiedName": "argv"
 		}
 	},
 	"files": {
 		"entries": {
-			"1": "packages/cli/src/index.ts"
+			"1": "src/index.ts",
+			"2": "README.md",
+			"3": ""
 		},
 		"reflections": {
-			"1": 0
+			"1": 0,
+			"2": 0,
+			"3": 0
 		}
 	}
 }
