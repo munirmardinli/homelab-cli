@@ -1,4 +1,4 @@
-import { execSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 import readline from 'node:readline';
 
 import type { PackageManagerOptions } from './types.js';
@@ -41,8 +41,9 @@ export class PackageManagerCLI {
           }
 
           try {
-            const cmd = `${this.options.installCmd} ${JSON.stringify(paket)}`;
-            execSync(cmd, { stdio: 'inherit' });
+            const cmd = this.options.installCmd;
+            const args = this.options.installArgs(paket);
+            execFileSync(cmd, args, { stdio: 'inherit' });
             console.log(`${paket} wurde (ggf.) installiert.`);
           } catch (err) {
             if (
@@ -66,7 +67,7 @@ export class PackageManagerCLI {
         });
       } else if (antwort === '2') {
         try {
-          execSync(this.options.updateCmd, { stdio: 'inherit' });
+          execFileSync(this.options.updateCmd, { stdio: 'inherit' });
           console.log(this.options.updateSuccessMsg);
         } catch (err) {
           if (

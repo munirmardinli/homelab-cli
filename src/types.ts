@@ -1,6 +1,7 @@
 interface PackageManagerOptions {
   platform: string;
-  installCmd: (pkg: string) => string;
+  installCmd: string;
+  installArgs: (pkg: string) => string[];
   updateCmd: string;
   installLabel: string;
   updateLabel: string;
