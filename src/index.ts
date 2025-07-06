@@ -18,7 +18,8 @@ function main() {
   if (process.platform === 'darwin') {
     const cli = new PackageManagerCLI({
       platform: 'darwin',
-      installCmd: (pkg) => `brew list ${pkg} || brew install ${pkg}`,
+      installCmd: 'brew',
+      installArgs: (pkg) => ['install', pkg],
       updateCmd: 'brew update && brew upgrade',
       installLabel: 'Paket installieren',
       updateLabel: 'Homebrew updaten',
@@ -31,7 +32,8 @@ function main() {
   } else if (process.platform === 'win32') {
     const cli = new PackageManagerCLI({
       platform: 'win32',
-      installCmd: (pkg) => `choco install ${pkg} -y`,
+      installCmd: 'choco',
+      installArgs: (pkg) => ['install', pkg, '-y'],
       updateCmd: 'choco upgrade all -y',
       installLabel: 'Paket installieren',
       updateLabel: 'Chocolatey updaten',
