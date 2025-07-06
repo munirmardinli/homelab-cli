@@ -6,8 +6,7 @@
  *
  * @module index
  */
-import { darwin } from './darwin.js';
-import { windows } from './windows.js';
+import { PackageManagerCLI } from './cli.js';
 
 /**
  * Startet das Hauptprogramm und ruft die plattformspezifische Funktion auf.
@@ -17,9 +16,31 @@ import { windows } from './windows.js';
  */
 function main() {
   if (process.platform === 'darwin') {
-    darwin();
+    const cli = new PackageManagerCLI({
+      platform: 'darwin',
+      installCmd: (pkg) => `brew list ${pkg} || brew install ${pkg}`,
+      updateCmd: 'brew update && brew upgrade',
+      installLabel: 'Paket installieren',
+      updateLabel: 'Homebrew updaten',
+      exitLabel: 'Beenden',
+      onlyPlatformMsg: 'Dieses Skript funktioniert nur auf macOS!',
+      updateSuccessMsg: 'Homebrew und alle Pakete wurden aktualisiert.',
+      exitMsg: 'Tschüss!',
+    });
+    cli.start();
   } else if (process.platform === 'win32') {
-    windows();
+    const cli = new PackageManagerCLI({
+      platform: 'win32',
+      installCmd: (pkg) => `choco install ${pkg} -y`,
+      updateCmd: 'choco upgrade all -y',
+      installLabel: 'Paket installieren',
+      updateLabel: 'Chocolatey updaten',
+      exitLabel: 'Beenden',
+      onlyPlatformMsg: 'Dieses Skript funktioniert nur auf Windows!',
+      updateSuccessMsg: 'Alle Chocolatey-Pakete wurden aktualisiert.',
+      exitMsg: 'Tschüss!',
+    });
+    cli.start();
   } else {
     console.log(
       'Dieses Skript unterstützt nur macOS (brew) und Windows (choco).',

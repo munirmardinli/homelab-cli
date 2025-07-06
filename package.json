@@ -1,5 +1,18 @@
 {
   "name": "homelab-cli",
+  "description": "A CLI for managing your homelab infrastructure",
+  "bin": {
+    "homelab-cli": "bin/homelab-cli"
+  },
+  "keywords": [
+    "cli",
+    "homelab",
+    "infrastructure",
+    "management",
+    "typescript",
+    "nodejs"
+  ],
+  "files": ["lib"],
   "version": "0.0.1",
   "sideEffects": false,
   "private": false,
