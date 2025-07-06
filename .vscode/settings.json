@@ -1,4 +1,6 @@
 {
+	"editor.fontFamily": "'FiraCode-Retina','FiraCode Nerd Font Mono','Fira Code', 'Menlo','3270 Nerd Font','Hack Nerd Font', 'FiraCode', 'Menlo', 'Monaco', 'Courier New', monospace, '3270 Nerd Font',Cascadia Mono, Consolas, DejaVu Sans Mono",
+  "terminal.integrated.fontFamily": "'FiraCode-Retina','FiraCode Nerd Font Mono','Fira Code', 'Menlo','3270 Nerd Font','Hack Nerd Font', 'FiraCode', 'Menlo', 'Monaco', 'Courier New', monospace, '3270 Nerd Font',Cascadia Mono, Consolas, DejaVu Sans Mono",
 	"git.postCommitCommand": "sync",
 	"workbench.colorTheme": "Default Dark Modern",
 	"redhat.telemetry.enabled": true,
@@ -6,8 +8,6 @@
 	"files.insertFinalNewline": true,
 	"files.trimFinalNewlines": true,
 	"window.zoomLevel": 1,
-	"liveServer.settings.donotShowInfoMsg": true,
-	"liveServer.settings.donotVerifyTags": true,
 	"prettier.singleQuote": true,
 	"prettier.endOfLine": "auto",
 	"prettier.useTabs": true,
@@ -19,7 +19,6 @@
 	"editor.renderLineHighlight": "gutter",
 	"editor.accessibilitySupport": "on",
 	"editor.guides.bracketPairsHorizontal": "active",
-	"editor.fontFamily": "'Fira Code', 'Courier New', Courier, monospace",
 	"editor.tabSize": 2,
 	"editor.formatOnSave": true,
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -51,9 +50,6 @@
 	"javascript.preferences.useAliasesForRenames": false,
 	"typescript.preferences.useAliasesForRenames": false,
 	"typescript.preferences.importModuleSpecifier": "relative",
-	"path-autocomplete.pathMappings": {
-		"@src": "${workspace}/src"
-	},
 	"workbench.colorCustomizations": {
 		"activityBar.activeBackground": "#599a43",
 		"activityBar.activeBorder": "#599a43",
@@ -113,11 +109,6 @@
 		"editor.defaultFormatter": "esbenp.prettier-vscode",
 		"editor.formatOnSave": true
 	},
-	"[markdown]": {
-		"editor.defaultFormatter": "yzhang.markdown-all-in-one",
-		"editor.formatOnSave": true
-	},
-
 	"terminal.integrated.profiles.windows": {
 		"Git Bash": {
 			"source": "Git Bash",
@@ -232,9 +223,6 @@
 	"[dockerfile]": {
 		"editor.defaultFormatter": "trunk.io"
 	},
-	"[log]": {
-		"editor.defaultFormatter": "log-formatter.log-formatter"
-	},
 	"[ignore]": {
 		"editor.defaultFormatter": "trunk.io"
 	},
@@ -243,9 +231,21 @@
 		"LC_ALL": "de_DE.UTF-8"
 	},
 	"files.encoding": "utf8",
-	"terminal.integrated.fontFamily": "Cascadia Mono, Fira Code, Consolas, DejaVu Sans Mono, monospace",
 	"eslint.workingDirectories": [
     { "directory": "packages/cli", "changeProcessCWD": true },
     { "directory": "packages/ssh", "changeProcessCWD": true }
-  ]
+  ],
+	"tabnine.experimentalAutoImports": true,
+	"files.exclude": {
+		"**/.trunk/*actions/": true,
+		"**/.trunk/*logs/": true,
+		"**/.trunk/*notifications/": true,
+		"**/.trunk/*out/": true,
+		"**/.trunk/*plugins/": true
+	},
+	"cursor.composer.shouldChimeAfterChatFinishes": true,
+	"cursor.diffs.useCharacterLevelDiffs": true,
+	"cursor.terminal.usePreviewBox": true,
+	"cursor.cpp.enablePartialAccepts": true,
+	"editor.codeActions.triggerOnFocusChange": true,
 }
