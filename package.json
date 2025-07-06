@@ -83,7 +83,6 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
-    "commander": "^14.0.0",
     "dotenv": "^17.0.1",
     "@homelab-cli/cli": "file:packages/cli",
     "@homelab-cli/darwin": "file:packages/darwin",

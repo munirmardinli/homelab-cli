@@ -1,0 +1,21 @@
+name: "Mark stale Issues and PRs"
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v8
+        with:
+          days-before-stale: 365
+          days-before-close: 7
+          stale-issue-message: "This issue has been marked as stale due to inactivity. Please comment if it’s still relevant."
+          close-issue-message: "This issue was closed due to inactivity."
+          stale-label: "stale"
+          exempt-labels: |
+            Great First Contribution
+            pinned
+            security
+          operations-per-run: 100
