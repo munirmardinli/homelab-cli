@@ -8,6 +8,7 @@
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "enginesStrict": true,
   "homepage": "https://munirmardinli.github.io/homelab-cli",
   "bin": {
     "homelab-cli": "bin/homelab-cli"
@@ -19,10 +20,6 @@
     "name": "Munir Mardinli"
   },
   "publisher": "Munir Mardinli",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
   "keywords": [
     "cli",
     "homelab",
@@ -31,9 +28,7 @@
     "typescript",
     "nodejs"
   ],
-  "files": [
-    "lib"
-  ],
+  "files": ["lib"],
   "exports": {
     ".": {
       "import": "./lib/index.js",
@@ -78,13 +73,8 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,json,yml,md}": [
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "*.ts": [
-      "tsc --noEmit"
-    ]
+    "*.{js,ts,json,yml,md}": ["prettier --write", "eslint --fix"],
+    "*.ts": ["tsc --noEmit"]
   },
   "engines": {
     "node": ">=18.0.0"

@@ -6,7 +6,7 @@
  *
  * @module index
  */
-import { PackageManagerCLI } from './cli.js';
+import { PackageManagerCLI } from './config/cli.js';
 
 /**
  * Startet das Hauptprogramm und ruft die plattformspezifische Funktion auf.

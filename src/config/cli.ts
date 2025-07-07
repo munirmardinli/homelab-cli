@@ -1,9 +1,10 @@
-import { execFileSync } from 'node:child_process';
+import { execSync, execFileSync } from 'node:child_process';
 import readline from 'node:readline';
 
-import type { PackageManagerOptions } from './types.js';
+import type { PackageManagerOptions } from '../types/types.js';
+import { BashHelper } from '../utils/bash.js';
 
-export class PackageManagerCLI {
+class PackageManagerCLI {
   private options: PackageManagerOptions;
 
   constructor(options: PackageManagerOptions) {
@@ -30,8 +31,9 @@ export class PackageManagerCLI {
     console.log('\nWas möchtest du tun?');
     console.log('1. ' + this.options.installLabel);
     console.log('2. ' + this.options.updateLabel);
-    console.log('3. ' + this.options.exitLabel);
-    rl.question('Bitte wähle (1/2/3): ', (antwort) => {
+    console.log('3. SSH-Verbindung aufbauen');
+    console.log('4. Beenden');
+    rl.question('Bitte wähle (1/2/3/4): ', (antwort) => {
       if (antwort === '1') {
         rl.question('Welches Paket soll installiert werden? ', (paket) => {
           if (!this.isValidPackageName(paket)) {
@@ -67,7 +69,7 @@ export class PackageManagerCLI {
         });
       } else if (antwort === '2') {
         try {
-          execFileSync(this.options.updateCmd, { stdio: 'inherit' });
+          execSync(this.options.updateCmd, { stdio: 'inherit' });
           console.log(this.options.updateSuccessMsg);
         } catch (err) {
           if (
@@ -87,8 +89,16 @@ export class PackageManagerCLI {
           this.menu();
         });
       } else if (antwort === '3') {
-        console.log(this.options.exitMsg);
+        rl.question('Bitte gib das SSH-Ziel ein (benutzer@host): ', (ziel) => {
+          rl.close();
+          BashHelper.startSSHSession(ziel, () => {
+            this.menu();
+          });
+          process.on('SIGINT', () => process.exit(0));
+        });
+      } else if (antwort === '4') {
         rl.close();
+        BashHelper.exitCLI();
       } else {
         console.log('Ungültige Eingabe!');
         rl.close();
@@ -99,3 +109,5 @@ export class PackageManagerCLI {
     });
   }
 }
+
+export { PackageManagerCLI };
