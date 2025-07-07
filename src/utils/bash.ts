@@ -5,12 +5,20 @@ class BashHelper {
    * Startet eine interaktive SSH-Session zu einem Zielhost.
    * @param host Zielhost (z.B. "user@host")
    */
-  static startSSHSession(host: string, onExit?: () => void) {
+  static startSSHSession(
+    host: string,
+    onExit?: () => void,
+    isWindowsTarget?: boolean,
+  ) {
     if (!host || !/^[\w.-]+@([\w.-]+)$/.test(host)) {
       console.error('Ungültiges SSH-Ziel! Format: benutzer@host');
       return;
     }
-    const ssh = spawn('ssh', [host], { stdio: 'inherit' });
+    let sshArgs = [host];
+    if (isWindowsTarget) {
+      sshArgs = [host, '-t', 'bash'];
+    }
+    const ssh = spawn('ssh', sshArgs, { stdio: 'inherit' });
     ssh.on('exit', (code) => {
       console.log(`SSH-Verbindung beendet (Exit-Code: ${code})`);
       if (onExit) {

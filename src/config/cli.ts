@@ -89,13 +89,26 @@ class PackageManagerCLI {
           this.menu();
         });
       } else if (antwort === '3') {
-        rl.question('Bitte gib das SSH-Ziel ein (benutzer@host): ', (ziel) => {
-          rl.close();
-          BashHelper.startSSHSession(ziel, () => {
-            this.menu();
-          });
-          process.on('SIGINT', () => process.exit(0));
-        });
+        rl.question(
+          'Bitte gib das SSH-Ziel ein (benutzer@host): ',
+          (target) => {
+            rl.question(
+              'Welches Zielbetriebssystem? (1 = Linux/macOS, 2 = Windows): ',
+              (osRequest) => {
+                rl.close();
+                const isWindowsTarget = osRequest === '2';
+                BashHelper.startSSHSession(
+                  target,
+                  () => {
+                    this.menu();
+                  },
+                  isWindowsTarget,
+                );
+                process.on('SIGINT', () => process.exit(0));
+              },
+            );
+          },
+        );
       } else if (antwort === '4') {
         rl.close();
         BashHelper.exitCLI();
