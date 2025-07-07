@@ -147,7 +147,7 @@ export default [
       'node/no-missing-import': 'off',
       'node/no-unpublished-import': 'off',
       'node/no-unsupported-features/node-builtins': 'off',
-      'max-params': ['warn', 4],
+      'max-params': ['warn', 5],
       'max-depth': ['warn', 4],
       'max-lines': ['warn', 700],
       'array-callback-return': 'error',

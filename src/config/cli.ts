@@ -96,45 +96,45 @@ class PackageManagerCLI {
         });
       } else if (antwort === '3') {
         rl.question(
-          'Bitte gib das SSH-Ziel ein (benutzer@host): ',
-          (target) => {
-            rl.question(
-              'Welches Zielbetriebssystem? (1 = Linux/macOS, 2 = Windows, 3 = NAS): ',
-              (osRequest) => {
-                if (osRequest === '3') {
-                  rl.question(
-                    'Bitte gib den SSH-Port für die NAS ein (Standard: 22): ',
-                    (portInput) => {
-                      rl.close();
-                      const port =
-                        portInput && portInput.trim() !== ''
-                          ? portInput.trim()
-                          : '22';
-                      BashHelper.startSSHSession(
-                        target,
-                        () => {
-                          this.menu();
-                        },
-                        false,
-                        port,
-                      );
-                      process.on('SIGINT', () => process.exit(0));
-                    },
-                  );
-                } else {
-                  rl.close();
-                  const isWindowsTarget = osRequest === '2';
-                  BashHelper.startSSHSession(
-                    target,
-                    () => {
-                      this.menu();
-                    },
-                    isWindowsTarget,
-                  );
-                  process.on('SIGINT', () => process.exit(0));
-                }
+          'Welches Zielbetriebssystem? (1 = Linux/macOS, 2 = Windows, 3 = NAS): ',
+          (osRequest) => {
+            rl.close();
+            let target = '';
+            let port: string | undefined = undefined;
+            let isWindowsTarget = false;
+            if (osRequest === '1') {
+              // Darwin (macOS/Linux)
+              const user = process.env.DARWIN_USERNAME;
+              const host = process.env.DARWIN_HOST;
+              target = `${user}@${host}`;
+              isWindowsTarget = false;
+            } else if (osRequest === '2') {
+              // Windows
+              const user = process.env.WINDOWS_USERNAME;
+              const host = process.env.WINDOWS_HOST;
+              target = `${user}@${host}`;
+              isWindowsTarget = true;
+            } else if (osRequest === '3') {
+              // NAS
+              const user = process.env.NAS_USERNAME;
+              const host = process.env.NAS_HOST;
+              port = process.env.NAS_PORT || '22';
+              target = `${user}@${host}`;
+              isWindowsTarget = false;
+            } else {
+              console.log('Ungültige Eingabe!');
+              this.menu();
+              return;
+            }
+            BashHelper.startSSHSession(
+              target,
+              () => {
+                this.menu();
               },
+              isWindowsTarget,
+              port,
             );
+            process.on('SIGINT', () => process.exit(0));
           },
         );
       } else if (antwort === '4') {
