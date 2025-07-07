@@ -48,12 +48,11 @@
   "vscode-icons-team.vscode-icons",
   // Codeium for AI-powered code suggestions
   "Codeium.codeium",
-  // WSL for Windows Subsystem for Linux support
-  "ms-vscode-remote.remote-wsl",
   // YAML support for YAML files
   "redhat.vscode-yaml",
   "Trunk.io",
   "CodeRabbit.coderabbit-vscode",
-  "drcika.apc-extension"
+  "drcika.apc-extension",
+  "codacy-app.codacy"
  ]
 }

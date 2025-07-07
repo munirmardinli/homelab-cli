@@ -16,3 +16,7 @@ lib
 docs
 .qodo
 .cursor/PRD/index.md
+
+
+#Ignore cursor AI rules
+.cursor\rules\codacy.mdc
