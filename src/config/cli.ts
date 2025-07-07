@@ -1,4 +1,4 @@
-import { execSync, execFileSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 import readline from 'node:readline';
 
 import type { PackageManagerOptions } from '../types/types.js';
@@ -69,7 +69,13 @@ class PackageManagerCLI {
         });
       } else if (antwort === '2') {
         try {
-          execSync(this.options.updateCmd, { stdio: 'inherit' });
+          const updateCmd = this.options.updateCmd;
+          const opts = this.options as Partial<PackageManagerOptions> & {
+            updateArgs?: () => string[];
+          };
+          const updateArgs =
+            typeof opts.updateArgs === 'function' ? opts.updateArgs() : [];
+          execFileSync(updateCmd, updateArgs, { stdio: 'inherit' });
           console.log(this.options.updateSuccessMsg);
         } catch (err) {
           if (
