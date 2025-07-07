@@ -70,8 +70,6 @@
 		"statusBarItem.remoteForeground": "#e7e7e7",
 		"commandCenter.border": "#e7e7e799"
 	},
-	"path-autocomplete.triggerOutsideStrings": true,
-	"path-autocomplete.extensionOnImport": true,
 	"[javascript][typescript][javascriptreact][typescriptreact]": {
 		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -247,5 +245,8 @@
 	"cursor.diffs.useCharacterLevelDiffs": true,
 	"cursor.terminal.usePreviewBox": true,
 	"cursor.cpp.enablePartialAccepts": true,
-	"editor.codeActions.triggerOnFocusChange": true
+	"editor.codeActions.triggerOnFocusChange": true,
+	"git.commitMessageLanguage": "en",
+	"git.inputValidationLength": 30,
+	"codium.codeCompletion.enable": true
 }

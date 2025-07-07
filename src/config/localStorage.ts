@@ -11,7 +11,7 @@ export class YamlDataService {
       const file = isStorageService.createYamlFileAndPath(fileName);
       isStorageService.createDirectoryExister(file);
       if (!fs.existsSync(file)) {
-        new Error(
+        console.error(
           `❌ Datei existiert nicht, erstelle ${fileName}.yml mit leerem Inhalt.`,
         );
         fs.writeFileSync(
@@ -37,7 +37,6 @@ export class YamlDataService {
     } catch (e) {
       console.error('❌ Fehler beim Laden der Daten', e);
     }
-    // Fallback: leeres Array zurückgeben, falls ein Fehler auftritt
     return [];
   }
 }
