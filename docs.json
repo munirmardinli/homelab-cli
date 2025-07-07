@@ -18,11 +18,11 @@
 	"readme": [
 		{
 			"kind": "text",
-			"text": "# Usage\n\n"
+			"text": "# Usage\n\n## Windows SSH Enable\n\n"
 		},
 		{
 			"kind": "code",
-			"text": "```bash\nnode lib/index.js setup --cmd ls\n```"
+			"text": "```powershell\nAdd-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0\n\nStart-Service sshd\n\nSet-Service -Name sshd -StartupType 'Automatic'\n\nNew-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22\n\nGet-Service sshd\n\nGet-NetFirewallRule -Name *ssh* | Select-Object Name, Enabled, Direction, Action, Profile\n```"
 		}
 	],
 	"symbolIdMap": {
