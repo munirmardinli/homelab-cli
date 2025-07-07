@@ -5,6 +5,6 @@
     "outDir": "lib",
     "baseUrl": "./"
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "dotenv.d.ts"],
   "exclude": ["node_modules", "lib"]
 }

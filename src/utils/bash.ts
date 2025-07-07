@@ -10,6 +10,7 @@ class BashHelper {
     host: string,
     onExit?: () => void,
     isWindowsTarget?: boolean,
+    port?: string,
   ) {
     if (!host || !/^[\w.-]+@([\w.-]+)$/.test(host)) {
       console.error('Ungültiges SSH-Ziel! Format: benutzer@host');
@@ -18,6 +19,9 @@ class BashHelper {
     let sshArgs = [host];
     if (isWindowsTarget) {
       sshArgs = [host, '-t', 'bash'];
+    }
+    if (port) {
+      sshArgs = ['-p', port, ...sshArgs];
     }
     let sshPath = '/usr/bin/ssh';
     if (platform() === 'win32') {
