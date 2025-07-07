@@ -1,4 +1,5 @@
 import { spawn } from 'node:child_process';
+import { platform } from 'node:os';
 
 class BashHelper {
   /**
@@ -18,7 +19,11 @@ class BashHelper {
     if (isWindowsTarget) {
       sshArgs = [host, '-t', 'bash'];
     }
-    const ssh = spawn('ssh', sshArgs, { stdio: 'inherit' });
+    let sshPath = '/usr/bin/ssh';
+    if (platform() === 'win32') {
+      sshPath = 'C:/Windows/System32/OpenSSH/ssh.exe';
+    }
+    const ssh = spawn(sshPath, sshArgs, { stdio: 'inherit' });
     ssh.on('exit', (code) => {
       console.log(`SSH-Verbindung beendet (Exit-Code: ${code})`);
       if (onExit) {

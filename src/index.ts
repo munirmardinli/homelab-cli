@@ -7,7 +7,7 @@
  * @module index
  */
 import { PackageManagerCLI } from './config/cli.js';
-
+import 'dotenv/config';
 /**
  * Startet das Hauptprogramm und ruft die plattformspezifische Funktion auf.
  *

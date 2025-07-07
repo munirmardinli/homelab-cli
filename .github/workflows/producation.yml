@@ -71,6 +71,19 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Run prettier tool
         run: npx prettier '**/*.{ts,tsx}' --write
+  dependency-cruiser:
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Run dependency-cruiser tool
+        run: npx dependency-cruiser --validate .dependency-cruiser.cjs src
   typecheck:
     needs: prepare
     runs-on: ubuntu-latest
@@ -89,6 +102,7 @@ jobs:
       - eslint
       - prettier
       - typecheck
+      - dependency-cruiser
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
