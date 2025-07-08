@@ -9,7 +9,7 @@
 		"summary": [
 			{
 				"kind": "text",
-				"text": "Hauptmodul für das CLI-Tool.\n\nImportiert plattformspezifische Funktionen und startet das Hauptprogramm.\nUnterstützte Plattformen: macOS (brew), Windows (choco)."
+				"text": "Hauptmodul für das CLI-Tool.\n\nImportiert plattformspezifische Funktionen und startet das Hauptprogramm.\nUnterstützte Plattformen: macOS (brew), Windows (choco).\n\nMenü-Option 5: Kommandos aus YAML-Datei ausführen"
 			}
 		]
 	},
