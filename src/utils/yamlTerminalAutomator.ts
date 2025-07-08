@@ -1,4 +1,4 @@
-import { spawnSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 
 import { YamlDataService } from '../config/localStorage.js';
 
@@ -22,18 +22,20 @@ class TerminalAutomator {
         );
         continue;
       }
-      const result = spawnSync(program, args, {
-        stdio: 'inherit',
-        shell: true,
-      });
-      if (result.error) {
-        console.error(`Fehler beim Ausführen von '${cmd}':`, result.error);
-        break;
-      }
-      if (result.status !== 0) {
-        console.error(
-          `Befehl '${cmd}' wurde mit Exit-Code ${result.status} beendet.`,
-        );
+      try {
+        execFileSync(program, args, {
+          stdio: 'inherit',
+          shell: false,
+        });
+      } catch (error: unknown) {
+        if (typeof error === 'object' && error !== null && 'status' in error) {
+          const status = (error as { status?: number }).status;
+          console.error(
+            `Befehl '${cmd}' wurde mit Exit-Code ${status} beendet.`,
+          );
+        } else {
+          console.error(`Fehler beim Ausführen von '${cmd}':`, error);
+        }
         break;
       }
     }

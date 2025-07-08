@@ -3,6 +3,7 @@ import readline from 'node:readline';
 
 import type { PackageManagerOptions } from '../types/types.js';
 import { BashHelper } from '../utils/bash.js';
+import { TerminalAutomator } from '../utils/yamlTerminalAutomator.js';
 
 class PackageManagerCLI {
   private options: PackageManagerOptions;
@@ -32,8 +33,9 @@ class PackageManagerCLI {
     console.log('1. ' + this.options.installLabel);
     console.log('2. ' + this.options.updateLabel);
     console.log('3. SSH-Verbindung aufbauen');
-    console.log('4. Beenden');
-    rl.question('Bitte wähle (1/2/3/4): ', (response: string): void => {
+    console.log('4. Kommandos aus YAML-Datei ausführen');
+    console.log('5. Beenden');
+    rl.question('Bitte wähle: ', (response: string): void => {
       if (response === '1') {
         rl.question('Welches Paket soll installiert werden? ', (paket) => {
           if (!this.isValidPackageName(paket)) {
@@ -138,6 +140,14 @@ class PackageManagerCLI {
           },
         );
       } else if (response === '4') {
+        rl.question('Dateiname der YAML-Datei (ohne .yml): ', (fileName) => {
+          TerminalAutomator.runAllCommandsFromYaml(fileName);
+          rl.close();
+          rl.on('close', () => {
+            this.menu();
+          });
+        });
+      } else if (response === '5') {
         rl.close();
         BashHelper.exitCLI();
       } else {

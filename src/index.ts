@@ -4,6 +4,8 @@
  * Importiert plattformspezifische Funktionen und startet das Hauptprogramm.
  * Unterstützte Plattformen: macOS (brew), Windows (choco).
  *
+ * Menü-Option 5: Kommandos aus YAML-Datei ausführen
+ *
  * @module index
  */
 import { PackageManagerCLI } from './config/cli.js';
