@@ -33,8 +33,8 @@ class PackageManagerCLI {
     console.log('2. ' + this.options.updateLabel);
     console.log('3. SSH-Verbindung aufbauen');
     console.log('4. Beenden');
-    rl.question('Bitte wähle (1/2/3/4): ', (antwort) => {
-      if (antwort === '1') {
+    rl.question('Bitte wähle (1/2/3/4): ', (response: string): void => {
+      if (response === '1') {
         rl.question('Welches Paket soll installiert werden? ', (paket) => {
           if (!this.isValidPackageName(paket)) {
             console.error('Ungültiger Paketname!');
@@ -67,7 +67,7 @@ class PackageManagerCLI {
             this.menu();
           });
         });
-      } else if (antwort === '2') {
+      } else if (response === '2') {
         try {
           const updateCmd = this.options.updateCmd;
           const opts = this.options as Partial<PackageManagerOptions> & {
@@ -94,7 +94,7 @@ class PackageManagerCLI {
         rl.on('close', () => {
           this.menu();
         });
-      } else if (antwort === '3') {
+      } else if (response === '3') {
         rl.question(
           'Welches Zielbetriebssystem? (1 = Linux/macOS, 2 = Windows, 3 = NAS): ',
           (osRequest) => {
@@ -137,7 +137,7 @@ class PackageManagerCLI {
             process.on('SIGINT', () => process.exit(0));
           },
         );
-      } else if (antwort === '4') {
+      } else if (response === '4') {
         rl.close();
         BashHelper.exitCLI();
       } else {
