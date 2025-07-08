@@ -105,19 +105,16 @@ class PackageManagerCLI {
             let port: string | undefined = undefined;
             let isWindowsTarget = false;
             if (osRequest === '1') {
-              // Darwin (macOS/Linux)
               const user = process.env.DARWIN_USERNAME;
               const host = process.env.DARWIN_HOST;
               target = `${user}@${host}`;
               isWindowsTarget = false;
             } else if (osRequest === '2') {
-              // Windows
               const user = process.env.WINDOWS_USERNAME;
               const host = process.env.WINDOWS_HOST;
               target = `${user}@${host}`;
               isWindowsTarget = true;
             } else if (osRequest === '3') {
-              // NAS
               const user = process.env.NAS_USERNAME;
               const host = process.env.NAS_HOST;
               port = process.env.NAS_PORT || '22';
@@ -140,12 +137,18 @@ class PackageManagerCLI {
           },
         );
       } else if (response === '4') {
-        rl.question('Dateiname der YAML-Datei (ohne .yml): ', (fileName) => {
-          TerminalAutomator.runAllCommandsFromYaml(fileName);
-          rl.close();
-          rl.on('close', () => {
-            this.menu();
-          });
+        let fileName = '';
+        if (process.platform === 'win32') {
+          fileName = 'windows';
+        } else if (process.platform === 'darwin') {
+          fileName = 'darwin';
+        } else if (process.platform === 'linux') {
+          fileName = 'linux';
+        }
+        TerminalAutomator.runAllCommandsFromYaml(fileName);
+        rl.close();
+        rl.on('close', () => {
+          this.menu();
         });
       } else if (response === '5') {
         rl.close();

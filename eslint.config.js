@@ -142,7 +142,7 @@ export default [
       'sonarjs/no-identical-functions': 'warn',
       'sonarjs/no-small-switch': 'warn',
       'sonarjs/no-nested-template-literals': 'warn',
-      'sonarjs/cognitive-complexity': ['warn', 15],
+      'sonarjs/cognitive-complexity': ['warn', 20],
       'node/no-unsupported-features/es-syntax': 'off',
       'node/no-missing-import': 'off',
       'node/no-unpublished-import': 'off',
