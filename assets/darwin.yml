@@ -1,2 +1,13 @@
 events:
-  - echo "Hallo Welt"
+  - brew install wget
+  - brew install node
+  - brew install git
+  - brew install --cask slack
+  - brew install --cask whatsapp
+  - brew install --cask postman
+  - brew install --cask discord
+  - brew install --cask visual-studio-code
+  - brew install --cask cursor
+  - brew install --cask warp
+  - brew install --cask bitwarden
+#  - sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
