@@ -263,10 +263,9 @@ jobs:
           username: ${{ env.DOCKER_USERNAME }}
           password: ${{ env.DOCKER_PASSWORD }}
           repository: ${{ env.DOCKER_IMAGE_NAME }}
-          readme-filepath: ./README.md
+          readme-filepath: README.md
           short-description: |
             ${{ github.event.repository.description }}
-            Categories: ${{ join(github.event.repository.topics, ', ') }}
       - name: Extract metadata for Docker Hub
         id: meta
         uses: docker/metadata-action@v5
