@@ -53,6 +53,8 @@
   "Trunk.io",
   "CodeRabbit.coderabbit-vscode",
   "drcika.apc-extension",
-  "codacy-app.codacy"
+  "codacy-app.codacy",
+  "christian-kohler.path-intellisense",
+  "ionutvmi.path-autocomplete"
  ]
 }
