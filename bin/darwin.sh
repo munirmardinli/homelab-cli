@@ -21,3 +21,6 @@ else
   echo "Nicht unterstütztes Betriebssystem: $OS"
   exit 1
 fi
+
+echo 'source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
+source ~/.zshrc

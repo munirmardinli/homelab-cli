@@ -1,4 +1,5 @@
 events:
+  - brew install powerlevel10k
   - brew install wget
   - brew install node
   - brew install git
