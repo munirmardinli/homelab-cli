@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
+fatal() { echo "$*" >&2; exit 1; }
 
-set -e +o pipefail
+set -euo pipefail
 
 # Set up paths first
 bin_name="codacy-cli-v2"
 
-# Determine OS-specific paths
 os_name=$(uname)
 arch=$(uname -m)
 
@@ -87,7 +87,6 @@ download() {
 }
 
 download_cli() {
-    # OS name lower case
     suffix=$(echo "$os_name" | tr '[:upper:]' '[:lower:]')
 
     local bin_folder="$1"
@@ -105,13 +104,11 @@ download_cli() {
     fi
 }
 
-# Warn if CODACY_CLI_V2_VERSION is set and update is requested
 if [ -n "$CODACY_CLI_V2_VERSION" ] && [ "$1" = "update" ]; then
     echo "⚠️  Warning: Performing update with forced version $CODACY_CLI_V2_VERSION"
     echo "    Unset CODACY_CLI_V2_VERSION to use the latest version"
 fi
 
-# Ensure version.yaml exists and is up to date
 if [ ! -f "$version_file" ] || [ "$1" = "update" ]; then
     echo "ℹ️  Fetching latest version..."
     version=$(get_latest_version)
@@ -119,7 +116,6 @@ if [ ! -f "$version_file" ] || [ "$1" = "update" ]; then
     echo "version: \"$version\"" > "$version_file"
 fi
 
-# Set the version to use
 if [ -n "$CODACY_CLI_V2_VERSION" ]; then
     version="$CODACY_CLI_V2_VERSION"
 else
@@ -127,13 +123,11 @@ else
 fi
 
 
-# Set up version-specific paths
 bin_folder="${CODACY_CLI_V2_TMP_FOLDER}/${version}"
 
 mkdir -p "$bin_folder"
 bin_path="$bin_folder"/"$bin_name"
 
-# Download the tool if not already installed
 download_cli "$bin_folder" "$bin_path" "$version"
 chmod +x "$bin_path"
 
