@@ -16,7 +16,7 @@ import 'dotenv/config';
  * @function main
  * @returns {void}
  */
-function main() {
+function main(): void {
   if (process.platform === 'darwin') {
     const cli = new PackageManagerCLI({
       platform: 'darwin',
