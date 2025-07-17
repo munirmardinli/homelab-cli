@@ -6,7 +6,7 @@
   "out": "public",
   "theme": "default",
   "logLevel": "Info",
-  "readme": "./docs/index.md",
+  "readme": "./docs/README.md",
   "entryPoints": ["./src/index.ts"],
   "tsconfig": "./.husky/config/tsconfig.docs.json",
   "hostedBaseUrl": "https://munirmardinli.github.io/homelab-cli",
