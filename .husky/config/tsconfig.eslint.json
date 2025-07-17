@@ -5,6 +5,10 @@
     "allowJs": true,
     "noEmit": true
   },
-  "include": ["../src/**/*", "../.dependency-cruiser.cjs", "../dotenv.d.ts"],
+  "include": [
+    "../../src/**/*",
+    "../../.dependency-cruiser.cjs",
+    "../../dotenv.d.ts"
+  ],
   "exclude": []
 }

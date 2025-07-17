@@ -1,5 +1,5 @@
 {
-  "extends": "./config/tsconfig.build.json",
+  "extends": "./.husky/config/tsconfig.build.json",
   "compilerOptions": {
     "rootDirs": ["src"],
     "outDir": "lib",

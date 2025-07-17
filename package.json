@@ -11,7 +11,7 @@
   "enginesStrict": true,
   "homepage": "https://munirmardinli.github.io/homelab-cli",
   "bin": {
-    "homelab-cli": "bin/homelab-cli"
+    "homelab-cli": ".husky/bin/homelab-cli"
   },
   "packageManager": "npm@11.4.2",
   "sponsor": {
@@ -102,6 +102,7 @@
     "ts-node": "^10.9.1",
     "tsx": "^4.20.3",
     "typedoc": "^0.28.5",
+    "typedoc-plugin-markdown": "^4.7.0",
     "typescript": "^5.7.3"
   },
   "dependencies": {

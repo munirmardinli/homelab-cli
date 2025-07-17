@@ -13,10 +13,9 @@ node_modules/
 lib
 
 # documentation
-docs
 .qodo
 .cursor/PRD/index.md
-
+public
 
 #Ignore cursor AI rules
 .cursor\rules\codacy.mdc

@@ -3,17 +3,19 @@
   "entryPointStrategy": "expand",
   "name": "homelab-cli",
   "lang": "en",
-  "out": "docs",
+  "out": "public",
   "theme": "default",
   "logLevel": "Info",
+  "readme": "./docs/index.md",
   "entryPoints": ["./src/index.ts"],
-  "tsconfig": "config/tsconfig.docs.json",
+  "tsconfig": "./.husky/config/tsconfig.docs.json",
   "hostedBaseUrl": "https://munirmardinli.github.io/homelab-cli",
   "titleLink": "https://munirmardinli.github.io/homelab-cli",
   "gitRevision": "main",
+  //"plugin": ["typedoc-plugin-markdown"],
   "categoryOrder": ["Reflections", "Types", "Comments", "*"],
   "groupOrder": ["Common", "Namespaces", "Variables", "Functions", "*"],
-  "json": "docs/docs.json",
+  "json": "public/docs.json",
   "darkHighlightTheme": "dark-plus",
   "includeHierarchySummary": true,
   "disableGit": false,
@@ -104,7 +106,7 @@
   "outputs": [
     {
       "name": "html",
-      "path": "docs/docs.json",
+      "path": "public/docs.json",
       "options": {
         "navigation": {
           "includeCategories": true,

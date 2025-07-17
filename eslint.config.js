@@ -24,7 +24,7 @@ export default [
       parserOptions: {
         ecmaVersion: 2021,
         sourceType: 'module',
-        project: ['config/tsconfig.eslint.json'],
+        project: ['./.husky/config/tsconfig.eslint.json'],
       },
       globals: {
         window: 'readonly',
@@ -37,7 +37,7 @@ export default [
     settings: {
       'import/resolver': {
         typescript: {
-          project: ['config/tsconfig.eslint.json'],
+          project: ['./.husky/config/tsconfig.eslint.json'],
         },
         node: {
           extensions: ['.ts'],
@@ -221,7 +221,7 @@ export default [
         defaultYAMLVersion: '1.2',
         project: [
           './packages/cli/tsconfig.json',
-          './config/tsconfig.eslint.json',
+          './.husky/config/tsconfig.eslint.json',
         ],
       },
     },
