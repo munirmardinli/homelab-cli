@@ -250,5 +250,18 @@ jobs:
           sed -i 's/tags_file: tags.md/# tags_file: tags.md/' mkdocs.yml
           echo "GH_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
 
-      - name: Deploy to docs branch
-        run: mkdocs gh-deploy --force --clean --no-history --remote-branch gh-pages
+      - name: Build MkDocs
+        run: mkdocs build --site-dir site
+
+      - name: Deploy MkDocs to gh-pages branch under /mkdocs
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git clone --branch gh-pages --single-branch https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
+          mkdir -p gh-pages/mkdocs
+          rm -rf gh-pages/mkdocs/*
+          cp -r site/* gh-pages/mkdocs/
+          cd gh-pages
+          git add mkdocs
+          git commit -m "Update MkDocs documentation in /mkdocs" || echo "No changes to commit"
+          git push

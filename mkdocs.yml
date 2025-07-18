@@ -11,7 +11,7 @@ repo_name: munirmardinli/homelab-cli/edit/main/docs/{path}
 dev_addr: 127.0.0.1:5501
 copyright: ©Munir Mardinli
 site_author: Munir Mardinli
-site_dir: public/mkdocs
+site_dir: public
 docs_dir: docs
 strict: false
 watch:
