@@ -192,12 +192,12 @@ jobs:
           package-lock.json
       - name: Scan Dockerfile
         run: |
-          trivy config .docker/Dockerfile \
+          trivy config config/.docker/Dockerfile \
           --severity HIGH,CRITICAL \
           --format table \
           --exit-code 1
       - name: Build Docker image
-        run: docker build -f .docker/Dockerfile -t homelab-cli .
+        run: docker build -f config/.docker/Dockerfile -t homelab-cli .
       - name: Scan Docker image
         run: |
           trivy image homelab-cli \
