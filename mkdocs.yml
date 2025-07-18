@@ -87,6 +87,7 @@ nav:
           - 🔧 Core Services: blog/posts/coreServices.md
           - 💻 Development Services: blog/posts/developmentServices.md
           - ☁️ Nextcloud: blog/posts/nextcloud.md
+  - 🏗 Code: code/index.md
   - ✉️ Contact: contact/index.md
 
 extra:
