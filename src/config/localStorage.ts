@@ -48,5 +48,3 @@ export class YamlDataService {
     return [];
   }
 }
-
-export { YamlDataService as yamlDataService };

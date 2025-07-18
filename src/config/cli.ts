@@ -5,7 +5,7 @@ import type { PackageManagerOptions } from '../types/types.js';
 import { BashHelper } from '../utils/bash.js';
 import { TerminalAutomator } from '../utils/yamlTerminalAutomator.js';
 
-class PackageManagerCLI {
+export class PackageManagerCLI {
   private readonly DEFAULT_STDIO_MODE = 'inherit';
   private readonly DEFAULT_SSH_PORT = '22';
   private readonly ACCESS_DENIED_KEYWORD = 'Zugriff';
@@ -187,5 +187,3 @@ class PackageManagerCLI {
     });
   }
 }
-
-export { PackageManagerCLI };

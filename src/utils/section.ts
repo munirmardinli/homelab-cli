@@ -8,7 +8,7 @@ import { DockerComposeUtil } from './docker.js';
 /**
  * Section Utility für interaktive Auswahl und Steuerung von DockerComposeUtil.
  */
-class Section {
+export class Section {
   private static readonly DEFAULT_DOCKER_COMPOSE_DIRECTORY = path.resolve(
     process.cwd(),
     'assets',
@@ -116,5 +116,3 @@ class Section {
 if (process.platform === 'win32') {
   Section.promptAndRun();
 }
-
-export { Section };

@@ -2,7 +2,7 @@ import { execFileSync } from 'node:child_process';
 
 import { YamlDataService } from '../config/localStorage.js';
 
-class TerminalAutomator {
+export class TerminalAutomator {
   private static readonly DEFAULT_STADIO_MODE = 'inherit';
   private static readonly NO_COMMANDS_FOUND =
     'Keine Kommandos in der YAML-Datei gefunden.';
@@ -60,5 +60,3 @@ class TerminalAutomator {
     return cmd.trim().split(/\s+/);
   }
 }
-
-export { TerminalAutomator };

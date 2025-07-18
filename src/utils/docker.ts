@@ -5,7 +5,7 @@ import path from 'node:path';
 /**
  * Hilfsklasse für docker-compose Operationen im assets/docker/deployment Verzeichnis.
  */
-class DockerComposeUtil {
+export class DockerComposeUtil {
   private static readonly DOCKER_CLI_PATH = 'docker-compose';
   private static readonly ENV_PATH_DIRECTORY = process.cwd();
   private static readonly CATCH_ERROR =
@@ -79,5 +79,3 @@ class DockerComposeUtil {
     }
   }
 }
-
-export { DockerComposeUtil };

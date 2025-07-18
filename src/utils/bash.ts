@@ -1,7 +1,7 @@
 import { spawn } from 'node:child_process';
 import { platform } from 'node:os';
 
-class BashHelper {
+export class BashHelper {
   private static readonly INVALID_SSH_TARGET =
     'Ungültiges SSH-Ziel! Format: benutzer@host';
   private static readonly SSH_EXIT_MSG = 'SSH-Verbindung beendet (Exit-Code:';
@@ -53,5 +53,3 @@ class BashHelper {
     process.exit(0);
   }
 }
-
-export { BashHelper };
