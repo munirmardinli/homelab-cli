@@ -20,3 +20,5 @@ public
 #Ignore cursor AI rules
 .cursor\rules\codacy.mdc
 .cursor/rules
+.trunk
+.codacy

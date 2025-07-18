@@ -11,7 +11,7 @@
   "enginesStrict": true,
   "homepage": "https://munirmardinli.github.io/homelab-cli",
   "bin": {
-    "homelab-cli": ".husky/bin/homelab-cli"
+    "homelab-cli": "config/bin/homelab-cli"
   },
   "packageManager": "npm@11.4.2",
   "sponsor": {

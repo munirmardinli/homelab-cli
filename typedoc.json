@@ -6,7 +6,7 @@
   "out": "public",
   "theme": "default",
   "logLevel": "Info",
-  "readme": "./docs/README.md",
+  "readme": "./docs/index.md",
   "entryPoints": ["./src/index.ts"],
   "tsconfig": "./config/tsconfig/tsconfig.docs.json",
   "hostedBaseUrl": "https://munirmardinli.github.io/homelab-cli",
