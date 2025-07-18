@@ -6,6 +6,7 @@ import path from 'node:path';
  * Hilfsklasse für docker-compose Operationen im assets/docker/deployment Verzeichnis.
  */
 class DockerComposeUtil {
+  private static readonly DOCKER_CLI_PATH = 'docker-compose';
   /**
    * Führt eine docker-compose Datei aus dem assets/docker/deployment Verzeichnis aus.
    * @param composeFileName Name der docker-compose Datei (z.B. "hosting.yml")
@@ -63,10 +64,14 @@ class DockerComposeUtil {
     }
 
     try {
-      execFileSync('docker-compose', ['-f', composeFilePath, ...args], {
-        stdio: 'inherit',
-        env,
-      });
+      execFileSync(
+        DockerComposeUtil.DOCKER_CLI_PATH,
+        ['-f', composeFilePath, ...args],
+        {
+          stdio: 'inherit',
+          env,
+        },
+      );
     } catch (error) {
       throw new Error(`Fehler beim Ausführen von docker-compose: ${error}`);
     }
