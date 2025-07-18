@@ -1,13 +1,13 @@
 site_name: Homelab Setup
 site_description: |-
   This repository contains a Docker Compose environment for a private homelab focused on security, automation, authentication, and developer productivity.
-site_url: https://munirmardinli.github.io/homelab-cli
-repo_url: https://github.communirmardinli/homelab-cli
+site_url: https://munirmardinli.github.io/homelab/
+repo_url: https://github.com/munirmardinli/homelab-cli
 #edit_uri: blob/main/docs
 remote_name: origin
 remote_branch: main
-edit_uri_template: https://github.communirmardinli/homelab-cli
-repo_name: munirmardinli/homelab-cli/edit/main/docs/{path}
+repo_name: munirmardinli/homelab-cli
+edit_uri_template: https://github.com/munirmardinli/homelab-cli/edit/main/docs/{path}
 dev_addr: 127.0.0.1:5501
 copyright: ©Munir Mardinli
 site_author: Munir Mardinli
@@ -18,14 +18,14 @@ watch:
   - .
 theme:
   name: material
-  custom_dir: config/docs/config/overrides
+  custom_dir: docs/config/overrides
   static_templates:
-    - config/docs/config/overrides/html/404.html
+    - docs/config/overrides/html/404.html
   font:
     text: Merriweather Sans
     code: Red Hat Mono
   language: en
-  favicon: config/docs/assets/favicon_io/favicon.ico
+  favicon: assets/favicon_io/favicon.ico
   features:
     - content.action.view
     - content.code.annotate
@@ -78,9 +78,9 @@ nav:
   - 🏠 Home:
       - index.md
       - 🌍 Global:
-          - 🌿 Environment: global/environment.md
-          - ⚙️ Shared Config: global/sharedConfig.md
-          - 🏷️ Tags: tags.md
+            - 🌿 Environment: global/environment.md
+            - ⚙️ Shared Config: global/sharedConfig.md
+            - 🏷️ Tags: tags.md
       - 📝 Blog:
           - 🛡️ Authentik: blog/posts/authentik.md
           - ❗ Container Management: blog/posts/containerManagement.md
@@ -90,10 +90,10 @@ nav:
   - ✉️ Contact: contact/index.md
 
 extra:
-  base_url: https://munirmardinli.github.io/homelab
+  base_url: https://munirmardinli.github.io/homelab-cli
   social:
     - icon: fontawesome/brands/github
-      link: https://github.mmunirmardinli/homelab-cli
+      link: https://github.com/munirmardinli/homelab-cli-cli?tab=repositories
       name: Github
   version:
     provider: mike
@@ -110,8 +110,8 @@ extra:
 #      lang: de
 
 extra_javascript:
-  - config/docs/config/overrides/javascripts/tablesort.js
-  - config/docs/config/overrides/javascripts/shortcuts.js
+  - docs/config/overrides/javascripts/tablesort.js
+  - docs/config/overrides/javascripts/shortcuts.js
   - https://unpkg.com/d3@7/dist/d3.min.js
   - https://unpkg.com/markmap-lib@0.15.3/dist/browser/index.js
   - https://unpkg.com/markmap-view@0.15.3/dist/browser/index.js
@@ -135,7 +135,7 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/katex/dist/contrib/mathtex-script-type.min.js
 
 extra_css:
-  - config/docs/config/overrides/stylesheets/contact.css
+  - docs/config/overrides/stylesheets/contact.css
   - https://unpkg.com/katex@0/dist/katex.min.css
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css
   - https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css
@@ -200,7 +200,7 @@ plugins:
       enabled: true
   - git-committers:
       enabled: true
-      repository: munirmardinli/homelab-cli
+      repository: munirmardinli/homelab-cli-cli
       branch: main
       token: !ENV GH_TOKEN_ORGA
   - info:
@@ -229,5 +229,5 @@ plugins:
       tags_file: tags.md
 
 hooks:
-  - config/docs/config/overrides/hooks/removeObserve.py
-  - config/docs/config/overrides/hooks/seo.py
+  - docs/config/overrides/hooks/removeObserve.py
+  - docs/config/overrides/hooks/seo.py

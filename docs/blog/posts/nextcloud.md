@@ -28,7 +28,7 @@ Self-hosted productivity platform with file sync & share, calendars, contacts an
 ### Core Services
 
 === "PostgreSQL"
-`yaml hl_lines="18-22"
+    ```yaml hl_lines="18-22"
     nextcloud-postgres:
       image: postgres:latest
       container_name: nextcloud-postgres
@@ -64,7 +64,7 @@ Self-hosted productivity platform with file sync & share, calendars, contacts an
         monitoring: nextcloud-postgress
       networks:
         dockerization:
-    `
+    ```
 
     1. → Database username (default: `nextcloud`)
     2. → Database password (default: `nextcloud`)
@@ -73,7 +73,7 @@ Self-hosted productivity platform with file sync & share, calendars, contacts an
     5. → Optional group ID for volume permissions (default: 100)
 
 === "Redis"
-`yaml hl_lines="20-21"
+    ```yaml hl_lines="20-21"
     nextcloud-redis:
       image: redis:alpine
       container_name: nextcloud-redis
@@ -103,13 +103,13 @@ Self-hosted productivity platform with file sync & share, calendars, contacts an
       labels:
         <<: *default-labels
         monitoring: nextcloud-redis
-    `
+    ```
 
     1. → Optional user ID for volume permissions (default: 1026)
     2. → Optional group ID for volume permissions (default: 100)
 
 === "Nextcloud"
-`yaml hl_lines="29-43"
+    ```yaml hl_lines="29-43"
     nextcloud:
       image: nextcloud:latest
       container_name: nextcloud
@@ -163,7 +163,7 @@ Self-hosted productivity platform with file sync & share, calendars, contacts an
         monitoring: nextcloud
       networks:
         dockerization:
-    `
+    ```
 
     1. → PostgreSQL username (matches database service)
     2. → PostgreSQL password (matches database service)
@@ -185,47 +185,43 @@ Self-hosted productivity platform with file sync & share, calendars, contacts an
 
 Refer to [Environment Variables](../../global/index.md) documentation for:
 
-| Variable                 | Description                     | Required       |
-| ------------------------ | ------------------------------- | -------------- |
-| `MOUNT_PATH_DOCKER_ROOT` | Storage path                    | ✅             |
-| `SYNOLOGY_BASIC_URL`     | Domain for trusted hosts        | ✅             |
-| `EMAIL`                  | Admin email for SMTP            | ✅             |
-| `SMTP_PASSWORD`          | SMTP auth password              | ✅             |
-| `UID_NAS_ADMIN`          | User ID for volume permissions  | ⚠️ Recommended |
-| `GID_NAS_ADMIN`          | Group ID for volume permissions | ⚠️ Recommended |
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `MOUNT_PATH_DOCKER_ROOT` | Storage path | ✅ |
+| `SYNOLOGY_BASIC_URL` | Domain for trusted hosts | ✅ |
+| `EMAIL` | Admin email for SMTP | ✅ |
+| `SMTP_PASSWORD` | SMTP auth password | ✅ |
+| `UID_NAS_ADMIN` | User ID for volume permissions | ⚠️ Recommended |
+| `GID_NAS_ADMIN` | Group ID for volume permissions | ⚠️ Recommended |
 
-!!! warning "Security Notice" - Be stored in `.env` files - Have restricted permissions (`chmod 600`) - Never be committed to version control - Be rotated periodically
+!!! warning "Security Notice"
+    - Be stored in `.env` files
+    - Have restricted permissions (`chmod 600`)
+    - Never be committed to version control
+    - Be rotated periodically
 
 ## 🚀 Deployment
 
 1. Create `.env` file with required variables
-2. _Initialize volumes_
-
+2. *Initialize volumes*
 ```bash
 mkdir -p ${MOUNT_PATH_DOCKER_ROOT}/nextcloud/{db,app}
 chown -R ${UID_NAS_ADMIN:-1026}:${GID_NAS_ADMIN:-100} ${MOUNT_PATH_DOCKER_ROOT}/nextcloud
 ```
-
 3. Start services
-
 ```bash
 docker-compose up -d
 ```
-
 4. Access web UI at `http://yourdomain.com:81`
-
 ### 🔄 Maintenance
 
 - **Backups**
-  - Regularly backup both the PostgreSQL and app volumes
+	- Regularly backup both the PostgreSQL and app volumes
 - **Updates**
-
 ```bash
 docker-compose pull && docker-compose up -d
 ```
-
 - **Logs**
-
 ```bash
 docker-compose logs -f
 ```
