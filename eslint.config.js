@@ -14,7 +14,7 @@ import globals from 'globals';
 
 export default [
   {
-    ignores: ['node_modules/', 'lib/', '/public', '/assets'],
+    ignores: ['node_modules/', 'lib/', '/public', '/assets','config/docs'],
   },
   js.configs.recommended,
   {
@@ -24,7 +24,7 @@ export default [
       parserOptions: {
         ecmaVersion: 2021,
         sourceType: 'module',
-        project: ['./.husky/config/tsconfig.eslint.json'],
+        project: ['./config/tsconfig/tsconfig.eslint.json'],
       },
       globals: {
         window: 'readonly',
@@ -37,7 +37,7 @@ export default [
     settings: {
       'import/resolver': {
         typescript: {
-          project: ['./.husky/config/tsconfig.eslint.json'],
+          project: ['./config/tsconfig/tsconfig.eslint.json'],
         },
         node: {
           extensions: ['.ts'],
@@ -221,7 +221,7 @@ export default [
         defaultYAMLVersion: '1.2',
         project: [
           './packages/cli/tsconfig.json',
-          './.husky/config/tsconfig.eslint.json',
+          './config/tsconfig/tsconfig.eslint.json',
         ],
       },
     },

@@ -8,7 +8,7 @@
   "logLevel": "Info",
   "readme": "./docs/README.md",
   "entryPoints": ["./src/index.ts"],
-  "tsconfig": "./.husky/config/tsconfig.docs.json",
+  "tsconfig": "./config/tsconfig/tsconfig.docs.json",
   "hostedBaseUrl": "https://munirmardinli.github.io/homelab-cli",
   "titleLink": "https://munirmardinli.github.io/homelab-cli",
   "gitRevision": "main",
