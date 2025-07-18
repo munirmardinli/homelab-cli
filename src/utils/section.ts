@@ -9,87 +9,107 @@ import { DockerComposeUtil } from './docker.js';
  * Section Utility für interaktive Auswahl und Steuerung von DockerComposeUtil.
  */
 class Section {
-  static async promptAndRun(defaultEnvFile = '.env') {
-    const composeDir = path.resolve(
-      process.cwd(),
-      'assets',
-      'docker',
-      'deployment',
-    );
-    const files = fs
-      .readdirSync(composeDir)
-      .filter((f) => f.endsWith('.yml') || f.endsWith('.yaml'));
-    if (files.length === 0) {
+  private static readonly DEFAULT_DOCKER_COMPOSE_DIRECTORY = path.resolve(
+    process.cwd(),
+    'assets',
+    'docker',
+    'deployment',
+  );
+  private static readonly NOT_FOUND_FILE_ERROR =
+    'Keine docker-compose Dateien im Verzeichnis gefunden:';
+  private static readonly DEFAULT_POSTFIX = '.yml';
+  private static readonly DEFAULT_ENV_FILE = '.env';
+  private static readonly SUCCESS_MESSAGE =
+    'docker-compose erfolgreich ausgeführt!';
+  private static readonly NAVIGATION =
+    'Wähle eine docker-compose Datei mit ↑/↓ und Enter:\n\n';
+  private static readonly DEFAULT_COMPOSE_ARGS = ['up', '-d'];
+  private static readonly INPUT_ENV_FILE =
+    'Name der .env Datei im Projektverzeichnis (Enter für Standard:';
+
+  private static files: string[] = [];
+  private static selected: number = 0;
+
+  private static renderMenu() {
+    output.write('\x1Bc');
+    output.write(this.NAVIGATION);
+    for (const [idx, file] of this.files.entries()) {
+      if (idx === this.selected) {
+        output.write(`> ${file} <\n`);
+      } else {
+        output.write(`  ${file}\n`);
+      }
+    }
+  }
+
+  private static keypressListener(
+    key: string,
+    resolve: () => void,
+    defaultEnvFile: string,
+  ) {
+    if (key === '\u0003') {
+      output.write('\nAbbruch.\n');
+      process.exit();
+    } else if (key === '\r' || key === '\n') {
+      input.setRawMode(false);
+      input.pause();
+      output.write(`\nAusgewählt: ${this.files[this.selected]}\n`);
+      input.removeListener('data', this.keypressListenerWrapper);
+      this.askEnvAndRun(String(this.files[this.selected]), defaultEnvFile);
+      resolve();
+    } else if (key === '\u001b[A') {
+      this.selected =
+        (this.selected - 1 + this.files.length) % this.files.length;
+      this.renderMenu();
+    } else if (key === '\u001b[B') {
+      this.selected = (this.selected + 1) % this.files.length;
+      this.renderMenu();
+    }
+  }
+
+  private static keypressListenerWrapper: (key: string) => void;
+
+  static async promptAndRun(defaultEnvFile = this.DEFAULT_ENV_FILE) {
+    this.files = fs
+      .readdirSync(this.DEFAULT_DOCKER_COMPOSE_DIRECTORY)
+      .filter((f) => f.endsWith(this.DEFAULT_POSTFIX) || f.endsWith('.yaml'));
+    if (this.files.length === 0) {
       console.error(
-        'Keine docker-compose Dateien im Verzeichnis gefunden:',
-        composeDir,
+        this.NOT_FOUND_FILE_ERROR,
+        this.DEFAULT_DOCKER_COMPOSE_DIRECTORY,
       );
       process.exit(1);
     }
-
-    let selected = 0;
-    function renderMenu() {
-      output.write('\x1Bc'); // clear screen
-      output.write('Wähle eine docker-compose Datei mit ↑/↓ und Enter:\n\n');
-      for (const [idx, file] of files.entries()) {
-        if (idx === selected) {
-          output.write(`> ${file} <\n`);
-        } else {
-          output.write(`  ${file}\n`);
-        }
-      }
-    }
-
+    this.selected = 0;
+    this.renderMenu();
+    input.setRawMode(true);
+    input.resume();
+    input.setEncoding('utf8');
     return new Promise<void>((resolve) => {
-      renderMenu();
-      input.setRawMode(true);
-      input.resume();
-      input.setEncoding('utf8');
-
-      function onKeypress(key: string) {
-        if (key === '\u0003') {
-          output.write('\nAbbruch.\n');
-          process.exit();
-        } else if (key === '\r' || key === '\n') {
-          input.setRawMode(false);
-          input.pause();
-          output.write(`\nAusgewählt: ${files[selected]}\n`);
-          input.removeListener('data', onKeypress);
-          askEnvAndRun(String(files[selected]), defaultEnvFile);
-          resolve();
-        } else if (key === '\u001b[A') {
-          selected = (selected - 1 + files.length) % files.length;
-          renderMenu();
-        } else if (key === '\u001b[B') {
-          selected = (selected + 1) % files.length;
-          renderMenu();
-        }
-      }
-      input.on('data', onKeypress);
+      this.keypressListenerWrapper = (key: string) =>
+        this.keypressListener(key, resolve, defaultEnvFile);
+      input.on('data', this.keypressListenerWrapper);
     });
+  }
 
-    function askEnvAndRun(fileName: string, defaultEnvFile: string) {
-      const envDir = path.resolve(process.cwd());
-      const rl = readline.createInterface({ input, output });
-      rl.question(
-        `Name der .env Datei im Projektverzeichnis (Enter für Standard: ${defaultEnvFile}): `,
-        (envFile) => {
-          rl.close();
-          try {
-            const envName =
-              envFile && typeof envFile === 'string' && envFile.trim()
-                ? envFile.trim()
-                : defaultEnvFile;
-            const envPath = path.join(envDir, envName);
-            DockerComposeUtil.run(fileName, ['up', '-d'], envPath);
-            console.log('docker-compose erfolgreich ausgeführt!');
-          } catch (err) {
-            console.error('Fehler:', err);
-            process.exit(1);
-          }
-        },
-      );
-    }
+  private static askEnvAndRun(fileName: string, defaultEnvFile: string) {
+    const envDir = path.resolve(process.cwd());
+    const rl = readline.createInterface({ input, output });
+    rl.question(`${this.INPUT_ENV_FILE} ${defaultEnvFile}): `, (envFile) => {
+      rl.close();
+      try {
+        const envName =
+          envFile && typeof envFile === 'string' && envFile.trim()
+            ? envFile.trim()
+            : defaultEnvFile;
+        const envPath = path.join(envDir, envName);
+        DockerComposeUtil.run(fileName, this.DEFAULT_COMPOSE_ARGS, envPath);
+        console.log(this.SUCCESS_MESSAGE);
+      } catch (err) {
+        console.error('Fehler:', err);
+        process.exit(1);
+      }
+    });
   }
 }
 

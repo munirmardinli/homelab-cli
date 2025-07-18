@@ -7,6 +7,16 @@ import path from 'node:path';
  */
 class DockerComposeUtil {
   private static readonly DOCKER_CLI_PATH = 'docker-compose';
+  private static readonly ENV_PATH_DIRECTORY = process.cwd();
+  private static readonly CATCH_ERROR =
+    'Fehler beim Ausführen von docker-compose:';
+  private static readonly DOTENV_NOTFOUND = '.env Datei nicht gefunden:';
+  private static readonly DOCKER_COMPOSE_NOT_FOUND =
+    'docker-compose Datei nicht gefunden:';
+  private static readonly DEPLOYMENT_DIR = ['assets', 'docker', 'deployment'];
+  private static readonly DEFAULT_COMPOSE_ARGS = ['up', '-d'];
+  private static readonly DEFAULT_STADIO_MODE = 'inherit';
+
   /**
    * Führt eine docker-compose Datei aus dem assets/docker/deployment Verzeichnis aus.
    * @param composeFileName Name der docker-compose Datei (z.B. "hosting.yml")
@@ -16,27 +26,23 @@ class DockerComposeUtil {
    */
   static run(
     composeFileName: string,
-    args: string[] = ['up', '-d'],
+    args: string[] = this.DEFAULT_COMPOSE_ARGS,
     envFilePath?: string,
   ): void {
     const composeFilePath = path.resolve(
-      process.cwd(),
-      'assets',
-      'docker',
-      'deployment',
+      this.ENV_PATH_DIRECTORY,
+      ...this.DEPLOYMENT_DIR,
       composeFileName,
     );
     if (!fs.existsSync(composeFilePath)) {
-      throw new Error(
-        `docker-compose Datei nicht gefunden: ${composeFilePath}`,
-      );
+      throw new Error(`${this.DOCKER_COMPOSE_NOT_FOUND}: ${composeFilePath}`);
     }
 
     let env = { ...process.env };
     if (envFilePath) {
-      const envPath = path.resolve(process.cwd(), envFilePath);
+      const envPath = path.resolve(this.ENV_PATH_DIRECTORY, envFilePath);
       if (!fs.existsSync(envPath)) {
-        throw new Error(`.env Datei nicht gefunden: ${envPath}`);
+        throw new Error(`${this.DOTENV_NOTFOUND}: ${envPath}`);
       }
       const envContent = fs.readFileSync(envPath, 'utf-8');
       for (const line of envContent.split(/\r?\n/)) {
@@ -64,16 +70,12 @@ class DockerComposeUtil {
     }
 
     try {
-      execFileSync(
-        DockerComposeUtil.DOCKER_CLI_PATH,
-        ['-f', composeFilePath, ...args],
-        {
-          stdio: 'inherit',
-          env,
-        },
-      );
+      execFileSync(this.DOCKER_CLI_PATH, ['-f', composeFilePath, ...args], {
+        stdio: this.DEFAULT_STADIO_MODE,
+        env,
+      });
     } catch (error) {
-      throw new Error(`Fehler beim Ausführen von docker-compose: ${error}`);
+      throw new Error(`${this.CATCH_ERROR}: ${error}`);
     }
   }
 }
