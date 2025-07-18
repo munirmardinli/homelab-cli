@@ -4,7 +4,15 @@ import fs from 'node:fs';
 import { isStorageService } from '../utils/isStorage.js';
 
 export class YamlDataService {
-  private static readonly EVENTS_KEY = 'events' as const;
+  private static readonly EVENTS_KEY = 'events';
+  private static readonly LOADING_DATE_ERROR = '❌ Fehler beim Laden der Daten';
+  private static readonly FILE_NOT_EXIST = '❌ Datei existiert nicht, erstelle';
+  private static readonly FILE_EMPTY_CONTENT = '.yml mit leerem Inhalt.';
+  private static readonly INVALID_EVENTS_PROP =
+    'Die events-Eigenschaft in der Datei';
+  private static readonly INVALID_EVENTS_PROP_SUFFIX =
+    '.yml war ungültig. Erstelle leeres Array.';
+  private static readonly UTF8_ENCODING = 'utf8';
 
   static getData<T>(fileName: string): T[] {
     try {
@@ -12,30 +20,30 @@ export class YamlDataService {
       isStorageService.createDirectoryExister(file);
       if (!fs.existsSync(file)) {
         console.error(
-          `❌ Datei existiert nicht, erstelle ${fileName}.yml mit leerem Inhalt.`,
+          `${this.FILE_NOT_EXIST} ${fileName}${this.FILE_EMPTY_CONTENT}`,
         );
         fs.writeFileSync(
           file,
-          yaml.dump({ [YamlDataService.EVENTS_KEY]: [] }),
-          'utf8',
+          yaml.dump({ [this.EVENTS_KEY]: [] }),
+          this.UTF8_ENCODING,
         );
       }
 
-      const rawData = fs.readFileSync(file, 'utf8');
+      const rawData = fs.readFileSync(file, this.UTF8_ENCODING);
       let data = yaml.load(rawData) as {
-        [YamlDataService.EVENTS_KEY]: T[];
+        events: T[];
       } | null;
 
-      if (!data || !Array.isArray(data[YamlDataService.EVENTS_KEY])) {
+      if (!data || !Array.isArray(data[this.EVENTS_KEY])) {
         console.warn(
-          `Die 'events'-Eigenschaft in der Datei ${fileName}.yml war ungültig. Erstelle leeres Array.`,
+          `${this.INVALID_EVENTS_PROP} ${fileName}${this.INVALID_EVENTS_PROP_SUFFIX}`,
         );
-        data = { [YamlDataService.EVENTS_KEY]: [] };
+        data = { [this.EVENTS_KEY]: [] };
       }
 
-      return data[YamlDataService.EVENTS_KEY];
+      return data[this.EVENTS_KEY];
     } catch (e) {
-      console.error('❌ Fehler beim Laden der Daten', e);
+      console.error(this.LOADING_DATE_ERROR, e);
     }
     return [];
   }
