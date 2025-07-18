@@ -12,6 +12,6 @@
       "syntaxKind": "block"
     }
   ],
-  "include": ["../../src/**/*","../../docs/**/*", "../../dotenv.d.ts"],
+  "include": ["../../src/**/*", "../../docs/**/*", "../../dotenv.d.ts"],
   "exclude": ["node_modules", "lib"]
 }

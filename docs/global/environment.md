@@ -53,7 +53,8 @@ These environment variables configure all Homelab services. Store sensitive valu
 !!! success "Best Practices" - **Always** use `.env` files for sensitive variables - Rotate credentials quarterly - Restrict permissions to `600` - Never commit to version control
 
 !!! example "Sample .env File"
-```bash # Core
+
+````bash # Core
 SYNOLOGY_BASIC_URL=synology.yourdomain.com
 MOUNT_PATH_DOCKER_ROOT=/mnt/docker
 
@@ -61,3 +62,4 @@ MOUNT_PATH_DOCKER_ROOT=/mnt/docker
     PG_PASS=strongpassword123
     AUTENTIK_SECRET_KEY=changeme
     ```
+````
