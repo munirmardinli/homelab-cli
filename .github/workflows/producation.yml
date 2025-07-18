@@ -239,7 +239,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install -r requirements.txt
+          pip install -r config/requirements.txt
           pip install mkdocs-material \
             mkdocs-git-authors-plugin \
             mkdocs-git-revision-date-localized-plugin \
