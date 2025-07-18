@@ -22,3 +22,6 @@ public
 .cursor/rules
 .trunk
 .codacy
+venv
+.cache
+__pycache__
