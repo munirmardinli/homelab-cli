@@ -2,7 +2,7 @@
 x-logging: &default-logging
   driver: loki
   options: &default-logging-options
-    loki-url: https://loki.${SYNOLOGY_BASIC_URL}/loki/api/v1/push
+    loki-url: https://loki.${SYNOLOGY_BASIC_URL:?SYNOLOGY_BASIC_URL required}/loki/api/v1/push
     loki-retries: 5
     loki-batch-size: 400
     loki-batch-wait: 2s
@@ -20,6 +20,9 @@ x-limits: &resource-limits
   mem_limit: "256m"
   mem_reservation: "64m"
   cpu_shares: "512"
+  restart: always
+  networks:
+    dockerization:
 
 services:
   cloudflared:
@@ -27,7 +30,12 @@ services:
     hostname: cloudflared
     image: cloudflare/cloudflared:latest
     command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TOKEN:?CLOUDFLARE_TOKEN required}
-    restart: always
+    healthcheck:
+      test: ["CMD", "cloudflared", "--version"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
     <<: *resource-limits
     logging:
       <<: *default-logging
@@ -43,8 +51,6 @@ services:
         source: /etc/localtime
         target: /etc/localtime
         read_only: true
-    networks:
-      dockerization:
     labels:
       <<: *default-labels
       monitoring: cloudflared
@@ -53,7 +59,6 @@ services:
     container_name: pihole
     hostname: pihole
     image: pihole/pihole
-    restart: always
     cap_add:
       - NET_ADMIN
     security_opt:
@@ -95,25 +100,32 @@ services:
       FTLCONF_PRIVACYLEVEL: ${FTLCONF_PRIVACYLEVEL:-0}
       VIRTUAL_HOST: pihole.${SYNOLOGY_BASIC_URL}
     ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "81:80/tcp"
+      - target: 53
+        published: 53
+        protocol: tcp
+        mode: host
+      - target: 53
+        published: 53
+        protocol: udp
+        mode: host
+      - target: 80
+        published: 81
+        protocol: tcp
+        mode: host
     volumes:
       - type: bind
-        source: ${MOUNT_PATH_DOCKER_ROOT}/server/dnsmasq.d
+        source: ${MOUNT_PATH_DOCKER_ROOT:?MOUNT_PATH_DOCKER_ROOT required}/config/dnsmasq.d
         target: /etc/dnsmasq.d
       - type: bind
-        source: ${MOUNT_PATH_DOCKER_ROOT}/server/pihole
+        source: ${MOUNT_PATH_DOCKER_ROOT}/pihole
         target: /etc/pihole
       - type: bind
-        source: ${MOUNT_PATH_DOCKER_ROOT}/server/pihole/logs
+        source: ${MOUNT_PATH_DOCKER_ROOT}/logs/pihole
         target: /var/log/pihole
       - type: bind
         source: /etc/localtime
         target: /etc/localtime
         read_only: true
-    networks:
-      dockerization:
     labels:
       <<: *default-labels
       monitoring: pihole
