@@ -12,7 +12,6 @@ dev_addr: 127.0.0.1:5501
 copyright: ©Munir Mardinli
 site_author: Munir Mardinli
 site_dir: public
-
 theme:
   name: material
   custom_dir: config/mkdocs/overrides
@@ -29,24 +28,6 @@ theme:
     - content.code.copy
     - content.code.select
     - content.tabs.link
-
-    - search.highlight
-    - search.share
-    - search.suggest
-    - content.tooltips
-    - header.autohide
-    - announce.dismiss
-    - navigation.tabs
-    - navigation.instant
-    - navigation.instant.prefetch
-    - navigation.instant.progress
-    - navigation.tracking
-    - navigation.path
-    - navigation.prune
-    - navigation.tabs.sticky
-    - navigation.footer
-    - toc.follow
-    - content.action.edit
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -174,7 +155,6 @@ plugins:
       token: !ENV GH_TOKEN
       branch: main
       enabled: true
-
 
 hooks:
   - config/mkdocs/hooks/removeObserve.py

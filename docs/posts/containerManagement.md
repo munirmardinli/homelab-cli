@@ -5,6 +5,7 @@ date:
 authors:
   - Munir
 tags:
+  - Management
   - Infrastructure
 categories:
   - Infrastructure
