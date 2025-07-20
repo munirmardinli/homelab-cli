@@ -47,7 +47,7 @@ theme:
 
 nav:
   - 🏠 Home:
-      - Default: index.md
+      - 🏠 Default: index.md
       - 🛡️ Authentik: posts/authentik.md
       - ❗ Container Management: posts/containerManagement.md
       - 🔧 Core Services: posts/coreServices.md
@@ -57,8 +57,8 @@ nav:
           - 🌿 Environment: posts/global/environment.md
           - ⚙️ Shared Config: posts/global/sharedConfig.md
       - 🏷️ Tags: tags.md
-  - Scripits:
-      - 🗄️ NAS: posts/scripts/nas.md
+  - 📝 Scripits:
+      - 📱 NAS: posts/scripts/nas.md
       - 🎨 PowerLevel10k: posts/scripts/powerLevel10.md
       - 🌐 Macvlan: posts/scripts/macvlan.md
       - 🐍 Venv: posts/scripts/venv.md
