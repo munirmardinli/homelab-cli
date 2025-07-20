@@ -143,6 +143,17 @@ plugins:
         - Global
   - tags:
       tags_file: docs/tags.md
+  - git-revision-date-localized:
+      type: date
+      fallback_to_build_date: false
+      enable_creation_date: true
+      enable: true
+  - git-committers:
+      repository: munirmardinli/homelab-cli
+      token: !ENV GH_TOKEN
+      branch: main
+      enabled: true
+
 
 hooks:
   - config/mkdocs/hooks/removeObserve.py
