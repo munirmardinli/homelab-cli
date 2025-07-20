@@ -1,5 +1,5 @@
 ---
-title: 🏗 Homebrew Installation Script
+title: 🏗 Homebrew Installation
 date:
   created: 2025-07-19
 tags:
@@ -20,7 +20,7 @@ description: >
 comments: true
 ---
 
-# 🏗 Homebrew Installation Script
+# 🏗 Homebrew Installation
 
 Automated installation of [Homebrew](https://brew.sh/) on macOS and Linux. The script checks if Homebrew is already installed, installs it if necessary, and sets up the shell environment.
 
@@ -37,7 +37,7 @@ Automated installation of [Homebrew](https://brew.sh/) on macOS and Linux. The s
 ### Process
 
 === "Brew Script"
-    ```sh hl_lines="4-31" linenums="1"
+    ```sh linenums="1"
     #!/bin/sh
 
     OS="$(uname -s)"
