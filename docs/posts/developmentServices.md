@@ -33,7 +33,7 @@ Integrated development environment with code editor, version control, and knowle
 ### Development Services
 
 === "Code Server"
-    ```yaml hl_lines="13-17"
+`yaml hl_lines="13-17"
     codeserver:
       container_name: codeserver
       hostname: codeserver
@@ -66,7 +66,7 @@ Integrated development environment with code editor, version control, and knowle
       labels:
         <<: *default-labels
         monitoring: codeserver
-    ```
+    `
 
     1. → User ID for volume permissions (default: 1026)
     2. → Group ID for volume permissions (default: 100)
@@ -75,7 +75,7 @@ Integrated development environment with code editor, version control, and knowle
     5. → Sudo password for terminal operations
 
 === "Obsidian"
-    ```yaml hl_lines="32-35"
+`yaml hl_lines="32-35"
     obsidian:
       container_name: obsidian
       hostname: obsidian
@@ -116,7 +116,7 @@ Integrated development environment with code editor, version control, and knowle
       labels:
         <<: *default-labels
         monitoring: obsidian
-    ```
+    `
 
     1. → Login email address
     2. → Web interface password (must be set in `.env`)
@@ -124,7 +124,7 @@ Integrated development environment with code editor, version control, and knowle
     4. → Group ID for volume permissions (default: 100)
 
 === "GitLab CE"
-    ```yaml hl_lines="12-39"
+`yaml hl_lines="12-39"
     gitlab:
       container_name: gitlab
       hostname: "gitlab.${SYNOLOGY_BASIC_URL:?Synology URL required}"
@@ -183,14 +183,14 @@ Integrated development environment with code editor, version control, and knowle
       labels:
         <<: *default-labels
         monitoring: gitlab
-    ```
+    `
 
     1. → User ID for volume permissions (default: 1026)
     2. → Group ID for volume permissions (default: 100)
     3. → Base URL for GitLab instance
-			 → SSH port for Git operations
-		 	 → Git operation timeout (seconds)
-			 → Enable email notifications
+    		 → SSH port for Git operations
+    	 	 → Git operation timeout (seconds)
+    		 → Enable email notifications
     	 → Sender email address
        → Email display name
        → Reply-to email address
@@ -213,7 +213,7 @@ Integrated development environment with code editor, version control, and knowle
     6. → Git SSH port (default: 5102)
 
 === "GitLab Runner"
-    ```yaml hl_lines="12-13"
+`yaml hl_lines="12-13"
     gitlab-runner:
       container_name: gitlab-runner
       hostname: gitlab-runner
@@ -244,7 +244,7 @@ Integrated development environment with code editor, version control, and knowle
       labels:
         <<: *default-labels
         monitoring: gitlab-runner
-    ```
+    `
 
     1. → User ID for volume permissions (default: 1026)
     2. → Group ID for volume permissions (default: 100)
@@ -253,36 +253,37 @@ Integrated development environment with code editor, version control, and knowle
 
 Refer to [Environment Variables](../../global/index.md) documentation for:
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `SUDO_PASSWORD_VSCODE` | Code Server password | ✅ |
-| `OBSIDIAN_PASSWORD` | Obsidian web interface password | ✅ |
-| `SMTP_PASSWORD` | GitLab email password | ✅ |
-| `MOUNT_PATH_DOCKER_ROOT` | Storage path | ✅ |
-| `SYNOLOGY_BASIC_URL` | Base domain for services | ✅ |
-| `UID_NAS_ADMIN` | User ID for volume permissions | ⚠️ Recommended |
-| `GID_NAS_ADMIN` | Group ID for volume permissions | ⚠️ Recommended |
+| Variable                 | Description                     | Required       |
+| ------------------------ | ------------------------------- | -------------- |
+| `SUDO_PASSWORD_VSCODE`   | Code Server password            | ✅             |
+| `OBSIDIAN_PASSWORD`      | Obsidian web interface password | ✅             |
+| `SMTP_PASSWORD`          | GitLab email password           | ✅             |
+| `MOUNT_PATH_DOCKER_ROOT` | Storage path                    | ✅             |
+| `SYNOLOGY_BASIC_URL`     | Base domain for services        | ✅             |
+| `UID_NAS_ADMIN`          | User ID for volume permissions  | ⚠️ Recommended |
+| `GID_NAS_ADMIN`          | Group ID for volume permissions | ⚠️ Recommended |
 
 !!! warning "Security Notice"
-    All sensitive credentials should:
-    - Be stored in `.env` files
-    - Have restricted permissions (`chmod 600`)
-    - Never be committed to version control
-    - Be rotated periodically
+All sensitive credentials should: - Be stored in `.env` files - Have restricted permissions (`chmod 600`) - Never be committed to version control - Be rotated periodically
 
 ## 🚀 Deployment
 
 1. Create `.env` file with required variables
 2. **Initialize volumes**
+
 ```bash
 mkdir -p ${MOUNT_PATH_DOCKER_ROOT}/{obsidian,gitlab/config,gitlab/data,gitlab/runner,logs/gitlab}
 chown -R ${UID_NAS_ADMIN:-1026}:${GID_NAS_ADMIN:-100} ${MOUNT_PATH_DOCKER_ROOT}
 ```
+
 3. **Start services**
+
 ```bash
 docker-compose up -d
 ```
+
 4. **Access services**
+
 - Code Server: `https://codeserver.yourdomain.com:${CODE_SERVER:-82}`
 - Obsidian: `https://yourdomain.com:${OBSIDIAN_PORT:-3421}`
 - GitLab: `https://gitlab.yourdomain.com:${GITLAB_HTTPS:-5100}`
@@ -290,12 +291,15 @@ docker-compose up -d
 ### 🔄 Maintenance
 
 - **Backups**
-	- Regularly backup all volume directories
+  - Regularly backup all volume directories
 - **Updates**
+
 ```bash
 docker-compose pull && docker-compose up -d --force-recreate
 ```
+
 - **Logs**
+
 ```bash
 docker-compose logs -f
 ```

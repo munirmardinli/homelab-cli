@@ -5,9 +5,11 @@ This repository contains a Docker Compose environment for a private homelab focu
 ## 📦 Included Services
 
 ### 🔐 Authentication
+
 - **Autentik**: OpenID Connect provider for SSO across all services
 
 ### 🛠 System Services
+
 - **Watchtower**: Automatic container updates
 - **Autoheal**: Restarts faulty containers
 - **Dashy**: Homepage with links and status overview
@@ -15,11 +17,13 @@ This repository contains a Docker Compose environment for a private homelab focu
 - **Guacamole**: Remote desktop gateway for RDP, SSH, and more
 
 ### 💻 Development Environment
-- **Code-Server**:  Web-based VS Code
+
+- **Code-Server**: Web-based VS Code
 - **Obsidian Server**: Central knowledge base
 - **GitLab & GitLab-Runner**: Private CI/CD platform
 
 ### ☁️ Private Cloud & Proxy
+
 - **Nextcloud**: File hosting and groupware
 - **Pi-hole**: Network-wide ad blocker
 - **Cloudflared**: Secure tunnels to Cloudflare
@@ -28,6 +32,7 @@ This repository contains a Docker Compose environment for a private homelab focu
 ## 🚀 Setup
 
 ### Prerequisites
+
 - Docker & Docker Compose
 - Configured `.env` Datei (see example `.env.example`)
 - Domain(s) + DNS access (recommended: Cloudflare)
@@ -56,13 +61,13 @@ docker-compose -f <Datei-Name>.yml up -d
 
 ## 🌍 Services Overview
 
-| Service     | Example URL                     | Auth via Autentik |
-|------------|-----------------------------------|-------------------|
-| Dashy      | `https://dashy.deinedomain.tld`   | ✅                |
-| GitLab     | `https://git.deinedomain.tld`     | ✅                |
-| Nextcloud  | `https://cloud.deinedomain.tld`   | ✅                |
-| Guacamole  | `https://remote.deinedomain.tld`  | ✅                |
-| Roundcube  | `https://mail.deinedomain.tld`    | ✅                |
+| Service   | Example URL                      | Auth via Autentik |
+| --------- | -------------------------------- | ----------------- |
+| Dashy     | `https://dashy.deinedomain.tld`  | ✅                |
+| GitLab    | `https://git.deinedomain.tld`    | ✅                |
+| Nextcloud | `https://cloud.deinedomain.tld`  | ✅                |
+| Guacamole | `https://remote.deinedomain.tld` | ✅                |
+| Roundcube | `https://mail.deinedomain.tld`   | ✅                |
 
 ## 🛡 Security
 

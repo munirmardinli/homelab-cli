@@ -14,7 +14,7 @@ import globals from 'globals';
 
 export default [
   {
-    ignores: ['node_modules/', 'lib/', '/public', '/assets','config/docs'],
+    ignores: ['node_modules/', 'lib/', '/public', '/assets', 'config/docs'],
   },
   js.configs.recommended,
   {

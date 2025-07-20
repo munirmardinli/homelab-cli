@@ -33,7 +33,7 @@ Essential networking stack including DNS resolution, reverse proxy, and cloud tu
 ### Core Services
 
 === "Cloudflare Tunnel"
-    ```yaml hl_lines="14-16"
+`yaml hl_lines="14-16"
     cloudflared:
       container_name: cloudflared
       hostname: cloudflared
@@ -60,14 +60,14 @@ Essential networking stack including DNS resolution, reverse proxy, and cloud tu
       labels:
         <<: *default-labels
         monitoring: cloudflared
-    ```
+    `
 
     1. → User ID for volume permissions (default: 1026)
     2. → Group ID for volume permissions (default: 100)
     3. → Metrics endpoint (default: 0.0.0.0:8080)
 
 === "Pi-hole DNS"
-    ```yaml hl_lines="30-45"
+`yaml hl_lines="30-45"
     pihole:
       container_name: pihole
       hostname: pihole
@@ -136,7 +136,7 @@ Essential networking stack including DNS resolution, reverse proxy, and cloud tu
       labels:
         <<: *default-labels
         monitoring: pihole
-    ```
+    `
 
     1. → User ID for permissions (default: 1026)
     2. → Group ID for permissions (default: 100)
@@ -156,7 +156,7 @@ Essential networking stack including DNS resolution, reverse proxy, and cloud tu
     16. → Virtual host URL
 
 === "Nginx Proxy Manager"
-    ```yaml hl_lines="25-28"
+`yaml hl_lines="25-28"
     npm-proxy:
       container_name: npm-proxy
       hostname: npm-proxy
@@ -208,7 +208,7 @@ Essential networking stack including DNS resolution, reverse proxy, and cloud tu
       labels:
         <<: *default-labels
         monitoring: npm-proxy
-    ```
+    `
 
     1. → User ID for permissions (default: 1026)
     2. → Group ID for permissions (default: 100)
@@ -219,31 +219,30 @@ Essential networking stack including DNS resolution, reverse proxy, and cloud tu
 
 Refer to [Environment Variables](../../global/index.md) documentation for:
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `CLOUDFLARE_TOKEN` | Cloudflare Tunnel token | ✅ |
-| `PI_HOLE_PASSWORD` | Pi-hole admin password | ✅ |
-| `INITIAL_ADMIN_PASSWORD` | NPM admin password | ✅ |
-| `MOUNT_PATH_DOCKER_ROOT` | Storage path | ✅ |
-| `SYNOLOGY_BASIC_URL` | Base domain for services | ✅ |
-| `UID_NAS_ADMIN` | User ID for volume permissions | ⚠️ Recommended |
-| `GID_NAS_ADMIN` | Group ID for volume permissions | ⚠️ Recommended |
+| Variable                 | Description                     | Required       |
+| ------------------------ | ------------------------------- | -------------- |
+| `CLOUDFLARE_TOKEN`       | Cloudflare Tunnel token         | ✅             |
+| `PI_HOLE_PASSWORD`       | Pi-hole admin password          | ✅             |
+| `INITIAL_ADMIN_PASSWORD` | NPM admin password              | ✅             |
+| `MOUNT_PATH_DOCKER_ROOT` | Storage path                    | ✅             |
+| `SYNOLOGY_BASIC_URL`     | Base domain for services        | ✅             |
+| `UID_NAS_ADMIN`          | User ID for volume permissions  | ⚠️ Recommended |
+| `GID_NAS_ADMIN`          | Group ID for volume permissions | ⚠️ Recommended |
 
-!!! warning "Security Notice"
-    - Be stored in `.env` files
-    - Have restricted permissions (`chmod 600`)
-    - Never be committed to version control
-    - Be rotated periodically
+!!! warning "Security Notice" - Be stored in `.env` files - Have restricted permissions (`chmod 600`) - Never be committed to version control - Be rotated periodically
 
 ## 🚀 Deployment
 
 1. Create `.env` file with required variables
-2. *Initialize volumes*
+2. _Initialize volumes_
+
 ```bash
 mkdir -p ${MOUNT_PATH_DOCKER_ROOT}/{config/dnsmasq.d,pihole,logs/pihole,ngx/data,ngx/letsencrypt}
 chown -R ${UID_NAS_ADMIN:-1026}:${GID_NAS_ADMIN:-100} ${MOUNT_PATH_DOCKER_ROOT}
 ```
+
 3. **Start services**
+
 ```bash
 docker-compose up -d
 ```
@@ -251,13 +250,16 @@ docker-compose up -d
 ### 🔄 Maintenance
 
 - **Backups**
-	- Regularly backup volume directories
+  - Regularly backup volume directories
 - **Updates**
+
 ```bash
 docker-compose pull
 docker-compose up -d
 ```
+
 - **Logs**
+
 ```bash
 docker-compose logs -f
 ```

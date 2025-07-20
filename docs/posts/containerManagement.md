@@ -31,7 +31,7 @@ Production-grade container monitoring, auto-healing and dashboard solutions.
 ### Core Services
 
 === "Watchtower"
-    ```yaml hl_lines="13-37" linenums="1"
+`yaml hl_lines="13-37" linenums="1"
     watchtower:
       image: containrrr/watchtower
       container_name: watchtower
@@ -89,7 +89,7 @@ Production-grade container monitoring, auto-healing and dashboard solutions.
       labels:
         <<: *default-labels
         monitoring: watchtower
-    ```
+    `
 
     1. → User ID for permissions (default: 1026)
     2. → Group ID for permissions (default: 100)
@@ -118,7 +118,7 @@ Production-grade container monitoring, auto-healing and dashboard solutions.
     25. → Gotify access token
 
 === "Autoheal"
-    ```yaml hl_lines="13-19" linenums="1"
+`yaml hl_lines="13-19" linenums="1"
     autoheal:
       image: willfarrell/autoheal
       container_name: autoheal
@@ -152,7 +152,7 @@ Production-grade container monitoring, auto-healing and dashboard solutions.
       labels:
         <<: *default-labels
         monitoring: autoheal
-    ```
+    `
 
     1. → User ID for permissions (default: 1026)
     2. → Group ID for permissions (default: 100)
@@ -163,7 +163,7 @@ Production-grade container monitoring, auto-healing and dashboard solutions.
     7. → Monitor only running containers (false)
 
 === "Dashy"
-    ```yaml hl_lines="21-22" linenums="1"
+`yaml hl_lines="21-22" linenums="1"
     dashy:
       container_name: dashy
       hostname: dashy
@@ -201,13 +201,13 @@ Production-grade container monitoring, auto-healing and dashboard solutions.
       labels:
         <<: *default-labels
         monitoring: dashy
-    ```
+    `
 
     1. → User ID for permissions (default: 1026)
     2. → Group ID for permissions (default: 100)
 
 === "Roundcube"
-    ```yaml linenums="1"
+`yaml linenums="1"
     roundcube:
       image: roundcube/roundcubemail:latest
       container_name: roundcube
@@ -234,10 +234,10 @@ Production-grade container monitoring, auto-healing and dashboard solutions.
       labels:
         <<: *default-labels
         monitoring: roundcube
-    ```
+    `
 
 === "Guacamole"
-    ```yaml hl_lines="15-18" linenums="1"
+`yaml hl_lines="15-18" linenums="1"
     guacamole:
       image: ${image_guacamole:-jwetzell/guacamole}
       container_name: guacamole
@@ -272,7 +272,7 @@ Production-grade container monitoring, auto-healing and dashboard solutions.
       labels:
         <<: *default-labels
         monitoring: guacamole
-    ```
+    `
 
     1. → User ID for permissions (default: 1026)
     2. → Group ID for permissions (default: 100)
@@ -281,34 +281,33 @@ Production-grade container monitoring, auto-healing and dashboard solutions.
 
 ## 🔐 Required Environment Variables
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `UID_NAS_ADMIN` | User ID for volume permissions | ⚠️ Recommended |
-| `GID_NAS_ADMIN` | Group ID for volume permissions | ⚠️ Recommended |
-| `WATCHTOWER_HTTP_API_TOKEN` | Watchtower API token | ✅ |
-| `WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN` | Gotify notification token | ✅ |
-| `MOUNT_PATH_DOCKER_ROOT` | Base storage path | ✅ |
-| `SYNOLOGY_BASIC_URL` | Base domain for services | ✅ |
-| `DASHY_PORT` | Dashy web interface port | ⚠️ Recommended |
-| `ROUNDCUBE_PORT` | Roundcube web interface port | ⚠️ Recommended |
-| `GUACMOLE_PORT` | Guacamole web interface port | ⚠️ Recommended |
-| `image_guacamole` | Guacamole image override | ⚠️ Optional |
+| Variable                               | Description                     | Required       |
+| -------------------------------------- | ------------------------------- | -------------- |
+| `UID_NAS_ADMIN`                        | User ID for volume permissions  | ⚠️ Recommended |
+| `GID_NAS_ADMIN`                        | Group ID for volume permissions | ⚠️ Recommended |
+| `WATCHTOWER_HTTP_API_TOKEN`            | Watchtower API token            | ✅             |
+| `WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN` | Gotify notification token       | ✅             |
+| `MOUNT_PATH_DOCKER_ROOT`               | Base storage path               | ✅             |
+| `SYNOLOGY_BASIC_URL`                   | Base domain for services        | ✅             |
+| `DASHY_PORT`                           | Dashy web interface port        | ⚠️ Recommended |
+| `ROUNDCUBE_PORT`                       | Roundcube web interface port    | ⚠️ Recommended |
+| `GUACMOLE_PORT`                        | Guacamole web interface port    | ⚠️ Recommended |
+| `image_guacamole`                      | Guacamole image override        | ⚠️ Optional    |
 
-!!! warning "Security Notice"
-    - Be stored in `.env` files
-    - Have restricted permissions (`chmod 600`)
-    - Never be committed to version control
-    - Be rotated periodically
+!!! warning "Security Notice" - Be stored in `.env` files - Have restricted permissions (`chmod 600`) - Never be committed to version control - Be rotated periodically
 
 ## 🚀 Deployment
 
 1. Create `.env` file with required variables
-2. *Initialize volumes*
+2. _Initialize volumes_
+
 ```bash
 mkdir -p ${MOUNT_PATH_DOCKER_ROOT}/{guacamole,logs/guacamole,development/config,www,config,db}
 chown -R ${UID_NAS_ADMIN:-1026}:${GID_NAS_ADMIN:-100} ${MOUNT_PATH_DOCKER_ROOT}
 ```
+
 3. **Start services**
+
 ```bash
 docker-compose up -d
 ```
@@ -316,10 +315,13 @@ docker-compose up -d
 ### 🔄 Maintenance
 
 - **Updates**
+
 ```bash
 docker-compose pull && docker-compose up -d
 ```
+
 - **Logs**
+
 ```bash
 docker-compose logs -f
 ```

@@ -32,7 +32,7 @@ Production-ready identity and access management solution with SSO, user director
 ### Core Services
 
 === "PostgreSQL"
-    ```yaml hl_lines="27-31"
+`yaml hl_lines="27-31"
     postgresql:
       container_name: authentik-postgresql
       hostname: authentik-postgresql
@@ -69,7 +69,7 @@ Production-ready identity and access management solution with SSO, user director
       labels:
         <<: *default-labels
         monitoring: authentik-postgresql
-    ```
+    `
 
     1. **POSTGRES_PASSWORD**
        → Required database password (must be set in `.env`)
@@ -83,7 +83,7 @@ Production-ready identity and access management solution with SSO, user director
        → Optional group ID for volume permissions (default: 100)
 
 === "Redis"
-    ```yaml hl_lines="28-29"
+`yaml hl_lines="28-29"
     redis:
       container_name: authentik-redis
       hostname: authentik-redis
@@ -118,13 +118,13 @@ Production-ready identity and access management solution with SSO, user director
       labels:
         <<: *default-labels
         monitoring: authentik-redis
-    ```
+    `
 
     1. → Optional user ID for volume permissions (default: 1026)
     2. → Optional group ID for volume permissions (default: 100)
 
 === "Authentik Server"
-    ```yaml hl_lines="14-23"
+`yaml hl_lines="14-23"
     authentik:
       container_name: authentik
       hostname: authentik
@@ -172,7 +172,7 @@ Production-ready identity and access management solution with SSO, user director
       labels:
         <<: *default-labels
         monitoring: authentik
-    ```
+    `
 
     1. → Redis hostname (using Docker service name)
     2. → PostgreSQL hostname (using Docker service name)
@@ -186,7 +186,7 @@ Production-ready identity and access management solution with SSO, user director
     10. → Group ID for volume permissions (default: 100)
 
 === "Authentik Worker"
-    ```yaml hl_lines="14-23"
+`yaml hl_lines="14-23"
     worker:
       container_name: authentik-worker
       hostname: authentik-worker
@@ -239,7 +239,7 @@ Production-ready identity and access management solution with SSO, user director
       labels:
         <<: *default-labels
         monitoring: authentik
-    ```
+    `
 
     1. → Redis hostname (using Docker service name)
     2. → PostgreSQL hostname (using Docker service name)
@@ -256,45 +256,48 @@ Production-ready identity and access management solution with SSO, user director
 
 Refer to [Environment Variables](../../global/index.md) documentation for:
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `PG_PASS` | PostgreSQL password | ✅ |
-| `AUTHENTIK_BOOTSTRAP_PASSWORD` | Initial admin password | ✅ |
-| `AUTHENTIK_SECRET_KEY` | Encryption key | ✅ |
-| `MOUNT_PATH_DOCKER_ROOT` | Storage path | ✅ |
-| `UID_NAS_ADMIN` | User ID for volume permissions | ⚠️ Recommended |
-| `GID_NAS_ADMIN` | Group ID for volume permissions | ⚠️ Recommended |
+| Variable                       | Description                     | Required       |
+| ------------------------------ | ------------------------------- | -------------- |
+| `PG_PASS`                      | PostgreSQL password             | ✅             |
+| `AUTHENTIK_BOOTSTRAP_PASSWORD` | Initial admin password          | ✅             |
+| `AUTHENTIK_SECRET_KEY`         | Encryption key                  | ✅             |
+| `MOUNT_PATH_DOCKER_ROOT`       | Storage path                    | ✅             |
+| `UID_NAS_ADMIN`                | User ID for volume permissions  | ⚠️ Recommended |
+| `GID_NAS_ADMIN`                | Group ID for volume permissions | ⚠️ Recommended |
 
-!!! warning "Security Notice"
-    - Be stored in `.env` files
-    - Have restricted permissions (`chmod 600`)
-    - Never be committed to version control
-    - Be rotated periodically
+!!! warning "Security Notice" - Be stored in `.env` files - Have restricted permissions (`chmod 600`) - Never be committed to version control - Be rotated periodically
 
 ## 🚀 Deployment
 
 1. Create `.env` file with required variables
-2. *Initialize volumes*
+2. _Initialize volumes_
+
 ```bash
 mkdir -p ${MOUNT_PATH_DOCKER_ROOT}/authentik/{database,redis,media,certs,templates}
 chown -R ${UID_NAS_ADMIN:-1026}:${GID_NAS_ADMIN:-100} ${MOUNT_PATH_DOCKER_ROOT}/authentik
 ```
+
 3. **Start services**
+
 ```bash
 docker-compose up -d
 ```
+
 4. Access web UI at `https://yourdomain.com:9443`
 
 ### 🔄 Maintenance
 
 - **Backups**
-	- Regularly backup the PostgreSQL volume
+  - Regularly backup the PostgreSQL volume
 - **Updates**
+
 ```bash
 docker-compose pull
 docker-compose up -d
 ```
+
 - **Logs**
+
 ```bash
 docker-compose logs -f
 ```
