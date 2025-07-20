@@ -1,11 +1,11 @@
 ---
-title: Authentik Configuration
+title: 🏗 Code Documentation
 date:
   created: 2025-07-19
 tags:
   - Code
 categories:
-  - Documentation
+  - Code
 authors:
   - Munir
 status: true

@@ -17,7 +17,7 @@ hide:
   - toc
 ---
 
-# ⚙️ Environment Variables
+# 🌿 Environment Variables
 
 These environment variables configure all Homelab services. Store sensitive values in your `.env` file and reference them in Docker Compose.
 

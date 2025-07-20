@@ -44,7 +44,7 @@ nav:
       - index.md
       - 🌍 Global:
           - 🌿 Environment: posts/global/environment.md
-          - ⚙️ Shared Config: posts/global/sharedConfig.m
+          - ⚙️ Shared Config: posts/global/sharedConfig.md
       - 📝 Blog:
           - 🛡️ Authentik: posts/authentik.md
           - ❗ Container Management: posts/containerManagement.md
@@ -52,7 +52,6 @@ nav:
           - 💻 Development Services: posts/developmentServices.md
           - ☁️ Nextcloud: posts/nextcloud.md
   - 🏗 Code: posts/code/index.md
-  - ✉️ Contact: posts/contact/index.md
   - 🏷️ Tags: tags.md
 
 extra:
@@ -138,8 +137,7 @@ plugins:
         - Security
         - Infrastructure
         - Productivity
-        - Documentation
-        - Globaly
+        - Code
         - Global
   - tags:
       tags_file: docs/tags.md

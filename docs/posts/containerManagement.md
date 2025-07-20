@@ -1,12 +1,11 @@
 ---
-title: Container Management
+title: ❗ Container Management
 date:
   created: 2025-07-19
 authors:
   - Munir
 tags:
-  - Monitoring
-  - Maintenance
+  - Infrastructure
 categories:
   - Infrastructure
 status: true
@@ -16,7 +15,7 @@ slug: management
 comments: true
 ---
 
-# Container Management Tools
+# ❗ Container Management Tools
 
 Production-grade container monitoring, auto-healing and dashboard solutions.
 

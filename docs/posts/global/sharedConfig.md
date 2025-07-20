@@ -8,18 +8,16 @@ tags:
   - Global
 categories:
   - Global
+slug: shared-config
+status: true
+robots: index, follow
+visibility: true
+comments: true
 hide:
   - toc
-slug: sharedConfig
-status: true
-visibility: true
-robots: index, follow
-comments: true
-custom_field:
-  custom_key: custom_value
 ---
 
-## Shared Docker Compose Anchors
+## ⚙️ Shared Docker Compose Anchors
 
 The following shared anchors are used across services in your docker-compose.yml file to ensure consistent configuration for logging, labeling, and resource limits.
 

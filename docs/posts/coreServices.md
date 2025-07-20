@@ -1,24 +1,25 @@
 ---
-title: Authentik Configuration
+title: 🔧 Core Services
 date:
   created: 2025-07-19
 tags:
-  - Authentication
-  - SSO
-categories:
-  - Security
+  - Networking
+  - DNS
+  - Proxy
 authors:
   - Munir
+categories:
+  - Infrastructure
 status: true
 robots: index, follow
 visibility: true
-slug: authentik
+slug: core
 comments: true
 ---
 
-# Authentik Identity Provider
+# 🔧 Core Infrastructure Services
 
-Production-ready identity and access management solution with SSO, user directories, and multi-factor authentication.
+Essential networking stack including DNS resolution, reverse proxy, and cloud tunneling.
 
 <!-- more -->
 
@@ -31,187 +32,169 @@ Production-ready identity and access management solution with SSO, user director
 
 ### Core Services
 
-=== "PostgreSQL"
-    ```yaml hl_lines="27-31"
-    postgresql:
-      container_name: authentik-postgresql
-      hostname: authentik-postgresql
-      image: docker.io/library/postgres:16-alpine
+=== "Cloudflare Tunnel"
+    ```yaml hl_lines="14-16"
+    cloudflared:
+      container_name: cloudflared
+      hostname: cloudflared
+      image: cloudflare/cloudflared:latest
+      command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TOKEN:?CLOUDFLARE_TOKEN required}
       restart: always
       <<: *resource-limits
       logging:
         <<: *default-logging
         options:
           <<: *default-logging-options
-          loki-external-labels: job=authentik-postgresql
-      healthcheck:
-        test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
-        start_period: 20s
-        interval: 30s
-        retries: 5
-        timeout: 5s
+          loki-external-labels: job=cloudflared
+      environment:
+        UID: ${UID_NAS_ADMIN:-1026} # (1)
+        GID: ${GID_NAS_ADMIN:-100} # (2)
+        TUNNEL_METRICS: ${TUNNEL_METRICS:-0.0.0.0:8080} # (3)
       volumes:
-        - type: bind
-          source: ${MOUNT_PATH_DOCKER_ROOT:?path required}/authentik/database
-          target: /var/lib/postgresql/data
         - type: bind
           source: /etc/localtime
           target: /etc/localtime
           read_only: true
-      environment:
-        POSTGRES_PASSWORD: ${PG_PASS:?database password required} # (1)
-        POSTGRES_USER: ${PG_USER:-authentik} # (2)
-        POSTGRES_DB: ${PG_DB:-authentik} # (3)
-        UID: ${UID_NAS_ADMIN:-1026} # optional (4)
-        GID: ${GID_NAS_ADMIN:-100} # optional (5)
       networks:
         dockerization:
       labels:
         <<: *default-labels
-        monitoring: authentik-postgresql
+        monitoring: cloudflared
     ```
 
-    1. **POSTGRES_PASSWORD**
-       → Required database password (must be set in `.env`)
-    2. **POSTGRES_USER**
-       → Database username (default: `authentik`)
-    3. **POSTGRES_DB**
-       → Database name (default: `authentik`)
-    4. **UID**
-       → Optional user ID for volume permissions (default: 1026)
-    5. **GID**
-       → Optional group ID for volume permissions (default: 100)
+    1. → User ID for volume permissions (default: 1026)
+    2. → Group ID for volume permissions (default: 100)
+    3. → Metrics endpoint (default: 0.0.0.0:8080)
 
-=== "Redis"
-    ```yaml hl_lines="28-29"
-    redis:
-      container_name: authentik-redis
-      hostname: authentik-redis
-      image: docker.io/library/redis:alpine
-      command: --save 60 1 --loglevel warning
+=== "Pi-hole DNS"
+    ```yaml hl_lines="30-45"
+    pihole:
+      container_name: pihole
+      hostname: pihole
+      image: pihole/pihole
       restart: always
+      cap_add:
+        - NET_ADMIN
+      security_opt:
+        - no-new-privileges=false
+      deploy:
+        resources:
+          limits:
+            memory: 512MB
+      ulimits:
+        nofile:
+          soft: 65536
+          hard: 65536
+      healthcheck:
+        test: ["CMD", "dig", "@127.0.0.1", "-p53", "pi.hole"]
+        interval: 1m
+        timeout: 10s
+        retries: 3
+        start_period: 30s
+      logging:
+        <<: *default-logging
+        options:
+          <<: *default-logging-options
+          loki-external-labels: job=pihole
+      environment:
+        UID: ${UID_NAS_ADMIN:-1026} # (1)
+        GID: ${GID_NAS_ADMIN:-100} # (2)
+        FTLCONF_LOCAL_IPV4: ${FTLCONF_LOCAL_IPV4:-0.0.0.0} # (3)
+        FTLCONF_LOCAL_IPV6: ${FTLCONF_LOCAL_IPV6:-::} # (4)
+        PIHOLE_UID: ${PIHOLE_UID:-1000} # (5)
+        PIHOLE_GID: ${PIHOLE_GID:-1000} # (6)
+        DNSMASQ_USER: ${DNSMASQ_USER:-pihole} # (7)
+        FTLCONF_dns_listeningMode: ${FTLCONF_dns_listeningMode:-all} # (8)
+        FTLCONF_webserver_port: ${FTLCONF_webserver_port:-80} # (9)
+        FTLCONF_webserver_api_password: ${PI_HOLE_PASSWORD:?Password is Missing} # (10)
+        WEBTHEME: ${WEBTHEME:-dark} # (11)
+        FTLCONF_dns_upstreams: ${FTLCONF_dns_upstreams:-1.1.1.1;1.0.0.1;8.8.8.8;8.8.4.4} # (12)
+        FTLCONF_QUERY_LOGGING: ${FTLCONF_QUERY_LOGGING:-true} # (13)
+        FTLCONF_MAXDBDAYS: ${FTLCONF_MAXDBDAYS:-30} # (14)
+        FTLCONF_PRIVACYLEVEL: ${FTLCONF_PRIVACYLEVEL:-0} # (15)
+        VIRTUAL_HOST: pihole.${SYNOLOGY_BASIC_URL} # (16)
+      ports:
+        - "53:53/tcp"
+        - "53:53/udp"
+        - "81:80/tcp"
+      volumes:
+        - type: bind
+          source: ${MOUNT_PATH_DOCKER_ROOT:?path required}/config/dnsmasq.d
+          target: /etc/dnsmasq.d
+        - type: bind
+          source: ${MOUNT_PATH_DOCKER_ROOT}/pihole
+          target: /etc/pihole
+        - type: bind
+          source: ${MOUNT_PATH_DOCKER_ROOT}/logs/pihole
+          target: /var/log/pihole
+        - type: bind
+          source: /etc/localtime
+          target: /etc/localtime
+          read_only: true
+      networks:
+        dockerization:
+      labels:
+        <<: *default-labels
+        monitoring: pihole
+    ```
+
+    1. → User ID for permissions (default: 1026)
+    2. → Group ID for permissions (default: 100)
+    3. → IPv4 listening address (default: 0.0.0.0)
+    4. → IPv6 listening address (default: ::)
+    5. → Pi-hole user ID (default: 1000)
+    6. → Pi-hole group ID (default: 1000)
+    7. → DNSMasq user (default: pihole)
+    8. → DNS listening mode (default: all)
+    9. → Web interface port (default: 80)
+    10. → Required admin password
+    11. → Web UI theme (default: dark)
+    12. → Upstream DNS servers
+    13. → Query logging (default: true)
+    14. → Log retention (default: 30 days)
+    15. → Privacy level (default: 0)
+    16. → Virtual host URL
+
+=== "Nginx Proxy Manager"
+    ```yaml hl_lines="25-28"
+    npm-proxy:
+      container_name: npm-proxy
+      hostname: npm-proxy
+      image: jc21/nginx-proxy-manager:latest
+      restart: always
+      healthcheck:
+        test:
+          - CMD
+          - curl
+          - -f
+          - http://localhost:81/ping
+        interval: 30s
+        timeout: 10s
+        retries: 3
+        start_period: 20s
       <<: *resource-limits
       logging:
         <<: *default-logging
         options:
           <<: *default-logging-options
-          loki-external-labels: job=authentik-redis
-      healthcheck:
-        test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
-        start_period: 20s
-        interval: 30s
-        retries: 5
-        timeout: 3s
+          loki-external-labels: job=npm-proxy
+      ports:
+        - ${NGNIX_PROXY_MANAGER_PORT:-84}:81
+      environment:
+        UID: ${UID_NAS_ADMIN:-1026} # (1)
+        GID: ${GID_NAS_ADMIN:-100} # (2)
+        INITIAL_ADMIN_EMAIL: ${EMAIL} # (3)
+        INITIAL_ADMIN_PASSWORD: ${INITIAL_ADMIN_PASSWORD:?Password is missing} # (4)
       volumes:
         - type: bind
-          source: ${MOUNT_PATH_DOCKER_ROOT}/authentik/redis
+          source: ${MOUNT_PATH_DOCKER_ROOT}/ngx/data
           target: /data
         - type: bind
-          source: /etc/localtime
-          target: /etc/localtime
-          read_only: true
-      environment:
-        UID: ${UID_NAS_ADMIN:-1026} # optional (1)
-        GID: ${GID_NAS_ADMIN:-100} # optional (2)
-      networks:
-        dockerization:
-      labels:
-        <<: *default-labels
-        monitoring: authentik-redis
-    ```
-
-    1. → Optional user ID for volume permissions (default: 1026)
-    2. → Optional group ID for volume permissions (default: 100)
-
-=== "Authentik Server"
-    ```yaml hl_lines="14-23"
-    authentik:
-      container_name: authentik
-      hostname: authentik
-      image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2025.2.1}
-      restart: always
-      command: server
-      <<: *resource-limits
-      logging:
-        <<: *default-logging
-        options:
-          <<: *default-logging-options
-          loki-external-labels: job=authentik
-      environment:
-        AUTHENTIK_REDIS__HOST: redis # (1)
-        AUTHENTIK_POSTGRESQL__HOST: postgresql # (2)
-        AUTHENTIK_POSTGRESQL__USER: ${PG_USER:-authentik} # (3)
-        AUTHENTIK_POSTGRESQL__NAME: ${PG_DB:-authentik} # (4)
-        AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS} # (5)
-        AUTHENTIK_BOOTSTRAP_EMAIL: ${EMAIL} # (6)
-        AUTHENTIK_BOOTSTRAP_PASSWORD: ${AUTHENTIK_BOOTSTRAP_PASSWORD} # (7)
-        AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY} # (8)
-        UID: ${UID_NAS_ADMIN:-1026} # optional (9)
-        GID: ${GID_NAS_ADMIN:-100} # optional (10)
-      volumes:
+          source: ${MOUNT_PATH_DOCKER_ROOT}/development/config/ngx.json
+          target: /app/config/production.json
         - type: bind
-          source: /etc/localtime
-          target: /etc/localtime
-          read_only: true
-        - type: bind
-          source: ${MOUNT_PATH_DOCKER_ROOT}/authentik/media
-          target: /media
-        - type: bind
-          source: ${MOUNT_PATH_DOCKER_ROOT}/authentik/templates
-          target: /templates
-      ports:
-        - "${COMPOSE_PORT_HTTP:-9001}:9000"
-        - "${COMPOSE_PORT_HTTPS:-9443}:9443"
-      depends_on:
-        postgresql:
-          condition: service_healthy
-        redis:
-          condition: service_healthy
-      networks:
-        dockerization:
-      labels:
-        <<: *default-labels
-        monitoring: authentik
-    ```
-
-    1. → Redis hostname (using Docker service name)
-    2. → PostgreSQL hostname (using Docker service name)
-    3. → PostgreSQL username (matches `POSTGRES_USER`)
-    4. → Database name (matches `POSTGRES_DB`)
-    5. → Must match `POSTGRES_PASSWORD`
-    6. → Initial admin email (must be set in `.env`)
-    7. → Initial admin password (must be set in `.env`)
-    8. → Encryption key (must be set in `.env`)
-    9. → User ID for volume permissions (default: 1026)
-    10. → Group ID for volume permissions (default: 100)
-
-=== "Authentik Worker"
-    ```yaml hl_lines="14-23"
-    worker:
-      container_name: authentik-worker
-      hostname: authentik-worker
-      image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2025.2.1}
-      restart: always
-      command: worker
-      <<: *resource-limits
-      logging:
-        <<: *default-logging
-        options:
-          <<: *default-logging-options
-          loki-external-labels: job=authentik-worker
-      environment:
-        AUTHENTIK_REDIS__HOST: redis # (1)
-        AUTHENTIK_POSTGRESQL__HOST: postgresql # (2)
-        AUTHENTIK_POSTGRESQL__USER: ${PG_USER:-authentik} # (3)
-        AUTHENTIK_POSTGRESQL__NAME: ${PG_DB:-authentik} # (4)
-        AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS} # (5)
-        AUTHENTIK_BOOTSTRAP_EMAIL: ${EMAIL} # (6)
-        AUTHENTIK_BOOTSTRAP_PASSWORD: ${AUTHENTIK_BOOTSTRAP_PASSWORD} # (7)
-        AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY} # (8)
-        UID: ${UID_NAS_ADMIN:-1026} # optional (9)
-        GID: ${GID_NAS_ADMIN:-100} # optional (10)
-      user: root
-      volumes:
+          source: ${MOUNT_PATH_DOCKER_ROOT}/ngx/letsencrypt
+          target: /etc/letsencrypt
         - type: bind
           source: /var/run/docker.sock
           target: /var/run/docker.sock
@@ -220,37 +203,17 @@ Production-ready identity and access management solution with SSO, user director
           source: /etc/localtime
           target: /etc/localtime
           read_only: true
-        - type: bind
-          source: ${MOUNT_PATH_DOCKER_ROOT}/authentik/media
-          target: /media
-        - type: bind
-          source: ${MOUNT_PATH_DOCKER_ROOT}/authentik/certs
-          target: /certs
-        - type: bind
-          source: ${MOUNT_PATH_DOCKER_ROOT}/authentik/templates
-          target: /templates
-      depends_on:
-        postgresql:
-          condition: service_healthy
-        redis:
-          condition: service_healthy
       networks:
         dockerization:
       labels:
         <<: *default-labels
-        monitoring: authentik
+        monitoring: npm-proxy
     ```
 
-    1. → Redis hostname (using Docker service name)
-    2. → PostgreSQL hostname (using Docker service name)
-    3. → PostgreSQL username (matches `POSTGRES_USER`)
-    4. → Database name (matches `POSTGRES_DB`)
-    5. → Must match `POSTGRES_PASSWORD`
-    6. → Initial admin email (must be set in `.env`)
-    7. → Initial admin password (must be set in `.env`)
-    8. → Encryption key (must be set in `.env`)
-    9. → User ID for volume permissions (default: 1026)
-    10. → Group ID for volume permissions (default: 100)
+    1. → User ID for permissions (default: 1026)
+    2. → Group ID for permissions (default: 100)
+    3. → Admin email address
+    4. → Required admin password
 
 ## 🔐 Required Environment Variables
 
@@ -258,10 +221,11 @@ Refer to [Environment Variables](../../global/index.md) documentation for:
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `PG_PASS` | PostgreSQL password | ✅ |
-| `AUTHENTIK_BOOTSTRAP_PASSWORD` | Initial admin password | ✅ |
-| `AUTHENTIK_SECRET_KEY` | Encryption key | ✅ |
+| `CLOUDFLARE_TOKEN` | Cloudflare Tunnel token | ✅ |
+| `PI_HOLE_PASSWORD` | Pi-hole admin password | ✅ |
+| `INITIAL_ADMIN_PASSWORD` | NPM admin password | ✅ |
 | `MOUNT_PATH_DOCKER_ROOT` | Storage path | ✅ |
+| `SYNOLOGY_BASIC_URL` | Base domain for services | ✅ |
 | `UID_NAS_ADMIN` | User ID for volume permissions | ⚠️ Recommended |
 | `GID_NAS_ADMIN` | Group ID for volume permissions | ⚠️ Recommended |
 
@@ -276,19 +240,18 @@ Refer to [Environment Variables](../../global/index.md) documentation for:
 1. Create `.env` file with required variables
 2. *Initialize volumes*
 ```bash
-mkdir -p ${MOUNT_PATH_DOCKER_ROOT}/authentik/{database,redis,media,certs,templates}
-chown -R ${UID_NAS_ADMIN:-1026}:${GID_NAS_ADMIN:-100} ${MOUNT_PATH_DOCKER_ROOT}/authentik
+mkdir -p ${MOUNT_PATH_DOCKER_ROOT}/{config/dnsmasq.d,pihole,logs/pihole,ngx/data,ngx/letsencrypt}
+chown -R ${UID_NAS_ADMIN:-1026}:${GID_NAS_ADMIN:-100} ${MOUNT_PATH_DOCKER_ROOT}
 ```
 3. **Start services**
 ```bash
 docker-compose up -d
 ```
-4. Access web UI at `https://yourdomain.com:9443`
 
 ### 🔄 Maintenance
 
 - **Backups**
-	- Regularly backup the PostgreSQL volume
+	- Regularly backup volume directories
 - **Updates**
 ```bash
 docker-compose pull

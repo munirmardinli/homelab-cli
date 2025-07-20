@@ -1,5 +1,5 @@
 ---
-title: Nextcloud Configuration
+title: ☁️ Nextcloud
 date:
   created: 2025-07-19
 tags:
@@ -16,7 +16,7 @@ authors:
   - Munir
 ---
 
-# Nextcloud Setup
+# ☁️ Nextcloud Setup
 
 Self-hosted productivity platform with file sync & share, calendars, contacts and more.
 
