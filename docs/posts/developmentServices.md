@@ -15,6 +15,9 @@ slug: development
 comments: true
 authors:
   - Munir
+links:
+  - 🌿 Environment: environment
+  - ⚙️ Shared Config: sharedConfig
 ---
 
 # 💻 Development Environment Stack
@@ -25,7 +28,7 @@ Integrated development environment with code editor, version control, and knowle
 
 ## 🛠️ Service Configuration
 
-- This setup uses the [shared Docker Compose anchors](../../global/sharedConfig.md) for:
+- This setup uses the [shared Docker Compose anchors](./global/sharedConfig.md) for:
 - Logging (`default-logging`)
 - Labels (`default-labels`)
 - Resource limits (`resource-limits`)
@@ -251,7 +254,7 @@ Integrated development environment with code editor, version control, and knowle
 
 ## 🔐 Required Environment Variables
 
-Refer to [Environment Variables](../../global/index.md) documentation for:
+Refer to [Environment Variables](./global/index.md) documentation for:
 
 | Variable | Description | Required |
 |----------|-------------|----------|

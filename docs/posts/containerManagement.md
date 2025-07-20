@@ -14,6 +14,9 @@ visibility: true
 robots: index, follow
 slug: management
 comments: true
+links:
+  - 🌿 Environment: environment
+  - ⚙️ Shared Config: sharedConfig
 ---
 
 # ❗ Container Management Tools

@@ -15,6 +15,9 @@ robots: index, follow
 visibility: true
 slug: core
 comments: true
+links:
+  - 🌿 Environment: environment
+  - ⚙️ Shared Config: sharedConfig
 ---
 
 # 🔧 Core Infrastructure Services
@@ -25,7 +28,7 @@ Essential networking stack including DNS resolution, reverse proxy, and cloud tu
 
 ## 🛠️ Service Configuration
 
-- This setup uses the [shared Docker Compose anchors](../../global/sharedConfig.md) for:
+- This setup uses the [shared Docker Compose anchors](./global/sharedConfig.md) for:
 - Logging (`default-logging`)
 - Labels (`default-labels`)
 - Resource limits (`resource-limits`)
@@ -217,7 +220,7 @@ Essential networking stack including DNS resolution, reverse proxy, and cloud tu
 
 ## 🔐 Required Environment Variables
 
-Refer to [Environment Variables](../../global/index.md) documentation for:
+Refer to [Environment Variables](./global/index.md) documentation for:
 
 | Variable | Description | Required |
 |----------|-------------|----------|

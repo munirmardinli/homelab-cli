@@ -24,7 +24,6 @@ theme:
   language: en
   favicon: assets/favicon_io/favicon.ico
   features:
-    - content.action.view
     - content.code.annotate
     - content.code.copy
     - content.code.select
@@ -57,14 +56,14 @@ nav:
           - 🌿 Environment: posts/global/environment.md
           - ⚙️ Shared Config: posts/global/sharedConfig.md
       - 🏷️ Tags: tags.md
-  - 📝 Scripits:
-      - 📱 NAS: posts/scripts/nas.md
-      - 🎨 PowerLevel10k: posts/scripts/powerLevel10.md
-      - 🌐 Macvlan: posts/scripts/macvlan.md
-      - 🐍 Venv: posts/scripts/venv.md
-      - 🔐 Hetzner Cert: posts/scripts/hetznerCert.md
-      -  Brew: posts/scripts/brew.md
-  - 🏗 Code Documentation: posts/code/index.md
+      - 📝 Scripits:
+          -  Brew: posts/scripts/brew.md
+          - 📱 NAS: posts/scripts/nas.md
+          - 🎨 PowerLevel10k: posts/scripts/powerLevel10.md
+          - 🌐 Macvlan: posts/scripts/macvlan.md
+          - 🐍 Venv: posts/scripts/venv.md
+          - 🔐 Hetzner Cert: posts/scripts/hetznerCert.md
+      - 🏗 Code Documentation: posts/code/index.md
 
 extra:
   social:
@@ -142,7 +141,10 @@ plugins:
       blog_dir: .
       archive_date_format: yyyy
       archive_url_date_format: yyyy
-      post_url_format: /{slug}.html
+      post_url_format: /{slug}
+      authors_file: "{blog}/.authors.yml"
+      categories_name: Categories
+      categories_url_format: "category/{slug}"
       categories_allowed:
         - Development
         - nextcloud
@@ -152,8 +154,7 @@ plugins:
         - Code
         - Global
         - Scripts
-  - tags:
-      tags_file: docs/tags.md
+  - tags
   - git-revision-date-localized:
       type: date
       fallback_to_build_date: false

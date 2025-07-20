@@ -8,7 +8,7 @@ tags:
   - Global
 categories:
   - Global
-slug: environment
+slug: sharedConfig
 status: true
 robots: index, follow
 visibility: true

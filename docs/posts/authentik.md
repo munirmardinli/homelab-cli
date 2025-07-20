@@ -14,6 +14,9 @@ robots: index, follow
 visibility: true
 slug: authentik
 comments: true
+links:
+  - 🌿 Environment: environment
+  - ⚙️ Shared Config: sharedConfig
 ---
 
 # 🛡️ Authentik Identity Provider
@@ -24,7 +27,7 @@ Production-ready identity and access management solution with SSO, user director
 
 ## 🛠️ Service Configuration
 
-- This setup uses the [shared Docker Compose anchors](../../global/sharedConfig.md) for:
+- This setup uses the [shared Docker Compose anchors](./global/sharedConfig.md) for:
 - Logging (`default-logging`)
 - Labels (`default-labels`)
 - Resource limits (`resource-limits`)
@@ -254,7 +257,7 @@ Production-ready identity and access management solution with SSO, user director
 
 ## 🔐 Required Environment Variables
 
-Refer to [Environment Variables](../../global/index.md) documentation for:
+Refer to [Environment Variables](./global/index.md) documentation for:
 
 | Variable | Description | Required |
 |----------|-------------|----------|
