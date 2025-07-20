@@ -1,5 +1,5 @@
 ---
-title: Environment
+title: 🌿 Environment
 date:
   created: 2025-07-19
 authors:
@@ -8,6 +8,7 @@ tags:
   - Global
 categories:
   - Global
+slug: environment
 status: true
 robots: index, follow
 visibility: true

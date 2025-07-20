@@ -1,5 +1,5 @@
 ---
-title: Shared Config
+title: ⚙️ Shared Config
 date:
   created: 2025-07-19
 authors:
@@ -10,6 +10,7 @@ categories:
   - Global
 hide:
   - toc
+slug: sharedConfig
 status: true
 visibility: true
 robots: index, follow
