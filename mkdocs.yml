@@ -15,9 +15,9 @@ site_dir: public
 
 theme:
   name: material
-  custom_dir: docs/config/overrides
+  custom_dir: config/mkdocs/overrides
   static_templates:
-    - docs/config/overrides/html/404.html
+    - config/mkdocs/overrides/html/404.html
   font:
     text: Merriweather Sans
     code: Red Hat Mono
@@ -141,5 +141,5 @@ plugins:
       tags_file: docs/tags.md
 
 hooks:
-  - docs/config/overrides/hooks/removeObserve.py
-  - docs/config/overrides/hooks/seo.py
+  - config/mkdocs/hooks/removeObserve.py
+  - config/mkdocs/hooks/seo.py
