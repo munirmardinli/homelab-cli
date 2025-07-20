@@ -33,7 +33,7 @@ Essential networking stack including DNS resolution, reverse proxy, and cloud tu
 ### Core Services
 
 === "Cloudflare Tunnel"
-    ```yaml hl_lines="14-16"
+    ```yaml hl_lines="14-16" linenums="1"
     cloudflared:
       container_name: cloudflared
       hostname: cloudflared
@@ -67,7 +67,7 @@ Essential networking stack including DNS resolution, reverse proxy, and cloud tu
     3. → Metrics endpoint (default: 0.0.0.0:8080)
 
 === "Pi-hole DNS"
-    ```yaml hl_lines="30-45"
+    ```yaml hl_lines="30-45" linenums="1"
     pihole:
       container_name: pihole
       hostname: pihole
@@ -156,7 +156,7 @@ Essential networking stack including DNS resolution, reverse proxy, and cloud tu
     16. → Virtual host URL
 
 === "Nginx Proxy Manager"
-    ```yaml hl_lines="25-28"
+    ```yaml hl_lines="25-28" linenums="1"
     npm-proxy:
       container_name: npm-proxy
       hostname: npm-proxy

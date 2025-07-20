@@ -23,6 +23,30 @@ theme:
     code: Red Hat Mono
   language: en
   favicon: assets/favicon_io/favicon.ico
+  features:
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
+    - content.tabs.link
+
+    - search.highlight
+    - search.share
+    - search.suggest
+    - content.tooltips
+    - header.autohide
+    - announce.dismiss
+    - navigation.tabs
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.path
+    - navigation.prune
+    - navigation.tabs.sticky
+    - navigation.footer
+    - toc.follow
+    - content.action.edit
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -50,8 +74,8 @@ nav:
       - 🌍 Global:
           - 🌿 Environment: posts/global/environment.md
           - ⚙️ Shared Config: posts/global/sharedConfig.md
-      - 🏗 Code: posts/code/index.md
       - 🏷️ Tags: tags.md
+  - 🏗 Code Documentation: posts/code/index.md
 
 extra:
   social:

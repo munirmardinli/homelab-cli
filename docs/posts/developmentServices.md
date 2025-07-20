@@ -33,7 +33,7 @@ Integrated development environment with code editor, version control, and knowle
 ### Development Services
 
 === "Code Server"
-    ```yaml hl_lines="13-17"
+    ```yaml hl_lines="13-17" linenums="1"
     codeserver:
       container_name: codeserver
       hostname: codeserver
@@ -75,7 +75,7 @@ Integrated development environment with code editor, version control, and knowle
     5. → Sudo password for terminal operations
 
 === "Obsidian"
-    ```yaml hl_lines="32-35"
+    ```yaml hl_lines="32-35" linenums="1"
     obsidian:
       container_name: obsidian
       hostname: obsidian
@@ -124,7 +124,7 @@ Integrated development environment with code editor, version control, and knowle
     4. → Group ID for volume permissions (default: 100)
 
 === "GitLab CE"
-    ```yaml hl_lines="12-39"
+    ```yaml hl_lines="12-39" linenums="1"
     gitlab:
       container_name: gitlab
       hostname: "gitlab.${SYNOLOGY_BASIC_URL:?Synology URL required}"
@@ -213,7 +213,7 @@ Integrated development environment with code editor, version control, and knowle
     6. → Git SSH port (default: 5102)
 
 === "GitLab Runner"
-    ```yaml hl_lines="12-13"
+    ```yaml hl_lines="12-13" linenums="1"
     gitlab-runner:
       container_name: gitlab-runner
       hostname: gitlab-runner

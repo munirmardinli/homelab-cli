@@ -32,7 +32,7 @@ Production-ready identity and access management solution with SSO, user director
 ### Core Services
 
 === "PostgreSQL"
-    ```yaml hl_lines="27-31"
+    ```yaml hl_lines="27-31" linenums="1"
     postgresql:
       container_name: authentik-postgresql
       hostname: authentik-postgresql
@@ -82,8 +82,8 @@ Production-ready identity and access management solution with SSO, user director
     5. **GID**
        → Optional group ID for volume permissions (default: 100)
 
-=== "Redis"
-    ```yaml hl_lines="28-29"
+=== "Redis" 
+    ```yaml hl_lines="28-29" linenums="1"
     redis:
       container_name: authentik-redis
       hostname: authentik-redis
@@ -124,7 +124,7 @@ Production-ready identity and access management solution with SSO, user director
     2. → Optional group ID for volume permissions (default: 100)
 
 === "Authentik Server"
-    ```yaml hl_lines="14-23"
+    ```yaml hl_lines="14-23" linenums="1"
     authentik:
       container_name: authentik
       hostname: authentik
@@ -186,7 +186,7 @@ Production-ready identity and access management solution with SSO, user director
     10. → Group ID for volume permissions (default: 100)
 
 === "Authentik Worker"
-    ```yaml hl_lines="14-23"
+    ```yaml hl_lines="14-23" linenums="1"
     worker:
       container_name: authentik-worker
       hostname: authentik-worker

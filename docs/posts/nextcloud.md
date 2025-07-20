@@ -32,7 +32,7 @@ Self-hosted productivity platform with file sync & share, calendars, contacts an
 ### Core Services
 
 === "PostgreSQL"
-    ```yaml hl_lines="18-22"
+    ```yaml hl_lines="18-22" linenums="1"
     nextcloud-postgres:
       image: postgres:latest
       container_name: nextcloud-postgres
@@ -77,7 +77,7 @@ Self-hosted productivity platform with file sync & share, calendars, contacts an
     5. → Optional group ID for volume permissions (default: 100)
 
 === "Redis"
-    ```yaml hl_lines="20-21"
+    ```yaml hl_lines="20-21" linenums="1"
     nextcloud-redis:
       image: redis:alpine
       container_name: nextcloud-redis
@@ -113,7 +113,7 @@ Self-hosted productivity platform with file sync & share, calendars, contacts an
     2. → Optional group ID for volume permissions (default: 100)
 
 === "Nextcloud"
-    ```yaml hl_lines="29-43"
+    ```yaml hl_lines="29-43" linenums="1"
     nextcloud:
       image: nextcloud:latest
       container_name: nextcloud
