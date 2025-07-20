@@ -10,11 +10,17 @@ import sonarjs from 'eslint-plugin-sonarjs';
 import yml from 'eslint-plugin-yml';
 import json from 'eslint-plugin-json';
 import yamlParser from 'yaml-eslint-parser';
-import globals from 'globals';
 
 export default [
   {
-    ignores: ['node_modules/', 'lib/', '/public', '/assets', 'config/docs'],
+    ignores: [
+      'node_modules/',
+      'lib/',
+      '/public/*/**',
+      '/assets',
+      'config/docs',
+      'venv/',
+    ],
   },
   js.configs.recommended,
   {
@@ -25,13 +31,6 @@ export default [
         ecmaVersion: 2021,
         sourceType: 'module',
         project: ['./config/tsconfig/tsconfig.eslint.json'],
-      },
-      globals: {
-        window: 'readonly',
-        document: 'readonly',
-        console: 'readonly',
-        ...globals.node,
-        ...globals.jest,
       },
     },
     settings: {

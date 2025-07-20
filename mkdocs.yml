@@ -121,8 +121,13 @@ markdown_extensions:
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 plugins:
-  - meta
-  - search:
+  - search
+  - rss:
+      match_path: 'posts/.*'
+      pretty_print: true
+      date_from_meta:
+        as_creation: date.created
+        as_update: date.updated
   - blog:
       blog_dir: .
       archive_date_format: yyyy
