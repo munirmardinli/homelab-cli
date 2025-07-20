@@ -1,5 +1,7 @@
 ---
 title: Contact
+date:
+  created: 2025-07-19
 authors:
   - Munir
 status: true
@@ -17,6 +19,10 @@ hide:
   - header
   - git-revision-date
 ---
+
+# Contact
+
+<!-- more -->
 
 <style>
   html[data-md-color-scheme="default"] .contact-form {

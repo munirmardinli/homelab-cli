@@ -1,7 +1,25 @@
+---
+title: Authentik Configuration
+date:
+  created: 2025-07-19
+tags:
+  - Code
+categories:
+  - Documentation
+authors:
+  - Munir
+status: true
+robots: index, follow
+visibility: true
+slug: code
+comments: true
+---
+
 # 📦 Source Directory Overview (`src`)
 
 Welcome to the technical heart of the project! This document provides a clear and concise overview of the structure and purpose of each file and folder within the `src` directory. Whether you're a new contributor or just curious, this guide will help you navigate the codebase with ease.
 
+<!-- more -->
 ---
 
 ## 📑 Table of Contents
@@ -52,4 +70,3 @@ The `BashHelper` class provides methods for establishing SSH connections and exi
 
 ### [`types/types.ts`](../../src/types/types.ts)
 Defines the `PackageManagerOptions` interface, which specifies configuration options for the CLI (such as platform, commands, labels, and messages).
-

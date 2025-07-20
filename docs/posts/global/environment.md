@@ -1,11 +1,13 @@
 ---
 title: Environment
+date:
+  created: 2025-07-19
 authors:
   - Munir
 tags:
-  - Globaly
+  - Global
 categories:
-  - Globaly
+  - Global
 status: true
 robots: index, follow
 visibility: true
@@ -17,6 +19,8 @@ hide:
 # ⚙️ Environment Variables
 
 These environment variables configure all Homelab services. Store sensitive values in your `.env` file and reference them in Docker Compose.
+
+<!-- more -->
 
 === "🔧 Core Configuration"
     | Variable | Description | Example |

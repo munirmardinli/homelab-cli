@@ -5,6 +5,9 @@ from bs4 import BeautifulSoup
 def extract_nav_urls(nav, docs_dir='docs', base_path=''):
     """Extrahiert alle URLs aus der nav-Struktur."""
     urls = set()
+    if nav is None:
+        return urls
+    
     for item in nav:
         if isinstance(item, dict):
             for _, value in item.items():
@@ -76,6 +79,8 @@ def clean_copyright(output, config):
 
 def on_post_page(output, page, config, **kwargs):
     nav = config.get('nav', [])
+    if nav is None:
+        nav = []
     nav_urls = extract_nav_urls(nav)
     output = remove_unlisted_archive_links(output, nav_urls)
     output = clean_copyright(output, config)

@@ -1,5 +1,7 @@
 ---
 title: Authentik Configuration
+date:
+  created: 2025-07-19
 tags:
   - Authentication
   - SSO
@@ -17,6 +19,8 @@ comments: true
 # Authentik Identity Provider
 
 Production-ready identity and access management solution with SSO, user directories, and multi-factor authentication.
+
+<!-- more -->
 
 ## 🛠️ Service Configuration
 

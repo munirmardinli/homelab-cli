@@ -1,5 +1,7 @@
 ---
 title: Nextcloud Configuration
+date:
+  created: 2025-07-19
 tags:
   - File Sharing
   - Collaboration
@@ -17,6 +19,8 @@ authors:
 # Nextcloud Setup
 
 Self-hosted productivity platform with file sync & share, calendars, contacts and more.
+
+<!-- more -->
 
 ## 🛠️ Service Configuration
 

@@ -1,5 +1,7 @@
 ---
 title: Core Services Configuration
+date:
+  created: 2025-07-19
 tags:
   - Networking
   - DNS
@@ -18,6 +20,8 @@ comments: true
 # Core Infrastructure Services
 
 Essential networking stack including DNS resolution, reverse proxy, and cloud tunneling.
+
+<!-- more -->
 
 ## 🛠️ Service Configuration
 

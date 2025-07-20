@@ -1,5 +1,7 @@
 ---
 title: Development Services Configuration
+date:
+  created: 2025-07-19
 tags:
   - IDE
   - Version Control
@@ -18,6 +20,8 @@ authors:
 # Development Environment Stack
 
 Integrated development environment with code editor, version control, and knowledge management.
+
+<!-- more -->
 
 ## 🛠️ Service Configuration
 

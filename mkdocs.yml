@@ -12,10 +12,7 @@ dev_addr: 127.0.0.1:5501
 copyright: ©Munir Mardinli
 site_author: Munir Mardinli
 site_dir: public
-docs_dir: docs
-strict: false
-watch:
-  - .
+
 theme:
   name: material
   custom_dir: docs/config/overrides
@@ -26,69 +23,37 @@ theme:
     code: Red Hat Mono
   language: en
   favicon: assets/favicon_io/favicon.ico
-  features:
-    - content.action.view
-    - content.code.annotate
-    - content.code.copy
-    - content.code.select
-    - content.tabs.link
-    - navigation.expand
-    - navigation.indexes
-    - navigation.sections
-    - navigation.top
-    - search.highlight
-    - search.share
-    - search.suggest
-    - content.tooltips
-    - header.autohide
-    - announce.dismiss
-    - navigation.tabs
-    - navigation.instant
-    - navigation.instant.prefetch
-    - navigation.instant.progress
-    - navigation.tracking
-    - navigation.path
-    - navigation.prune
-    - navigation.tabs.sticky
-    - navigation.footer
-    - toc.follow
-    - content.action.edit
-  icon:
-    logo: simple/docker
-    annotation: material/arrow-right-circle
-    previous: fontawesome/solid/angle-left
-    next: fontawesome/solid/angle-right
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
       toggle:
         icon: material/weather-sunny
         name: Switch to dark mode
-      primary: teal
-      accent: teal
+      primary: blue
+      accent: deep orange
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       toggle:
         icon: material/weather-night
         name: Switch to light mode
-      primary: teal
-      accent: teal
+      primary: deep orange
+      accent: deep purple
 
 nav:
   - 🏠 Home:
       - index.md
       - 🌍 Global:
-            - 🌿 Environment: global/environment.md
-            - ⚙️ Shared Config: global/sharedConfig.md
-            - 🏷️ Tags: tags.md
+          - 🌿 Environment: posts/global/environment.md
+          - ⚙️ Shared Config: posts/global/sharedConfig.m
       - 📝 Blog:
-          - 🛡️ Authentik: blog/posts/authentik.md
-          - ❗ Container Management: blog/posts/containerManagement.md
-          - 🔧 Core Services: blog/posts/coreServices.md
-          - 💻 Development Services: blog/posts/developmentServices.md
-          - ☁️ Nextcloud: blog/posts/nextcloud.md
-  - 🏗 Code: code/index.md
-  - ✉️ Contact: contact/index.md
+          - 🛡️ Authentik: posts/authentik.md
+          - ❗ Container Management: posts/containerManagement.md
+          - 🔧 Core Services: posts/coreServices.md
+          - 💻 Development Services: posts/developmentServices.md
+          - ☁️ Nextcloud: posts/nextcloud.md
+  - 🏗 Code: posts/code/index.md
+  - ✉️ Contact: posts/contact/index.md
+  - 🏷️ Tags: tags.md
 
 extra:
   base_url: https://munirmardinli.github.io/homelab-cli
@@ -109,37 +74,6 @@ extra:
 #    - name: Deutsch
 #      link: /de/
 #      lang: de
-
-extra_javascript:
-  - docs/config/overrides/javascripts/tablesort.js
-  - docs/config/overrides/javascripts/shortcuts.js
-  - https://unpkg.com/d3@7/dist/d3.min.js
-  - https://unpkg.com/markmap-lib@0.15.3/dist/browser/index.js
-  - https://unpkg.com/markmap-view@0.15.3/dist/browser/index.js
-  - https://fastly.jsdelivr.net/npm/jquery/dist/jquery.min.js
-  - https://fastly.jsdelivr.net/npm/echarts/dist/echarts.min.js
-  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML
-  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
-  - https://unpkg.com/katex@0/dist/katex.min.js
-  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
-  - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
-  - https://cdn.jsdelivr.net/npm/vega@5
-  - https://cdn.jsdelivr.net/npm/vega-lite@5
-  - https://cdn.jsdelivr.net/npm/vega-embed@6
-  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js
-  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js
-  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js
-  - https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js
-  - https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js
-  - https://cdn.jsdelivr.net/npm/katex/dist/contrib/mathtex-script-type.min.js
-
-extra_css:
-  - docs/config/overrides/stylesheets/contact.css
-  - https://unpkg.com/katex@0/dist/katex.min.css
-  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css
-  - https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css
 
 markdown_extensions:
   - nl2br
@@ -187,47 +121,24 @@ markdown_extensions:
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 plugins:
-  - git-authors
-  - meta-descriptions
   - meta
-  - macros:
-      include_dir: docs
-      modules: []
-  - glightbox
-  - git-revision-date-localized:
-      type: date
-      fallback_to_build_date: false
-      enable_creation_date: true
-      enabled: true
-  - git-committers:
-      enabled: true
-      repository: munirmardinli/homelab-cli-cli
-      branch: main
-      token: !ENV GH_TOKEN_ORGA
-  - info:
-      enabled: false
-      enabled_on_serve: true
-  - markmap:
-      encoding: utf-8
-      file_extension: .mm.md
-      d3_version: "7"
-      lib_version: 0.15.3
-      view_version: 0.15.3
   - search:
-      separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
-      enabled: true
-      pipeline:
-        - stemmer
-        - stopWordFilter
-        - trimmer
   - blog:
       blog_dir: .
-      post_dir: "{blog}/"
-      post_url_format: "{slug}"
       archive_date_format: yyyy
       archive_url_date_format: yyyy
+      post_url_format: /{slug}.html
+      categories_allowed:
+        - Development
+        - nextcloud
+        - Security
+        - Infrastructure
+        - Productivity
+        - Documentation
+        - Globaly
+        - Global
   - tags:
-      tags_file: tags.md
+      tags_file: docs/tags.md
 
 hooks:
   - docs/config/overrides/hooks/removeObserve.py

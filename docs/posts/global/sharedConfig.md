@@ -1,11 +1,13 @@
 ---
 title: Shared Config
+date:
+  created: 2025-07-19
 authors:
   - Munir
 tags:
-  - Globaly
+  - Global
 categories:
-  - Globaly
+  - Global
 hide:
   - toc
 status: true
@@ -19,6 +21,8 @@ custom_field:
 ## Shared Docker Compose Anchors
 
 The following shared anchors are used across services in your docker-compose.yml file to ensure consistent configuration for logging, labeling, and resource limits.
+
+<!-- more -->
 
 === "Logging"
     **Standardized Logging for Docker services**
