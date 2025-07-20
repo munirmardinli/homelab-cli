@@ -1,1 +1,1 @@
-# Blog
+# Homelab Documentation

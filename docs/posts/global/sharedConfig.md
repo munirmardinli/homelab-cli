@@ -25,7 +25,7 @@ The following shared anchors are used across services in your docker-compose.yml
 <!-- more -->
 
 === "Logging"
-**Standardized Logging for Docker services**
+    **Standardized Logging for Docker services**
 
     The following shared anchors are used across services in your docker-compose.yml file to ensure consistent configuration for logging, labeling, and resource limits.
 
@@ -64,7 +64,7 @@ The following shared anchors are used across services in your docker-compose.yml
           - Adjusting timeouts based on network latency
 
 === "Labels"
-**Standardized labels for Docker services**
+    **Standardized labels for Docker services**
 
     The following shared anchors ensure consistent behavior across your `docker-compose.yml`:
 
@@ -87,7 +87,7 @@ The following shared anchors are used across services in your docker-compose.yml
         ```
 
 === "Resource Limits"
-**Standardized Resource Limits for Docker services**
+    **Standardized Resource Limits for Docker services**
 
     The following shared anchors ensure consistent behavior across your `docker-compose.yml`:
 

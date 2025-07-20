@@ -56,7 +56,6 @@ nav:
   - 🏷️ Tags: tags.md
 
 extra:
-  base_url: https://munirmardinli.github.io/homelab-cli
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/munirmardinli/homelab-cli-cli?tab=repositories
@@ -123,7 +122,7 @@ markdown_extensions:
 plugins:
   - search
   - rss:
-      match_path: 'posts/.*'
+      match_path: "posts/.*"
       pretty_print: true
       date_from_meta:
         as_creation: date.created
@@ -148,3 +147,4 @@ plugins:
 hooks:
   - config/mkdocs/hooks/removeObserve.py
   - config/mkdocs/hooks/seo.py
+  - config/mkdocs/hooks/socialMedia.py
