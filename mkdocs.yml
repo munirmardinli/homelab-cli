@@ -1,3 +1,4 @@
+# trunk-ignore-all(prettier)
 site_name: Homelab Setup
 site_description: |-
   This repository contains a Docker Compose environment for a private homelab focused on security, automation, authentication, and developer productivity.
@@ -56,6 +57,13 @@ nav:
           - 🌿 Environment: posts/global/environment.md
           - ⚙️ Shared Config: posts/global/sharedConfig.md
       - 🏷️ Tags: tags.md
+  - Scripits:
+      - 🗄️ NAS: posts/scripts/nas.md
+      - 🎨 PowerLevel10k: posts/scripts/powerLevel10.md
+      - 🌐 Macvlan: posts/scripts/macvlan.md
+      - 🐍 Venv: posts/scripts/venv.md
+      - 🔐 Hetzner Cert: posts/scripts/hetznerCert.md
+      -  Brew: posts/scripts/brew.md
   - 🏗 Code Documentation: posts/code/index.md
 
 extra:
@@ -143,6 +151,7 @@ plugins:
         - Productivity
         - Code
         - Global
+        - Scripts
   - tags:
       tags_file: docs/tags.md
   - git-revision-date-localized:
