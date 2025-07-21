@@ -257,7 +257,7 @@ Production-ready identity and access management solution with SSO, user director
 
 ## 🔐 Required Environment Variables
 
-Refer to [Environment Variables](./global/index.md) documentation for:
+Refer to [Environment Variables](./global/environment.md) documentation for:
 
 | Variable | Description | Required |
 |----------|-------------|----------|

@@ -66,6 +66,7 @@ nav:
       - 🏗 Code Documentation: posts/code/index.md
 
 extra:
+  repo_blob_url: "https://github.com/munirmardinli/homelab-cli/blob/main"
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/munirmardinli/homelab-cli-cli?tab=repositories
@@ -131,6 +132,7 @@ markdown_extensions:
 
 plugins:
   - search
+  - macros
   - rss:
       match_path: "posts/.*"
       pretty_print: true

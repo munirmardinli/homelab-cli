@@ -1,1 +1,4 @@
 comments: true
+status: true
+robots: index, follow
+visibility: true

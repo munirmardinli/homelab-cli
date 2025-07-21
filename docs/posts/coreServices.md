@@ -220,7 +220,7 @@ Essential networking stack including DNS resolution, reverse proxy, and cloud tu
 
 ## 🔐 Required Environment Variables
 
-Refer to [Environment Variables](./global/index.md) documentation for:
+Refer to [Environment Variables](./global/environment.md) documentation for:
 
 | Variable | Description | Required |
 |----------|-------------|----------|
