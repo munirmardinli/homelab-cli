@@ -208,18 +208,6 @@ Dieses Skript automatisiert die Installation von [Entware](https://entware.net/)
 sh assets/scripts/nas.sh
 ```
 
-- Skript als Benutzer mit ausreichenden Rechten auf dem Synology NAS ausführen
-
-## 📝 Beispielausgabe
-
-```
-[2025-07-19 12:00:00] Entware erfolgreich installiert ✓
-```
-
-## 📂 Speicherort
-
-- `assets/scripts/nas.sh`
-
 ## 🔗 Referenzen
 
 - [Entware Offizielle Dokumentation](https://github.com/Entware/Entware/wiki) 

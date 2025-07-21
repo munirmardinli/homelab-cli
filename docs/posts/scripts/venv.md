@@ -53,18 +53,6 @@ sh assets/scripts/venv.sh
 
 ---
 
-## 📂 Location
-- `assets/scripts/venv.sh`
-
----
-
-## 📝 Example Output
-```
-Successfully built the MkDocs site.
-```
-
----
-
 ## 🔗 References
 - [Python venv Documentation](https://docs.python.org/3/library/venv.html)
 - [MkDocs Documentation](https://www.mkdocs.org/) 
