@@ -88,12 +88,6 @@ sh assets/scripts/brew.sh
 - On macOS, `.zprofile` is updated and the Homebrew environment is loaded
 - On Linux, `.profile` is updated and the Homebrew environment is loaded
 
-## 📝 Example Output
-
-```
-Homebrew ist bereits installiert. Überspringe Installation.
-```
-
 ## 🔄 Maintenance & Updates
 
 - To update Homebrew:
@@ -101,10 +95,6 @@ Homebrew ist bereits installiert. Überspringe Installation.
 brew update && brew upgrade
 ```
 - To rerun the script, simply execute as described above
-
-## 📂 Location
-
-- `assets/scripts/brew.sh`
 
 ## 🔗 References
 

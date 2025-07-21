@@ -1,5 +1,5 @@
 ---
-title: 🎨 Powerlevel10k Zsh Theme Setup Script
+title: 🎨 Powerlevel10k Zsh Script
 date:
   created: 2025-07-19
 tags:
@@ -20,7 +20,7 @@ description: >
 comments: true
 ---
 
-# 🎨 Powerlevel10k Zsh Theme Setup Script (`powerLevel10.sh`)
+# 🎨 Powerlevel10k Zsh Script
 
 This script adds the [Powerlevel10k](https://github.com/romkatv/powerlevel10k) theme to your `.zshrc` if it is not already present, and reloads your Zsh configuration. It is intended for macOS systems using Homebrew.
 
@@ -28,11 +28,29 @@ This script adds the [Powerlevel10k](https://github.com/romkatv/powerlevel10k) t
 
 ---
 
-## 📑 Features
+## 🛠️ Features
 - Checks if Powerlevel10k is already sourced in `.zshrc`
 - Appends the theme source line if missing
 - Reloads `.zshrc` to apply changes immediately
 - Provides user feedback in German
+
+---
+
+### Process
+
+=== "PowerLevel10k"
+    ```sh linenums="1"
+    #!/usr/bin/env zsh # (1)
+
+    if ! grep -Fxq "source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme" ~/.zshrc; then
+      echo 'source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
+      echo "Powerlevel10k wurde zur .zshrc hinzugefügt."
+      source ~/.zshrc
+    else
+      echo "Powerlevel10k ist bereits in der .zshrc eingetragen."
+    fi
+    ```
+    1. → Starts the script with Zsh (ensures Zsh is used).
 
 ---
 
@@ -49,18 +67,6 @@ zsh assets/scripts/powerLevel10.sh
 ## ⚠️ Notes
 - Only modifies `.zshrc` if the theme is not already present
 - Assumes Powerlevel10k is installed at `/opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme`
-
----
-
-## 📂 Location
-- `assets/scripts/powerLevel10.sh`
-
----
-
-## 📝 Example Output
-```
-Powerlevel10k wurde zur .zshrc hinzugefügt.
-```
 
 ---
 

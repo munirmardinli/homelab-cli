@@ -78,12 +78,6 @@ sh assets/scripts/hetzner_cert.sh
 
 - Ensure your `.env` file contains: `ACME_ACCOUNT_EMAIL`, `HETZNER_TOKEN`, `DOMAIN`, `SYNO_USERNAME`, `SYNO_PASSWORD`
 
-## 📝 Example Output
-
-```
-Certificate successfully issued and deployed to Synology DSM.
-```
-
 ## 🔄 Maintenance & Updates
 
 - To manually renew certificates:
@@ -94,10 +88,6 @@ acme.sh --renew -d yourdomain.com --force
 ```bash
 acme.sh --upgrade
 ```
-
-## 📂 Location
-
-- `assets/scripts/hetzner_cert.sh`
 
 ## 🔗 References
 

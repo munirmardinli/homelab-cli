@@ -83,7 +83,6 @@ This script interactively creates a Docker macvlan network, supporting both IPv4
     8. → Creates a dual-stack macvlan network with both IPv4 and IPv6.
     9. → Creates an IPv4-only macvlan network.
 
-
 ## 🔐 Important Notes
 
 - Requires Docker to be installed and running
@@ -99,17 +98,6 @@ sh assets/scripts/macvlan.sh
 
 - Run the script and follow the interactive prompts
 
-## 📝 Example Output
-
-```
-Enter the Docker network name: mynet
-Enter the first three parts of the IPv4 address (e.g. 10.100.0): 10.100.0
-Select network type:
-1) IPv4 and IPv6
-2) IPv4 only
-Selection (1 or 2): 1
-```
-
 ## 🔄 Maintenance & Updates
 
 - To list macvlan networks:
@@ -120,10 +108,6 @@ docker network ls | grep macvlan
 ```bash
 docker network rm <network_name>
 ```
-
-## 📂 Location
-
-- `assets/scripts/macvlan.sh`
 
 ## 🔗 References
 
