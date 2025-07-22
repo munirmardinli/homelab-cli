@@ -1,7 +1,6 @@
 import { execFileSync } from 'node:child_process';
 import readline from 'node:readline';
 
-import type { PackageManagerOptions } from '../types/types.js';
 import { BashHelper } from '../utils/bash.js';
 import { TerminalAutomator } from '../utils/yamlTerminalAutomator.js';
 
@@ -31,9 +30,33 @@ export class PackageManagerCLI {
   private readonly UPDATE_ACCESS_DENIED_ERROR =
     'Fehler beim Updaten: Zugriff verweigert! Bitte führe dieses Tool als Administrator aus!';
 
-  private options: PackageManagerOptions;
+  private options: {
+    platform: string;
+    installCmd: string;
+    installArgs: (pkg: string) => string[];
+    updateCmd: string;
+    installLabel: string;
+    updateLabel: string;
+    exitLabel: string;
+    onlyPlatformMsg: string;
+    updateSuccessMsg: string;
+    exitMsg: string;
+    updateArgs?: () => string[];
+  };
 
-  constructor(options: PackageManagerOptions) {
+  constructor(options: {
+    platform: string;
+    installCmd: string;
+    installArgs: (pkg: string) => string[];
+    updateCmd: string;
+    installLabel: string;
+    updateLabel: string;
+    exitLabel: string;
+    onlyPlatformMsg: string;
+    updateSuccessMsg: string;
+    exitMsg: string;
+    updateArgs?: () => string[];
+  }) {
     this.options = options;
   }
 
@@ -99,7 +122,7 @@ export class PackageManagerCLI {
       } else if (response === '2') {
         try {
           const updateCmd = this.options.updateCmd;
-          const opts = this.options as Partial<PackageManagerOptions> & {
+          const opts = this.options as Partial<typeof this.options> & {
             updateArgs?: () => string[];
           };
           const updateArgs =

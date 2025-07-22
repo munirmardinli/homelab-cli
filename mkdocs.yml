@@ -16,8 +16,8 @@ site_dir: public
 theme:
   name: material
   custom_dir: config/mkdocs/overrides
- # static_templates:
- #   - config/mkdocs/overrides/html/404.html
+  # static_templates:
+  #   - config/mkdocs/overrides/html/404.html
   font:
     text: Merriweather Sans
     code: Red Hat Mono
