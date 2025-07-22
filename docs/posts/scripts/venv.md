@@ -34,6 +34,23 @@ This script automates the creation of a Python virtual environment, installs dep
 - Builds the MkDocs documentation site with verbose output
 - Installs MkDocs if not already present
 
+## Script Code
+
+=== "Venv"
+    ```sh linenums="1"
+    #!/bin/bash
+
+    python3 -m venv venv # (1)
+    source venv/Scripts/activate # (2)
+    pip install -r config/requirements.txt # (3)
+    mkdocs build --verbose # (4)
+    ```
+
+    1. → Creates Python virtual environment in `venv` folder
+    2. → Activates the environment using Windows path
+    3. → Installs all dependencies from requirements file
+    4. → Builds MkDocs documentation with detailed output
+
 ---
 
 ## 🚀 Usage
