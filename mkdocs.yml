@@ -164,7 +164,7 @@ plugins:
       archive_url_date_format: yyyy
       post_url_format: /{slug}
       authors_file: "{blog}/.authors.yml"
-      pagination_per_page: 4
+      pagination_per_page: 3
   - tags
   - git-revision-date-localized:
       type: date
