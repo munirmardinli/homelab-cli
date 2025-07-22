@@ -26,33 +26,45 @@ Automates the process of issuing and deploying SSL certificates for domains mana
 
 ## 🛠️ Service Configuration
 
-- Loads environment variables from a `.env` file
-- Installs acme.sh if not already present
-- Issues wildcard SSL certificates using Hetzner DNS API
+- Loads environment variables from `.env` file
+- Installs and configures acme.sh
+- Issues wildcard certificates via Hetzner DNS API
 - Deploys certificates to Synology DSM
-- Supports certificate renewal via cron
+- Sets up automatic renewal
 
 ### Process
 
 === "Hetzner Certs Script"
     ```sh linenums="1"
-    #!/bin/sh
+    # Laden der Umgebungsvariablen aus der .env-Datei
+    if [ -f .env ]; then # (1)
+        export $(grep -v '^#' .env | xargs -d '\n')
+    fi
 
-    # Load environment variables
-    if [ -f .env ]; then
-      . ./.env # (1)
-    fi
-    # Install acme.sh if not present
-    if ! command -v acme.sh >/dev/null 2>&1; then
-      curl https://get.acme.sh | sh # (2)
-      export PATH="$HOME/.acme.sh:$PATH"
-    fi
-    # Issue certificate
-    acme.sh --issue --dns dns_hetzner -d "$DOMAIN" -d "*.$DOMAIN" --accountemail "$ACME_ACCOUNT_EMAIL" # (3)
-    # Deploy to Synology DSM
-    acme.sh --deploy --deploy-hook synology_dsm --domain "$DOMAIN" --home "$HOME/.acme.sh" --ecc # (4)
-    # (Optional) Add to cron for renewal
-    acme.sh --install-cronjob # (5)
+    # Acme.sh von GitHub herunterladen und extrahieren
+    wget https://github.com/acmesh-official/acme.sh/archive/master.tar.gz # (2)
+    tar -xvzf master.tar.gz
+    cd acme.sh-master
+    ./acme.sh --install --nocron --home /usr/local/share/acme.sh --accountemail "$ACME_ACCOUNT_EMAIL"
+    cd ~
+    source .profile
+
+    # Zertifikat ausstellen
+    cd /usr/local/share/acme.sh # (3)
+    export HETZNER_TOKEN="$HETZNER_TOKEN"
+    ./acme.sh --issue --dns dns_hetzner -d "$DOMAIN" -d "*.$DOMAIN" --server letsencrypt
+
+    # Synology Einstellungen für Anmeldung und Zertifikat
+    export SYNO_USERNAME="$SYNO_USERNAME"
+    export SYNO_PASSWORD="$SYNO_PASSWORD"
+    export SYNO_CERTIFICATE=""
+
+    # Zertifikat auf Synology DSM bereitstellen
+    ./acme.sh --deploy --home . -d "$DOMAIN" --deploy-hook synology_dsm # (4)
+
+    # Zertifikat ernern 
+
+    /usr/local/share/acme.sh/acme.sh --cron --home /usr/local/share/acme.sh/ # (5)
     ```
 
     1. → Loads required environment variables from a `.env` file (must define `ACME_ACCOUNT_EMAIL`, `HETZNER_TOKEN`, `DOMAIN`, `SYNO_USERNAME`, `SYNO_PASSWORD`).
