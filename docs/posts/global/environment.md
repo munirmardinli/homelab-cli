@@ -11,6 +11,8 @@ status: true
 robots: index, follow
 visibility: true
 comments: true
+description: >
+  Comprehensive guide to environment variables used across Homelab services. Includes security best practices and configuration examples.
 hide:
   - toc
 ---

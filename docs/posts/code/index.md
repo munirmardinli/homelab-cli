@@ -11,6 +11,8 @@ robots: index, follow
 visibility: true
 slug: code
 comments: true
+description: >
+  Technical reference for the `src` directory structure, modules, and key functionalities of the CLI tool. Designed for contributors and maintainers.
 ---
 
 # 📦 Source Directory Overview (`src`)

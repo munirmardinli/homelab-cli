@@ -34,22 +34,19 @@ This script adds the [Powerlevel10k](https://github.com/romkatv/powerlevel10k) t
 
 ---
 
-### Process
+```sh linenums="1"
+#!/usr/bin/env zsh
 
-=== "PowerLevel10k"
-    ```sh linenums="1"
-    #!/usr/bin/env zsh
+if ! grep -Fxq "source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme" ~/.zshrc; then
+  echo 'source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
+  echo "Powerlevel10k wurde zur .zshrc hinzugefügt." # (1)
+  source ~/.zshrc
+else
+  echo "Powerlevel10k ist bereits in der .zshrc eingetragen."
+fi
+```
 
-    if ! grep -Fxq "source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme" ~/.zshrc; then
-      echo 'source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
-      echo "Powerlevel10k wurde zur .zshrc hinzugefügt." # (1)
-      source ~/.zshrc
-    else
-      echo "Powerlevel10k ist bereits in der .zshrc eingetragen."
-    fi
-    ```
-
-    1. → Starts the script with Zsh (ensures Zsh is used).
+1. → Starts the script with Zsh (ensures Zsh is used).
 
 ## 🚀 Usage
 

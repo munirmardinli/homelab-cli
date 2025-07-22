@@ -138,6 +138,36 @@ jobs:
             mkdocs-git-revision-date-localized-plugin \
             mkdocs-git-committers-plugin-2
 
+      - name: Create manifest.webmanifest
+        run: |
+          echo '{
+            "name": "Homelab Setup",
+            "short_name": "Homelab Setup",
+            "start_url": "https://munirmardinli.github.io/homelab-cli",
+            "display": "standalone",
+            "background_color": "#ffffff",
+            "theme_color": "#1565c0",
+            "icons": [
+              {
+                "src": "images/icons/icon-192.png",
+                "sizes": "192x192",
+                "type": "image/png"
+              },
+              {
+                "src": "images/icons/icon-512.png",
+                "sizes": "512x512",
+                "type": "image/png"
+              }
+            ]
+          }' > docs/manifest.webmanifest
+
+      - name: Create Robots
+        run: |
+          User-agent: *
+          Disallow:
+          Sitemap: https://munirmardinli.github.io/homelab/sitemap.xml
+          ' > docs/robots.txt
+
       - name: Prepare Environment
         run: |
           sed -i 's/tags_file: tags.md/# tags_file: tags.md/' mkdocs.yml

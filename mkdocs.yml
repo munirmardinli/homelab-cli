@@ -1,8 +1,6 @@
 # trunk-ignore-all(prettier)
 site_name: Homelab Setup
-site_description: |-
-  This repository contains a Docker Compose environment for a private homelab focused on security, automation, authentication, and developer productivity.
-site_url: https://munirmardinli.github.io/homelab/
+site_url: https://munirmardinli.github.io/homelab-cli/
 repo_url: https://github.com/munirmardinli/homelab-cli
 #edit_uri: blob/main/docs
 remote_name: origin
@@ -84,9 +82,6 @@ nav:
           - 🔐 Hetzner Cert: posts/scripts/hetznerCert.md
       - 🏗 Code Documentation: posts/code/index.md
 
-not_nav:
-  - tags.md
-
 extra:
   repo_blob_url: "https://github.com/munirmardinli/homelab-cli/blob/main"
   social:
@@ -94,7 +89,9 @@ extra:
       link: https://github.com/munirmardinli/homelab-cli-cli?tab=repositories
       name: Github
   version:
-    provider: mike
+    default:
+      - stable
+      - development
   status:
     new: Recently added
     deprecated: Deprecated
@@ -167,12 +164,15 @@ plugins:
       archive_url_date_format: yyyy
       post_url_format: /{slug}
       authors_file: "{blog}/.authors.yml"
+      pagination_per_page: 4
   - tags
   - git-revision-date-localized:
       type: date
+      locale: de
+      timezone: Europe/Berlin
       fallback_to_build_date: false
       enable_creation_date: true
-      enable: true
+      enabled: true
   - git-committers:
       repository: munirmardinli/homelab-cli
       token: !ENV GH_TOKEN
@@ -181,5 +181,4 @@ plugins:
 
 hooks:
   - config/mkdocs/hooks/removeObserve.py
-  - config/mkdocs/hooks/seo.py
   - config/mkdocs/hooks/socialMedia.py

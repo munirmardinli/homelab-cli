@@ -13,6 +13,8 @@ visibility: true
 comments: true
 hide:
   - toc
+description: >
+  Standardized configuration anchors for Docker Compose including logging, labels, and resource limits to ensure consistency across services.
 ---
 
 # ⚙️ Shared Config
