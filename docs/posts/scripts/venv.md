@@ -1,5 +1,5 @@
 ---
-title: 🐍 Python Virtual Environment & MkDocs Build Script
+title: 🐍 Venv Script
 date:
   created: 2025-07-19
 tags:
@@ -20,7 +20,7 @@ description: >
 comments: true
 ---
 
-# 🐍 Python Virtual Environment & MkDocs Build Script (`venv.sh`)
+# 🐍 Venv Script
 
 This script automates the creation of a Python virtual environment, installs dependencies from `requirements.txt`, and builds the MkDocs documentation site. It is intended for use on Windows systems (using `venv/Scripts/activate`).
 
