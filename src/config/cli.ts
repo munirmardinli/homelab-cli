@@ -4,7 +4,7 @@ import readline from 'node:readline';
 import { BashHelper } from '../utils/bash.js';
 import { TerminalAutomator } from '../utils/yamlTerminalAutomator.js';
 
-export class PackageManagerCLI {
+export class PackageManagerCLI extends TerminalAutomator {
   private readonly DEFAULT_STDIO_MODE = 'inherit';
   private readonly DEFAULT_SSH_PORT = '22';
   private readonly ACCESS_DENIED_KEYWORD = 'Zugriff';
@@ -57,6 +57,7 @@ export class PackageManagerCLI {
     exitMsg: string;
     updateArgs?: () => string[];
   }) {
+    super();
     this.options = options;
   }
 
@@ -192,7 +193,7 @@ export class PackageManagerCLI {
         } else if (process.platform === 'linux') {
           fileName = 'linux';
         }
-        TerminalAutomator.runAllCommandsFromYaml(fileName);
+        PackageManagerCLI.runAllCommandsFromYaml(fileName);
         rl.close();
         rl.on('close', () => {
           this.menu();
