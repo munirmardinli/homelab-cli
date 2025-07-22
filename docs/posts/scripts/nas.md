@@ -7,8 +7,6 @@ tags:
   - Synology
   - NAS
   - Entware
-categories:
-  - Scripts
 authors:
   - Munir
 status: true

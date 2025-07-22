@@ -6,8 +6,6 @@ authors:
   - Munir
 tags:
   - Global
-categories:
-  - Global
 slug: environment
 status: true
 robots: index, follow

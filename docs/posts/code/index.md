@@ -4,8 +4,6 @@ date:
   created: 2025-07-19
 tags:
   - Code
-categories:
-  - Code
 authors:
   - Munir
 status: true

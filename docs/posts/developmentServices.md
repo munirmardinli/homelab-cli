@@ -6,8 +6,6 @@ tags:
   - IDE
   - Version Control
   - Note Taking
-categories:
-  - Development
 status: true
 robots: index, follow
 visibility: true

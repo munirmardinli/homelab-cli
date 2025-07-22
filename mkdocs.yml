@@ -28,6 +28,26 @@ theme:
     - content.code.copy
     - content.code.select
     - content.tabs.link
+    - navigation.expand
+    - navigation.indexes
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - search.share
+    - search.suggest
+    - content.tooltips
+    - announce.dismiss
+    - navigation.tabs
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.path
+    - navigation.prune
+    - navigation.tabs.sticky
+    - navigation.footer
+    - toc.follow
+
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -55,7 +75,6 @@ nav:
       - 🌍 Global:
           - 🌿 Environment: posts/global/environment.md
           - ⚙️ Shared Config: posts/global/sharedConfig.md
-      - 🏷️ Tags: tags.md
       - 📝 Scripits:
           -  Brew: posts/scripts/brew.md
           - 📱 NAS: posts/scripts/nas.md
@@ -64,6 +83,9 @@ nav:
           - 🐍 Venv: posts/scripts/venv.md
           - 🔐 Hetzner Cert: posts/scripts/hetznerCert.md
       - 🏗 Code Documentation: posts/code/index.md
+
+not_nav:
+  - tags.md
 
 extra:
   repo_blob_url: "https://github.com/munirmardinli/homelab-cli/blob/main"
@@ -145,17 +167,6 @@ plugins:
       archive_url_date_format: yyyy
       post_url_format: /{slug}
       authors_file: "{blog}/.authors.yml"
-      categories_name: Categories
-      categories_url_format: "category/{slug}"
-      categories_allowed:
-        - Development
-        - nextcloud
-        - Security
-        - Infrastructure
-        - Productivity
-        - Code
-        - Global
-        - Scripts
   - tags
   - git-revision-date-localized:
       type: date

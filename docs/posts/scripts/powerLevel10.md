@@ -1,5 +1,5 @@
 ---
-title: 🎨 Powerlevel10k Zsh Script
+title: 🎨 Powerlevel10k Script
 date:
   created: 2025-07-19
 tags:
@@ -7,8 +7,6 @@ tags:
   - Zsh
   - Theme
   - Powerlevel10k
-categories:
-  - Scripts
 authors:
   - Munir
 status: true
@@ -20,7 +18,7 @@ description: >
 comments: true
 ---
 
-# 🎨 Powerlevel10k Zsh Script
+# 🎨 Powerlevel10k Script
 
 This script adds the [Powerlevel10k](https://github.com/romkatv/powerlevel10k) theme to your `.zshrc` if it is not already present, and reloads your Zsh configuration. It is intended for macOS systems using Homebrew.
 

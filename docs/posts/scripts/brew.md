@@ -7,8 +7,6 @@ tags:
   - Homebrew
   - macOS
   - Linux
-categories:
-  - Scripts
 authors:
   - Munir
 status: true

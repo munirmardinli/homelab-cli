@@ -5,8 +5,6 @@ date:
 tags:
   - File Sharing
   - Collaboration
-categories:
-  - Productivity
 status: true
 robots: index, follow
 visibility: true
@@ -190,7 +188,7 @@ Self-hosted productivity platform with file sync & share, calendars, contacts an
 
 ## 🔐 Required Environment Variables
 
-Refer to [Environment Variables](./global/environment.md) documentation for:
+Refer to [Environment Variables](./global/index.md) documentation for:
 
 | Variable | Description | Required |
 |----------|-------------|----------|

@@ -6,8 +6,6 @@ tags:
   - Script
   - Docker
   - Networking
-categories:
-  - Scripts
 authors:
   - Munir
 status: true

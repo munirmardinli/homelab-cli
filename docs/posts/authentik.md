@@ -5,8 +5,6 @@ date:
 tags:
   - Authentication
   - SSO
-categories:
-  - Security
 authors:
   - Munir
 status: true

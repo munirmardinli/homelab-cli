@@ -7,8 +7,6 @@ tags:
   - Python
   - MkDocs
   - Virtualenv
-categories:
-  - Scripts
 authors:
   - Munir
 status: true

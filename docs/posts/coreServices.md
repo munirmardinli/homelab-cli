@@ -8,8 +8,6 @@ tags:
   - Proxy
 authors:
   - Munir
-categories:
-  - Infrastructure
 status: true
 robots: index, follow
 visibility: true

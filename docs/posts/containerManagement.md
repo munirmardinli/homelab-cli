@@ -7,8 +7,6 @@ authors:
 tags:
   - Management
   - Infrastructure
-categories:
-  - Infrastructure
 status: true
 visibility: true
 robots: index, follow

@@ -7,8 +7,6 @@ tags:
   - SSL
   - Hetzner
   - Certificate
-categories:
-  - Scripts
 authors:
   - Munir
 status: true
