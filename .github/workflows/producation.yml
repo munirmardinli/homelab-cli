@@ -8,10 +8,9 @@ on:
       - main
 
 env:
-  DOCKER_USERNAME: mardinlimunir
-  DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
-  DOCKER_IMAGE_NAME: mardinlimunir/${{ github.event.repository.name }}
   GITGUARDIAN_API: ${{ secrets.GITGUARDIAN_API_KEY }}
+  NPM_VERSION: "22"
+  PYTHON_VERSION: "3.13"
 
 permissions:
   contents: write
@@ -30,7 +29,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ env.NPM_VERSION }}
           cache: npm
       - name: Cache node modules
         id: cache-node-modules
@@ -128,7 +127,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
+          python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Install Dependencies
         run: |
@@ -163,10 +162,9 @@ jobs:
 
       - name: Create Robots
         run: |
-          User-agent: *
+          echo 'User-agent: *
           Disallow:
-          Sitemap: https://munirmardinli.github.io/homelab/sitemap.xml
-          ' > docs/robots.txt
+          Sitemap: https://munirmardinli.github.io/homelab/sitemap.xml' > docs/robots.txt
 
       - name: Prepare Environment
         run: |
@@ -200,7 +198,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: ${{ env.NPM_VERSION }}
           cache: npm
       - uses: actions/cache@v4
         with:
