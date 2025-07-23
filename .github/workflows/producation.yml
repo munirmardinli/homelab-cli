@@ -225,7 +225,7 @@ jobs:
               nav_urls = extract_nav_urls(nav)
               output = remove_unlisted_archive_links(output, nav_urls)
               output = clean_copyright(output, config)
-              return output' > config/mkdocs/hooks/.removeObserve.py
+              return output' > config/mkdocs/hooks/removeObserve.py
 
       - name: Create manifest.webmanifest
         run: |
