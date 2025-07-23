@@ -25,3 +25,4 @@ public
 venv
 .cache
 __pycache__
+docs/posts/global/index.md
