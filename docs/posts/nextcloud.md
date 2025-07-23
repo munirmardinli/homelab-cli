@@ -15,6 +15,8 @@ authors:
 links:
   - 🌿 Environment: environment
   - ⚙️ Shared Config: sharedConfig
+description: >
+  Complete Docker Compose setup for Nextcloud file sync & share, calendars, contacts and more.
 ---
 
 # ☁️ Nextcloud Setup

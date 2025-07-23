@@ -15,6 +15,10 @@ comments: true
 links:
   - 🌿 Environment: environment
   - ⚙️ Shared Config: sharedConfig
+description: >
+  Complete Docker Compose setup for Authentik identity provider with PostgreSQL and Redis.
+  Includes SSO, user management, multi-factor authentication, and production-ready configuration
+  with health checks, logging, and monitoring integration.
 ---
 
 # 🛡️ Authentik Identity Provider

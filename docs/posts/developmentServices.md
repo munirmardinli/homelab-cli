@@ -16,6 +16,9 @@ authors:
 links:
   - 🌿 Environment: environment
   - ⚙️ Shared Config: sharedConfig
+description: >
+  Complete Docker Compose setup for Code Server, Obsidian, and GitLab CE.
+  Includes development tools for code editing, note-taking, and version control.
 ---
 
 # 💻 Development Environment Stack

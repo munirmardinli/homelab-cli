@@ -16,6 +16,9 @@ comments: true
 links:
   - 🌿 Environment: environment
   - ⚙️ Shared Config: sharedConfig
+description: >
+  Complete Docker Compose setup for Cloudflare Tunnel, Pi-hole DNS, and Nginx Proxy Manager.
+  Includes essential networking stack including DNS resolution, reverse proxy, and cloud tunneling.
 ---
 
 # 🔧 Core Infrastructure Services

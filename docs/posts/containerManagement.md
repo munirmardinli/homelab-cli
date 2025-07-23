@@ -15,6 +15,10 @@ comments: true
 links:
   - 🌿 Environment: environment
   - ⚙️ Shared Config: sharedConfig
+description: >
+  Complete Docker Compose setup for Watchtower, Autoheal, Dashy, Roundcube, and Guacamole.
+  Includes container monitoring, auto-healing, and production-ready configuration
+  with health checks, logging, and monitoring integration.
 ---
 
 # ❗ Container Management Tools
