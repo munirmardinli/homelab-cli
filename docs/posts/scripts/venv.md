@@ -10,12 +10,9 @@ tags:
 authors:
   - Munir
 status: true
-robots: index, follow
-visibility: true
 slug: venv
 description: >
   Automates Python virtual environment setup and MkDocs site build.
-comments: true
 ---
 
 # 🐍 Venv Script

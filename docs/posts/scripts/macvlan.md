@@ -9,12 +9,9 @@ tags:
 authors:
   - Munir
 status: true
-robots: index, follow
-visibility: true
 slug: macvlan
 description: >
   Interactive script to create Docker macvlan networks with IPv4 and optional IPv6 support.
-comments: true
 ---
 
 # 🌐 Docker Macvlan

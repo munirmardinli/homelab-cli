@@ -7,10 +7,7 @@ tags:
   - Version Control
   - Note Taking
 status: true
-robots: index, follow
-visibility: true
 slug: development
-comments: true
 authors:
   - Munir
 links:
@@ -29,7 +26,7 @@ Integrated development environment with code editor, version control, and knowle
 
 ## 🛠️ Service Configuration
 
-- This setup uses the [shared Docker Compose anchors](./global/sharedConfig.md) for:
+- This setup uses the [shared Docker Compose anchors]({{ config.site_url }}sharedConfig) for:
 - Logging (`default-logging`)
 - Labels (`default-labels`)
 - Resource limits (`resource-limits`)
@@ -255,7 +252,7 @@ Integrated development environment with code editor, version control, and knowle
 
 ## 🔐 Required Environment Variables
 
-Refer to [Environment Variables](./global/environment.md) documentation for:
+Refer to [Environment Variables]({{ config.site_url }}environment) documentation for:
 
 | Variable | Description | Required |
 |----------|-------------|----------|

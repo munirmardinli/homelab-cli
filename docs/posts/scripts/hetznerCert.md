@@ -10,12 +10,9 @@ tags:
 authors:
   - Munir
 status: true
-robots: index, follow
-visibility: true
 slug: hetznerCert
 description: >
   Automated SSL certificate issuance and deployment for Hetzner domains using acme.sh and Synology DSM.
-comments: true
 ---
 
 # 🔐 Hetzner Certificate

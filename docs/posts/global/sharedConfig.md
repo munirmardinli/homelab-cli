@@ -8,9 +8,6 @@ tags:
   - Global
 slug: sharedConfig
 status: true
-robots: index, follow
-visibility: true
-comments: true
 hide:
   - toc
 description: >

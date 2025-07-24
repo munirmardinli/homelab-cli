@@ -9,10 +9,7 @@ tags:
 authors:
   - Munir
 status: true
-robots: index, follow
-visibility: true
 slug: core
-comments: true
 links:
   - 🌿 Environment: environment
   - ⚙️ Shared Config: sharedConfig
@@ -29,7 +26,7 @@ Essential networking stack including DNS resolution, reverse proxy, and cloud tu
 
 ## 🛠️ Service Configuration
 
-- This setup uses the [shared Docker Compose anchors](./global/sharedConfig.md) for:
+- This setup uses the [shared Docker Compose anchors]({{ config.site_url }}sharedConfig) for:
 - Logging (`default-logging`)
 - Labels (`default-labels`)
 - Resource limits (`resource-limits`)
@@ -221,7 +218,7 @@ Essential networking stack including DNS resolution, reverse proxy, and cloud tu
 
 ## 🔐 Required Environment Variables
 
-Refer to [Environment Variables](./global/environment.md) documentation for:
+Refer to [Environment Variables]({{ config.site_url }}environment) documentation for:
 
 | Variable | Description | Required |
 |----------|-------------|----------|

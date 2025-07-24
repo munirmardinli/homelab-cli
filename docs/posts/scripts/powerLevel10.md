@@ -10,12 +10,9 @@ tags:
 authors:
   - Munir
 status: true
-robots: index, follow
-visibility: true
 slug: powerlevel10k
 description: >
   Automates the setup of the Powerlevel10k Zsh theme by updating your .zshrc.
-comments: true
 ---
 
 # 🎨 Powerlevel10k Script

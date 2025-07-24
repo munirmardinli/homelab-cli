@@ -10,12 +10,9 @@ tags:
 authors:
   - Munir
 status: true
-robots: index, follow
-visibility: true
 slug: nas
 description: >
   Automatisierte Entware-Installation und Grundkonfiguration für Synology NAS Systeme.
-comments: true
 ---
 
 # 🗄️ NAS Script

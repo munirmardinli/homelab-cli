@@ -6,10 +6,7 @@ tags:
   - File Sharing
   - Collaboration
 status: true
-robots: index, follow
-visibility: true
 slug: nextcloud
-comments: true
 authors:
   - Munir
 links:
@@ -27,7 +24,7 @@ Self-hosted productivity platform with file sync & share, calendars, contacts an
 
 ## 🛠️ Service Configuration
 
-- This setup uses the [shared Docker Compose anchors](./global/sharedConfig.md) for
+- This setup uses the [shared Docker Compose anchors]({{ config.site_url }}sharedConfig) for
 - Logging (`default-logging`)
 - Labels (`default-labels`)
 - Resource limits (`resource-limits`)
@@ -190,7 +187,7 @@ Self-hosted productivity platform with file sync & share, calendars, contacts an
 
 ## 🔐 Required Environment Variables
 
-Refer to [Environment Variables](./global/index.md) documentation for:
+Refer to [Environment Variables]({{ config.site_url }}environment) documentation for:
 
 | Variable | Description | Required |
 |----------|-------------|----------|

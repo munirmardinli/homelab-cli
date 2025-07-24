@@ -84,6 +84,7 @@ nav:
 
 extra:
   repo_blob_url: "https://github.com/munirmardinli/homelab-cli/blob/main"
+  repo_reference_url: "https://github.com/munirmardinli/homelab-cli"
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/munirmardinli/homelab-cli-cli?tab=repositories

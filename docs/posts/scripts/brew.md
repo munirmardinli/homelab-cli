@@ -11,12 +11,9 @@ tags:
 authors:
   - Munir
 status: true
-robots: index, follow
-visibility: true
 slug: brew
 description: >
   Automated Homebrew installation script for macOS and Linux.
-comments: true
 nav_order: 3
 ---
 
