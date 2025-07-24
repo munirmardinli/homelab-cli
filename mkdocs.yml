@@ -79,6 +79,15 @@ nav:
           - 🐍 Venv: posts/scripts/venv.md
           - 🔐 Hetzner Cert: posts/scripts/hetznerCert.md
       - 🏗 Code Documentation: posts/code/index.md
+extra_javascript:
+  - config/mkdocs/js/interactive_graph.js
+  - https://fastly.jsdelivr.net/npm/jquery/dist/jquery.min.js
+  - https://fastly.jsdelivr.net/npm/echarts/dist/echarts.min.js
+  - config/mkdocs/js/obsidian_tags.js
+  - config/mkdocs/js/interactive_graph.js
+extra_css:
+  - config/mkdocs/styles/obsidian_tags.css
+  - config/mkdocs/styles/interactive_graph.css
 
 extra:
   repo_blob_url: "https://github.com/munirmardinli/homelab-cli/blob/main"
@@ -177,6 +186,10 @@ plugins:
       token: !ENV GH_TOKEN
       branch: main
       enabled: true
+  - obsidian-support: {}
+  - obsidian-bridge: {}
+  - obsidian-interactive-graph: {}
+  - glightbox
 
 hooks:
   - config/mkdocs/hooks/removeObserve.py

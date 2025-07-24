@@ -59,7 +59,7 @@ The `Section` class provides an interactive menu for selecting and running Docke
 The `isStorageService` class offers helper methods for creating directories and file paths for YAML files in the `assets` directory.
 
 ### [`utils/docker.ts`]({{ config.extra.repo_blob_url }}/src/utils/docker.ts)
-The `DockerComposeUtil` class encapsulates Docker Compose operations, including error handling and loading environment variables from `.env` files.
+The `DockerComposeUtil` class #encapsulates Docker Compose operations, including error handling and loading environment variables from `.env` files.
 
 ### [`utils/bash.ts`]({{ config.extra.repo_blob_url }}/src/utils/bash.ts)
 The `BashHelper` class provides methods for establishing SSH connections and exiting the CLI program. It works seamlessly across Windows and Unix systems.
@@ -69,4 +69,4 @@ The `BashHelper` class provides methods for establishing SSH connections and exi
 ## 📝 Type Definitions
 
 ### [`types/types.ts`]({{ config.extra.repo_blob_url }}/src/types/types.ts)
-Defines the `PackageManagerOptions` interface, which specifies configuration options for the CLI (such as platform, commands, labels, and messages).
+Defines the `PackageManagerOptions` interface, which specifies configuration options for the CLI `(such as platform, commands, labels, and messages)`.

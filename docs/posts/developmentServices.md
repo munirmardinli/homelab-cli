@@ -4,8 +4,10 @@ date:
   created: 2025-07-19
 tags:
   - IDE
-  - Version Control
-  - Note Taking
+  - Version
+  - Control
+  - Note
+  - Taking
 status: true
 slug: development
 authors:
@@ -13,9 +15,8 @@ authors:
 links:
   - 🌿 Environment: environment
   - ⚙️ Shared Config: sharedConfig
-description: >
-  Complete Docker Compose setup for Code Server, Obsidian, and GitLab CE.
-  Includes development tools for code editing, note-taking, and version control.
+description: |
+  Complete Docker Compose setup for Code Server, Obsidian, and GitLab CE. Includes development tools for code editing, note-taking, and version control.
 ---
 
 # 💻 Development Environment Stack
@@ -26,54 +27,45 @@ Integrated development environment with code editor, version control, and knowle
 
 ## 🛠️ Service Configuration
 
-- This setup uses the [shared Docker Compose anchors]({{ config.site_url }}sharedConfig) for:
+- This setup uses #the [shared Docker Compose anchors]({{ config.site_url }}sharedConfig) for:
 - Logging (`default-logging`)
 - Labels (`default-labels`)
 - Resource limits (`resource-limits`)
 
 ### Development Services
 
-=== "Code Server"
-    ```yaml hl_lines="13-17" linenums="1"
-    codeserver:
-      container_name: codeserver
-      hostname: codeserver
-      image: ghcr.io/linuxserver/code-server
-      restart: always
-      <<: *resource-limits
-      logging:
-        <<: *default-logging
-        options:
-          <<: *default-logging-options
-          loki-external-labels: job=codeserver
-      environment:
-        UID: ${UID_NAS_ADMIN:-1026} # (1)
-        GID: ${GID_NAS_ADMIN:-100} # (2)
-        PASSWORD: ${SUDO_PASSWORD_VSCODE} # (3)
-        PROXY_DOMAIN: codeserver.${SYNOLOGY_BASIC_URL} # (4)
-        SUDO_PASSWORD: ${SUDO_PASSWORD_VSCODE} # (5)
-      volumes:
-        - type: bind
-          source: /etc/localtime
-          target: /etc/localtime
-          read_only: true
-        - type: bind
-          source: ${MOUNT_PATH_DOCKER_ROOT:?path required}/obsidian
-          target: /config
-      ports:
-        - ${CODE_SERVER:-82}:8443
-      networks:
-        - dockerization
-      labels:
-        <<: *default-labels
-        monitoring: codeserver
-    ```
+```yaml hl_lines="13-17" linenums="1"
 
-    1. → User ID for volume permissions (default: 1026)
-    2. → Group ID for volume permissions (default: 100)
-    3. → Web interface password (must be set in `.env`)
-    4. → Proxy domain for the service
-    5. → Sudo password for terminal operations
+x-logging: &default-logging
+  driver: loki
+  options: &default-logging-options
+    loki-url: https://loki.${SYNOLOGY_BASIC_URL}/loki/api/v1/push
+    loki-retries: 5
+    loki-batch-size: 400
+    loki-batch-wait: 2s
+    loki-timeout: 10s
+    loki-max-backoff: 5s
+    loki-min-backoff: 1s
+    loki-tenant-id: default
+
+x-labels: &default-labels
+  com.centurylinklabs.watchtower.enable: true
+  recreat.container: true
+  container.label.group: development
+
+x-limits: &resource-limits
+  mem_limit: "256m"
+  mem_reservation: "64m"
+  cpu_shares: "512"
+  restart: always
+  networks:
+    dockerization:
+
+---
+services:
+
+
+```
 
 === "Obsidian"
     ```yaml hl_lines="32-35" linenums="1"
@@ -184,6 +176,37 @@ Integrated development environment with code editor, version control, and knowle
       labels:
         <<: *default-labels
         monitoring: gitlab
+
+    gitlab-runner:
+      container_name: gitlab-runner
+      hostname: gitlab-runner
+      restart: always
+      <<: *resource-limits
+      logging:
+        <<: *default-logging
+        options:
+          <<: *default-logging-options
+          loki-external-labels: job=gitlab-runner
+      environment:
+        UID: ${UID_NAS_ADMIN:-1026} # (7)
+        GID: ${GID_NAS_ADMIN:-100} # (8)
+      volumes:
+        - type: bind
+          source: /etc/localtime
+          target: /etc/localtime
+          read_only: true
+        - type: bind
+          source: /var/run/docker.sock
+          target: /var/run/docker.sock
+          read_only: true
+        - type: bind
+          source: ${MOUNT_PATH_DOCKER_ROOT}/gitlab/runner
+          target: /etc/gitlab-runner
+      networks:
+        dockerization:
+      labels:
+        <<: *default-labels
+        monitoring: gitlab-runner
     ```
 
     1. → User ID for volume permissions (default: 1026)
@@ -212,43 +235,8 @@ Integrated development environment with code editor, version control, and knowle
     4. → Web UI port (default: 5100)
     5. → Container registry port (default: 5101)
     6. → Git SSH port (default: 5102)
-
-=== "GitLab Runner"
-    ```yaml hl_lines="12-13" linenums="1"
-    gitlab-runner:
-      container_name: gitlab-runner
-      hostname: gitlab-runner
-      restart: always
-      <<: *resource-limits
-      logging:
-        <<: *default-logging
-        options:
-          <<: *default-logging-options
-          loki-external-labels: job=gitlab-runner
-      environment:
-        UID: ${UID_NAS_ADMIN:-1026} # (1)
-        GID: ${GID_NAS_ADMIN:-100} # (2)
-      volumes:
-        - type: bind
-          source: /etc/localtime
-          target: /etc/localtime
-          read_only: true
-        - type: bind
-          source: /var/run/docker.sock
-          target: /var/run/docker.sock
-          read_only: true
-        - type: bind
-          source: ${MOUNT_PATH_DOCKER_ROOT}/gitlab/runner
-          target: /etc/gitlab-runner
-      networks:
-        dockerization:
-      labels:
-        <<: *default-labels
-        monitoring: gitlab-runner
-    ```
-
-    1. → User ID for volume permissions (default: 1026)
-    2. → Group ID for volume permissions (default: 100)
+    7. → User ID for volume permissions (default: 1026)
+    8. → Group ID for volume permissions (default: 100)
 
 ## 🔐 Required Environment Variables
 
