@@ -91,8 +91,7 @@ services:
       DOCKER_API_VERSION: 1.41 # (18)
       WATCHTOWER_REMOVE_VOLUMES: false # (19)
       WATCHTOWER_TRACE: true # (20)
-      WATCHTOWER_HTTP_API_TOKEN: 
-      ${WATCHTOWER_HTTP_API_TOKEN:? Token is missing} # (21)
+      WATCHTOWER_HTTP_API_TOKEN: ${WATCHTOWER_HTTP_API_TOKEN:? Token is missing} # (21)
     ports:
       - target: 8080
         published: 8080
@@ -232,21 +231,21 @@ networks:
 1. Create `.env` file with required variables
 2. *Initialize volumes*
 ```bash
-mkdir -p ${MOUNT_PATH_DOCKER_ROOT}/{compose/config/dashy.yml}
+mkdir -p ${MOUNT_PATH_DOCKER_ROOT}/{compose/config}
 chown -R ${UID_NAS_ADMIN:-1026}:${GID_NAS_ADMIN:-100} ${MOUNT_PATH_DOCKER_ROOT}
 ```
 3. **Start services**
 ```bash
-docker-compose up -d
+docker-compose -f management.yml up -d
 ```
 
 ### 🔄 Maintenance
 
 - **Updates**
 ```bash
-docker-compose pull && docker-compose up -d
+docker-compose -f management.yml pull && docker-compose -f management.yml up -d
 ```
 - **Logs**
 ```bash
-docker-compose logs -f
+docker-compose -f management.yml logs -f
 ```

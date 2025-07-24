@@ -33,188 +33,163 @@ Essential networking stack including DNS resolution, reverse proxy, and cloud tu
 
 ### Core Services
 
-=== "Cloudflare Tunnel"
-    ```yaml hl_lines="14-16" linenums="1"
-    cloudflared:
-      container_name: cloudflared
-      hostname: cloudflared
-      image: cloudflare/cloudflared:latest
-      command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TOKEN:?CLOUDFLARE_TOKEN required}
-      restart: always
-      <<: *resource-limits
-      logging:
-        <<: *default-logging
-        options:
-          <<: *default-logging-options
-          loki-external-labels: job=cloudflared
-      environment:
-        UID: ${UID_NAS_ADMIN:-1026} # (1)
-        GID: ${GID_NAS_ADMIN:-100} # (2)
-        TUNNEL_METRICS: ${TUNNEL_METRICS:-0.0.0.0:8080} # (3)
-      volumes:
-        - type: bind
-          source: /etc/localtime
-          target: /etc/localtime
-          read_only: true
-      networks:
-        dockerization:
-      labels:
-        <<: *default-labels
-        monitoring: cloudflared
-    ```
+```yaml linenums="1" title="management.yml"
+---
+x-logging: &default-logging
+  driver: loki
+  options: &default-logging-options
+    loki-url: https://loki.${SYNOLOGY_BASIC_URL}/loki/api/v1/push
+    loki-retries: 5
+    loki-batch-size: 400
+    loki-batch-wait: 2s
+    loki-timeout: 10s
+    loki-max-backoff: 5s
+    loki-min-backoff: 1s
+    loki-tenant-id: default
 
-    1. → User ID for volume permissions (default: 1026)
-    2. → Group ID for volume permissions (default: 100)
-    3. → Metrics endpoint (default: 0.0.0.0:8080)
+x-labels: &default-labels
+  com.centurylinklabs.watchtower.enable: true
+  recreat.container: true
+  container.label.group: hosting
 
-=== "Pi-hole DNS"
-    ```yaml hl_lines="30-45" linenums="1"
-    pihole:
-      container_name: pihole
-      hostname: pihole
-      image: pihole/pihole
-      restart: always
-      cap_add:
-        - NET_ADMIN
-      security_opt:
-        - no-new-privileges=false
-      deploy:
-        resources:
-          limits:
-            memory: 512MB
-      ulimits:
-        nofile:
-          soft: 65536
-          hard: 65536
-      healthcheck:
-        test: ["CMD", "dig", "@127.0.0.1", "-p53", "pi.hole"]
-        interval: 1m
-        timeout: 10s
-        retries: 3
-        start_period: 30s
-      logging:
-        <<: *default-logging
-        options:
-          <<: *default-logging-options
-          loki-external-labels: job=pihole
-      environment:
-        UID: ${UID_NAS_ADMIN:-1026} # (1)
-        GID: ${GID_NAS_ADMIN:-100} # (2)
-        FTLCONF_LOCAL_IPV4: ${FTLCONF_LOCAL_IPV4:-0.0.0.0} # (3)
-        FTLCONF_LOCAL_IPV6: ${FTLCONF_LOCAL_IPV6:-::} # (4)
-        PIHOLE_UID: ${PIHOLE_UID:-1000} # (5)
-        PIHOLE_GID: ${PIHOLE_GID:-1000} # (6)
-        DNSMASQ_USER: ${DNSMASQ_USER:-pihole} # (7)
-        FTLCONF_dns_listeningMode: ${FTLCONF_dns_listeningMode:-all} # (8)
-        FTLCONF_webserver_port: ${FTLCONF_webserver_port:-80} # (9)
-        FTLCONF_webserver_api_password: ${PI_HOLE_PASSWORD:?Password is Missing} # (10)
-        WEBTHEME: ${WEBTHEME:-dark} # (11)
-        FTLCONF_dns_upstreams: ${FTLCONF_dns_upstreams:-1.1.1.1;1.0.0.1;8.8.8.8;8.8.4.4} # (12)
-        FTLCONF_QUERY_LOGGING: ${FTLCONF_QUERY_LOGGING:-true} # (13)
-        FTLCONF_MAXDBDAYS: ${FTLCONF_MAXDBDAYS:-30} # (14)
-        FTLCONF_PRIVACYLEVEL: ${FTLCONF_PRIVACYLEVEL:-0} # (15)
-        VIRTUAL_HOST: pihole.${SYNOLOGY_BASIC_URL} # (16)
-      ports:
-        - "53:53/tcp"
-        - "53:53/udp"
-        - "81:80/tcp"
-      volumes:
-        - type: bind
-          source: ${MOUNT_PATH_DOCKER_ROOT:?path required}/config/dnsmasq.d
-          target: /etc/dnsmasq.d
-        - type: bind
-          source: ${MOUNT_PATH_DOCKER_ROOT}/pihole
-          target: /etc/pihole
-        - type: bind
-          source: ${MOUNT_PATH_DOCKER_ROOT}/logs/pihole
-          target: /var/log/pihole
-        - type: bind
-          source: /etc/localtime
-          target: /etc/localtime
-          read_only: true
-      networks:
-        dockerization:
-      labels:
-        <<: *default-labels
-        monitoring: pihole
-    ```
+x-limits: &resource-limits
+  mem_limit: "256m"
+  mem_reservation: "64m"
+  cpu_shares: "512"
+  restart: always
+  networks:
+    dockerization:
 
-    1. → User ID for permissions (default: 1026)
-    2. → Group ID for permissions (default: 100)
-    3. → IPv4 listening address (default: 0.0.0.0)
-    4. → IPv6 listening address (default: ::)
-    5. → Pi-hole user ID (default: 1000)
-    6. → Pi-hole group ID (default: 1000)
-    7. → DNSMasq user (default: pihole)
-    8. → DNS listening mode (default: all)
-    9. → Web interface port (default: 80)
-    10. → Required admin password
-    11. → Web UI theme (default: dark)
-    12. → Upstream DNS servers
-    13. → Query logging (default: true)
-    14. → Log retention (default: 30 days)
-    15. → Privacy level (default: 0)
-    16. → Virtual host URL
+services:
+  cloudflared:
+    container_name: cloudflared
+    hostname: cloudflared
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TOKEN:?CLOUDFLARE_TOKEN required}
+    healthcheck:
+      test: ["CMD", "cloudflared", "--version"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    <<: *resource-limits
+    logging:
+      <<: *default-logging
+      options:
+        <<: *default-logging-options
+        loki-external-labels: job=cloudflared
+    environment:
+      UID: ${UID_NAS_ADMIN:-1026} # (1)
+      GID: ${GID_NAS_ADMIN:-100} # (2)
+      TUNNEL_METRICS: ${TUNNEL_METRICS:-0.0.0.0:8080} # (3)
+    volumes:
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+    labels:
+      <<: *default-labels
+      monitoring: cloudflared
 
-=== "Nginx Proxy Manager"
-    ```yaml hl_lines="25-28" linenums="1"
-    npm-proxy:
-      container_name: npm-proxy
-      hostname: npm-proxy
-      image: jc21/nginx-proxy-manager:latest
-      restart: always
-      healthcheck:
-        test:
-          - CMD
-          - curl
-          - -f
-          - http://localhost:81/ping
-        interval: 30s
-        timeout: 10s
-        retries: 3
-        start_period: 20s
-      <<: *resource-limits
-      logging:
-        <<: *default-logging
-        options:
-          <<: *default-logging-options
-          loki-external-labels: job=npm-proxy
-      ports:
-        - ${NGNIX_PROXY_MANAGER_PORT:-84}:81
-      environment:
-        UID: ${UID_NAS_ADMIN:-1026} # (1)
-        GID: ${GID_NAS_ADMIN:-100} # (2)
-        INITIAL_ADMIN_EMAIL: ${EMAIL} # (3)
-        INITIAL_ADMIN_PASSWORD: ${INITIAL_ADMIN_PASSWORD:?Password is missing} # (4)
-      volumes:
-        - type: bind
-          source: ${MOUNT_PATH_DOCKER_ROOT}/ngx/data
-          target: /data
-        - type: bind
-          source: ${MOUNT_PATH_DOCKER_ROOT}/development/config/ngx.json
-          target: /app/config/production.json
-        - type: bind
-          source: ${MOUNT_PATH_DOCKER_ROOT}/ngx/letsencrypt
-          target: /etc/letsencrypt
-        - type: bind
-          source: /var/run/docker.sock
-          target: /var/run/docker.sock
-          read_only: true
-        - type: bind
-          source: /etc/localtime
-          target: /etc/localtime
-          read_only: true
-      networks:
-        dockerization:
-      labels:
-        <<: *default-labels
-        monitoring: npm-proxy
-    ```
+  pihole:
+    container_name: pihole
+    hostname: pihole
+    image: pihole/pihole
+    cap_add:
+      - NET_ADMIN
+    security_opt:
+      - no-new-privileges=false
+    deploy:
+      resources:
+        limits:
+          memory: 512MB
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    healthcheck:
+      test: ["CMD", "dig", "@127.0.0.1", "-p53", "pi.hole"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    logging:
+      <<: *default-logging
+      options:
+        <<: *default-logging-options
+        loki-external-labels: job=pihole
+    environment:
+      UID: ${UID_NAS_ADMIN:-1026} # (4)
+      GID: ${GID_NAS_ADMIN:-100} # (5)
+      FTLCONF_LOCAL_IPV4: ${FTLCONF_LOCAL_IPV4:-0.0.0.0} # (6)
+      FTLCONF_LOCAL_IPV6: ${FTLCONF_LOCAL_IPV6:-::} # (7)
+      PIHOLE_UID: ${PIHOLE_UID:-1000} # (8)
+      PIHOLE_GID: ${PIHOLE_GID:-1000} # (9)
+      DNSMASQ_USER: ${DNSMASQ_USER:-pihole} # (10)
+      FTLCONF_dns_listeningMode: ${FTLCONF_dns_listeningMode:-all} # (11)
+      FTLCONF_webserver_port: ${FTLCONF_webserver_port:-80} # (12)
+      FTLCONF_webserver_api_password: ${PI_HOLE_PASSWORD:?Password is Missing} # (13)
+      WEBTHEME: ${WEBTHEME:-dark} # (14)
+      FTLCONF_dns_upstreams: ${FTLCONF_dns_upstreams:-1.1.1.1;1.0.0.1;8.8.8.8;8.8.4.4} # (15)
+      FTLCONF_QUERY_LOGGING: ${FTLCONF_QUERY_LOGGING:-true} # (16)
+      FTLCONF_MAXDBDAYS: ${FTLCONF_MAXDBDAYS:-30} # (17)
+      FTLCONF_PRIVACYLEVEL: ${FTLCONF_PRIVACYLEVEL:-0} # (18)
+      VIRTUAL_HOST: pihole.${SYNOLOGY_BASIC_URL} # (19)
+    ports:
+      - target: 53
+        published: 53
+        protocol: tcp
+        mode: host
+      - target: 53
+        published: 53
+        protocol: udp
+        mode: host
+      - target: 80
+        published: 81
+        protocol: tcp
+        mode: host
+    volumes:
+      - type: bind
+        source: ${MOUNT_PATH_DOCKER_ROOT}/config/dnsmasq.d
+        target: /etc/dnsmasq.d
+      - type: bind
+        source: ${MOUNT_PATH_DOCKER_ROOT}/pihole
+        target: /etc/pihole
+      - type: bind
+        source: ${MOUNT_PATH_DOCKER_ROOT}/logs/pihole
+        target: /var/log/pihole
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+    labels:
+      <<: *default-labels
+      monitoring: pihole
 
-    1. → User ID for permissions (default: 1026)
-    2. → Group ID for permissions (default: 100)
-    3. → Admin email address
-    4. → Required admin password
+networks:
+  dockerization:
+    external: true
+```
+
+1. → User ID for volume permissions (default: 1026)
+2. → Group ID for volume permissions (default: 100)
+3. → Metrics endpoint (default: 0.0.0.0:8080)
+4. → User ID for permissions (default: 1026)
+5. → Group ID for permissions (default: 100)
+6. → IPv4 listening address (default: 0.0.0.0)
+7. → IPv6 listening address (default: ::)
+8. → Pi-hole user ID (default: 1000)
+9. → Pi-hole group ID (default: 1000)
+10. → DNSMasq user (default: pihole)
+11. → DNS listening mode (default: all)
+12. → Web interface port (default: 80)
+13. → Required admin password
+14. → Web UI theme (default: dark)
+15. → Upstream DNS servers
+16. → Query logging (default: true)
+17. → Log retention (default: 30 days)
+18. → Privacy level (default: 0)
+19. → Virtual host URL
 
 ## 🔐 Required Environment Variables
 
@@ -241,12 +216,12 @@ Refer to [Environment Variables]({{ config.site_url }}environment) documentation
 1. Create `.env` file with required variables
 2. *Initialize volumes*
 ```bash
-mkdir -p ${MOUNT_PATH_DOCKER_ROOT}/{config/dnsmasq.d,pihole,logs/pihole,ngx/data,ngx/letsencrypt}
+mkdir -p ${MOUNT_PATH_DOCKER_ROOT}/{config/dnsmasq.d,pihole,logs/pihole}
 chown -R ${UID_NAS_ADMIN:-1026}:${GID_NAS_ADMIN:-100} ${MOUNT_PATH_DOCKER_ROOT}
 ```
 3. **Start services**
 ```bash
-docker-compose up -d
+docker-compose -f hosting.yml up -d
 ```
 
 ### 🔄 Maintenance
@@ -255,10 +230,10 @@ docker-compose up -d
 	- Regularly backup volume directories
 - **Updates**
 ```bash
-docker-compose pull
-docker-compose up -d
+docker-compose -f hosting.yml pull
+docker-compose -f hosting.yml up -d
 ```
 - **Logs**
 ```bash
-docker-compose logs -f
+docker-compose -f hosting.yml logs -f
 ```
