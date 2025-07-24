@@ -34,7 +34,7 @@ This script automates the installation of [Entware](https://entware.net/) and ba
 
 ---
 
-```sh linenums="1"
+```sh linenums="1" title="nas.sh"
 #!/bin/bash
 
 # =============================================================================

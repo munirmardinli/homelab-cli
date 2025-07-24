@@ -33,7 +33,7 @@ Automated installation of [Homebrew](https://brew.sh/) on macOS and Linux. The s
 
 ---
 
-```sh linenums="1"
+```sh linenums="1" title="brew.sh"
 #!/bin/sh
 
 OS="$(uname -s)"

@@ -30,7 +30,7 @@ This script automates the creation of a Python virtual environment, installs dep
 - Installs MkDocs if not already present
 
 ---
-```sh linenums="1"
+```sh linenums="1" title="venv.sh"
 #!/bin/bash
 
 python3 -m venv venv # (1)

@@ -33,7 +33,7 @@ Essential networking stack including DNS resolution, reverse proxy, and cloud tu
 
 ### Core Services
 
-```yaml linenums="1" title="management.yml"
+```yaml linenums="1" title="hosting.yml"
 ---
 x-logging: &default-logging
   driver: loki

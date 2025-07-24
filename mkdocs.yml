@@ -65,11 +65,9 @@ theme:
 nav:
   - 🏠 Home:
       - 🏠 Default: index.md
-      - 🛡️ Authentik: posts/authentik.md
-      - ❗ Container Management: posts/containerManagement.md
-      - 🔧 Core Services: posts/coreServices.md
+      - ❗ Container Management: posts/management.md
+      - 🔧 Core Services: posts/hosting.md
       - 💻 Development Services: posts/developmentServices.md
-      - ☁️ Nextcloud: posts/nextcloud.md
       - 🌍 Global:
           - 🌿 Environment: posts/global/environment.md
           - ⚙️ Shared Config: posts/global/sharedConfig.md

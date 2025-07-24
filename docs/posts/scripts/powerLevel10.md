@@ -31,7 +31,7 @@ This script adds the [Powerlevel10k](https://github.com/romkatv/powerlevel10k) t
 
 ---
 
-```sh linenums="1"
+```sh linenums="1" title="powerlevel10k.sh"
 #!/usr/bin/env zsh
 
 if ! grep -Fxq "source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme" ~/.zshrc; then

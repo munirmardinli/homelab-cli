@@ -31,7 +31,7 @@ Automates the process of issuing and deploying SSL certificates for domains mana
 
 ---
 
-```sh linenums="1"
+```sh linenums="1" title="hetzner.sh"
 # Laden der Umgebungsvariablen aus der .env-Datei
 if [ -f .env ]; then # (1)
     export $(grep -v '^#' .env | xargs -d '\n')
