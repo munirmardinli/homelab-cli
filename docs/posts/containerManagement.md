@@ -179,35 +179,35 @@ networks:
     external: true
 ```
 
-1. → User ID for permissions (default: 1026)
-2. → Group ID for permissions (default: 100)
-3. → Automatically clean up old images
-4. → Enable container monitoring by label
-5. → Enable debug mode
-6. → Enable rolling restarts
-7. → Monitor stopped containers
-8. → Disable colored output
-9. → Disable setup message
-10. → Container stop timeout (30s)
-11. → Disable container restarts (false)
-12. → Check interval in seconds (30)
-13. → Enable HTTP API updates
-14. → Enable metrics endpoint
-15. → Enable periodic polls via API
-16. → Enable TLS verification
-17. → Log level (info)
-18. → Docker API version (1.41)
-19. → Remove volumes with containers (false)
-20. → Enable trace logging
-21. → Required API token
-22. → User ID for permissions (default: 1026)
-23. → Group ID for permissions (default: 100)
-24. → Health check interval (60s)
-25. → Label to identify containers to monitor
-26. → Docker socket path
-27. → Gotify webhook URL for notifications
-28. → Monitor only running containers (false)
-29. → Environment PROD
+1. User ID for permissions (default: 1026)
+2. Group ID for permissions (default: 100)
+3. Automatically clean up old images
+4. Enable container monitoring by label
+5. Enable debug mode
+6. Enable rolling restarts
+7. Monitor stopped containers
+8. Disable colored output
+9. Disable setup message
+10. Container stop timeout (30s)
+11. Disable container restarts (false)
+12. Check interval in seconds (30)
+13. Enable HTTP API updates
+14. Enable metrics endpoint
+15. Enable periodic polls via API
+16. Enable TLS verification
+17. Log level (info)
+18. Docker API version (1.41)
+19. Remove volumes with containers (false)
+20. Enable trace logging
+21. Required API token
+22. User ID for permissions (default: 1026)
+23. Group ID for permissions (default: 100)
+24. Health check interval (60s)
+25. Label to identify containers to monitor
+26. Docker socket path
+27. Gotify webhook URL for notifications
+28. Monitor only running containers (false)
+29. Environment PROD
 
 ## 🔐 Required Environment Variables
 

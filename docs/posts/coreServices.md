@@ -171,25 +171,25 @@ networks:
     external: true
 ```
 
-1. → User ID for volume permissions (default: 1026)
-2. → Group ID for volume permissions (default: 100)
-3. → Metrics endpoint (default: 0.0.0.0:8080)
-4. → User ID for permissions (default: 1026)
-5. → Group ID for permissions (default: 100)
-6. → IPv4 listening address (default: 0.0.0.0)
-7. → IPv6 listening address (default: ::)
-8. → Pi-hole user ID (default: 1000)
-9. → Pi-hole group ID (default: 1000)
-10. → DNSMasq user (default: pihole)
-11. → DNS listening mode (default: all)
-12. → Web interface port (default: 80)
-13. → Required admin password
-14. → Web UI theme (default: dark)
-15. → Upstream DNS servers
-16. → Query logging (default: true)
-17. → Log retention (default: 30 days)
-18. → Privacy level (default: 0)
-19. → Virtual host URL
+1. User ID for volume permissions (default: 1026)
+2. Group ID for volume permissions (default: 100)
+3. Metrics endpoint (default: 0.0.0.0:8080)
+4. User ID for permissions (default: 1026)
+5. Group ID for permissions (default: 100)
+6. IPv4 listening address (default: 0.0.0.0)
+7. IPv6 listening address (default: ::)
+8. Pi-hole user ID (default: 1000)
+9. Pi-hole group ID (default: 1000)
+10. DNSMasq user (default: pihole)
+11. DNS listening mode (default: all)
+12. Web interface port (default: 80)
+13. Required admin password
+14. Web UI theme (default: dark)
+15. Upstream DNS servers
+16. Query logging (default: true)
+17. Log retention (default: 30 days)
+18. Privacy level (default: 0)
+19. Virtual host URL
 
 ## 🔐 Required Environment Variables
 
