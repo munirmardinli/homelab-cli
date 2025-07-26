@@ -48,7 +48,6 @@ jobs:
       - name: Set cache output
         id: set-cache-output
         run: echo "cache-hit=$(ls node_modules | wc -l | tr -d ' ')" >> $GITHUB_OUTPUT
-        
   eslint:
     needs: prepare
     runs-on: ubuntu-latest
@@ -133,12 +132,13 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      - name: Cache pip packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('config/requirements.txt') }}
-          restore-keys: ${{ runner.os }}-pip-
+      - name: Install Dependencies
+        run: |
+          pip install -r config/requirements.txt
+          pip install mkdocs-material \
+            mkdocs-git-authors-plugin \
+            mkdocs-git-revision-date-localized-plugin \
+            mkdocs-git-committers-plugin-2
       - name: Create manifest.webmanifest
         run: |
           echo '{
