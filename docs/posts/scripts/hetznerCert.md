@@ -33,12 +33,12 @@ Automates the process of issuing and deploying SSL certificates for domains mana
 
 ```sh linenums="1" title="hetzner.sh"
 # Laden der Umgebungsvariablen aus der .env-Datei
-if [ -f .env ]; then # (1)
+if [ -f .env ]; then # (1)!
     export $(grep -v '^#' .env | xargs -d '\n')
 fi
 
 # Acme.sh von GitHub herunterladen und extrahieren
-wget https://github.com/acmesh-official/acme.sh/archive/master.tar.gz # (2)
+wget https://github.com/acmesh-official/acme.sh/archive/master.tar.gz # (2)!
 tar -xvzf master.tar.gz
 cd acme.sh-master
 ./acme.sh --install --nocron --home /usr/local/share/acme.sh --accountemail "$ACME_ACCOUNT_EMAIL"
@@ -46,7 +46,7 @@ cd ~
 source .profile
 
 # Zertifikat ausstellen
-cd /usr/local/share/acme.sh # (3)
+cd /usr/local/share/acme.sh # (3)!
 export HETZNER_TOKEN="$HETZNER_TOKEN"
 ./acme.sh --issue --dns dns_hetzner -d "$DOMAIN" -d "*.$DOMAIN" --server letsencrypt
 
@@ -56,11 +56,11 @@ export SYNO_PASSWORD="$SYNO_PASSWORD"
 export SYNO_CERTIFICATE=""
 
 # Zertifikat auf Synology DSM bereitstellen
-./acme.sh --deploy --home . -d "$DOMAIN" --deploy-hook synology_dsm # (4)
+./acme.sh --deploy --home . -d "$DOMAIN" --deploy-hook synology_dsm # (4)!
 
 # Zertifikat ernern 
 
-/usr/local/share/acme.sh/acme.sh --cron --home /usr/local/share/acme.sh/ # (5)
+/usr/local/share/acme.sh/acme.sh --cron --home /usr/local/share/acme.sh/ # (5)!
 ```
 
 1. Loads required environment variables from a `.env` file (must define `ACME_ACCOUNT_EMAIL`, `HETZNER_TOKEN`, `DOMAIN`, `SYNO_USERNAME`, `SYNO_PASSWORD`).

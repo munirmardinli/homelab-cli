@@ -36,7 +36,7 @@ This script adds the [Powerlevel10k](https://github.com/romkatv/powerlevel10k) t
 
 if ! grep -Fxq "source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme" ~/.zshrc; then
   echo 'source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
-  echo "Powerlevel10k wurde zur .zshrc hinzugefügt." # (1)
+  echo "Powerlevel10k wurde zur .zshrc hinzugefügt." # (1)!
   source ~/.zshrc
 else
   echo "Powerlevel10k ist bereits in der .zshrc eingetragen."

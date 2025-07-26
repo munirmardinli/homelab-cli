@@ -79,9 +79,9 @@ services:
         <<: *default-logging-options
         loki-external-labels: job=cloudflared
     environment:
-      UID: ${UID_NAS_ADMIN:-1026} # (1)
-      GID: ${GID_NAS_ADMIN:-100} # (2)
-      TUNNEL_METRICS: ${TUNNEL_METRICS:-0.0.0.0:8080} # (3)
+      UID: ${UID_NAS_ADMIN:-1026} # (1)!
+      GID: ${GID_NAS_ADMIN:-100} # (2)!
+      TUNNEL_METRICS: ${TUNNEL_METRICS:-0.0.0.0:8080} # (3)!
     volumes:
       - type: bind
         source: /etc/localtime
@@ -119,22 +119,22 @@ services:
         <<: *default-logging-options
         loki-external-labels: job=pihole
     environment:
-      UID: ${UID_NAS_ADMIN:-1026} # (4)
-      GID: ${GID_NAS_ADMIN:-100} # (5)
-      FTLCONF_LOCAL_IPV4: ${FTLCONF_LOCAL_IPV4:-0.0.0.0} # (6)
-      FTLCONF_LOCAL_IPV6: ${FTLCONF_LOCAL_IPV6:-::} # (7)
-      PIHOLE_UID: ${PIHOLE_UID:-1000} # (8)
-      PIHOLE_GID: ${PIHOLE_GID:-1000} # (9)
-      DNSMASQ_USER: ${DNSMASQ_USER:-pihole} # (10)
-      FTLCONF_dns_listeningMode: ${FTLCONF_dns_listeningMode:-all} # (11)
-      FTLCONF_webserver_port: ${FTLCONF_webserver_port:-80} # (12)
-      FTLCONF_webserver_api_password: ${PI_HOLE_PASSWORD:?Password is Missing} # (13)
-      WEBTHEME: ${WEBTHEME:-dark} # (14)
-      FTLCONF_dns_upstreams: ${FTLCONF_dns_upstreams:-1.1.1.1;1.0.0.1;8.8.8.8;8.8.4.4} # (15)
-      FTLCONF_QUERY_LOGGING: ${FTLCONF_QUERY_LOGGING:-true} # (16)
-      FTLCONF_MAXDBDAYS: ${FTLCONF_MAXDBDAYS:-30} # (17)
-      FTLCONF_PRIVACYLEVEL: ${FTLCONF_PRIVACYLEVEL:-0} # (18)
-      VIRTUAL_HOST: pihole.${SYNOLOGY_BASIC_URL} # (19)
+      UID: ${UID_NAS_ADMIN:-1026} # (4)!
+      GID: ${GID_NAS_ADMIN:-100} # (5)!
+      FTLCONF_LOCAL_IPV4: ${FTLCONF_LOCAL_IPV4:-0.0.0.0} # (6)!
+      FTLCONF_LOCAL_IPV6: ${FTLCONF_LOCAL_IPV6:-::} # (7)!
+      PIHOLE_UID: ${PIHOLE_UID:-1000} # (8)!
+      PIHOLE_GID: ${PIHOLE_GID:-1000} # (9)!
+      DNSMASQ_USER: ${DNSMASQ_USER:-pihole} # (10)!
+      FTLCONF_dns_listeningMode: ${FTLCONF_dns_listeningMode:-all} # (11)!
+      FTLCONF_webserver_port: ${FTLCONF_webserver_port:-80} # (12)!
+      FTLCONF_webserver_api_password: ${PI_HOLE_PASSWORD:?Password is Missing} # (13)!
+      WEBTHEME: ${WEBTHEME:-dark} # (14)!
+      FTLCONF_dns_upstreams: ${FTLCONF_dns_upstreams:-1.1.1.1;1.0.0.1;8.8.8.8;8.8.4.4} # (15)!
+      FTLCONF_QUERY_LOGGING: ${FTLCONF_QUERY_LOGGING:-true} # (16)!
+      FTLCONF_MAXDBDAYS: ${FTLCONF_MAXDBDAYS:-30} # (17)!
+      FTLCONF_PRIVACYLEVEL: ${FTLCONF_PRIVACYLEVEL:-0} # (18)!
+      VIRTUAL_HOST: pihole.${SYNOLOGY_BASIC_URL} # (19)!
     ports:
       - target: 53
         published: 53

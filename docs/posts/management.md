@@ -71,27 +71,27 @@ services:
         <<: *default-logging-options
         loki-external-labels: job=watchtower
     environment:
-      UID: ${UID_NAS_ADMIN:-1026} # (1)
-      GID: ${GID_NAS_ADMIN:-100} # (2)
-      WATCHTOWER_CLEANUP: true # (3)
-      WATCHTOWER_LABEL_ENABLE: true # (4)
-      WATCHTOWER_DEBUG: true # (5)
-      WATCHTOWER_ROLLING_RESTART: true # (6)
-      WATCHTOWER_INCLUDE_STOPPED: true # (7)
-      NO_COLOR: 1 # (8)
-      WATCHTOWER_NO_SETUP_MESSAGE: true # (9)
-      WATCHTOWER_TIMEOUT: 30s # (10)
-      WATCHTOWER_NO_RESTART: false # (11)
-      WATCHTOWER_POLL_INTERVAL: 30 # (12)
-      WATCHTOWER_HTTP_API_UPDATE: true # (13)
-      WATCHTOWER_HTTP_API_METRICS: true # (14)
-      WATCHTOWER_HTTP_API_PERIODIC_POLLS: true # (15)
-      DOCKER_TLS_VERIFY: true # (16)
-      WATCHTOWER_LOG_LEVEL: info # (17)
-      DOCKER_API_VERSION: 1.41 # (18)
-      WATCHTOWER_REMOVE_VOLUMES: false # (19)
-      WATCHTOWER_TRACE: true # (20)
-      WATCHTOWER_HTTP_API_TOKEN: ${WATCHTOWER_HTTP_API_TOKEN:? Token is missing} # (21)
+      UID: ${UID_NAS_ADMIN:-1026} # (1)!
+      GID: ${GID_NAS_ADMIN:-100} # (2)!
+      WATCHTOWER_CLEANUP: true # (3)!
+      WATCHTOWER_LABEL_ENABLE: true # (4)!
+      WATCHTOWER_DEBUG: true # (5)!
+      WATCHTOWER_ROLLING_RESTART: true # (6)!
+      WATCHTOWER_INCLUDE_STOPPED: true # (7)!
+      NO_COLOR: 1 # (8)!
+      WATCHTOWER_NO_SETUP_MESSAGE: true # (9)!
+      WATCHTOWER_TIMEOUT: 30s # (10)!
+      WATCHTOWER_NO_RESTART: false # (11)!
+      WATCHTOWER_POLL_INTERVAL: 30 # (12)!
+      WATCHTOWER_HTTP_API_UPDATE: true # (13)!
+      WATCHTOWER_HTTP_API_METRICS: true # (14)!
+      WATCHTOWER_HTTP_API_PERIODIC_POLLS: true # (15)!
+      DOCKER_TLS_VERIFY: true # (16)!
+      WATCHTOWER_LOG_LEVEL: info # (17)!
+      DOCKER_API_VERSION: 1.41 # (18)!
+      WATCHTOWER_REMOVE_VOLUMES: false # (19)!
+      WATCHTOWER_TRACE: true # (20)!
+      WATCHTOWER_HTTP_API_TOKEN: ${WATCHTOWER_HTTP_API_TOKEN:? Token is missing} # (21)!
     ports:
       - target: 8080
         published: 8080
@@ -125,13 +125,13 @@ services:
         <<: *default-logging-options
         loki-external-labels: job=autoheal
     environment:
-      UID: ${UID_NAS_ADMIN:-1026} # (22)
-      GID: ${GID_NAS_ADMIN:-100} # (23)
-      AUTOHEAL_INTERVAL: 60s # (24)
-      AUTOHEAL_CONTAINER_LABEL: recreat.container # (25)
-      DOCKER_HOST: unix:///var/run/docker.sock # (26)
-      WEBHOOK_URL: https://gotify.${SYNOLOGY_BASIC_URL}/message?token=${WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN} # (27)
-      AUTOHEAL_ONLY_MONITOR_RUNNING: false # (28)
+      UID: ${UID_NAS_ADMIN:-1026} # (22)!
+      GID: ${GID_NAS_ADMIN:-100} # (23)!
+      AUTOHEAL_INTERVAL: 60s # (24)!
+      AUTOHEAL_CONTAINER_LABEL: recreat.container # (25)!
+      DOCKER_HOST: unix:///var/run/docker.sock # (26)!
+      WEBHOOK_URL: https://gotify.${SYNOLOGY_BASIC_URL}/message?token=${WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN} # (27)!
+      AUTOHEAL_ONLY_MONITOR_RUNNING: false # (28)!
     volumes:
       - type: bind
         source: /var/run/docker.sock
@@ -156,7 +156,7 @@ services:
         <<: *default-logging-options
         loki-external-labels: job=dashy
     environment:
-      NODE_ENV: production # (29)
+      NODE_ENV: production # (29)!
     ports:
       - target: 8080
         published: 90

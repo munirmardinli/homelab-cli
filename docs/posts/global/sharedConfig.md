@@ -27,16 +27,16 @@ The following shared anchors are used across services in your docker-compose.yml
 
     ```yaml hl_lines="2-11" linenums="1"
     x-logging: &default-logging
-      driver: "loki" # (1)
+      driver: "loki" # (1)!
       options: &default-logging-options
-        loki-url: https://loki.${SYNOLOGY_BASIC_URL}/loki/api/v1/push # (2)
-        loki-retries: 5 # (3)
-        loki-batch-size: 400 # (4)
-        loki-batch-wait: 2s # (5)
-        loki-timeout: 10s # (6)
-        loki-max-backoff: 5s # (7)
-        loki-min-backoff: 1s # (8)
-        loki-tenant-id: default # (9)
+        loki-url: https://loki.${SYNOLOGY_BASIC_URL}/loki/api/v1/push # (2)!
+        loki-retries: 5 # (3)!
+        loki-batch-size: 400 # (4)!
+        loki-batch-wait: 2s # (5)!
+        loki-timeout: 10s # (6)!
+        loki-max-backoff: 5s # (7)!
+        loki-min-backoff: 1s # (8)!
+        loki-tenant-id: default # (9)!
     ```
 
     1. → Uses Grafana Loki for log aggregation
@@ -66,9 +66,9 @@ The following shared anchors are used across services in your docker-compose.yml
 
     ```yaml hl_lines="2-4" linenums="1"
     x-labels: &default-labels
-      com.centurylinklabs.watchtower.enable: true  # (1)
-      recreat.container: true                      # (2)
-      container.label.group: setup                 # (3)
+      com.centurylinklabs.watchtower.enable: true  # (1)!
+      recreat.container: true                      # (2)!
+      container.label.group: setup                 # (3)!
     ```
 
     1. → Enables [Watchtower](https://containrrr.dev/watchtower/) to auto-update this container
@@ -92,11 +92,11 @@ The following shared anchors are used across services in your docker-compose.yml
       deploy:
         resources:
           limits:
-            cpus: '0.50'  # (1)
-            memory: 512M  # (2)
+            cpus: '0.50'  # (1)!
+            memory: 512M  # (2)!
           reservations:
-            cpus: '0.25'  # (3)
-            memory: 256M  # (4)
+            cpus: '0.25'  # (3)!
+            memory: 256M  # (4)!
     ```
 
     1. → Container won't exceed 50% of a CPU core

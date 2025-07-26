@@ -88,11 +88,11 @@ services:
         target: /etc/localtime
         read_only: true
     environment:
-      POSTGRES_PASSWORD: ${PG_PASS:?database password required} # (1)
-      POSTGRES_USER: ${PG_USER:-authentik} # (2)
-      POSTGRES_DB: ${PG_DB:-authentik} # (3)
-      UID: ${UID_NAS_ADMIN:-1026} # (4)
-      GID: ${GID_NAS_ADMIN:-100} # (5)
+      POSTGRES_PASSWORD: ${PG_PASS:?database password required} # (1)!
+      POSTGRES_USER: ${PG_USER:-authentik} # (2)!
+      POSTGRES_DB: ${PG_DB:-authentik} # (3)!
+      UID: ${UID_NAS_ADMIN:-1026} # (4)!
+      GID: ${GID_NAS_ADMIN:-100} # (5)!
     labels:
       <<: *default-labels
       monitoring: authentik-postgresql
@@ -125,8 +125,8 @@ services:
         target: /etc/localtime
         read_only: true
     environment:
-      UID: ${UID_NAS_ADMIN:-1026} # (6)
-      GID: ${GID_NAS_ADMIN:-100} # (7)
+      UID: ${UID_NAS_ADMIN:-1026} # (6)!
+      GID: ${GID_NAS_ADMIN:-100} # (7)!
     labels:
       <<: *default-labels
       monitoring: authentik-redis
@@ -143,16 +143,16 @@ services:
         <<: *default-logging-options
         loki-external-labels: job=authentik
     environment:
-      AUTHENTIK_REDIS__HOST: redis # (8)
-      AUTHENTIK_POSTGRESQL__HOST: postgresql # (9)
-      AUTHENTIK_POSTGRESQL__USER: ${PG_USER:-authentik} # (10)
-      AUTHENTIK_POSTGRESQL__NAME: ${PG_DB:-authentik} # (11)
-      AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS} # (12)
-      AUTHENTIK_BOOTSTRAP_EMAIL: ${EMAIL} # (13)
-      AUTHENTIK_BOOTSTRAP_PASSWORD: ${AUTHENTIK_BOOTSTRAP_PASSWORD} # (14)
-      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY} # (15)
-      UID: ${UID_NAS_ADMIN:-1026} # (16)
-      GID: ${GID_NAS_ADMIN:-100} # (17)
+      AUTHENTIK_REDIS__HOST: redis # (8)!
+      AUTHENTIK_POSTGRESQL__HOST: postgresql # (9)!
+      AUTHENTIK_POSTGRESQL__USER: ${PG_USER:-authentik} # (10)!
+      AUTHENTIK_POSTGRESQL__NAME: ${PG_DB:-authentik} # (11)!
+      AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS} # (12)!
+      AUTHENTIK_BOOTSTRAP_EMAIL: ${EMAIL} # (13)!
+      AUTHENTIK_BOOTSTRAP_PASSWORD: ${AUTHENTIK_BOOTSTRAP_PASSWORD} # (14)!
+      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY} # (15)!
+      UID: ${UID_NAS_ADMIN:-1026} # (16)!
+      GID: ${GID_NAS_ADMIN:-100} # (17)!
     volumes:
       - type: bind
         source: /etc/localtime
@@ -188,16 +188,16 @@ services:
         <<: *default-logging-options
         loki-external-labels: job=authentik-worker
     environment:
-      AUTHENTIK_REDIS__HOST: redis # (18)
-      AUTHENTIK_POSTGRESQL__HOST: postgresql # (19)
-      AUTHENTIK_POSTGRESQL__USER: ${PG_USER:-authentik} # (20)
-      AUTHENTIK_POSTGRESQL__NAME: ${PG_DB:-authentik} # (21)
-      AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS} # (22)
-      AUTHENTIK_BOOTSTRAP_EMAIL: ${EMAIL} # (23)
-      AUTHENTIK_BOOTSTRAP_PASSWORD: ${AUTHENTIK_BOOTSTRAP_PASSWORD} # (24)
-      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY} # (25)
-      UID: ${UID_NAS_ADMIN:-1026} # (26)
-      GID: ${GID_NAS_ADMIN:-100} # (27)
+      AUTHENTIK_REDIS__HOST: redis # (18)!
+      AUTHENTIK_POSTGRESQL__HOST: postgresql # (19)!
+      AUTHENTIK_POSTGRESQL__USER: ${PG_USER:-authentik} # (20)!
+      AUTHENTIK_POSTGRESQL__NAME: ${PG_DB:-authentik} # (21)!
+      AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS} # (22)!
+      AUTHENTIK_BOOTSTRAP_EMAIL: ${EMAIL} # (23)!
+      AUTHENTIK_BOOTSTRAP_PASSWORD: ${AUTHENTIK_BOOTSTRAP_PASSWORD} # (24)!
+      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY} # (25)!
+      UID: ${UID_NAS_ADMIN:-1026} # (26)!
+      GID: ${GID_NAS_ADMIN:-100} # (27)!
     user: root
     volumes:
       - type: bind

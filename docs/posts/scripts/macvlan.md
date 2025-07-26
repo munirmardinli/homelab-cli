@@ -32,20 +32,20 @@ This script interactively creates a Docker macvlan network, supporting both IPv4
 ```sh linenums="1" title="macvlan.sh"
 #!/bin/bash
 
-read -p "Enter the Docker network name: " NETWORK_NAME # (1)
-read -p "Enter the first three parts of the IPv4 address (e.g. 10.100.0): " IP_PREFIX # (2)
+read -p "Enter the Docker network name: " NETWORK_NAME # (1)!
+read -p "Enter the first three parts of the IPv4 address (e.g. 10.100.0): " IP_PREFIX # (2)!
 
-SUBNET_IPV4="${IP_PREFIX}.0/24" # (3)
-GATEWAY_IPV4="${IP_PREFIX}.254" # (4)
+SUBNET_IPV4="${IP_PREFIX}.0/24" # (3)!
+GATEWAY_IPV4="${IP_PREFIX}.254" # (4)!
 
 echo "Select network type:"
 echo "1) IPv4 and IPv6"
 echo "2) IPv4 only"
-read -p "Selection (1 or 2): " NET_TYPE # (5)
+read -p "Selection (1 or 2): " NET_TYPE # (5)!
 
 if [ "$NET_TYPE" = "1" ]; then
-    IPV6_PREFIX="fd00::" # (6)
-    SUBNET_IPV6="${IPV6_PREFIX}/64" # (7)
+    IPV6_PREFIX="fd00::" # (6)!
+    SUBNET_IPV6="${IPV6_PREFIX}/64" # (7)!
     docker network create -d macvlan \
       --subnet=$SUBNET_IPV4 \
       --gateway=$GATEWAY_IPV4 \

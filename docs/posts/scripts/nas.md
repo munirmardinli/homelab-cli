@@ -66,7 +66,7 @@ warning() {
 # =============================================================================
 # 1. Voraussetzungen prüfen
 # =============================================================================
-log "Prüfe Voraussetzungen..." # (1)
+log "Prüfe Voraussetzungen..." # (1)!
 
 # Prüfe ob wir auf einem Synology NAS sind
 if [ ! -d "/volume1" ]; then
@@ -82,7 +82,7 @@ fi
 # =============================================================================
 # 2. Entware Verzeichnis vorbereiten
 # =============================================================================
-log "Bereite Entware Verzeichnis vor..." # (2)
+log "Bereite Entware Verzeichnis vor..." # (2)!
 
 ENTWARE_DIR="/volume1/@Entware"
 OPT_DIR="$ENTWARE_DIR/opt"
@@ -101,7 +101,7 @@ fi
 # =============================================================================
 # 3. Mount-Point einrichten
 # =============================================================================
-log "Richte Mount-Point ein..." # (3)
+log "Richte Mount-Point ein..." # (3)!
 
 # Prüfe ob bereits gemountet
 if ! mountpoint -q /opt; then
@@ -120,7 +120,7 @@ fi
 # =============================================================================
 # 4. Entware installieren
 # =============================================================================
-log "Installiere Entware..." # (4)
+log "Installiere Entware..." # (4)!
 
 # Prüfe ob Entware bereits installiert ist
 if [ ! -f "/opt/bin/opkg" ]; then
@@ -133,7 +133,7 @@ fi
 # =============================================================================
 # 5. System-Informationen anzeigen
 # =============================================================================
-log "System-Informationen:" # (5)
+log "System-Informationen:" # (5)!
 echo "Architektur: $(uname -m)"
 echo "CPU-Info:"
 cat /proc/cpuinfo | grep "model name" | head -1
@@ -141,7 +141,7 @@ cat /proc/cpuinfo | grep "model name" | head -1
 # =============================================================================
 # 6. PATH konfigurieren
 # =============================================================================
-log "Konfiguriere PATH..." # (6)
+log "Konfiguriere PATH..." # (6)!
 
 # Prüfe ob PATH bereits konfiguriert ist
 if ! grep -q "/opt/bin:/opt/sbin" ~/.profile; then
@@ -157,7 +157,7 @@ export PATH=/opt/bin:/opt/sbin:$PATH
 # =============================================================================
 # 7. Entware aktualisieren und Tools installieren
 # =============================================================================
-log "Aktualisiere Entware Paketliste..." # (7)
+log "Aktualisiere Entware Paketliste..." # (7)!
 opkg update
 
 log "Installiere nano..."

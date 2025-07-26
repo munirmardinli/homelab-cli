@@ -33,10 +33,10 @@ This script automates the creation of a Python virtual environment, installs dep
 ```sh linenums="1" title="venv.sh"
 #!/bin/bash
 
-python3 -m venv venv # (1)
-source venv/Scripts/activate # (2)
-pip install -r config/requirements.txt # (3)
-mkdocs build --verbose # (4)
+python3 -m venv venv # (1)!
+source venv/Scripts/activate # (2)!
+pip install -r config/requirements.txt # (3)!
+mkdocs build --verbose # (4)!
 ```
 
 1. → Creates Python virtual environment in `venv` folder
