@@ -183,6 +183,10 @@ services:
     labels:
       <<: *default-labels
       monitoring: gitlab-runner
+
+networks:
+  dockerization:
+    external: true
 ```
 
 1. → Creates Python virtual environment in `venv` folder

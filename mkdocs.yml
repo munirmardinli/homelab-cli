@@ -67,7 +67,7 @@ nav:
       - 🏠 Default: index.md
       - ❗ Container Management: posts/management.md
       - 🔧 Core Services: posts/hosting.md
-      - 💻 Development Services: posts/developmentServices.md
+      - 💻 Development Services: posts/development.md
       - 🌍 Global:
           - 🌿 Environment: posts/global/environment.md
           - ⚙️ Shared Config: posts/global/sharedConfig.md
