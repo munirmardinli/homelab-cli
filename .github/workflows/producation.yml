@@ -47,8 +47,39 @@ jobs:
       - name: Set cache output
         id: set-cache-output
         run: echo "cache-hit=$(ls node_modules | wc -l | tr -d ' ')" >> $GITHUB_OUTPUT
+
+  prepare-docs:
+    runs-on: ubuntu-latest
+    outputs:
+      docs_cache: ${{ steps.set-docs-cache.outputs.cache-hit }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Cache pip packages
+        id: cache-pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('config/requirements.txt') }}
+          restore-keys: ${{ runner.os }}-pip-
+      - name: Install Dependencies
+        run: |
+          pip install -r config/requirements.txt
+          pip install mkdocs-material \
+            mkdocs-git-authors-plugin \
+            mkdocs-git-revision-date-localized-plugin \
+            mkdocs-git-committers-plugin-2
+      - name: Set docs cache output
+        id: set-docs-cache
+        run: echo "cache-hit=$(pip list | grep mkdocs | wc -l | tr -d ' ')" >> $GITHUB_OUTPUT
+
   eslint:
-    needs: prepare
+    needs: 
+      - prepare
+      - prepare-docs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -61,7 +92,9 @@ jobs:
       - name: Run eslint tool
         run: npx eslint 'src/**/*.ts' --fix
   prettier:
-    needs: prepare
+    needs: 
+      - prepare
+      - prepare-docs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -74,7 +107,9 @@ jobs:
       - name: Run prettier tool
         run: npx prettier '**/*.{ts,tsx}' --write
   dependency-cruiser:
-    needs: prepare
+    needs: 
+      - prepare
+      - prepare-docs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -87,7 +122,9 @@ jobs:
       - name: Run dependency-cruiser tool
         run: npx dependency-cruiser --validate .dependency-cruiser.cjs src
   typecheck:
-    needs: prepare
+    needs: 
+      - prepare
+      - prepare-docs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -131,13 +168,12 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      - name: Install Dependencies
-        run: |
-          pip install -r config/requirements.txt
-          pip install mkdocs-material \
-            mkdocs-git-authors-plugin \
-            mkdocs-git-revision-date-localized-plugin \
-            mkdocs-git-committers-plugin-2
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('config/requirements.txt') }}
+          restore-keys: ${{ runner.os }}-pip-
       - name: Create manifest.webmanifest
         run: |
           echo '{
