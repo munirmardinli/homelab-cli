@@ -1,0 +1,83 @@
+{
+  "nodes": [
+    {
+      "id": "0",
+      "name": "\ud83c\udfe0 Home",
+      "symbolSize": 0,
+      "value": "/homelab-cli/"
+    },
+    {
+      "id": "1",
+      "name": "\u2757 Container Management",
+      "symbolSize": 0,
+      "value": "/homelab-cli/management/"
+    },
+    {
+      "id": "2",
+      "name": "\ud83d\udd27 Core Services",
+      "symbolSize": 0,
+      "value": "/homelab-cli/core/"
+    },
+    {
+      "id": "3",
+      "name": "\ud83d\udcbb Development Services",
+      "symbolSize": 0,
+      "value": "/homelab-cli/development/"
+    },
+    {
+      "id": "4",
+      "name": "\ud83c\udf3f Environment",
+      "symbolSize": 0,
+      "value": "/homelab-cli/environment/"
+    },
+    {
+      "id": "5",
+      "name": "\u2699\ufe0f Shared Config",
+      "symbolSize": 0,
+      "value": "/homelab-cli/sharedConfig/"
+    },
+    {
+      "id": "6",
+      "name": "\ud83c\udfd7 Homebrew Installation",
+      "symbolSize": 0,
+      "value": "/homelab-cli/brew/"
+    },
+    {
+      "id": "7",
+      "name": "\ud83d\uddc4\ufe0f NAS Script",
+      "symbolSize": 0,
+      "value": "/homelab-cli/nas/"
+    },
+    {
+      "id": "8",
+      "name": "\ud83c\udfa8 Powerlevel10k Script",
+      "symbolSize": 0,
+      "value": "/homelab-cli/powerlevel10k/"
+    },
+    {
+      "id": "9",
+      "name": "\ud83c\udf10 Docker Macvlan",
+      "symbolSize": 0,
+      "value": "/homelab-cli/macvlan/"
+    },
+    {
+      "id": "10",
+      "name": "\ud83d\udc0d Venv Script",
+      "symbolSize": 0,
+      "value": "/homelab-cli/venv/"
+    },
+    {
+      "id": "11",
+      "name": "\ud83d\udd10 Hetzner Certificate",
+      "symbolSize": 0,
+      "value": "/homelab-cli/hetznerCert/"
+    },
+    {
+      "id": "12",
+      "name": "\ud83c\udfd7 Code Documentation",
+      "symbolSize": 0,
+      "value": "/homelab-cli/code/"
+    }
+  ],
+  "links": []
+}
