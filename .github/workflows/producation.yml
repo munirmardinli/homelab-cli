@@ -306,7 +306,7 @@ jobs:
             .npm
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Build application
-        run: npx tsc --production
+        run: npx tsc
       - name: Prune Dependencies
         run: npm prune --production
       - name: Log in to GitHub Container Registry
