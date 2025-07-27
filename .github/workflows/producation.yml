@@ -10,6 +10,7 @@ on:
 env:
   GITGUARDIAN_API: ${{ secrets.GITGUARDIAN_API_KEY }}
   NPM_VERSION: "22"
+  REGISTRY_URL: "https://npm.pkg.github.com"
   PYTHON_VERSION: "3.13"
   TRIVY_VERSION: "0.64.1"
   DEPLOYMENT_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
@@ -27,8 +28,15 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       node_modules_cache: ${{ steps.set-cache-output.outputs.cache-hit }}
+      package_version: ${{ steps.get-version.outputs.version }}
     steps:
       - uses: actions/checkout@v4
+      - name: Get package version
+        id: get-version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "PACKAGE_VERSION=$VERSION" >> $GITHUB_ENV
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -118,6 +126,14 @@ jobs:
       - name: Build application
         run: |
           npx tsc
+      - name: Cache build artifacts
+        uses: actions/cache@v4
+        with:
+          path: |
+            dist
+            build
+          key: ${{ runner.os }}-build-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-build-
   deploy-docs:
     needs: build-prod
     runs-on: ubuntu-latest
@@ -257,3 +273,29 @@ jobs:
       - name: Run npm audit
         run: npm audit --audit-level=moderate
         working-directory: ${{ github.workspace }}
+
+  publish-package:
+    needs: build-prod
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NPM_VERSION }}
+          registry-url: https://npm.pkg.github.com
+      - uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .npm
+            dist
+            build
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Publish package to GitHub Packages
+        run: |
+          echo "Publishing version $(node -p "require('./package.json').version")"
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PACKAGE_VERSION: $(node -p "require('./package.json').version")
+# PACKAGE_VERSION
