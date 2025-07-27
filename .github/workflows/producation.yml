@@ -15,6 +15,9 @@ env:
   TRIVY_VERSION: "0.64.1"
   DEPLOYMENT_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
   REPO_NAME: ${{ github.event.repository.name }}
+  IMAGE_TAG: latest
+  DOCKER_IMAGE_NAME: ${{ github.repository_owner }}/${{ github.event.repository.name }}
+  DOCKER_REGISTRY: ghcr.io
 
 permissions:
   contents: write
@@ -300,4 +303,48 @@ jobs:
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-# PACKAGE_VERSION
+  docker-prod:
+    needs: build-prod
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .npm
+            dist
+            build
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.DOCKER_REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: config/.docker/Dockerfile
+          push: true
+          tags: ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
+          build-args: |
+            NODE_ENV=production
+            BRANCH=${{ github.ref_name }}
+            BUILD_TIMESTAMP=${{ github.event.repository.updated_at }}
+            GITHUB_REPO=${{ github.repository }}
+            IMAGE_TITLE=${{ github.event.repository.name }}
+            GITHUB_OWNER=${{ github.repository_owner }}
+            GITHUB_REF_NAME=${{ github.ref_name }}
+            IMAGE_DESCRIPTION=${{ github.event.repository.description }}
+            GITHUB_SHA=${{ github.sha }}
+            REPO_LICENSE=${{ github.event.repository.license }}
+            REPO_CATEGORIES=${{ github.event.repository.topics }}
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
