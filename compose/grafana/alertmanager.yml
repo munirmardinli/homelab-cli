@@ -1,0 +1,20 @@
+route:
+  group_by: ["alertname", "job"]
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 3h
+  receiver: discord
+
+receivers:
+  - name: discord
+    discord_configs:
+      - webhook_url: https://discord.com/api/webhooks/1395122964781072515/99aiol1g64JzO1tjJiyixIGbLwmbMk_Kbj4R0QoJgzww8hP8yKgD4DfsTDplyOZ7nX0e
+        message: |
+          **[{{ .Status | toUpper }}] {{ .CommonLabels.alertname }}**
+          {{ range .Alerts }}
+          > 🛑 **Regel:** `{{ .Labels.alertname }}`
+          > 🐳 **Container:** `{{ .Labels.container_label_com_docker_compose_service }}`
+          > 🖥️ **Instance:** `{{ .Labels.instance }}`
+          > ⚠️ **Severity:** `{{ .Labels.severity }}`
+          > 📝 **Beschreibung:** {{ .Annotations.description }}
+          {{ end }}

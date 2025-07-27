@@ -1,0 +1,47 @@
+groups:
+  - name: cadvisor.rules
+    rules:
+      - alert: CadvisorDown
+        expr: up{job="Cadvisor"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "cAdvisor ist nicht erreichbar"
+          description: "Der cAdvisor auf {{ $labels.instance }} ist seit mindestens 1 Minute nicht erreichbar."
+
+      - alert: ContainerHighCPU
+        expr: rate(container_cpu_usage_seconds_total{job="Cadvisor"}[5m]) * 100 > 80
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Hohe CPU-Nutzung in Container"
+          description: "Ein Container auf {{ $labels.instance }} nutzt dauerhaft mehr als 80% CPU ({{ $labels.container_label_com_docker_swarm_service_name }})."
+
+      - alert: ContainerHighMemory
+        expr: container_memory_usage_bytes{job="Cadvisor"} / container_spec_memory_limit_bytes{job="Cadvisor"} * 100 > 90
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Hoher Speicherverbrauch in Container"
+          description: "Ein Container auf {{ $labels.instance }} nutzt mehr als 90% seines zugewiesenen Speichers."
+
+      - alert: ContainerRestartsFrequently
+        expr: rate(container_start_time_seconds{job="Cadvisor"}[10m]) > 0.01
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Container wurde häufig neugestartet"
+          description: "Mindestens ein Container auf {{ $labels.instance }} wurde in den letzten 10 Minuten mehrfach neugestartet."
+
+      - alert: ContainerDiskUsageHigh
+        expr: container_fs_usage_bytes{job="Cadvisor"} / container_fs_limit_bytes{job="Cadvisor"} * 100 > 90
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Hoher Speicherverbrauch im Container-Dateisystem"
+          description: "Ein Container auf {{ $labels.instance }} nutzt über 90% seines Dateisystemplatzes."

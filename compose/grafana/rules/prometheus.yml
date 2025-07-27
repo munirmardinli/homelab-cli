@@ -1,0 +1,11 @@
+groups:
+  - name: prometheus.rules
+    rules:
+      - alert: PrometheusDown
+        expr: probe_success{job="Blackbox HTTP-HTTPS", instance=~".*prometheus.*"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Prometheus ist nicht erreichbar"
+          description: "Der Service Prometheus ist seit mehr als 1 Minute nicht erreichbar."

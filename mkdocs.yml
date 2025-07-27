@@ -65,6 +65,7 @@ theme:
 nav:
   - 🏠 Home:
       - 🏠 Default: index.md
+      - 🛡️ Authentik: posts/authentik.md
       - ❗ Container Management: posts/management.md
       - 🔧 Core Services: posts/hosting.md
       - 💻 Development Services: posts/development.md

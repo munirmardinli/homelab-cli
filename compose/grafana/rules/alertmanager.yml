@@ -1,0 +1,11 @@
+groups:
+  - name: alertmanager.rules
+    rules:
+      - alert: AlertmanagerDown
+        expr: probe_success{job="Blackbox HTTP-HTTPS", instance=~".*alertmanager.*"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Alertmanager ist nicht erreichbar"
+          description: "Der Service Alertmanager ist seit mehr als 1 Minute nicht erreichbar."

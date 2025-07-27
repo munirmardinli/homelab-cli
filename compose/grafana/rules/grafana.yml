@@ -1,0 +1,11 @@
+groups:
+  - name: grafana.rules
+    rules:
+      - alert: GrafanaDown
+        expr: probe_success{job="Blackbox HTTP-HTTPS", instance=~".*grafana.*"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Grafana ist nicht erreichbar"
+          description: "Der Service Grafana ist seit mehr als 1 Minute nicht erreichbar."

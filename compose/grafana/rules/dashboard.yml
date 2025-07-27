@@ -1,0 +1,21 @@
+groups:
+  - name: dashboard-api.rules
+    rules:
+      - alert: DashboardApiDown
+        expr: up{job="dashboard-api"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "dashboard-api ist nicht erreichbar"
+          description: "Der Service dashboard-api ist seit mehr als 1 Minute nicht erreichbar."
+  - name: dashboard-ui.rules
+    rules:
+      - alert: DashboardUiDown
+        expr: up{job="dashboard-ui"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "dashboard-ui ist nicht erreichbar"
+          description: "Der Service dashboard-ui ist seit mehr als 1 Minute nicht erreichbar."
