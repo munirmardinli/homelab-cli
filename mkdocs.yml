@@ -177,10 +177,6 @@ plugins:
       token: !ENV GH_TOKEN
       branch: main
       enabled: true
-  - obsidian-support: {}
-  - obsidian-bridge: {}
-  - obsidian-interactive-graph: {}
-  - glightbox
 
 hooks:
   - config/mkdocs/hooks/removeObserve.py
