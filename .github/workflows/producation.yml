@@ -133,8 +133,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            dist
-            build
+            lib
           key: ${{ runner.os }}-build-${{ github.sha }}
           restore-keys: ${{ runner.os }}-build-
   deploy-docs:
@@ -292,8 +291,7 @@ jobs:
           path: |
             node_modules
             .npm
-            dist
-            build
+            lib
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Verify package version
         run: |
@@ -313,8 +311,7 @@ jobs:
           path: |
             node_modules
             .npm
-            dist
-            build
+            lib
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
