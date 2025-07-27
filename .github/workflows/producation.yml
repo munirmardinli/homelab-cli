@@ -11,6 +11,7 @@ env:
   GITGUARDIAN_API: ${{ secrets.GITGUARDIAN_API_KEY }}
   NPM_VERSION: "22"
   PYTHON_VERSION: "3.13"
+  TRIVY_VERSION: "0.64.1"
   DEPLOYMENT_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
   REPO_NAME: ${{ github.event.repository.name }}
 
@@ -47,35 +48,6 @@ jobs:
       - name: Set cache output
         id: set-cache-output
         run: echo "cache-hit=$(ls node_modules | wc -l | tr -d ' ')" >> $GITHUB_OUTPUT
-
-  prepare-docs:
-    runs-on: ubuntu-latest
-    outputs:
-      docs_cache: ${{ steps.set-docs-cache.outputs.cache-hit }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ env.PYTHON_VERSION }}
-      - name: Cache pip packages
-        id: cache-pip
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('config/requirements.txt') }}
-          restore-keys: ${{ runner.os }}-pip-
-      - name: Install Dependencies
-        run: |
-          pip install -r config/requirements.txt
-          pip install mkdocs-material \
-            mkdocs-git-authors-plugin \
-            mkdocs-git-revision-date-localized-plugin \
-            mkdocs-git-committers-plugin-2
-      - name: Set docs cache output
-        id: set-docs-cache
-        run: echo "cache-hit=$(pip list | grep mkdocs | wc -l | tr -d ' ')" >> $GITHUB_OUTPUT
-
   eslint:
     needs: prepare
     runs-on: ubuntu-latest
@@ -89,7 +61,6 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Run eslint tool
         run: npx eslint 'src/**/*.ts' --fix
-
   prettier:
     needs: prepare
     runs-on: ubuntu-latest
@@ -103,7 +74,6 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Run prettier tool
         run: npx prettier '**/*.{ts,tsx}' --write
-
   dependency-cruiser:
     needs: prepare
     runs-on: ubuntu-latest
@@ -117,7 +87,6 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Run dependency-cruiser tool
         run: npx dependency-cruiser --validate .dependency-cruiser.cjs src
-
   typecheck:
     needs: prepare
     runs-on: ubuntu-latest
@@ -131,7 +100,6 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Run typecheck tool
         run: npx tsc --noEmit
-
   build-prod:
     needs:
       - eslint
@@ -150,11 +118,8 @@ jobs:
       - name: Build application
         run: |
           npx tsc
-
   deploy-docs:
-    needs: 
-      - build-prod
-      - prepare-docs
+    needs: build-prod
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -167,22 +132,13 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      - name: Cache pip packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('config/requirements.txt') }}
-          restore-keys: ${{ runner.os }}-pip-
-
       - name: Install Dependencies
-        if: needs.prepare-docs.outputs.docs_cache != '1'
         run: |
           pip install -r config/requirements.txt
           pip install mkdocs-material \
             mkdocs-git-authors-plugin \
             mkdocs-git-revision-date-localized-plugin \
             mkdocs-git-committers-plugin-2
-
       - name: Create manifest.webmanifest
         run: |
           echo '{
@@ -219,7 +175,6 @@ jobs:
 
       - name: Deploy to docs branch
         run: mkdocs gh-deploy --force --clean --no-history --remote-branch gh-pages
-
   git_guardian-prod:
     name: GitGuardian scan
     needs: build-prod
@@ -237,7 +192,6 @@ jobs:
           GITHUB_PULL_BASE_SHA: ${{ github.event.pull_request.base.sha }}
           GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
           GITGUARDIAN_API_KEY: ${{ env.GITGUARDIAN_API }}
-
   trivy-scans-prod:
     runs-on: ubuntu-latest
     needs: build-prod
@@ -260,7 +214,7 @@ jobs:
       - name: Install Trivy
         uses: aquasecurity/setup-trivy@v0.2.3
         with:
-          version: "v0.64.1"
+          version: v${{ env.TRIVY_VERSION }}
       - name: Update Trivy DB
         run: trivy image --download-db-only
       - name: Scan npm vulnerabilities
@@ -288,7 +242,6 @@ jobs:
           --ignore-unfixed \
           --format table \
           --exit-code 1
-
   check-audit-prod:
     needs: build-prod
     runs-on: ubuntu-latest
