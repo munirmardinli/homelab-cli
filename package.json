@@ -1,7 +1,7 @@
 {
-  "name": "homelab-cli",
+  "name": "@munirmardinli/homelab-cli",
   "description": "A CLI for managing your homelab infrastructure",
-  "private": true,
+  "private": false,
   "version": "0.0.1",
   "sideEffects": false,
   "license": "MIT",
@@ -12,6 +12,10 @@
   "homepage": "https://munirmardinli.github.io/homelab-cli",
   "bin": {
     "homelab-cli": "config/bin/homelab-cli"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
   },
   "packageManager": "npm@11.4.2",
   "sponsor": {

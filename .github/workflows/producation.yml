@@ -297,7 +297,7 @@ jobs:
           echo "Package version from package.json: $(node -p "require('./package.json').version")"
           echo "Package name: $(node -p "require('./package.json').name")"
       - name: Publish package to GitHub Packages
-        run: npm publish
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 # PACKAGE_VERSION
