@@ -330,8 +330,6 @@ jobs:
           push: true
           tags: ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
           build-args: |
             NODE_ENV=production
             BRANCH=${{ github.ref_name }}
@@ -344,7 +342,3 @@ jobs:
             GITHUB_SHA=${{ github.sha }}
             REPO_LICENSE=${{ github.event.repository.license }}
             REPO_CATEGORIES=${{ github.event.repository.topics }}
-      - name: Move cache
-        run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
