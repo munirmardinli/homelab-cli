@@ -1,0 +1,227 @@
+---
+global:
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  evaluation_interval: 15s
+  external_labels:
+    environment: production
+    location: home_network
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - alertmanager:9093
+      timeout: 5s
+      scheme: http
+rule_files:
+  - /etc/prometheus/rules/*
+
+scrape_configs:
+  - job_name: Prometheus
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - localhost:9090
+        labels:
+          group: prometheus
+          service: prometheus
+    scrape_timeout: 5s
+    metric_relabel_configs:
+      - source_labels:
+          - __name__
+        regex: go_.*
+        action: drop
+  - job_name: Node Exporter
+    static_configs:
+      - targets:
+          - node-exporter:9100
+        labels:
+          group: system
+          service: node_exporter
+    metric_relabel_configs:
+      - source_labels:
+          - __name__
+        regex: node_nfs_.*|node_pressure_.*
+        action: drop
+  - job_name: Cadvisor
+    static_configs:
+      - targets:
+          - cadvisor:8080
+        labels:
+          group: containers
+          service: cadvisor
+    metric_relabel_configs:
+      - source_labels:
+          - __name__
+        regex: container_fs_.*_seconds_total
+        action: drop
+  - job_name: SNMP Metrics
+    static_configs:
+      - targets:
+          - snmp:9116
+        labels:
+          group: network
+          service: snmp_exporter
+    scrape_timeout: 10s
+  - job_name: Alertmanager
+    static_configs:
+      - targets:
+          - alertmanager:9093
+        labels:
+          group: monitoring
+          service: alertmanager
+    metric_relabel_configs:
+      - source_labels:
+          - __name__
+        regex: alertmanager_silences.*
+        action: keep
+  - job_name: Windows Exporter
+    static_configs:
+      - targets:
+          - 10.100.0.19:9182
+        labels:
+          group: system
+          service: windows_exporter
+          os: windows
+          device: desktop
+    metric_relabel_configs:
+      - source_labels:
+          - __name__
+        regex: wmi_.*
+        action: drop
+  - job_name: iMac Exporter
+    static_configs:
+      - targets:
+          - 10.100.0.5:9100
+        labels:
+          group: system
+          service: node_exporter
+          os: macos
+          device: imac
+  - job_name: Fritzbox Exporter
+    static_configs:
+      - targets:
+          - fritzbox-exporter:9787
+        labels:
+          group: network
+          service: fritzbox_exporter
+          device: router
+  - job_name: Cloudflared
+    static_configs:
+      - targets:
+          - cloudflared:8080
+        labels:
+          group: network
+          service: cloudflared
+  - job_name: Blackbox Metrics
+    static_configs:
+      - targets:
+          - blackbox-exporter:9115
+        labels:
+          group: probes
+          service: blackbox_exporter
+  - job_name: SNMP Exporter
+    static_configs:
+      - targets:
+          - 10.100.0.10
+          - 10.100.0.4
+        labels:
+          group: network
+          service: network_devices
+    metrics_path: /snmp
+    params:
+      auth:
+        - public_v2
+      module:
+        - if_mib
+    relabel_configs:
+      - source_labels:
+          - __address__
+        target_label: __param_target
+      - source_labels:
+          - __param_target
+        target_label: instance
+      - target_label: __address__
+        replacement: snmp:9116
+      - source_labels:
+          - __param_target
+        regex: 10\.100\.0\.10
+        target_label: device_type
+        replacement: router
+      - source_labels:
+          - __param_target
+        regex: 10\.100\.0\.4
+        target_label: device_type
+        replacement: switch
+  - job_name: Blackbox HTTP-HTTPS
+    metrics_path: /probe
+    params:
+      module:
+        - http_2xx
+    static_configs:
+      - targets:
+          - prometheus:9090
+          - grafana:3000
+          - alertmanager:9093
+        labels:
+          service_group: monitoring
+      - targets:
+          - snmp:9116
+          - node-exporter:9100
+          - fritzbox-exporter:9787
+          - cadvisor:8080
+        labels:
+          service_group: exporters
+      - targets:
+          - loki:3100
+          - cloudflared:8080
+        labels:
+          service_group: system_services
+      - targets:
+          - 10.100.0.5:9100
+          - 10.100.0.19:9182
+        labels:
+          service_group: end_systems
+    relabel_configs:
+      - source_labels:
+          - __address__
+        target_label: __param_target
+      - source_labels:
+          - __param_target
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115
+  - job_name: Blackbox TCP
+    metrics_path: /probe
+    params:
+      module:
+        - tcp_connect
+    static_configs:
+      - targets:
+          - prometheus:9090
+          - grafana:3000
+          - alertmanager:9093
+        labels:
+          service_group: monitoring
+    relabel_configs:
+      - source_labels:
+          - __address__
+        target_label: __param_target
+      - source_labels:
+          - __param_target
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115
+  - job_name: Watchtower
+    honor_timestamps: true
+    scheme: http
+    metrics_path: /v1/metrics
+    bearer_token_file: /etc/prometheus/secret/watchower.txt
+    static_configs:
+      - targets:
+          - watchtower:8080
+        labels:
+          group: system
+          service: watchtower
+    scrape_interval: 60s

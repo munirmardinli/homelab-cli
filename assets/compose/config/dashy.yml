@@ -1,0 +1,2209 @@
+pageInfo:
+  title: Munir Lab
+appConfig:
+  layout: auto
+  iconSize: medium
+  language: de
+  auth:
+    users:
+      - user: "${DASHY_USERNAME}"
+        hash: "${DASHY_PASSWORD_HASH}"
+        type: admin
+  theme: nord-frost
+sections:
+  - name: Uhrzeit
+    icon: https://cdn-icons-png.flaticon.com/512/4305/4305432.png
+    widgets:
+      - type: clock
+        options: null
+        timeZone: Europe/Berlin
+        format: de-DE
+        hideDate: false
+        id: 0_747_clock
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 2
+      collapsed: false
+      hideForGuests: true
+  - name: Wetter
+    icon: https://cdn-icons-png.freepik.com/512/543/543275.png
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: false
+      hideForGuests: true
+    widgets:
+      - type: weather-forecast
+        options:
+          apiKey: "${WEATHER_API_KEY}"
+          city: Gütersloh
+          units: metric
+          hideDetails: true
+        id: 0_635_weatherforecast
+  - name: Sozialmediens
+    icon: https://cdn-icons-png.flaticon.com/512/4187/4187272.png
+    items:
+      - title: Facebook
+        description: >-
+          Facebook ist ein soziales Netzwerk, das es Nutzern ermöglicht, Profile
+          zu erstellen, Inhalte zu teilen, mit Freunden zu interagieren und
+          Gruppen beizutreten. Es bietet Funktionen wie Status-Updates, Fotos,
+          Videos und Events und ist eines der größten sozialen Netzwerke
+          weltweit.
+        icon: favicon
+        url: https://www.facebook.com/metamorphosis.gt/
+        target: newtab
+        tags:
+          - sozialmedia
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 0_1367_facebook
+      - title: Skype
+        description: >-
+          Skype ist eine Kommunikationssoftware, die VoIP (Voice over IP),
+          Videoanrufe und Instant Messaging ermöglicht. Nutzer können kostenlos
+          mit anderen Skype-Nutzern telefonieren und chatten sowie gegen Gebühr
+          Festnetz- und Mobilnummern anrufen.
+        icon: favicon
+        url: https://www.skype.com/de/features/skype-web/
+        target: newtab
+        tags:
+          - sozialmedia
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 1_1367_skype
+      - title: Instagram
+        description: Instagram
+        icon: favicon
+        url: https://www.instagram.com/kolonistes.fuchs/
+        target: newtab
+        tags:
+          - sozialmedia
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 2_1367_instagram
+      - title: Youtube
+        description: ' YouTube ist eine Video-Sharing-Plattform, auf der Nutzer Videos hochladen, anschauen, teilen und kommentieren können. Sie bietet eine breite Vielfalt an Inhalten, von Unterhaltung bis Bildung, und ermöglicht es Nutzern, eigene Kanäle zu erstellen.'
+        icon: favicon
+        url: https://www.youtube.com/@munir.mardinli
+        target: newtab
+        tags:
+          - sozialmedia
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 3_1367_youtube
+      - title: Wikipedia
+        description: >-
+          Wikipedia ist eine freie, webbasierte Enzyklopädie, die von
+          freiwilligen Nutzern erstellt und bearbeitet wird. Sie ist in vielen
+          Sprachen verfügbar und enthält eine breite Sammlung an Artikeln zu
+          unterschiedlichsten Themen.
+        icon: favicon
+        url: https://de.wikipedia.org/
+        target: newtab
+        tags:
+          - sozialmedia
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 4_1367_wikipedia
+      - title: Twitch
+        icon: favicon
+        url: https://www.twitch.tv
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 5_1367_twitch
+      - title: Xing
+        icon: favicon
+        url: https://www.xing.com
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 6_1367_xing
+      - title: X
+        icon: favicon
+        url: https://x.com/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 7_1367_x
+      - title: LinkedIn
+        icon: favicon
+        url: https://www.linkedin.com/login/de
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 8_1367_linkedin
+      - title: Linktree
+        icon: favicon
+        url: https://auth.linktr.ee/login
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 9_1367_linktree
+      - title: Buy Me a Coffee
+        icon: favicon
+        url: https://buymeacoffee.com/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 10_1367_buymeacoffee
+    displayData:
+      sortBy: most-used
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: false
+  - name: Homelab
+    icon: https://cdn-icons-png.flaticon.com/512/252/252035.png
+    displayData:
+      sortBy: most-used
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: true
+    items:
+      - title: FritzBox
+        description: >-
+          Die FritzBox ist ein Router von AVM, der WLAN, Telefonie,
+          Smart-Home-Funktionen und mehr vereint. Sie wird häufig in privaten
+          Haushalten und kleinen Büros eingesetzt.
+        icon: >-
+          https://play-lh.googleusercontent.com/5e4OogJ7E44ghdkAyOIIi85rU7K3jXL60arBfIXsLD9Cn4cxkxki2IuIBweDpGXow20
+        url: http://fritz.box
+        target: newtab
+        tags:
+          - nas
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 0_696_fritzbox
+      - title: Dashboard
+        description: >-
+          Dashboard ist ein selbst Erstelltertool, mit dem ich alle meine Worte
+          dort speichern könnte
+        icon: >-
+          https://cdn-icons-png.freepik.com/256/16139/16139673.png?semt=ais_hybrid
+        url: http://homelab:4001
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 1_696_dashboard
+      - title: Hetzner
+        icon: favicon
+        url: https://www.hetzner.com
+        target: newtab
+        tags:
+          - nas
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 2_696_hetzner
+      - title: Synology
+        icon: favicon
+        url: https://homelab:5/#/signin
+        target: newtab
+        tags:
+          - nas
+        provider: Synology
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 3_696_synology
+      - title: PiHole
+        icon: >-
+          https://static-00.iconduck.com/assets.00/pihole-icon-349x512-0hhcppg7.png
+        url: http://homelab:81/admin/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 4_696_pihole
+      - title: Raspberry PI
+        icon: favicon
+        url: https://id.raspberrypi.com/sign-up
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 5_696_raspberrypi
+  - name: Studium
+    icon: https://cdn-icons-png.flaticon.com/512/8011/8011980.png
+    displayData:
+      sortBy: most-used
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: true
+    items:
+      - title: Geogebra
+        icon: favicon
+        url: https://accounts.geogebra.org/
+        target: newtab
+        tags:
+          - studies
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 0_747_geogebra
+      - title: Knowunity
+        icon: >-
+          https://play-lh.googleusercontent.com/bpJyqtYAaKoae4F8m9FsstK7YluJVTJdjW4__iGofDS5gF187Z88N3GAQbVL3E7knAs=w600-h300-pc0xffffff-pd
+        url: https://knowunity.de
+        target: newtab
+        tags:
+          - studies
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 1_747_knowunity
+      - title: Radom
+        icon: favicon
+        url: https://www.classtools.net/random-name-picker/
+        target: newtab
+        tags:
+          - studies
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 2_747_radom
+      - title: Arndt bruenner
+        icon: https://cdn-icons-png.flaticon.com/512/4720/4720458.png
+        url: https://www.arndt-bruenner.de/mathe/mathekurse.htm
+        target: newtab
+        tags:
+          - studies
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 3_747_arndtbruenner
+      - title: Padlet
+        icon: favicon
+        url: https://padlet.com/dozenthoelscher
+        target: newtab
+        tags:
+          - studies
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 4_747_padlet
+      - title: Latex Zeichnen
+        icon: favicon
+        url: https://www.zeichen.tv/sonderzeichen/mathematik/
+        target: newtab
+        tags:
+          - studies
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 5_747_latexzeichnen
+      - title: 10015.io
+        icon: favicon
+        url: https://10015.io
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        tags:
+          - studies
+        id: 6_747_io
+      - title: Zotero
+        icon: favicon
+        url: https://www.zotero.org/user/login/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 7_747_zotero
+      - title: Data Camp
+        icon: favicon
+        url: https://www.datacamp.com
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 8_747_datacamp
+      - title: Khan Academy
+        icon: favicon
+        url: https://de.khanacademy.org
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 9_747_khanacademy
+  - name: Hobby
+    icon: >-
+      https://cdn.icon-icons.com/icons2/2331/PNG/512/hobbies_hobby_activity_lifestyle_free_time_icon_142248.png
+    displayData:
+      sortBy: most-used
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: true
+    items:
+      - title: Komoot
+        icon: favicon
+        url: https://www.komoot.de
+        target: newtab
+        tags:
+          - hobby
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 0_500_komoot
+      - title: Gramin
+        icon: favicon
+        url: https://connect.garmin.com/
+        target: newtab
+        tags:
+          - hobby
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 1_500_gramin
+      - title: Netflix
+        icon: favicon
+        url: https://www.netflix.com/
+        target: newtab
+        tags:
+          - hobby
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 2_500_netflix
+      - title: NW
+        icon: favicon
+        url: https://www.nw.de/
+        target: newtab
+        tags:
+          - hobby
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 3_500_nw
+      - title: Thalia
+        icon: favicon
+        url: https://www.thalia.de/
+        target: newtab
+        tags:
+          - hobby
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 4_500_thalia
+      - title: Decathlon
+        icon: favicon
+        url: https://www.decathlon.com
+        target: newtab
+        tags:
+          - hobby
+        statusCheckAllowInsecure: true
+        statusCheck: true
+        id: 5_500_decathlon
+      - title: Emulatorgames
+        icon: favicon
+        url: https://www.emulatorgames.net/roms/
+        target: newtab
+        tags:
+          - hobby
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 6_500_emulatorgames
+      - title: Marble Master
+        icon: favicon
+        url: https://www.bubbleshooter.net/marble-blast/
+        target: newtab
+        tags:
+          - hobby
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 7_500_marblemaster
+      - title: Chess
+        icon: favicon
+        url: https://www.chess.com/de
+        target: newtab
+        tags:
+          - hobby
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 8_500_chess
+      - title: Frag Mutti
+        icon: favicon
+        url: https://www.frag-mutti.de
+        target: newtab
+        tags:
+          - hobby
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 9_500_fragmutti
+      - title: Solitär
+        icon: favicon
+        url: https://www.solitär.de
+        target: newtab
+        tags:
+          - hobby
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 10_500_solitr
+      - title: Crazy Taxi Classic
+        icon: favicon
+        url: https://arcadespot.com/game/crazy-taxi-catch-a-ride/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        tags:
+          - hobby
+        id: 11_500_crazytaxiclassic
+      - title: Tic Tac Toe
+        icon: favicon
+        url: >-
+          https://www.topster.de/online-spiele/tic-tac-toe.php?id=44786&name=ZjDN#
+        target: newtab
+        id: 12_500_tictactoe
+      - title: Steam
+        icon: favicon
+        url: https://store.steampowered.com/
+        target: newtab
+        tags:
+          - hobby
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 13_500_steam
+      - title: Hamachi
+        icon: favicon
+        url: https://vpn.net/
+        target: newtab
+        tags:
+          - hobby
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 14_500_hamachi
+      - title: Sudoku
+        icon: favicon
+        url: https://sudoku.com/de
+        target: newtab
+        tags:
+          - hobby
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 15_500_sudoku
+      - title: Jawaker
+        icon: favicon
+        url: https://www.jawaker.com/en
+        target: newtab
+        tags:
+          - hobby
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 16_500_jawaker
+      - title: Schacharena
+        icon: favicon
+        url: https://www.schacharena.de
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 17_500_schacharena
+      - title: Sonic
+        icon: favicon
+        url: https://game-game.com.de/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 18_500_sonic
+      - title: Lichess
+        icon: favicon
+        url: https://lichess.org/login?referrer=/de
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 19_500_lichess
+  - name: Shopping
+    icon: >-
+      https://upload.wikimedia.org/wikipedia/commons/3/3f/Map_Icons_Shopping_Center.png
+    displayData:
+      sortBy: most-used
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: true
+    items:
+      - title: Amazon
+        icon: favicon
+        url: https://www.amazon.de/
+        target: newtab
+        statusCheck: true
+        tags:
+          - shopping
+        statusCheckAllowInsecure: true
+        id: 0_840_amazon
+      - title: Lieferando
+        icon: favicon
+        url: https://www.lieferando.de/
+        target: newtab
+        statusCheck: true
+        tags:
+          - shopping
+        statusCheckAllowInsecure: true
+        id: 1_840_lieferando
+      - title: Stripe
+        icon: favicon
+        url: https://dashboard.stripe.com/login
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 2_840_stripe
+  - name: Korrespondentieren
+    icon: https://cdn-icons-png.flaticon.com/512/5893/5893924.png
+    displayData:
+      sortBy: most-used
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: true
+    items:
+      - title: Formspree
+        icon: >-
+          https://cdn.icon-icons.com/icons2/2699/PNG/512/formspree_logo_icon_170133.png
+        url: https://formspree.io/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 0_1921_formspree
+      - title: Temp-Mail
+        icon: https://tempmails.net/uploads/1642664233-tempmail-logo.png
+        url: https://temp-mail.org/de/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 1_1921_tempmail
+      - title: Gmail
+        icon: favicon
+        url: https://accounts.google.com/
+        target: newtab
+        tags:
+          - mail
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 2_1921_gmail
+      - title: Apple
+        icon: favicon
+        url: https://secure8.store.apple.com/de/shop/signIn
+        target: newtab
+        tags:
+          - mail
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 3_1921_apple
+      - title: GMX
+        icon: favicon
+        url: https://www.gmx.net/
+        target: newtab
+        tags:
+          - mail
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 4_1921_gmx
+      - title: Mohmal
+        description: Programm gibt E-Mail, die für 45 Minute aktiv sind
+        icon: https://www.root-me.org/IMG/logo/auton0.png?1637503221
+        url: https://www.mohmal.com
+        target: newtab
+        statusCheckAllowInsecure: true
+        statusCheck: true
+        id: 5_1921_mohmal
+  - name: Gemischt
+    icon: https://cdn-icons-png.flaticon.com/512/3129/3129855.png
+    displayData:
+      sortBy: most-used
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: true
+    items:
+      - title: AOK
+        icon: favicon
+        url: https://aok.de/
+        target: newtab
+        tags:
+          - mix
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 0_820_aok
+      - title: Videoconverter
+        icon: favicon
+        url: https://de.onlinevideoconverter.pro/472RM/youtube-converter-mp3
+        target: newtab
+        tags:
+          - mix
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 1_820_videoconverter
+      - title: Saveform
+        icon: favicon
+        url: https://de.savefrom.net/187/
+        target: newtab
+        tags:
+          - mix
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 2_820_saveform
+      - title: Reparatur
+        icon: favicon
+        url: https://de.ifixit.com
+        target: newtab
+        tags:
+          - mix
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 3_820_reparatur
+      - title: Onlineangebote
+        icon: favicon
+        url: >-
+          https://www.kreis-guetersloh.de/themen/jobcenter/info-center/onlineangebote/
+        target: newtab
+        tags:
+          - mix
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 4_820_onlineangebote
+      - title: Sparkasse
+        icon: favicon
+        url: https://www.sparkasse-guetersloh-rietberg-versmold.de/de/home.html
+        target: newtab
+        tags:
+          - mix
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 5_820_sparkasse
+      - title: Resumme
+        icon: >-
+          https://static-00.iconduck.com/assets.00/resume-icon-397x512-doqhpuo9.png
+        url: https://resumegenius.com
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 6_820_resumme
+      - title: vmock
+        icon: >-
+          https://pbs.twimg.com/profile_images/721921901040250880/-c2n2mMb_400x400.jpg
+        url: https://www.vmock.com/site
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 7_820_vmock
+      - title: Elster
+        icon: favicon
+        url: https://www.elster.de/eportal/meinKonto
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 8_820_elster
+      - title: BUND-ID
+        icon: favicon
+        url: https://id.bund.de/de/web/login/1/eID
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 9_820_bundid
+      - title: Wertgarantie
+        icon: favicon
+        url: https://my.wertgarantie.com/de
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 10_820_wertgarantie
+  - name: PowerPoint Tools
+    icon: https://cdn-icons-png.flaticon.com/512/10228/10228968.png
+    displayData:
+      sortBy: most-used
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: true
+    items:
+      - title: Piktochart
+        icon: favicon
+        url: https://create.piktochart.com/users/sign_in
+        target: newtab
+        tags:
+          - ppt
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 0_1608_piktochart
+      - title: Xmind
+        icon: favicon
+        url: https://www.xmind.net/embed/az9c/#
+        target: newtab
+        tags:
+          - ppt
+        statusCheckAllowInsecure: true
+        statusCheck: true
+        id: 1_1608_xmind
+      - title: Remove
+        icon: favicon
+        url: https://www.remove.bg/de
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        tags:
+          - ppt
+        id: 2_1608_remove
+      - title: ToonMe
+        icon: favicon
+        url: https://toonme.com
+        target: newtab
+        tags:
+          - ppt
+        statusCheckAllowInsecure: true
+        statusCheck: true
+        id: 3_1608_toonme
+      - title: pixabay
+        icon: favicon
+        url: https://pixabay.com/de/
+        target: newtab
+        tags:
+          - ppt
+        statusCheckAllowInsecure: true
+        statusCheck: true
+        id: 4_1608_pixabay
+      - title: Tailorbrands
+        icon: favicon
+        url: https://studio.tailorbrands.com/login
+        target: newtab
+        tags:
+          - ppt
+        statusCheckAllowInsecure: true
+        statusCheck: true
+        id: 5_1608_tailorbrands
+      - title: Prezi
+        icon: favicon
+        url: https://prezi.com/
+        target: newtab
+        tags:
+          - ppt
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 6_1608_prezi
+      - title: Sildescarnival
+        icon: favicon
+        url: https://www.slidescarnival.com
+        target: newtab
+        tags:
+          - ppt
+        statusCheckAllowInsecure: true
+        statusCheck: true
+        id: 7_1608_sildescarnival
+      - title: Checkshortul
+        icon: favicon
+        url: https://checkshorturl.com
+        target: newtab
+        tags:
+          - ppt
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 8_1608_checkshortul
+      - title: Descript
+        icon: favicon
+        url: https://www.descript.com
+        target: newtab
+        tags:
+          - ppt
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 9_1608_descript
+      - title: PDF Convert
+        icon: favicon
+        url: https://www.adobe.com/mena_en/acrobat/online/pdf-to-word.html
+        target: newtab
+        tags:
+          - ppt
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 10_1608_pdfconvert
+      - title: 3D Roomstyler
+        icon: favicon
+        url: https://roomstyler.com/rooms/13616221/4-office
+        target: newtab
+        tags:
+          - ppt
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 11_1608_droomstyler
+      - title: Blogschreiben
+        icon: favicon
+        url: https://app.copy.ai/login
+        target: newtab
+        tags:
+          - ppt
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 12_1608_blogschreiben
+      - title: Videocreek
+        icon: favicon
+        url: https://videocreek.com
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        tags:
+          - ppt
+        id: 13_1608_videocreek
+      - title: Photopea
+        icon: favicon
+        url: https://www.photopea.com
+        target: newtab
+        tags:
+          - ppt
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 14_1608_photopea
+      - title: Tineye
+        icon: favicon
+        url: https://tineye.com
+        target: newtab
+        tags:
+          - ppt
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 15_1608_tineye
+      - title: Coohom
+        icon: favicon
+        url: https://www.coohom.com/
+        target: newtab
+        tags:
+          - ppt
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 16_1608_coohom
+      - title: Falshted
+        icon: favicon
+        url: https://www.falstad.com/circuit/circuitjs.html
+        target: newtab
+        tags:
+          - ppt
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 17_1608_falshted
+      - title: New3jcn
+        icon: favicon
+        url: https://www.new3jcn.com/
+        target: newtab
+        tags:
+          - ppt
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 18_1608_newjcn
+      - title: Sildeegg
+        icon: favicon
+        url: https://www.slideegg.com
+        target: newtab
+        tags:
+          - ppt
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 19_1608_sildeegg
+      - title: Unscreen
+        icon: favicon
+        url: https://www.unscreen.com
+        target: newtab
+        tags:
+          - ppt
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 20_1608_unscreen
+      - title: Cleanup Pictures
+        icon: favicon
+        url: https://cleanup.pictures
+        target: newtab
+        tags:
+          - ppt
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 21_1608_cleanuppictures
+      - title: Mural
+        icon: favicon
+        url: https://www.mural.co/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 22_1608_mural
+  - name: 'Recherche '
+    icon: https://cdn-icons-png.flaticon.com/512/2038/2038534.png
+    displayData:
+      sortBy: most-used
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: true
+    items:
+      - title: PDFDrive
+        icon: favicon
+        url: https://www.pdfdrive.com
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 0_937_pdfdrive
+      - title: Springer
+        icon: favicon
+        url: >-
+          https://link.springer.com/shop/springernature/back2school-sale/de-eu/?utm_campaign=CONR_BOOKS_ECOM_GL_PHSS_B2S22_All-b2s&gclid=Cj0KCQjwuaiXBhCCARIsAKZLt3mkibAqHfNibtGZaCBMlSYc0rDgtdimT-74zdNfICKLksslmeAh3tAaAoMwEALw_wcB
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 1_937_springer
+      - title: Refseek
+        icon: favicon
+        url: https://www.refseek.com
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 2_937_refseek
+      - title: Worldcat
+        icon: favicon
+        url: https://www.worldcat.org
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 3_937_worldcat
+      - title: Teeeis
+        icon: favicon
+        url: https://teesis.de
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 4_937_teeeis
+      - title: Citationmachine
+        icon: favicon
+        url: https://www.citationmachine.net
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 5_937_citationmachine
+      - title: Lekturehilfe
+        icon: favicon
+        url: https://lektuerehilfe.de
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 6_937_lekturehilfe
+      - title: Heinrich-Heine-Universität Düsseldorf
+        icon: favicon
+        url: https://katalog.ulb.hhu.de
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 7_937_heinrichheineuniversittdsseldorf
+  - name: Sprache
+    icon: https://cdn-icons-png.flaticon.com/512/3898/3898082.png
+    displayData:
+      sortBy: most-used
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: true
+    items:
+      - title: PONS
+        icon: >-
+          https://play-lh.googleusercontent.com/YFXVacKlDN0oygSv6QK-GNzNxiaL89W61i0VqLbxqR4soENaJlBgS0kWkJOeDRJpyII
+        url: https://de.pons.com
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 0_710_pons
+      - title: languagetool
+        icon: >-
+          https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/LanguageTool_Logo_%282018%29.svg/640px-LanguageTool_Logo_%282018%29.svg.png
+        url: >-
+          https://languagetool.org/de?utm_source=google&utm_medium=cpc&utm_campaign=GA_LT_DE_de_Sales_KW_Generic_3Upgrade&utm_content=rechtschreibung&utm_term=rechtschreibung&gclid=EAIaIQobChMI98S6_Z2D_gIVDs13Ch0N8wFpEAAYASAAEgJPtPD_BwE
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 1_710_languagetool
+      - title: Hemingway
+        icon: >-
+          https://thumbs.dreamstime.com/b/ernest-hemingway-portrait-vector-cartoon-158888809.jpg
+        url: https://hemingwayapp.com
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 2_710_hemingway
+      - title: Duden
+        icon: >-
+          https://play-lh.googleusercontent.com/9TXyOJoMCo4cdcVXJFTP1XUS8dCZEX1E1NzhiTIIqepLiYhlFHILoR3a35RvP5uW8g
+        url: https://www.duden.de/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 3_710_duden
+      - title: Arabdict
+        icon: >-
+          https://cdn6.aptoide.com/imgs/b/b/3/bb3efcf04a0ea754c2bb507e2e9dbe7f_icon.png
+        url: https://www.arabdict.com/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 4_710_arabdict
+      - title: Plattdeutsch
+        icon: https://plattmakers.de/img/logo.svg
+        url: https://plattmakers.de/de/find=Siehst_du%3F
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 5_710_plattdeutsch
+      - title: MundMisch
+        icon: fab fa-mundmische
+        url: https://www.mundmische.de
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 6_710_mundmisch
+      - title: Aphorismen
+        icon: >-
+          https://w7.pngwing.com/pngs/205/483/png-transparent-computer-icons-quotation-citation-quotation-text-monochrome-internet.png
+        url: https://www.aphorismen.de/zitat/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 7_710_aphorismen
+      - title: Kunstworte
+        icon: https://www.kunst-worte.de/img/kw-inverted-sw.png
+        url: https://www.kunst-worte.de/archaismen/seite-2/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 8_710_kunstworte
+      - title: aberwitzig
+        icon: https://www.aberwitzig.com/witze.gif
+        url: https://www.aberwitzig.com/witze-zum-totlachen-2.php
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 9_710_aberwitzig
+      - title: Archaismen
+        icon: >-
+          https://play-lh.googleusercontent.com/F24dTh_b6O3kL9mcf4qpiFVBSVYuU4nybyngk1OtBZehr1Ec6XO0xrozsvbleHe9fj65=w240-h480-rw
+        url: https://ewnor.de/lexikon/lex-k.php
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 10_710_archaismen
+      - title: Bab.La
+        icon: >-
+          https://play-lh.googleusercontent.com/29VLNDC26UNrYRbo7KSNZd9dFD1ZHa9CQMPsbl5o7aRuU04Uistqg1aMRMTOnD-o9w
+        url: https://de.bab.la
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 11_710_babla
+  - name: UX
+    icon: >-
+      https://service.kreis-guetersloh.de/documents/20550/318837/layout_set_logo.png/f03f5bce-2940-7ac8-12e4-3bf7a1cb73bc?t=1683005370288
+    displayData:
+      sortBy: most-used
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: true
+    items:
+      - title: ConceptBoard
+        icon: >-
+          https://yt3.googleusercontent.com/ytc/AOPolaQljdwbznmhoYjo2mLxjqZWwQ50RNI4ptqW70Bh=s900-c-k-c0x00ffffff-no-rj
+        url: https://conceptboard.com/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 0_173_conceptboard
+      - title: Backend Gütersloh
+        icon: >-
+          https://www.guetersloh.digital/gd-wAssets/img/persons/weblication/wThumbnails/gtlogo-blau-2caf39d1-2a69be90@120ll.png
+        url: https://www.guetersloh.de/weblication/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 1_173_backendgtersloh
+      - title: Excalidraw
+        icon: favicon
+        url: https://excalidraw.com
+        target: newtab
+        tags:
+          - explanation
+        statusCheckUrl: https://excalidraw.com
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 2_173_excalidraw
+      - title: Balsamiq Wireframes
+        icon: favicon
+        url: https://balsamiq.com/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 3_173_balsamiqwireframes
+  - name: IT-Tool
+    icon: https://cdn-icons-png.flaticon.com/512/8824/8824175.png
+    displayData:
+      sortBy: most-used
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: true
+    items:
+      - title: Remote-IT
+        icon: >-
+          https://play-lh.googleusercontent.com/xF5yX1KjAO-HKZ3ekm1CKAWYCfvl5PmUPtHKXB04AgtT2yFwha7GrAtJORHlZxG7mdE
+        url: https://www.remote.it
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 0_616_remoteit
+      - title: DuckDNS
+        icon: >-
+          https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/duckdns.png
+        url: https://www.duckdns.org
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 1_616_duckdns
+      - title: Noip
+        icon: https://d2qr50rz2oof04.cloudfront.net/assets/img/logo/logo-bug.png
+        url: https://www.noip.com/de-DE
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 2_616_noip
+      - title: Parallels
+        icon: >-
+          https://e7.pngegg.com/pngimages/14/919/png-clipart-parallels-desktop-9-for-mac-computer-icons-macos-virtual-machine-microsoft-logo-sign.png
+        url: https://www.parallels.com/de/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 3_616_parallels
+      - title: TeamViewer
+        icon: >-
+          https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/TeamViewer_Logo_Icon_Only.svg/1200px-TeamViewer_Logo_Icon_Only.svg.png
+        url: https://www.teamviewer.com/de/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 4_616_teamviewer
+      - title: Roadmap
+        icon: >-
+          https://cdn-1.webcatalog.io/catalog/roadmap-sh/roadmap-sh-icon-filled-256.png?v=1687417626361
+        url: https://draw.roadmap.sh/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 5_616_roadmap
+      - title: CCI
+        icon: https://cdn.pixabay.com/photo/2014/06/13/01/07/circles-367966_1280.png
+        url: https://crop-circle.imageonline.co/#google_vignette
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 6_616_cci
+      - title: JSONata
+        icon: https://docs.jsonata.org/img/jsonata-button.png
+        url: https://try.jsonata.org/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 7_616_jsonata
+      - title: jsonplaceholder
+        icon: >-
+          https://user-images.githubusercontent.com/53334880/119559594-20fcc280-bdb8-11eb-8244-b721cc0c55a9.png
+        url: https://jsonplaceholder.typicode.com/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 8_616_jsonplaceholder
+      - title: Swagger
+        icon: https://upload.wikimedia.org/wikipedia/commons/a/ab/Swagger-logo.png
+        url: https://editor.swagger.io/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 9_616_swagger
+      - title: Caesar-Code
+        icon: https://cdn-icons-png.flaticon.com/512/3655/3655567.png
+        url: https://www.macronom.de/kryptographie/caesar/verschluesselung.php
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 10_616_caesarcode
+      - title: pastebin
+        icon: >-
+          https://static.wikia.nocookie.net/logopedia/images/5/5f/Pastebin_Ukraine.png/revision/latest?cb=20220303213531
+        url: https://pastebin.com/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 11_616_pastebin
+      - title: Fontawesome
+        icon: https://ps.w.org/font-awesome/assets/icon-256x256.png?rev=1991998
+        url: https://fontawesome.com
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 12_616_fontawesome
+      - title: Easel
+        icon: >-
+          https://portalmotor.gyldendal.dk//-/media/home/sprog/engelsk7_10/Resources/Web-Tools/SkoleTube-ikoner/Easelly.ashx?w=330
+        url: https://www.easel.ly
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 13_616_easel
+      - title: Fontawesome
+        icon: https://www.drupal.org/files/project-images/font_awesome_logo.png
+        url: https://fontawesome.com/v4/icons/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 14_616_fontawesome
+      - title: tinkercad
+        icon: >-
+          https://pbs.twimg.com/profile_images/938223681200840704/tDlpituS_400x400.jpg
+        url: https://www.tinkercad.com
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 15_616_tinkercad
+      - title: Termius
+        icon: >-
+          https://downloadr2.apkmirror.com/wp-content/uploads/2017/04/5901802c7975a-384x384.png
+        url: https://termius.com
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 16_616_termius
+      - title: Shuffle
+        icon: >-
+          https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Shuffle_icon.svg/2048px-Shuffle_icon.svg.png
+        url: https://shuffle.dev/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 17_616_shuffle
+      - title: IT-Tool
+        icon: https://cdn-icons-png.flaticon.com/512/3964/3964296.png
+        url: https://it-tools.tech/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 18_616_ittool
+      - title: PDF24
+        icon: >-
+          https://upload.wikimedia.org/wikipedia/commons/c/c0/PDF24_Creator_application_logo_256x256.png
+        url: https://tools.pdf24.org/de/
+        target: newtab
+        tags:
+          - mix
+        statusCheckAllowInsecure: true
+        statusCheck: true
+        id: 19_616_pdf
+      - title: Smartserials
+        icon: favicon
+        url: https://smartserials.com
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        tags:
+          - ittool
+        id: 20_616_smartserials
+      - title: Loremipsum
+        icon: favicon
+        url: https://www.loremipsum.de
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        tags:
+          - ittool
+        id: 21_616_loremipsum
+      - title: Kurz URLs
+        icon: favicon
+        url: https://t1p.de
+        target: newtab
+        tags:
+          - ittool
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 22_616_kurzurls
+      - title: Cisdem
+        icon: favicon
+        url: https://www.cisdem.com
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        tags:
+          - ittool
+        id: 23_616_cisdem
+      - title: Notube
+        icon: favicon
+        url: https://notube.cc/de/youtube-app-v20
+        target: newtab
+        tags:
+          - ittool
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 24_616_notube
+      - title: Short.io
+        icon: favicon
+        url: https://app.short.io/users/dashboard/449488/links
+        target: newtab
+        tags:
+          - ittool
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 25_616_shortio
+      - title: Wie ist mein IP
+        icon: favicon
+        url: https://www.wieistmeineip.de
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        tags:
+          - ittool
+        id: 26_616_wieistmeinip
+      - title: Virustotal
+        icon: favicon
+        url: https://www.virustotal.com
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        tags:
+          - ittool
+        id: 27_616_virustotal
+      - title: SEO-Tools
+        icon: favicon
+        url: https://maximumseotools.com//tools
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 28_616_seotools
+      - title: Postman
+        icon: favicon
+        url: https://www.postman.com/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 29_616_postman
+      - title: Anaconda
+        icon: favicon
+        url: https://anaconda.com/app/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 30_616_anaconda
+      - title: Kaggle
+        icon: favicon
+        url: https://www.kaggle.com
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 31_616_kaggle
+  - name: Développement
+    icon: https://cdn-icons-png.flaticon.com/512/2110/2110641.png
+    displayData:
+      sortBy: most-used
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: true
+    items:
+      - title: Virtual Studio
+        icon: favicon
+        url: https://vscode.dev
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 0_1500_virtualstudio
+      - title: Codepen.io
+        icon: favicon
+        url: https://codepen.io/pen/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 1_1500_codepenio
+      - title: HTML-CSS-JS
+        icon: favicon
+        url: https://html-css-js.com/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 2_1500_htmlcssjs
+      - title: Overapi
+        icon: favicon
+        url: https://overapi.com/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 3_1500_overapi
+      - title: Cloudinary
+        icon: favicon
+        url: https://cloudinary.com/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 4_1500_cloudinary
+      - title: Lottie
+        icon: favicon
+        url: https://lottiefiles.com
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 5_1500_lottie
+      - title: Vercel
+        description: >-
+          Vercel ist eine Hosting-Plattform für schnelle, skalierbare
+          Webanwendungen mit globalem CDN und einfacher Integration.
+        icon: favicon
+        url: https://vercel.com/login
+        target: newtab
+        tags:
+          - development
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 6_1500_vercel
+      - title: OpenStreetMap
+        description: >-
+          OpenStreetMap (OSM) ist eine freie, editierbare Weltkarte, die von
+          Nutzern erstellt und gepflegt wird. Jeder kann Kartenmaterial
+          hinzufügen, bearbeiten und nutzen.
+        icon: favicon
+        url: https://www.openstreetmap.org/login?cookie_test=true
+        target: newtab
+        tags:
+          - development
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 7_1500_openstreetmap
+      - title: Stack Overflow
+        description: ' Stack Overflow ist eine Frage-Antwort-Plattform für Programmierer, auf der Entwickler Fragen stellen, Antworten geben und Lösungen für technische Probleme teilen können.'
+        icon: favicon
+        url: >-
+          https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2f
+        target: newtab
+        tags:
+          - development
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 8_1500_stackoverflow
+      - title: Slack
+        description: >-
+          Slack ist eine Kollaborationsplattform für Teams, die Chats,
+          Dateifreigabe und Integration von Tools in einem zentralen
+          Arbeitsbereich vereint.
+        icon: favicon
+        url: https://slack.com/signin#/signin
+        target: newtab
+        tags:
+          - development
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 9_1500_slack
+      - title: Prisma Studio
+        description: >-
+          Prisma Studio ist eine benutzerfreundliche GUI zur Verwaltung und
+          Bearbeitung von Datenbanken, die mit Prisma, einem ORM
+          (Object-Relational Mapping) für Node.js, verbunden sind.
+        icon: >-
+          https://d2eip9sf3oo6c2.cloudfront.net/tags/images/000/001/287/square_480/prismaHD.png
+        url: https://console.prisma.io/login
+        target: newtab
+        tags:
+          - development
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 10_1500_prismastudio
+      - title: Altairgraphql
+        icon: favicon
+        url: https://web.altairgraphql.dev
+        target: newtab
+        tags:
+          - development
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 11_1500_altairgraphql
+      - title: Notify Events
+        icon: favicon
+        url: https://notify.events/de/user/sign-in
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 12_1500_notifyevents
+  - name: CI/CD
+    icon: https://www.mabl.com/hs-fs/hubfs/CICDBlog.png?width=536&name=CICDBlog.png
+    displayData:
+      sortBy: most-used
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: true
+    items:
+      - title: Digitalocean
+        icon: >-
+          https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/DigitalOcean_icon.svg/2048px-DigitalOcean_icon.svg.png
+        url: https://www.digitalocean.com/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 0_322_digitalocean
+      - title: Render
+        icon: >-
+          https://cdn.sanity.io/images/34ent8ly/production/ec37a3660704e1fa2b4246c9a01ab34e145194ad-824x824.png
+        url: https://render.com/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 1_322_render
+      - title: Firebase
+        icon: https://assets.stickpng.com/images/5847f40ecef1014c0b5e488a.png
+        url: https://firebase.google.com/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 2_322_firebase
+      - title: Terraform
+        icon: >-
+          https://static-00.iconduck.com/assets.00/terraform-icon-452x512-ildgg5fd.png
+        url: https://app.terraform.io/session
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 3_322_terraform
+  - name: Hacker
+    icon: https://cdn.icon-icons.com/icons2/1859/PNG/512/hacker_117897.png
+    displayData:
+      sortBy: most-used
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: true
+    items:
+      - title: Linodo
+        icon: favicon
+        url: https://login.linode.com/login
+        target: newtab
+        tags:
+          - hacker
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 0_590_linodo
+      - title: Cloudflare
+        icon: >-
+          https://static-00.iconduck.com/assets.00/cloudflare-icon-2048x2048-wks6nchu.png
+        url: https://dash.cloudflare.com/login?lang=de-de
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 1_590_cloudflare
+      - title: Freenom
+        icon: favicon
+        url: https://www.freenom.com/de/index.html?lang=de
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        tags:
+          - hacker
+        id: 2_590_freenom
+  - name: KI-Tool
+    icon: https://cdn-icons-png.flaticon.com/512/6461/6461777.png
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: false
+    items:
+      - title: ChatGPT
+        description: >-
+          ChatGPT ist ein KI-basierter Sprachmodell-Assistent von OpenAI, der
+          natürliche Gespräche führt, Fragen beantwortet, Texte erstellt und bei
+          verschiedenen Aufgaben unterstützt.
+        icon: favicon
+        url: https://chatgpt.com/
+        target: newtab
+        tags:
+          - nas
+        provider: KI
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 0_607_chatgpt
+      - title: Perplexity AI
+        icon: favicon
+        url: https://www.perplexity.ai
+        target: newtab
+        tags:
+          - ki
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 1_607_perplexityai
+      - title: Beautiful.ia
+        icon: favicon
+        url: https://www.beautiful.ai
+        target: newtab
+        tags:
+          - ki
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 2_607_beautifulia
+      - title: Open-IA Bild
+        icon: favicon
+        url: https://openai.com
+        target: newtab
+        tags:
+          - ki
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 3_607_openiabild
+      - title: Smodin.io
+        icon: favicon
+        url: https://smodin.io/de/textzusammenfassung
+        target: newtab
+        tags:
+          - ki
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 4_607_smodinio
+      - title: Futureme
+        icon: favicon
+        url: https://www.futureme.org
+        target: newtab
+        tags:
+          - ki
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 5_607_futureme
+      - title: Dictation
+        icon: favicon
+        url: https://dictation.io
+        target: newtab
+        tags:
+          - ki
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 6_607_dictation
+      - title: Replit
+        icon: favicon
+        url: https://replit.com
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        tags:
+          - ki
+        id: 7_607_replit
+      - title: Anaki AI
+        icon: favicon
+        url: https://app.anakin.ai/discover
+        target: newtab
+        statusCheckAllowInsecure: true
+        statusCheck: true
+        id: 8_607_anakiai
+      - title: Notebook LM
+        icon: favicon
+        url: https://notebooklm.google/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 9_607_notebooklm
+  - name: Parser
+    icon: https://cdn-icons-png.flaticon.com/512/6672/6672002.png
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: false
+    items:
+      - title: Json-Schema
+        icon: >-
+          https://hilleer.gallerycdn.vsassets.io/extensions/hilleer/yaml-plus-json/1.12.2/1696603114239/Microsoft.VisualStudio.Services.Icons.Default
+        url: >-
+          https://json-schema.app/view/%23?url=https%3A%2F%2Fraw.githubusercontent.com%2FLissy93%2Fdashy%2Fmaster%2Fsrc%2Futils%2FConfigSchema.json
+        target: newtab
+        tags:
+          - config
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 0_621_jsonschema
+      - title: Json Validator
+        icon: >-
+          https://images.seeklogo.com/logo-png/55/2/json-schema-icon-logo-png_seeklogo-551179.png
+        url: https://www.jsonschemavalidator.net/s/JFUj7X9J
+        target: newtab
+        statusCheckAllowInsecure: true
+        tags:
+          - config
+        statusCheck: true
+        id: 1_621_jsonvalidator
+      - title: Json to YAML
+        icon: >-
+          https://hilleer.gallerycdn.vsassets.io/extensions/hilleer/yaml-plus-json/1.12.2/1696603114239/Microsoft.VisualStudio.Services.Icons.Default
+        url: https://jsonformatter.org/json-to-yaml
+        target: newtab
+        tags:
+          - config
+        statusCheckAllowInsecure: true
+        statusCheck: true
+        id: 2_621_jsontoyaml
+      - title: YAML to JSON
+        icon: >-
+          https://hilleer.gallerycdn.vsassets.io/extensions/hilleer/yaml-plus-json/1.12.2/1696603114239/Microsoft.VisualStudio.Services.Icons.Default
+        url: https://jsonformatter.org/yaml-to-json
+        target: newtab
+        tags:
+          - config
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 3_621_yamltojson
+  - name: Git-Tools
+    icon: https://cdn-icons-png.flaticon.com/512/4494/4494740.png
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: false
+    items:
+      - title: GitHub
+        description: ''
+        icon: favicon
+        url: https://github.com/login
+        target: newtab
+        tags:
+          - git
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 0_866_github
+      - title: GitLab
+        icon: favicon
+        url: https://gitlab.com/
+        target: newtab
+        tags:
+          - git
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 1_866_gitlab
+      - title: Is Maintained
+        description: Issue status and response times
+        icon: favicon
+        url: https://isitmaintained.com/
+        target: newtab
+        tags:
+          - git
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 2_866_ismaintained
+      - title: Buy Me a Coffee
+        icon: favicon
+        url: https://buymeacoffee.com/signup
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 3_866_buymeacoffee
+      - title: Renovate
+        icon: https://docs.renovatebot.com/assets/images/logo.png
+        url: https://developer.mend.io/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 4_866_renovate
+      - title: Scrimba
+        icon: favicon
+        url: https://scrimba.com
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 5_866_scrimba
+      - title: CodeSandbox
+        icon: favicon
+        url: codesandbox.io
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 6_866_codesandbox
+      - title: SonarQube
+        icon: favicon
+        url: https://sonarcloud.io
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 7_866_sonarqube
+      - title: Mintlify
+        icon: favicon
+        url: https://mintlify.com
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 8_866_mintlify
+  - name: SmartHome
+    icon: https://cdn-icons-png.flaticon.com/512/3354/3354557.png
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: false
+    items:
+      - title: HoemBridge
+        icon: favicon
+        url: http://homelab:8581/login
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 0_912_hoembridge
+      - title: Eclipse-Mosquitto
+        icon: >-
+          https://raw.githubusercontent.com/docker-library/docs/757578e3a44e5460a8a11d32a81776f8b74231a9/eclipse-mosquitto/logo.png
+        url: http://homelab:1883
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 1_912_eclipsemosquitto
+      - title: Influxdb
+        icon: https://img.icons8.com/flat_round/200/influxdb.png
+        url: http://homelab:8086/signin
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 2_912_influxdb
+      - title: Grafana
+        description: >-
+          Grafana ist eine Open-Source-Plattform zur Datenvisualisierung und
+          Überwachung. Sie ermöglicht das Erstellen interaktiver Dashboards, um
+          Metriken und Logs aus verschiedenen Quellen wie Datenbanken und
+          Monitoring-Tools zu visualisieren.
+        icon: >-
+          https://cdn.iconscout.com/icon/free/png-256/free-grafana-3628811-3030088.png
+        url: http://homelab:9091
+        target: newtab
+        tags:
+          - nas
+        provider: Monitoring
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 3_912_grafana
+      - title: Prometheus
+        description: >-
+          Prometheus ist ein Open-Source-Monitoring- und Alerting-System, das
+          vor allem zur Überwachung von Systemen und Anwendungen in Echtzeit
+          verwendet wird. Es sammelt und speichert Metriken, die dann für
+          Dashboards und Warnmeldungen genutzt werden können.
+        icon: >-
+          https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Prometheus_software_logo.svg/2066px-Prometheus_software_logo.svg.png
+        url: http://homelab:9090/query
+        target: newtab
+        tags:
+          - monitoring
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 4_912_prometheus
+      - title: Shelly Cloud
+        icon: >-
+          https://cdn-1.webcatalog.io/catalog/shelly/shelly-icon-filled-256.webp?v=1745800404170
+        url: https://control.shelly.cloud/#/login
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 5_912_shellycloud
+      - title: Tuya
+        icon: >-
+          https://play-lh.googleusercontent.com/KGM9NYnyox9TXwoaY3PKl1PfQ2rTPp1rnpNNtmlbgozJZykhZhGKsL3z9myoj4ccayLS
+        url: >-
+          https://auth.tuya.com/?from=https%3A%2F%2Fauth.tuya.com%2Flogin%2Fsilent%3Ffrom%3Dhttps%253A%252F%252Fwww.tuya.com%252Fredirect%253Furl%253Dhttps%253A%252F%252Fplatform.tuya.com
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 6_912_tuya
+      - title: Home Connect
+        description: ''
+        icon: favicon
+        url: https://developer.home-connect.com/user/login
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 7_912_homeconnect
+      - title: Pushover
+        icon: favicon
+        url: https://pushover.net/login
+        target: newtab
+        statusCheckAllowInsecure: true
+        statusCheck: true
+        id: 8_912_pushover
+      - title: Shelly Cloud
+        icon: favicon
+        url: https://control.shelly.cloud/#/login
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 9_912_shellycloud
+      - title: Meross Cloud
+        icon: favicon
+        url: https://shop.meross.com/account/login
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 10_912_merosscloud
+      - title: WhatsTable
+        icon: favicon
+        url: https://notifier.whatsable.app
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 11_912_whatstable
+      - title: Smartlief
+        icon: >-
+          https://play-lh.googleusercontent.com/rv2gbYzrx4VVjCAV0GTQLAchpks9V2yt5MOMXjT44t1OHtvAr4SlZlw3d39sgmVLIiE=w240-h480-rw
+        url: https://smartapp.smart321.com/smartlife
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 12_912_smartlief
+      - title: Sentry
+        icon: https://www.svgrepo.com/show/354332/sentry-icon.svg
+        url: https://sentry.io/auth/login/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 13_912_sentry
+      - title: Accuweather
+        icon: favicon
+        url: https://developer.accuweather.com/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 14_912_accuweather
+  - name: Working
+    icon: https://cdn-icons-png.flaticon.com/512/9483/9483031.png
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: false
+    items:
+      - title: LeetCode
+        icon: >-
+          https://cdn.iconscout.com/icon/free/png-256/free-leetcode-logo-icon-download-in-svg-png-gif-file-formats--technology-social-media-company-vol-1-pack-logos-icons-3030025.png
+        url: https://leetcode.com/
+        target: newtab
+        statusCheckAllowInsecure: true
+        statusCheck: true
+        id: 0_737_leetcode
+      - title: Crystal Knows
+        icon: favicon
+        url: https://www.crystalknows.com/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 1_737_crystalknows
+      - title: Inhub
+        icon: >-
+          https://media.licdn.com/dms/image/v2/D4E0BAQH1QbBRTK75EQ/company-logo_200_200/company-logo_200_200/0/1718628888322/in_hub_gmbh_logo?e=2147483647&v=beta&t=d8lTIR2xs9t1MLnOUf696oRGwu7rW2CxbGeez9Z9w5s
+        url: https://inhub.ai/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 2_737_inhub
+      - title: AuthoredUp
+        icon: >-
+          https://media.licdn.com/dms/image/v2/C4E0BAQEa5K-aQjiuWA/company-logo_200_200/company-logo_200_200/0/1671131332301/authoredin_logo?e=2147483647&v=beta&t=trHVF7H_nZcZZiz90OuL00L8G3aKgTQgo9NbzteiWa4
+        url: https://authoredup.com/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 3_737_authoredup
+      - title: Twwt Hunter
+        icon: favicon
+        url: https://tweethunter.io/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 4_737_twwthunter
+      - title: GFS
+        icon: favicon
+        url: https://www.gfs-bielefeld.de/karriere/stellenangebote
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 5_737_gfs
+      - title: Bang Netzwerke
+        icon: >-
+          https://www.bang-netzwerke.de/wp-content/uploads/2022/12/cropped-BANG_NETZWERKE_Icon.png
+        url: https://www.bang-netzwerke.de/ausbildung/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 6_737_bangnetzwerke
+      - title: IHK
+        icon: favicon
+        url: https://www.ostwestfalen.ihk.de/ausbildung/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 7_737_ihk
+      - title: Ausbildungschance OWL
+        icon: >-
+          https://www.ostwestfalen.ihk.de/fileadmin/Dokumente/Berufliche_Bildung/Vor_der_Ausbildung/Ausbildungschance_Logo_RGB.jpg
+        url: https://www.ausbildungschance-owl.de/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 8_737_ausbildungschanceowl
+      - title: AUBI-Plus
+        icon: favicon
+        url: https://www.aubi-plus.de/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 9_737_aubiplus
+      - title: Jobs GT
+        icon: >-
+          https://www.xn--jobs-fr-gtersloh-ozbd.de/export/sites/jfms/data/guetersloh/images/apple-touch-icon.png
+        url: https://www.jobs-gütersloh.de/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 10_737_jobsgt
+      - title: Resume Worded
+        icon: favicon
+        url: https://resumeworded.com/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 11_737_resumeworded
+      - title: Ausbildung NRW
+        icon: >-
+          https://play-lh.googleusercontent.com/hytdtKSCoaGRYl23l-o0kbCDLz0ZBM6JPLVUX0Bo2TD1Mev9CALK6tUj_CVCbHMnFg=w240-h480-rw
+        url: https://suche.ausbildung.nrw/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 12_737_ausbildungnrw
+  - name: IT-Management
+    icon: https://cdn-icons-png.flaticon.com/512/1646/1646613.png
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: true
+    items:
+      - title: ORCID
+        icon: favicon
+        url: https://orcid.org/register
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 0_1223_orcid
+      - title: DeepScan
+        description: Static analysis for finding runtime errors and quality issues
+        icon: favicon
+        url: https://deepscan.io
+        target: newtab
+        tags:
+          - git
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 1_1223_deepscan
+      - title: Snyk
+        description: Dependency vulnerability scanning
+        icon: favicon
+        url: https://snyk.io
+        target: newtab
+        statusCheck: true
+        tags:
+          - git
+        statusCheckAllowInsecure: true
+        id: 2_1223_snyk
+      - title: FOSSA
+        description: Dependency license checking
+        icon: favicon
+        url: https://fossa.com/
+        target: newtab
+        tags:
+          - git
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 3_1223_fossa
+      - title: DeepSource
+        description: Source code analysis
+        icon: favicon
+        url: https://deepsource.io
+        target: newtab
+        tags:
+          - git
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 4_1223_deepsource
+      - title: Gitguardian
+        icon: favicon
+        url: https://dashboard.gitguardian.com/auth/login?redirect_url=%2Fanalytics
+        target: newtab
+        tags:
+          - git
+        statusCheckAllowInsecure: true
+        statusCheck: true
+        id: 5_1223_gitguardian
+      - title: MasterTask
+        description: >-
+          MasterTask ist eine Aufgaben- und Projektmanagement-App, die Teams
+          hilft, Aufgaben zu organisieren, zu verfolgen und zu erledigen. Sie
+          bietet Funktionen wie To-Do-Listen, Zeitmanagement und Zusammenarbeit
+          in Echtzeit.
+        icon: >-
+          https://cdn1.meistertask.com/assets/meisterlabs/products/meistertask/icon-a180b0f392b059b046e36e08d9276da6d3fcdf864351ac1b4e296ffb48178bb2.png
+        url: https://www.meistertask.com/
+        target: newtab
+        tags:
+          - development
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 6_1223_mastertask
+      - title: NPM
+        description: >-
+          NPM (Node Package Manager) ist ein Paketmanager für JavaScript, der es
+          Entwicklern ermöglicht, Bibliotheken und Abhängigkeiten zu verwalten
+          und zu installieren.
+        icon: favicon
+        url: https://www.npmjs.com/login
+        target: newtab
+        tags:
+          - development
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 7_1223_npm
+      - title: Jsoncrack
+        icon: favicon
+        url: https://jsoncrack.com
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 8_1223_jsoncrack
+  - name: Mockup
+    icon: https://cdn-icons-png.flaticon.com/512/1420/1420843.png
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: false
+    items:
+      - title: Dribbble
+        icon: favicon
+        url: https://dribbble.com/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 0_623_dribbble
+      - title: Behance
+        icon: favicon
+        url: https://www.behance.net/#
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 1_623_behance
+      - title: Canva
+        icon: favicon
+        url: https://www.canva.com/de_de/
+        target: newtab
+        tags:
+          - ppt
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 2_623_canva
+      - title: Jitter
+        icon: favicon
+        url: https://jitter.video/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 3_623_jitter
+      - title: Code Project
+        icon: favicon
+        url: https://www.codeproject.com/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 4_623_codeproject

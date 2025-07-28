@@ -1,0 +1,59 @@
+---
+x-logging: &default-logging
+  driver: loki
+  options: &default-logging-options
+    loki-url: https://loki.${SYNOLOGY_BASIC_URL:?SYNOLOGY_BASIC_URL required}/loki/api/v1/push
+    loki-retries: 5
+    loki-batch-size: 400
+    loki-batch-wait: 2s
+    loki-timeout: 10s
+    loki-max-backoff: 5s
+    loki-min-backoff: 1s
+    loki-tenant-id: default
+
+x-labels: &default-labels
+  com.centurylinklabs.watchtower.enable: true
+  recreat.container: true
+  container.label.group: management
+
+x-limits: &resource-limits
+  mem_limit: 256m
+  mem_reservation: 64m
+  cpu_shares: "512"
+  restart: always
+  networks:
+    dockerization:
+
+services:
+  dashy:
+    container_name: dashy
+    hostname: dashy
+    image: lissy93/dashy:latest
+    <<: *resource-limits
+    logging:
+      <<: *default-logging
+      options:
+        <<: *default-logging-options
+        loki-external-labels: job=dashy
+    environment:
+      NODE_ENV: production
+    ports:
+      - target: 8080
+        published: 90
+        protocol: tcp
+        mode: host
+    volumes:
+      - type: bind
+        source: ${MOUNT_PATH_DOCKER_ROOT:?Path is missing}/compose/config/dashy.yml
+        target: /app/user-data/conf.yml
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+    labels:
+      <<: *default-labels
+      monitoring: dashy
+
+networks:
+  dockerization:
+    external: true
