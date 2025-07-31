@@ -11,7 +11,7 @@
   "enginesStrict": true,
   "homepage": "https://munirmardinli.github.io/homelab-cli",
   "bin": {
-    "homelab-cli": "config/bin/homelab-cli"
+    "homelab-cli": "lib/bin/homelab-cli.js"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com",
