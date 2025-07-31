@@ -39,6 +39,7 @@ services:
           target: /home/node/app/src
           ignore: 
             - node_modules
+            - lib
         - action: rebuild
           path: package.json
     networks:
