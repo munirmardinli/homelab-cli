@@ -45,9 +45,23 @@ function main(): void {
       exitMsg: 'Tschüss!',
     });
     cli.start();
+  } else if (process.platform === 'linux') {
+    const cli = new PackageManagerCLI({
+      platform: 'linux',
+      installCmd: 'apk',
+      installArgs: (pkg) => ['add', pkg],
+      updateCmd: 'apk update && apk upgrade',
+      installLabel: 'Paket installieren',
+      updateLabel: 'Pakete updaten',
+      exitLabel: 'Beenden',
+      onlyPlatformMsg: 'Dieses Skript funktioniert nur auf Linux!',
+      updateSuccessMsg: 'Alle Pakete wurden aktualisiert.',
+      exitMsg: 'Tschüss!',
+    });
+    cli.start();
   } else {
     console.log(
-      'Dieses Skript unterstützt nur macOS (brew) und Windows (choco).',
+      'Dieses Skript unterstützt nur macOS (brew), Windows (choco) und Linux (apk).',
     );
     process.exit(0);
   }

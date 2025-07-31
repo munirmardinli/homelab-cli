@@ -8,7 +8,7 @@ route:
 receivers:
   - name: discord
     discord_configs:
-      - webhook_url: https://discord.com/api/webhooks/1395122964781072515/99aiol1g64JzO1tjJiyixIGbLwmbMk_Kbj4R0QoJgzww8hP8yKgD4DfsTDplyOZ7nX0e
+      - webhook_url: { { .Secrets.DISCORD_WEBHOOK_URL } }
         message: |
           **[{{ .Status | toUpper }}] {{ .CommonLabels.alertname }}**
           {{ range .Alerts }}

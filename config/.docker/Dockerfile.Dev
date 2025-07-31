@@ -1,0 +1,26 @@
+# syntax=docker/dockerfile:1
+
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Dockerfile reference guide at
+# https://docs.docker.com/go/dockerfile-reference/
+
+# Want to help us make this template better? Share your feedback here: https://forms.gle/ybq9Krt8jtBL3iCk7
+
+ARG NODE_VERSION=22
+
+FROM node:${NODE_VERSION}-alpine
+
+WORKDIR /home/node/app
+
+RUN apk add --no-cache openssh-client sshpass
+
+COPY package.json ./
+RUN npm install
+
+RUN npm install -g npm@latest
+
+COPY . .
+
+USER node
+
+CMD ["npx", "tsx", "src/index.ts"]

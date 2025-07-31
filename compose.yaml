@@ -1,0 +1,53 @@
+---
+x-labels: &default-labels
+  com.centurylinklabs.watchtower.enable: true
+  recreat.container: true
+  container.label.group: management
+
+x-limits: &resource-limits
+  mem_limit: 256m
+  mem_reservation: 64m
+  cpu_shares: "512"
+  restart: always
+  tty: true
+
+services:
+  homelab-cli:
+    build:
+      context: .
+      dockerfile: config/.docker/Dockerfile.Dev
+    image: node-dev
+    container_name: homelab-cli
+    <<: *resource-limits
+    hostname: homelab-cli
+    environment:
+      NODE_ENV: development
+      WINDOWS_USERNAME: ${WINDOWS_USERNAME}
+      WINDOWS_PASSWORD: ${USER}
+      WINDOWS_HOST: ${WINDOWS_HOST}
+      DARWIN_USERNAME: ${DARWIN_USERNAME}
+      DARWIN_PASSWORD: ${DARWIN_PASSWORD}
+      DARWIN_HOST: ${DARWIN_HOST}
+      NAS_USERNAME: ${NAS_USERNAME}
+      NAS_PASSWORD: ${NAS_PASSWORD}
+      NAS_HOST: ${NAS_HOST}
+      NAS_PORT: ${NAS_PORT}
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /home/node/app/src
+          ignore: 
+            - node_modules
+        - action: rebuild
+          path: package.json
+    networks:
+      dockerization:
+    labels:
+      <<: *default-labels
+      monitoring: homelab-cli
+      description: Homelab CLI
+
+networks:
+  dockerization:
+    external: true
