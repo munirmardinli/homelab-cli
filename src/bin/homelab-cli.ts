@@ -2,7 +2,7 @@
 
 /**
  * Homelab CLI Application Class
- * 
+ *
  * This class serves as the main entry point for the homelab-cli application.
  * It handles the initialization and execution of the CLI application.
  */
@@ -10,7 +10,9 @@
 class HomelabCLI {
   private static instance: HomelabCLI;
 
-  private constructor() {}
+  private constructor() {
+    // Private constructor to enforce singleton pattern
+  }
 
   /**
    * Get the singleton instance of HomelabCLI
@@ -59,4 +61,3 @@ cli.start().catch((error) => {
   console.error('💥 Fatal error in homelab-cli:', error);
   process.exit(1);
 });
-
