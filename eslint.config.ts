@@ -10,11 +10,11 @@ import sonarjs from 'eslint-plugin-sonarjs';
 import yml from 'eslint-plugin-yml';
 import json from 'eslint-plugin-json';
 import yamlParser from 'yaml-eslint-parser';
-import pluginReact from "eslint-plugin-react";
-import { defineConfig } from "eslint/config";
+import pluginReact from 'eslint-plugin-react';
+import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
-  { files: ["**/*.{ts}"], plugins: { js }, extends: ["js/recommended"] },
+  { files: ['**/*.{ts}'], plugins: { js }, extends: ['js/recommended'] },
   pluginReact.configs.flat.recommended,
   {
     files: ['**/*.{ts}'],

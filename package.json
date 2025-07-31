@@ -2,7 +2,7 @@
   "name": "@munirmardinli/homelab-cli",
   "description": "A CLI for managing your homelab infrastructure",
   "private": false,
-  "version": "0.0.6",
+  "version": "0.0.7",
   "sideEffects": false,
   "license": "MIT",
   "type": "module",
@@ -32,9 +32,7 @@
     "typescript",
     "nodejs"
   ],
-  "files": [
-    "lib"
-  ],
+  "files": ["lib"],
   "exports": {
     ".": {
       "import": "./lib/index.js",
@@ -80,13 +78,8 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,json,yml,md}": [
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "*.ts": [
-      "tsc --noEmit"
-    ]
+    "*.{js,ts,json,yml,md}": ["prettier --write", "eslint --fix"],
+    "*.ts": ["tsc --noEmit"]
   },
   "engines": {
     "node": ">=18.0.0"

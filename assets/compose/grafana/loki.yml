@@ -49,6 +49,5 @@ table_manager:
 compactor:
   working_directory: /loki/compactor
 
-
 ruler:
   alertmanager_url: http://alertmanager:9093

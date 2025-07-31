@@ -8,4 +8,4 @@ groups:
           severity: critical
         annotations:
           summary: "Dashy ist nicht erreichbar"
-          description: "Der Service dashy ist seit mehr als 1 Minute nicht erreichbar." 
+          description: "Der Service dashy ist seit mehr als 1 Minute nicht erreichbar."

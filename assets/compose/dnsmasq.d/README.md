@@ -1,4 +1,5 @@
 # 🛡️ DNS-Blockliste für Pi-hole
+
 **The Big Blocklist Collection**
 
 Diese Sammlung von Host-Listen hilft dir, Werbung, Tracker, Malware und andere unerwünschte Inhalte mit Pi-hole oder ähnlicher DNS-basierten Software zu blockieren.
@@ -6,6 +7,7 @@ Diese Sammlung von Host-Listen hilft dir, Werbung, Tracker, Malware und andere u
 ---
 
 ## 🔗 Inhaltsverzeichnis
+
 - [⚠️ Verdächtige & Malware-Quellen](#️-verdächtige--malware-quellen)
 - [📢 Werbeblocker-Listen](#-werbeblocker-listen)
 - [📡 Tracking & Telemetrie](#-tracking--telemetrie)

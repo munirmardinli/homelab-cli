@@ -85,7 +85,7 @@ sections:
         statusCheckAllowInsecure: true
         id: 2_1367_instagram
       - title: Youtube
-        description: ' YouTube ist eine Video-Sharing-Plattform, auf der Nutzer Videos hochladen, anschauen, teilen und kommentieren können. Sie bietet eine breite Vielfalt an Inhalten, von Unterhaltung bis Bildung, und ermöglicht es Nutzern, eigene Kanäle zu erstellen.'
+        description: " YouTube ist eine Video-Sharing-Plattform, auf der Nutzer Videos hochladen, anschauen, teilen und kommentieren können. Sie bietet eine breite Vielfalt an Inhalten, von Unterhaltung bis Bildung, und ermöglicht es Nutzern, eigene Kanäle zu erstellen."
         icon: favicon
         url: https://www.youtube.com/@munir.mardinli
         target: newtab
@@ -908,7 +908,7 @@ sections:
         statusCheck: true
         statusCheckAllowInsecure: true
         id: 22_1608_mural
-  - name: 'Recherche '
+  - name: "Recherche "
     icon: https://cdn-icons-png.flaticon.com/512/2038/2038534.png
     displayData:
       sortBy: most-used
@@ -1459,7 +1459,7 @@ sections:
         statusCheckAllowInsecure: true
         id: 7_1500_openstreetmap
       - title: Stack Overflow
-        description: ' Stack Overflow ist eine Frage-Antwort-Plattform für Programmierer, auf der Entwickler Fragen stellen, Antworten geben und Lösungen für technische Probleme teilen können.'
+        description: " Stack Overflow ist eine Frage-Antwort-Plattform für Programmierer, auf der Entwickler Fragen stellen, Antworten geben und Lösungen für technische Probleme teilen können."
         icon: favicon
         url: >-
           https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2f
@@ -1747,7 +1747,7 @@ sections:
       hideForGuests: false
     items:
       - title: GitHub
-        description: ''
+        description: ""
         icon: favicon
         url: https://github.com/login
         target: newtab
@@ -1897,7 +1897,7 @@ sections:
         statusCheckAllowInsecure: true
         id: 6_912_tuya
       - title: Home Connect
-        description: ''
+        description: ""
         icon: favicon
         url: https://developer.home-connect.com/user/login
         target: newtab
