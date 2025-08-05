@@ -1,0 +1,212 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "Homelab Setup",
+    "home_page_url": "https://munirmardinli.github.io/homelab-cli/",
+    "feed_url": "https://munirmardinli.github.io/homelab-cli/feed_json_created.json",
+    "description": null,
+    "icon": null,
+    "authors": [
+        {
+            "name": "Munir Mardinli"
+        }
+    ],
+    "language": "en",
+    "items": [
+        {
+            "id": "https://munirmardinli.github.io/homelab-cli/authentik/",
+            "url": "https://munirmardinli.github.io/homelab-cli/authentik/",
+            "title": "\ud83d\udee1\ufe0f Authentik",
+            "content_html": "Complete Docker Compose setup for Authentik identity provider with PostgreSQL and Redis. Includes SSO, user management, multi-factor authentication, and production-ready configuration with health checks, logging, and monitoring integration.\n",
+            "image": null,
+            "date_published": "2025-07-19T00:00:00+00:00",
+            "authors": [
+                {
+                    "name": "Munir Mardinli"
+                }
+            ],
+            "tags": null
+        },
+        {
+            "id": "https://munirmardinli.github.io/homelab-cli/development/",
+            "url": "https://munirmardinli.github.io/homelab-cli/development/",
+            "title": "\ud83d\udcbb Development Services",
+            "content_html": "Complete Docker Compose setup for Code Server, Obsidian, and GitLab CE. Includes development tools for code editing, note-taking, and version control.\n",
+            "image": null,
+            "date_published": "2025-07-19T00:00:00+00:00",
+            "authors": [
+                {
+                    "name": "Munir Mardinli"
+                }
+            ],
+            "tags": null
+        },
+        {
+            "id": "https://munirmardinli.github.io/homelab-cli/core/",
+            "url": "https://munirmardinli.github.io/homelab-cli/core/",
+            "title": "\ud83d\udd27 Core Services",
+            "content_html": "Complete Docker Compose setup for Cloudflare Tunnel, Pi-hole DNS, and Nginx Proxy Manager. Includes essential networking stack including DNS resolution, reverse proxy, and cloud tunneling.\n",
+            "image": null,
+            "date_published": "2025-07-19T00:00:00+00:00",
+            "authors": [
+                {
+                    "name": "Munir Mardinli"
+                }
+            ],
+            "tags": null
+        },
+        {
+            "id": "https://munirmardinli.github.io/homelab-cli/management/",
+            "url": "https://munirmardinli.github.io/homelab-cli/management/",
+            "title": "\u2757 Container Management",
+            "content_html": "Complete Docker Compose setup for Watchtower, Autoheal, Dashy, Roundcube, and Guacamole. Includes container monitoring, auto-healing, and production-ready configuration with health checks, logging, and monitoring integration.\n",
+            "image": null,
+            "date_published": "2025-07-19T00:00:00+00:00",
+            "authors": [
+                {
+                    "name": "Munir Mardinli"
+                }
+            ],
+            "tags": null
+        },
+        {
+            "id": "https://munirmardinli.github.io/homelab-cli/code/",
+            "url": "https://munirmardinli.github.io/homelab-cli/code/",
+            "title": "\ud83c\udfd7 Code Documentation",
+            "content_html": "Technical reference for the `src` directory structure, modules, and key functionalities of the CLI tool. Designed for contributors and maintainers.\n",
+            "image": null,
+            "date_published": "2025-07-19T00:00:00+00:00",
+            "authors": [
+                {
+                    "name": "Munir Mardinli"
+                }
+            ],
+            "tags": null
+        },
+        {
+            "id": "https://munirmardinli.github.io/homelab-cli/environment/",
+            "url": "https://munirmardinli.github.io/homelab-cli/environment/",
+            "title": "\ud83c\udf3f Environment",
+            "content_html": "Comprehensive guide to environment variables used across Homelab services. Includes security best practices and configuration examples.\n",
+            "image": null,
+            "date_published": "2025-07-19T00:00:00+00:00",
+            "authors": [
+                {
+                    "name": "Munir Mardinli"
+                }
+            ],
+            "tags": null
+        },
+        {
+            "id": "https://munirmardinli.github.io/homelab-cli/sharedConfig/",
+            "url": "https://munirmardinli.github.io/homelab-cli/sharedConfig/",
+            "title": "\u2699\ufe0f Shared Config",
+            "content_html": "Standardized configuration anchors for Docker Compose including logging, labels, and resource limits to ensure consistency across services.\n",
+            "image": null,
+            "date_published": "2025-07-19T00:00:00+00:00",
+            "authors": [
+                {
+                    "name": "Munir Mardinli"
+                }
+            ],
+            "tags": null
+        },
+        {
+            "id": "https://munirmardinli.github.io/homelab-cli/brew/",
+            "url": "https://munirmardinli.github.io/homelab-cli/brew/",
+            "title": "\ud83c\udfd7 Homebrew Installation",
+            "content_html": "Automated Homebrew installation script for macOS and Linux.\n",
+            "image": null,
+            "date_published": "2025-07-19T00:00:00+00:00",
+            "authors": [
+                {
+                    "name": "Munir Mardinli"
+                }
+            ],
+            "tags": null
+        },
+        {
+            "id": "https://munirmardinli.github.io/homelab-cli/dotenv/",
+            "url": "https://munirmardinli.github.io/homelab-cli/dotenv/",
+            "title": "\ud83d\udcc4 Dotenv",
+            "content_html": "<p>```sh linenums=\"1\" title=\"dotenv.sh\"</p>\n<h1>!/bin/sh</h1>\n<p>export INFLUX_TOKEN=$(grep '^INFLUX_TOKEN=' .env | cut -d '=' -f2-)</p>\n<h1>Dashy</h1>\n<p>export DASHY_USERNAME=$(grep '^D...</p>",
+            "image": null,
+            "date_published": "2025-07-19T00:00:00+00:00",
+            "authors": [
+                {
+                    "name": "Munir Mardinli"
+                }
+            ],
+            "tags": null
+        },
+        {
+            "id": "https://munirmardinli.github.io/homelab-cli/hetznerCert/",
+            "url": "https://munirmardinli.github.io/homelab-cli/hetznerCert/",
+            "title": "\ud83d\udd10 Hetzner Certificate",
+            "content_html": "Automated SSL certificate issuance and deployment for Hetzner domains using acme.sh and Synology DSM.\n",
+            "image": null,
+            "date_published": "2025-07-19T00:00:00+00:00",
+            "authors": [
+                {
+                    "name": "Munir Mardinli"
+                }
+            ],
+            "tags": null
+        },
+        {
+            "id": "https://munirmardinli.github.io/homelab-cli/macvlan/",
+            "url": "https://munirmardinli.github.io/homelab-cli/macvlan/",
+            "title": "\ud83c\udf10 Docker Macvlan",
+            "content_html": "Interactive script to create Docker macvlan networks with IPv4 and optional IPv6 support.\n",
+            "image": null,
+            "date_published": "2025-07-19T00:00:00+00:00",
+            "authors": [
+                {
+                    "name": "Munir Mardinli"
+                }
+            ],
+            "tags": null
+        },
+        {
+            "id": "https://munirmardinli.github.io/homelab-cli/nas/",
+            "url": "https://munirmardinli.github.io/homelab-cli/nas/",
+            "title": "\ud83d\uddc4\ufe0f NAS Script",
+            "content_html": "Automatisierte Entware-Installation und Grundkonfiguration f\u00fcr Synology NAS Systeme.\n",
+            "image": null,
+            "date_published": "2025-07-19T00:00:00+00:00",
+            "authors": [
+                {
+                    "name": "Munir Mardinli"
+                }
+            ],
+            "tags": null
+        },
+        {
+            "id": "https://munirmardinli.github.io/homelab-cli/powerlevel10k/",
+            "url": "https://munirmardinli.github.io/homelab-cli/powerlevel10k/",
+            "title": "\ud83c\udfa8 Powerlevel10k Script",
+            "content_html": "Automates the setup of the Powerlevel10k Zsh theme by updating your .zshrc.\n",
+            "image": null,
+            "date_published": "2025-07-19T00:00:00+00:00",
+            "authors": [
+                {
+                    "name": "Munir Mardinli"
+                }
+            ],
+            "tags": null
+        },
+        {
+            "id": "https://munirmardinli.github.io/homelab-cli/venv/",
+            "url": "https://munirmardinli.github.io/homelab-cli/venv/",
+            "title": "\ud83d\udc0d Venv Script",
+            "content_html": "Automates Python virtual environment setup and MkDocs site build.\n",
+            "image": null,
+            "date_published": "2025-07-19T00:00:00+00:00",
+            "authors": [
+                {
+                    "name": "Munir Mardinli"
+                }
+            ],
+            "tags": null
+        }
+    ]
+}
