@@ -73,7 +73,7 @@ jobs:
             .npm
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Run eslint tool
-        run: npx eslint 'src/**/*.ts' --fix
+        run: npx eslint . --fix
   prettier:
     needs: prepare
     runs-on: ubuntu-latest

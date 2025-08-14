@@ -9,7 +9,6 @@ import { DockerComposeUtil } from './docker.js';
  * Section Utility für interaktive Auswahl und Steuerung von DockerComposeUtil.
  */
 export class Section extends DockerComposeUtil {
-
   private keypressListenerWrapper: (key: string) => void = () => {};
 
   private readonly DEFAULT_DOCKER_COMPOSE_DIRECTORY = path.resolve(
@@ -22,8 +21,7 @@ export class Section extends DockerComposeUtil {
     'Keine docker-compose Dateien im Verzeichnis gefunden:';
   private readonly DEFAULT_POSTFIX = '.yml';
   private readonly DEFAULT_ENV_FILE = '.env';
-  private readonly SUCCESS_MESSAGE =
-    'docker-compose erfolgreich ausgeführt!';
+  private readonly SUCCESS_MESSAGE = 'docker-compose erfolgreich ausgeführt!';
   private readonly NAVIGATION =
     'Wähle eine docker-compose Datei mit ↑/↓ und Enter:\n\n';
   private readonly DEFAULT_COMPOSE_ARGS = ['up', '-d'];

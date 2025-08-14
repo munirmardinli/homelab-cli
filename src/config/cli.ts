@@ -29,7 +29,7 @@ export class PackageManagerCLI extends TerminalAutomator {
   private readonly GENERIC_UPDATE_ERROR = 'Fehler beim Updaten:';
   private readonly UPDATE_ACCESS_DENIED_ERROR =
     'Fehler beim Updaten: Zugriff verweigert! Bitte führe dieses Tool als Administrator aus!';
-  private readonly BASH_HELPER: BashHelper
+  private readonly BASH_HELPER: BashHelper;
 
   private options: {
     platform: string;
