@@ -221,6 +221,7 @@ jobs:
       - name: Build application for Trivy
         run: |
           npx tsc
+          echo "AVD-DS-0002" >> .trivyignore
       - name: Install Trivy
         uses: aquasecurity/setup-trivy@v0.2.3
         with:

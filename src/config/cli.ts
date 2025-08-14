@@ -29,6 +29,7 @@ export class PackageManagerCLI extends TerminalAutomator {
   private readonly GENERIC_UPDATE_ERROR = 'Fehler beim Updaten:';
   private readonly UPDATE_ACCESS_DENIED_ERROR =
     'Fehler beim Updaten: Zugriff verweigert! Bitte führe dieses Tool als Administrator aus!';
+  private readonly BASH_HELPER: BashHelper
 
   private options: {
     platform: string;
@@ -59,6 +60,7 @@ export class PackageManagerCLI extends TerminalAutomator {
   }) {
     super();
     this.options = options;
+    this.BASH_HELPER = new BashHelper();
   }
 
   private isValidPackageName(pkg: string): boolean {
@@ -174,7 +176,7 @@ export class PackageManagerCLI extends TerminalAutomator {
             this.menu();
             return;
           }
-          BashHelper.startSSHSession(
+          this.BASH_HELPER.startSSHSession(
             target,
             () => {
               this.menu();
@@ -193,14 +195,14 @@ export class PackageManagerCLI extends TerminalAutomator {
         } else if (process.platform === 'linux') {
           fileName = 'linux';
         }
-        PackageManagerCLI.runAllCommandsFromYaml(fileName);
+        this.runAllCommandsFromYaml(fileName);
         rl.close();
         rl.on('close', () => {
           this.menu();
         });
       } else if (response === '5') {
         rl.close();
-        BashHelper.exitCLI();
+        this.BASH_HELPER.exitCLI();
       } else {
         console.log(this.INVALID_INPUT_ERROR);
         rl.close();

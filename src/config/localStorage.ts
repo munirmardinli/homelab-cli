@@ -3,7 +3,7 @@ import fs from 'node:fs';
 
 import { isStorageService } from '../utils/isStorage.js';
 
-export class YamlDataService {
+export class YamlDataService extends isStorageService {
   private static readonly EVENTS_KEY = 'events';
   private static readonly LOADING_DATE_ERROR = '❌ Fehler beim Laden der Daten';
   private static readonly FILE_NOT_EXIST = '❌ Datei existiert nicht, erstelle';
@@ -16,8 +16,8 @@ export class YamlDataService {
 
   static getData<T>(fileName: string): T[] {
     try {
-      const file = isStorageService.createYamlFileAndPath(fileName);
-      isStorageService.createDirectoryExister(file);
+      const file = this.createYamlFileAndPath(fileName);
+      this.createDirectoryExister(file);
       if (!fs.existsSync(file)) {
         console.error(
           `${this.FILE_NOT_EXIST} ${fileName}${this.FILE_EMPTY_CONTENT}`,

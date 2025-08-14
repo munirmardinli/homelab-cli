@@ -8,29 +8,32 @@ import { DockerComposeUtil } from './docker.js';
 /**
  * Section Utility für interaktive Auswahl und Steuerung von DockerComposeUtil.
  */
-export class Section {
-  private static readonly DEFAULT_DOCKER_COMPOSE_DIRECTORY = path.resolve(
+export class Section extends DockerComposeUtil {
+
+  private keypressListenerWrapper: (key: string) => void = () => {};
+
+  private readonly DEFAULT_DOCKER_COMPOSE_DIRECTORY = path.resolve(
     process.cwd(),
     'assets',
     'docker',
     'deployment',
   );
-  private static readonly NOT_FOUND_FILE_ERROR =
+  private readonly NOT_FOUND_FILE_ERROR =
     'Keine docker-compose Dateien im Verzeichnis gefunden:';
-  private static readonly DEFAULT_POSTFIX = '.yml';
-  private static readonly DEFAULT_ENV_FILE = '.env';
-  private static readonly SUCCESS_MESSAGE =
+  private readonly DEFAULT_POSTFIX = '.yml';
+  private readonly DEFAULT_ENV_FILE = '.env';
+  private readonly SUCCESS_MESSAGE =
     'docker-compose erfolgreich ausgeführt!';
-  private static readonly NAVIGATION =
+  private readonly NAVIGATION =
     'Wähle eine docker-compose Datei mit ↑/↓ und Enter:\n\n';
-  private static readonly DEFAULT_COMPOSE_ARGS = ['up', '-d'];
-  private static readonly INPUT_ENV_FILE =
+  private readonly DEFAULT_COMPOSE_ARGS = ['up', '-d'];
+  private readonly INPUT_ENV_FILE =
     'Name der .env Datei im Projektverzeichnis (Enter für Standard:';
 
-  private static files: string[] = [];
-  private static selected: number = 0;
+  private files: string[] = [];
+  private selected: number = 0;
 
-  private static renderMenu() {
+  private renderMenu() {
     output.write('\x1Bc');
     output.write(this.NAVIGATION);
     for (const [idx, file] of this.files.entries()) {
@@ -42,7 +45,7 @@ export class Section {
     }
   }
 
-  private static keypressListener(
+  private keypressListener(
     key: string,
     resolve: () => void,
     defaultEnvFile: string,
@@ -67,9 +70,7 @@ export class Section {
     }
   }
 
-  private static keypressListenerWrapper: (key: string) => void;
-
-  static async promptAndRun(defaultEnvFile = this.DEFAULT_ENV_FILE) {
+  async promptAndRun(defaultEnvFile = this.DEFAULT_ENV_FILE) {
     this.files = fs
       .readdirSync(this.DEFAULT_DOCKER_COMPOSE_DIRECTORY)
       .filter((f) => f.endsWith(this.DEFAULT_POSTFIX) || f.endsWith('.yaml'));
@@ -92,7 +93,7 @@ export class Section {
     });
   }
 
-  private static askEnvAndRun(fileName: string, defaultEnvFile: string) {
+  private askEnvAndRun(fileName: string, defaultEnvFile: string) {
     const envDir = path.resolve(process.cwd());
     const rl = readline.createInterface({ input, output });
     rl.question(`${this.INPUT_ENV_FILE} ${defaultEnvFile}): `, (envFile) => {
@@ -111,8 +112,4 @@ export class Section {
       }
     });
   }
-}
-
-if (process.platform === 'win32') {
-  Section.promptAndRun();
 }

@@ -2,20 +2,20 @@ import { spawn } from 'node:child_process';
 import { platform } from 'node:os';
 
 export class BashHelper {
-  private static readonly INVALID_SSH_TARGET =
+  private readonly INVALID_SSH_TARGET =
     'Ungültiges SSH-Ziel! Format: benutzer@host';
-  private static readonly SSH_EXIT_MSG = 'SSH-Verbindung beendet (Exit-Code:';
-  private static readonly EXIT_MSG =
+  private readonly SSH_EXIT_MSG = 'SSH-Verbindung beendet (Exit-Code:';
+  private readonly EXIT_MSG =
     'Das Programm wird beendet. Auf Wiedersehen!';
-  private static readonly DEFAULT_STADIO_MODE = 'inherit';
-  private static readonly DEFAULT_OPEN_SSH_PATH =
+  private readonly DEFAULT_STADIO_MODE = 'inherit';
+  private readonly DEFAULT_OPEN_SSH_PATH =
     'C:/Windows/System32/OpenSSH/ssh.exe';
-  private static readonly DEFAULT_SSH_PATH = '/usr/bin/ssh';
+  private readonly DEFAULT_SSH_PATH = '/usr/bin/ssh';
   /**
    * Startet eine interaktive SSH-Session zu einem Zielhost.
    * @param host Zielhost (z.B. "user@host")
    */
-  static startSSHSession(
+  startSSHSession(
     host: string,
     onExit?: () => void,
     isWindowsTarget?: boolean,
@@ -48,7 +48,7 @@ export class BashHelper {
   /**
    * Beendet das CLI-Programm.
    */
-  static exitCLI() {
+  exitCLI() {
     console.log(this.EXIT_MSG);
     process.exit(0);
   }
