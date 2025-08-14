@@ -13,6 +13,10 @@ on:
   schedule:
     - cron: "0 3 * * 0"
 
+env:
+  NPM_VERSION: "22"
+  REGISTRY_URL: "https://npm.pkg.github.com"
+
 jobs:
   analyze:
     name: Analyze
@@ -41,11 +45,14 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ env.NPM_VERSION }}
           cache: "npm"
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+          echo "@munirmardinli-dev:registry=${{ env.REGISTRY_URL }}" > ~/.npmrc
+          npm install
 
       - name: Build project
         run: npx tsc
