@@ -2,7 +2,7 @@
   "name": "@munirmardinli/homelab-cli",
   "description": "A CLI for managing your homelab infrastructure",
   "private": false,
-  "version": "0.0.12",
+  "version": "0.0.13",
   "sideEffects": false,
   "license": "MIT",
   "type": "module",
