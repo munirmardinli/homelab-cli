@@ -2,7 +2,7 @@
   "name": "@munirmardinli/homelab-cli",
   "description": "A CLI for managing your homelab infrastructure",
   "private": false,
-  "version": "0.0.13",
+  "version": "0.0.14",
   "sideEffects": false,
   "license": "MIT",
   "type": "module",
@@ -85,7 +85,6 @@
     "node": ">=18.0.0"
   },
   "devDependencies": {
-    "@munirmardinli-dev/eslint": "0.0.7",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^24.2.0",
     "dependency-cruiser": "^17.0.0",

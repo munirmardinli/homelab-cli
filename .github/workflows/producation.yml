@@ -40,10 +40,6 @@ jobs:
           VERSION=$(node -p "require('./package.json').version")
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "PACKAGE_VERSION=$VERSION" >> $GITHUB_ENV
-      - name: Authenticate with GitHub Packages
-        run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
-          echo "@munirmardinli-dev:registry=${{ env.REGISTRY_URL }}" > ~/.npmrc
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -74,8 +70,16 @@ jobs:
             node_modules
             .npm
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Authenticate with GitHub Packages
+        run: |
+          export NODE_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          echo "NODE_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: Run eslint tool
-        run: npx eslint . --fix
+        run: |
+          npm install @munirmardinli-dev/eslint --save-dev --no-save
+          npx eslint . --fix
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   prettier:
     needs: prepare
     runs-on: ubuntu-latest
