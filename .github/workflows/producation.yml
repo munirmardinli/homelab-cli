@@ -70,16 +70,12 @@ jobs:
             node_modules
             .npm
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-      - name: Authenticate with GitHub Packages
-        run: |
-          export NODE_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
-          echo "NODE_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
-      - name: Run eslint tool
-        run: |
-          npm install @munirmardinli-dev/eslint --save-dev --no-save
-          npx eslint . --fix
+      - name: Install ESLint package
+        run: npm install @munirmardinli-dev/eslint --save-dev --no-save
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run eslint tool
+        run: npx eslint . --fix
   prettier:
     needs: prepare
     runs-on: ubuntu-latest
