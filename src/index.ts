@@ -1,23 +1,32 @@
-/**
- * Hauptmodul für das CLI-Tool.
- *
- * Importiert plattformspezifische Funktionen und startet das Hauptprogramm.
- * Unterstützte Plattformen: macOS (brew), Windows (choco).
- *
- * Menü-Option 5: Kommandos aus YAML-Datei ausführen
- *
- * @module index
- */
 import { PackageManagerCLI } from './config/cli.js';
 import 'dotenv/config';
+
 /**
- * Startet das Hauptprogramm und ruft die plattformspezifische Funktion auf.
- *
- * @function main
- * @returns {void}
+ * Eine Klasse, die das Hauptprogramm kapselt und die plattformspezifische Funktion aufruft.
  */
-function main(): void {
-  if (process.platform === 'darwin') {
+class PackageManagerApp {
+  /**
+   * Startet die Anwendung basierend auf der aktuellen Plattform.
+   * @returns {void}
+   */
+  public run(): void {
+    if (process.platform === 'darwin') {
+      this.runMacOS();
+    } else if (process.platform === 'win32') {
+      this.runWindows();
+    } else if (process.platform === 'linux') {
+      this.runLinux();
+    } else {
+      this.showUnsupportedPlatformMessage();
+    }
+  }
+
+  /**
+   * Führt die macOS-spezifische Logik aus.
+   * @private
+   * @returns {void}
+   */
+  private runMacOS(): void {
     const cli = new PackageManagerCLI({
       platform: 'darwin',
       installCmd: 'brew',
@@ -31,7 +40,14 @@ function main(): void {
       exitMsg: 'Tschüss!',
     });
     cli.start();
-  } else if (process.platform === 'win32') {
+  }
+
+  /**
+   * Führt die Windows-spezifische Logik aus.
+   * @private
+   * @returns {void}
+   */
+  private runWindows(): void {
     const cli = new PackageManagerCLI({
       platform: 'win32',
       installCmd: 'choco',
@@ -45,7 +61,14 @@ function main(): void {
       exitMsg: 'Tschüss!',
     });
     cli.start();
-  } else if (process.platform === 'linux') {
+  }
+
+  /**
+   * Führt die Linux-spezifische Logik aus.
+   * @private
+   * @returns {void}
+   */
+  private runLinux(): void {
     const cli = new PackageManagerCLI({
       platform: 'linux',
       installCmd: 'apk',
@@ -59,7 +82,14 @@ function main(): void {
       exitMsg: 'Tschüss!',
     });
     cli.start();
-  } else {
+  }
+
+  /**
+   * Zeigt eine Nachricht für nicht unterstützte Plattformen an.
+   * @private
+   * @returns {void}
+   */
+  private showUnsupportedPlatformMessage(): void {
     console.log(
       'Dieses Skript unterstützt nur macOS (brew), Windows (choco) und Linux (apk).',
     );
@@ -67,4 +97,4 @@ function main(): void {
   }
 }
 
-main();
+new PackageManagerApp().run();

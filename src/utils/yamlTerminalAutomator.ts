@@ -2,7 +2,7 @@ import { execFileSync } from 'node:child_process';
 
 import { YamlDataService } from '../config/localStorage.js';
 
-export class TerminalAutomator {
+export class TerminalAutomator extends YamlDataService {
   private readonly DEFAULT_STADIO_MODE = 'inherit';
   private readonly NO_COMMANDS_FOUND =
     'Keine Kommandos in der YAML-Datei gefunden.';
@@ -14,12 +14,15 @@ export class TerminalAutomator {
   private readonly ERROR_PREFIX = 'Fehler beim Ausführen von';
   private readonly ERROR_SUFFIX = ':';
 
+  constructor() {
+    super();
+  }
   /**
    * Liest alle Kommandos aus einer YAML-Datei im assets/-Verzeichnis und führt sie nacheinander aus.
    * @param fileName Dateiname ohne .yml
    */
   runAllCommandsFromYaml(fileName: string) {
-    const commands = YamlDataService.getData<string>(fileName);
+    const commands = this.getData<string>(fileName);
     if (!Array.isArray(commands) || commands.length === 0) {
       console.log(this.NO_COMMANDS_FOUND);
       return;

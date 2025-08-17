@@ -4,20 +4,23 @@ import fs from 'node:fs';
 import { isStorageService } from '../utils/isStorage.js';
 
 export class YamlDataService extends isStorageService {
-  private static readonly EVENTS_KEY = 'events';
-  private static readonly LOADING_DATE_ERROR = '❌ Fehler beim Laden der Daten';
-  private static readonly FILE_NOT_EXIST = '❌ Datei existiert nicht, erstelle';
-  private static readonly FILE_EMPTY_CONTENT = '.yml mit leerem Inhalt.';
-  private static readonly INVALID_EVENTS_PROP =
+  private readonly EVENTS_KEY = 'events';
+  private readonly LOADING_DATE_ERROR = '❌ Fehler beim Laden der Daten';
+  private readonly FILE_NOT_EXIST = '❌ Datei existiert nicht, erstelle';
+  private readonly FILE_EMPTY_CONTENT = '.yml mit leerem Inhalt.';
+  private readonly INVALID_EVENTS_PROP =
     'Die events-Eigenschaft in der Datei';
-  private static readonly INVALID_EVENTS_PROP_SUFFIX =
+  private readonly INVALID_EVENTS_PROP_SUFFIX =
     '.yml war ungültig. Erstelle leeres Array.';
-  private static readonly UTF8_ENCODING = 'utf8';
+  private readonly UTF8_ENCODING = 'utf8';
 
-  static getData<T>(fileName: string): T[] {
+  constructor() {
+    super();
+  }
+  getData<T>(fileName: string): T[] {
     try {
-      const file = this.createYamlFileAndPath(fileName);
-      this.createDirectoryExister(file);
+      const file = super.createYamlFileAndPath(fileName);
+      super.createDirectoryExister(file);
       if (!fs.existsSync(file)) {
         console.error(
           `${this.FILE_NOT_EXIST} ${fileName}${this.FILE_EMPTY_CONTENT}`,
