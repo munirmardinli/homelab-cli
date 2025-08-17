@@ -1,16 +1,16 @@
 import eslintConfig from '@munirmardinli-dev/eslint';
 
 export default eslintConfig({
-  files: ['**/*.{ts}'],
+  files: ['**/*.ts'],
   ignores: [
-    'eslint.config.ts',
-    'node_modules/',
-    'lib/',
-    'public',
-    '/assets',
-    'config/docs',
-    'venv/',
-    'dotenv.d.ts',
+    '**/eslint.config.ts',
+    '**/node_modules/**',
+    '**/lib/**',
+    '**/public/**',
+    '**/assets/**',
+    '**/config/docs/**',
+    '**/venv/**',
+    '**/dotenv.d.ts',
   ],
   project: ['./config/tsconfig/tsconfig.eslint.json'],
   yamlProjects: [

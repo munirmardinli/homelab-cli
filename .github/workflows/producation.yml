@@ -75,7 +75,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Run eslint tool
-        run: npx eslint . --fix
+        run: npx @munirmardinli-dev/eslint . --fix
   prettier:
     needs: prepare
     runs-on: ubuntu-latest

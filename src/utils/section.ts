@@ -9,7 +9,7 @@ import { DockerComposeUtil } from './docker.js';
  * Section Utility für interaktive Auswahl und Steuerung von DockerComposeUtil.
  */
 export class Section extends DockerComposeUtil {
-  private keypressListenerWrapper: (key: string) => void = () => {};
+  private keypressListenerWrapper!: (key: string) => void;
 
   private readonly DEFAULT_DOCKER_COMPOSE_DIRECTORY = path.resolve(
     process.cwd(),
@@ -31,6 +31,11 @@ export class Section extends DockerComposeUtil {
   private files: string[] = [];
   private selected: number = 0;
 
+  constructor() {
+    super();
+    this.promptAndRun();
+    this.renderMenu();
+  }
   private renderMenu() {
     output.write('\x1Bc');
     output.write(this.NAVIGATION);
