@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    
+    <title>Homelab Setup</title>
+    
+    <link>https://munirmardinli.github.io/homelab-cli/</link>
+    <atom:link href="https://munirmardinli.github.io/homelab-cli/feed_rss_updated.xml" rel="self" type="application/rss+xml" />
+
+    
+    <managingEditor>Munir Mardinli</managingEditor>
+    <docs>https://github.com/munirmardinli/homelab-cli</docs>
+    <language>en</language>
+
+    
+    <pubDate>Tue, 07 Oct 2025 04:55:51 -0000</pubDate>
+    <lastBuildDate>Tue, 07 Oct 2025 04:55:51 -0000</lastBuildDate>
+    <ttl>1440</ttl>
+
+    
+    <generator>MkDocs RSS plugin - v1.17.3</generator>
+
+    
+    
+    <image>
+      <url>None</url>
+      <title>Homelab Setup</title>
+      <link>https://munirmardinli.github.io/homelab-cli/</link>
+    </image>
+    
+
+    
+    
+    <item>
+      <title>📄 Dotenv</title>
+      
+      
+        
+      <author>Munir Mardinli</author>
+        
+      
+      
+      
+      <description>&lt;p&gt;```sh linenums=&#34;1&#34; title=&#34;dotenv.sh&#34;&lt;/p&gt;
+&lt;h1&gt;!/bin/sh&lt;/h1&gt;
+&lt;p&gt;export INFLUX_TOKEN=$(grep &#39;^INFLUX_TOKEN=&#39; .env | cut -d &#39;=&#39; -f2-)&lt;/p&gt;
+&lt;h1&gt;Dashy&lt;/h1&gt;
+&lt;p&gt;export DASHY_USERNAME=$(grep &#39;^D...&lt;/p&gt;</description>
+      <link>https://munirmardinli.github.io/homelab-cli/dotenv/</link>
+      <pubDate>Mon, 28 Jul 2025 11:00:45 +0000</pubDate>
+      <source url="https://munirmardinli.github.io/homelab-cli/feed_rss_updated.xml">Homelab Setup</source>
+      
+      <guid isPermaLink="true">https://munirmardinli.github.io/homelab-cli/dotenv/</guid>
+      
+    </item>
+    
+    <item>
+      <title>💻 Development Services</title>
+      
+      
+        
+      <author>Munir Mardinli</author>
+        
+      
+      
+      
+      <description>Complete Docker Compose setup for Code Server, Obsidian, and GitLab CE. Includes development tools for code editing, note-taking, and version control.
+</description>
+      <link>https://munirmardinli.github.io/homelab-cli/development/</link>
+      <pubDate>Sat, 26 Jul 2025 19:23:04 +0000</pubDate>
+      <source url="https://munirmardinli.github.io/homelab-cli/feed_rss_updated.xml">Homelab Setup</source>
+      
+      <guid isPermaLink="true">https://munirmardinli.github.io/homelab-cli/development/</guid>
+      
+    </item>
+    
+    <item>
+      <title>🛡️ Authentik</title>
+      
+      
+        
+      <author>Munir Mardinli</author>
+        
+      
+      
+      
+      <description>Complete Docker Compose setup for Authentik identity provider with PostgreSQL and Redis. Includes SSO, user management, multi-factor authentication, and production-ready configuration with health checks, logging, and monitoring integration.
+</description>
+      <link>https://munirmardinli.github.io/homelab-cli/authentik/</link>
+      <pubDate>Sat, 26 Jul 2025 19:14:23 +0000</pubDate>
+      <source url="https://munirmardinli.github.io/homelab-cli/feed_rss_updated.xml">Homelab Setup</source>
+      
+      <guid isPermaLink="true">https://munirmardinli.github.io/homelab-cli/authentik/</guid>
+      
+    </item>
+    
+    <item>
+      <title>🔧 Core Services</title>
+      
+      
+        
+      <author>Munir Mardinli</author>
+        
+      
+      
+      
+      <description>Complete Docker Compose setup for Cloudflare Tunnel, Pi-hole DNS, and Nginx Proxy Manager. Includes essential networking stack including DNS resolution, reverse proxy, and cloud tunneling.
+</description>
+      <link>https://munirmardinli.github.io/homelab-cli/core/</link>
+      <pubDate>Sat, 26 Jul 2025 19:14:23 +0000</pubDate>
+      <source url="https://munirmardinli.github.io/homelab-cli/feed_rss_updated.xml">Homelab Setup</source>
+      
+      <guid isPermaLink="true">https://munirmardinli.github.io/homelab-cli/core/</guid>
+      
+    </item>
+    
+    <item>
+      <title>❗ Container Management</title>
+      
+      
+        
+      <author>Munir Mardinli</author>
+        
+      
+      
+      
+      <description>Complete Docker Compose setup for Watchtower, Autoheal, Dashy, Roundcube, and Guacamole. Includes container monitoring, auto-healing, and production-ready configuration with health checks, logging, and monitoring integration.
+</description>
+      <link>https://munirmardinli.github.io/homelab-cli/management/</link>
+      <pubDate>Sat, 26 Jul 2025 19:14:23 +0000</pubDate>
+      <source url="https://munirmardinli.github.io/homelab-cli/feed_rss_updated.xml">Homelab Setup</source>
+      
+      <guid isPermaLink="true">https://munirmardinli.github.io/homelab-cli/management/</guid>
+      
+    </item>
+    
+    <item>
+      <title>⚙️ Shared Config</title>
+      
+      
+        
+      <author>Munir Mardinli</author>
+        
+      
+      
+      
+      <description>Standardized configuration anchors for Docker Compose including logging, labels, and resource limits to ensure consistency across services.
+</description>
+      <link>https://munirmardinli.github.io/homelab-cli/sharedConfig/</link>
+      <pubDate>Sat, 26 Jul 2025 19:14:23 +0000</pubDate>
+      <source url="https://munirmardinli.github.io/homelab-cli/feed_rss_updated.xml">Homelab Setup</source>
+      
+      <guid isPermaLink="true">https://munirmardinli.github.io/homelab-cli/sharedConfig/</guid>
+      
+    </item>
+    
+    <item>
+      <title>🔐 Hetzner Certificate</title>
+      
+      
+        
+      <author>Munir Mardinli</author>
+        
+      
+      
+      
+      <description>Automated SSL certificate issuance and deployment for Hetzner domains using acme.sh and Synology DSM.
+</description>
+      <link>https://munirmardinli.github.io/homelab-cli/hetznerCert/</link>
+      <pubDate>Sat, 26 Jul 2025 19:14:23 +0000</pubDate>
+      <source url="https://munirmardinli.github.io/homelab-cli/feed_rss_updated.xml">Homelab Setup</source>
+      
+      <guid isPermaLink="true">https://munirmardinli.github.io/homelab-cli/hetznerCert/</guid>
+      
+    </item>
+    
+    <item>
+      <title>🌐 Docker Macvlan</title>
+      
+      
+        
+      <author>Munir Mardinli</author>
+        
+      
+      
+      
+      <description>Interactive script to create Docker macvlan networks with IPv4 and optional IPv6 support.
+</description>
+      <link>https://munirmardinli.github.io/homelab-cli/macvlan/</link>
+      <pubDate>Sat, 26 Jul 2025 19:14:23 +0000</pubDate>
+      <source url="https://munirmardinli.github.io/homelab-cli/feed_rss_updated.xml">Homelab Setup</source>
+      
+      <guid isPermaLink="true">https://munirmardinli.github.io/homelab-cli/macvlan/</guid>
+      
+    </item>
+    
+    <item>
+      <title>🗄️ NAS Script</title>
+      
+      
+        
+      <author>Munir Mardinli</author>
+        
+      
+      
+      
+      <description>Automatisierte Entware-Installation und Grundkonfiguration für Synology NAS Systeme.
+</description>
+      <link>https://munirmardinli.github.io/homelab-cli/nas/</link>
+      <pubDate>Sat, 26 Jul 2025 19:14:23 +0000</pubDate>
+      <source url="https://munirmardinli.github.io/homelab-cli/feed_rss_updated.xml">Homelab Setup</source>
+      
+      <guid isPermaLink="true">https://munirmardinli.github.io/homelab-cli/nas/</guid>
+      
+    </item>
+    
+    <item>
+      <title>🎨 Powerlevel10k Script</title>
+      
+      
+        
+      <author>Munir Mardinli</author>
+        
+      
+      
+      
+      <description>Automates the setup of the Powerlevel10k Zsh theme by updating your .zshrc.
+</description>
+      <link>https://munirmardinli.github.io/homelab-cli/powerlevel10k/</link>
+      <pubDate>Sat, 26 Jul 2025 19:14:23 +0000</pubDate>
+      <source url="https://munirmardinli.github.io/homelab-cli/feed_rss_updated.xml">Homelab Setup</source>
+      
+      <guid isPermaLink="true">https://munirmardinli.github.io/homelab-cli/powerlevel10k/</guid>
+      
+    </item>
+    
+    <item>
+      <title>🐍 Venv Script</title>
+      
+      
+        
+      <author>Munir Mardinli</author>
+        
+      
+      
+      
+      <description>Automates Python virtual environment setup and MkDocs site build.
+</description>
+      <link>https://munirmardinli.github.io/homelab-cli/venv/</link>
+      <pubDate>Sat, 26 Jul 2025 19:14:23 +0000</pubDate>
+      <source url="https://munirmardinli.github.io/homelab-cli/feed_rss_updated.xml">Homelab Setup</source>
+      
+      <guid isPermaLink="true">https://munirmardinli.github.io/homelab-cli/venv/</guid>
+      
+    </item>
+    
+    <item>
+      <title>🏗 Code Documentation</title>
+      
+      
+        
+      <author>Munir Mardinli</author>
+        
+      
+      
+      
+      <description>Technical reference for the `src` directory structure, modules, and key functionalities of the CLI tool. Designed for contributors and maintainers.
+</description>
+      <link>https://munirmardinli.github.io/homelab-cli/code/</link>
+      <pubDate>Thu, 24 Jul 2025 21:55:19 +0000</pubDate>
+      <source url="https://munirmardinli.github.io/homelab-cli/feed_rss_updated.xml">Homelab Setup</source>
+      
+      <guid isPermaLink="true">https://munirmardinli.github.io/homelab-cli/code/</guid>
+      
+    </item>
+    
+    <item>
+      <title>🌿 Environment</title>
+      
+      
+        
+      <author>Munir Mardinli</author>
+        
+      
+      
+      
+      <description>Comprehensive guide to environment variables used across Homelab services. Includes security best practices and configuration examples.
+</description>
+      <link>https://munirmardinli.github.io/homelab-cli/environment/</link>
+      <pubDate>Tue, 22 Jul 2025 20:42:03 +0000</pubDate>
+      <source url="https://munirmardinli.github.io/homelab-cli/feed_rss_updated.xml">Homelab Setup</source>
+      
+      <guid isPermaLink="true">https://munirmardinli.github.io/homelab-cli/environment/</guid>
+      
+    </item>
+    
+    <item>
+      <title>🏗 Homebrew Installation</title>
+      
+      
+        
+      <author>Munir Mardinli</author>
+        
+      
+      
+      
+      <description>Automated Homebrew installation script for macOS and Linux.
+</description>
+      <link>https://munirmardinli.github.io/homelab-cli/brew/</link>
+      <pubDate>Tue, 22 Jul 2025 00:00:00 +0000</pubDate>
+      <source url="https://munirmardinli.github.io/homelab-cli/feed_rss_updated.xml">Homelab Setup</source>
+      
+      <guid isPermaLink="true">https://munirmardinli.github.io/homelab-cli/brew/</guid>
+      
+    </item>
+    
+  </channel>
+</rss>
