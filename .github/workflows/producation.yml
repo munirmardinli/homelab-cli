@@ -58,6 +58,45 @@ jobs:
       - name: Set cache output
         id: set-cache-output
         run: echo "cache-hit=$(ls node_modules | wc -l | tr -d ' ')" >> $GITHUB_OUTPUT
+  biome-check:
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Run Biome check
+        run: npx @biomejs/biome check --write
+  biome-format:
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Run Biome format
+        run: npx @biomejs/biome format --write
+  biome-lint:
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Run Biome lint
+        run: npx @biomejs/biome lint --write
   typecheck:
     needs: prepare
     runs-on: ubuntu-latest
@@ -73,6 +112,9 @@ jobs:
         run: npx tsc --noEmit
   build-prod:
     needs:
+      - biome-check
+      - biome-format
+      - biome-lint
       - typecheck
     runs-on: ubuntu-latest
     steps:
@@ -136,32 +178,7 @@ jobs:
           --ignore-unfixed \
           --format table \
           --exit-code 1
-  publish-package:
-    needs: build-prod
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NPM_VERSION }}
-          registry-url: ${{ env.REGISTRY_URL }}
-      - uses: actions/cache@v4
-        with:
-          path: |
-            node_modules
-            .npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-      - name: Build application
-        run: npx tsc
-      - name: Verify package version
-        run: |
-          echo "Package version from package.json: $(node -p "require('./package.json').version")"
-          echo "Package name: $(node -p "require('./package.json').name")"
-      - name: Publish package to GitHub Packages
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   docker-prod:
     needs: build-prod
     runs-on: ubuntu-latest
@@ -202,3 +219,32 @@ jobs:
             IMAGE_DESCRIPTION=${{ github.event.repository.description }}
             GITHUB_SHA=${{ github.sha }}
             REPO_LICENSE=${{ github.event.repository.license }}
+
+  publish-package:
+    needs:
+      - trivy-scans-prod
+      - docker-prod
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NPM_VERSION }}
+          registry-url: ${{ env.REGISTRY_URL }}
+      - uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Build application
+        run: npx tsc
+      - name: Verify package version
+        run: |
+          echo "Package version from package.json: $(node -p "require('./package.json').version")"
+          echo "Package name: $(node -p "require('./package.json').name")"
+      - name: Publish package to GitHub Packages
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
