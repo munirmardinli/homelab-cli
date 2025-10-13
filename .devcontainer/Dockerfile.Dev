@@ -3,8 +3,7 @@ FROM node:22-alpine AS builder
 
 WORKDIR /home/node/app
 
-COPY package.json package-lock.json tsconfig.json dotenv.d.ts ./
-COPY config ./config
+COPY package.json package-lock.json tsconfig.json ./
 COPY src ./src
 RUN npm install
 

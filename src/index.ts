@@ -1,5 +1,5 @@
 import { PackageManagerCLI } from "./config/cli.js";
-import "dotenv/config";
+import { SecretsParser } from "./utils/secrets.js";
 
 /**
  * Eine Klasse, die das Hauptprogramm kapselt und die plattformspezifische Funktion aufruft.
@@ -10,6 +10,10 @@ class PackageManagerApp {
 	 * @returns {void}
 	 */
 	public run(): void {
+		// Lade Secrets/Umgebungsvariablen
+		const secretsParser = new SecretsParser();
+		secretsParser.loadSecrets();
+
 		if (process.platform === "darwin") {
 			this.runMacOS();
 		} else if (process.platform === "win32") {

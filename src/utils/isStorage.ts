@@ -11,7 +11,7 @@ export class isStorageService {
 		return false;
 	}
 
-	createYamlFileAndPath(fileName: string): string {
-		return path.join(process.cwd(), "assets", `${fileName}.yml`);
+	createJsonFileAndPath(fileName: string): string {
+		return path.join(process.cwd(), "assets", `${fileName}.json`);
 	}
 }

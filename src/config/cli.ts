@@ -11,8 +11,8 @@ export class PackageManagerCLI extends TerminalAutomator {
 	private readonly ACCESS_DENIED_KEYWORD_EN = "access";
 	private readonly WHAT_DO_YOU_WANT_TO_DO = "\nWas möchtest du tun?";
 	private readonly SSH_CONNECTION_OPTION = "3. SSH-Verbindung aufbauen";
-	private readonly EXECUTE_YAML_OPTION =
-		"4. Kommandos aus YAML-Datei ausführen";
+	private readonly EXECUTE_JSON_OPTION =
+		"4. Kommandos aus JSON-Datei ausführen";
 	private readonly EXIT_OPTION = "5. Beenden";
 	private readonly PLEASE_CHOOSE_PROMPT = "Bitte wähle: ";
 	private readonly WHICH_PACKAGE_PROMPT =
@@ -29,6 +29,8 @@ export class PackageManagerCLI extends TerminalAutomator {
 	private readonly GENERIC_UPDATE_ERROR = "Fehler beim Updaten:";
 	private readonly UPDATE_ACCESS_DENIED_ERROR =
 		"Fehler beim Updaten: Zugriff verweigert! Bitte führe dieses Tool als Administrator aus!";
+	private readonly MISSING_SSH_CONFIG_ERROR =
+		"❌ SSH-Konfiguration fehlt! Bitte erstelle eine secrets.txt Datei mit deinen SSH-Verbindungsdaten.";
 	private readonly BASH_HELPER: BashHelper;
 
 	private options: {
@@ -84,7 +86,7 @@ export class PackageManagerCLI extends TerminalAutomator {
 		console.log(`1. ${this.options.installLabel}`);
 		console.log(`2. ${this.options.updateLabel}`);
 		console.log(this.SSH_CONNECTION_OPTION);
-		console.log(this.EXECUTE_YAML_OPTION);
+		console.log(this.EXECUTE_JSON_OPTION);
 		console.log(this.EXIT_OPTION);
 		rl.question(this.PLEASE_CHOOSE_PROMPT, (response: string): void => {
 			if (response === "1") {
@@ -110,8 +112,8 @@ export class PackageManagerCLI extends TerminalAutomator {
 						) {
 							console.error(
 								this.INSTALLATION_ERROR_PREFIX +
-									paket +
-									this.ACCESS_DENIED_HINT,
+								paket +
+								this.ACCESS_DENIED_HINT,
 							);
 						} else {
 							console.error(`${this.INSTALLATION_ERROR_PREFIX} ${paket}:`, err);
@@ -156,19 +158,34 @@ export class PackageManagerCLI extends TerminalAutomator {
 					let port: string | undefined;
 					let isWindowsTarget = false;
 					if (osRequest === "1") {
-						const user = process.env.DARWIN_USERNAME;
-						const host = process.env.DARWIN_HOST;
+						const user = process.env["DARWIN_USERNAME"];
+						const host = process.env["DARWIN_HOST"];
+						if (!user || !host) {
+							console.log(this.MISSING_SSH_CONFIG_ERROR);
+							this.menu();
+							return;
+						}
 						target = `${user}@${host}`;
 						isWindowsTarget = false;
 					} else if (osRequest === "2") {
-						const user = process.env.WINDOWS_USERNAME;
-						const host = process.env.WINDOWS_HOST;
+						const user = process.env["WINDOWS_USERNAME"];
+						const host = process.env["WINDOWS_HOST"];
+						if (!user || !host) {
+							console.log(this.MISSING_SSH_CONFIG_ERROR);
+							this.menu();
+							return;
+						}
 						target = `${user}@${host}`;
 						isWindowsTarget = true;
 					} else if (osRequest === "3") {
-						const user = process.env.NAS_USERNAME;
-						const host = process.env.NAS_HOST;
-						port = process.env.NAS_PORT || this.DEFAULT_SSH_PORT;
+						const user = process.env["NAS_USERNAME"];
+						const host = process.env["NAS_HOST"];
+						if (!user || !host) {
+							console.log(this.MISSING_SSH_CONFIG_ERROR);
+							this.menu();
+							return;
+						}
+						port = process.env["NAS_PORT"] || this.DEFAULT_SSH_PORT;
 						target = `${user}@${host}`;
 						isWindowsTarget = false;
 					} else {
@@ -195,7 +212,7 @@ export class PackageManagerCLI extends TerminalAutomator {
 				} else if (process.platform === "linux") {
 					fileName = "linux";
 				}
-				this.runAllCommandsFromYaml(fileName);
+				this.runAllCommandsFromJson(fileName);
 				rl.close();
 				rl.on("close", () => {
 					this.menu();

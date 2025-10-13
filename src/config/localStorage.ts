@@ -1,21 +1,20 @@
 import fs from "node:fs";
-import yaml from "js-yaml";
 
 import { isStorageService } from "../utils/isStorage.js";
 
-export class YamlDataService extends isStorageService {
+export class JsonDataService extends isStorageService {
 	private readonly EVENTS_KEY = "events";
 	private readonly LOADING_DATE_ERROR = "❌ Fehler beim Laden der Daten";
 	private readonly FILE_NOT_EXIST = "❌ Datei existiert nicht, erstelle";
-	private readonly FILE_EMPTY_CONTENT = ".yml mit leerem Inhalt.";
+	private readonly FILE_EMPTY_CONTENT = ".json mit leerem Inhalt.";
 	private readonly INVALID_EVENTS_PROP = "Die events-Eigenschaft in der Datei";
 	private readonly INVALID_EVENTS_PROP_SUFFIX =
-		".yml war ungültig. Erstelle leeres Array.";
+		".json war ungültig. Erstelle leeres Array.";
 	private readonly UTF8_ENCODING = "utf8";
 
 	getData<T>(fileName: string): T[] {
 		try {
-			const file = super.createYamlFileAndPath(fileName);
+			const file = super.createJsonFileAndPath(fileName);
 			super.createDirectoryExister(file);
 			if (!fs.existsSync(file)) {
 				console.error(
@@ -23,13 +22,13 @@ export class YamlDataService extends isStorageService {
 				);
 				fs.writeFileSync(
 					file,
-					yaml.dump({ [this.EVENTS_KEY]: [] }),
+					JSON.stringify({ [this.EVENTS_KEY]: [] }, null, 2),
 					this.UTF8_ENCODING,
 				);
 			}
 
 			const rawData = fs.readFileSync(file, this.UTF8_ENCODING);
-			let data = yaml.load(rawData) as {
+			let data = JSON.parse(rawData) as {
 				events: T[];
 			} | null;
 

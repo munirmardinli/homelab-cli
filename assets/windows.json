@@ -1,0 +1,12 @@
+{
+	"events": [
+		"choco install wget",
+		"choco install nodejs",
+		"choco install postman",
+		"choco install putty",
+		"choco install graphviz",
+		"choco upgrade python -y",
+		"choco install mkcert",
+		"choco install git"
+	]
+}

@@ -1,17 +1,5 @@
-# depencies
 node_modules/
-
-# secrets
-.env.development.local
-.env.test.local
-.env.production.local
-.env.local
-.env
-
-# build
 lib
-
-.obsidian
 .cursorignore
 .cursor/
 .vscode/

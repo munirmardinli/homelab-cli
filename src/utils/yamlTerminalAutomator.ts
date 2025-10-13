@@ -1,11 +1,11 @@
 import { execFileSync } from "node:child_process";
 
-import { YamlDataService } from "../config/localStorage.js";
+import { JsonDataService } from "../config/localStorage.js";
 
-export class TerminalAutomator extends YamlDataService {
+export class TerminalAutomator extends JsonDataService {
 	private readonly DEFAULT_STADIO_MODE = "inherit";
 	private readonly NO_COMMANDS_FOUND =
-		"Keine Kommandos in der YAML-Datei gefunden.";
+		"Keine Kommandos in der JSON-Datei gefunden.";
 	private readonly EXEC_PREFIX = "\nFühre aus: ";
 	private readonly PARSE_WARN =
 		"Befehl konnte nicht geparst werden und wird übersprungen:";
@@ -15,10 +15,10 @@ export class TerminalAutomator extends YamlDataService {
 	private readonly ERROR_SUFFIX = ":";
 
 	/**
-	 * Liest alle Kommandos aus einer YAML-Datei im assets/-Verzeichnis und führt sie nacheinander aus.
-	 * @param fileName Dateiname ohne .yml
+	 * Liest alle Kommandos aus einer JSON-Datei im assets/-Verzeichnis und führt sie nacheinander aus.
+	 * @param fileName Dateiname ohne .json
 	 */
-	runAllCommandsFromYaml(fileName: string) {
+	runAllCommandsFromJson(fileName: string) {
 		const commands = this.getData<string>(fileName);
 		if (!Array.isArray(commands) || commands.length === 0) {
 			console.log(this.NO_COMMANDS_FOUND);
