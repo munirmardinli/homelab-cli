@@ -58,7 +58,6 @@
     "type": "individual",
     "url": "https://linktr.ee/munirmardinli"
   },
-  "readmeFilename": "README.md",
   "contributors": [
     {
       "name": "Munir Mardinli",
@@ -66,31 +65,13 @@
       "url": "https://linktr.ee/munirmardinli"
     }
   ],
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm run lint && npm run test"
-    }
-  },
-  "lint-staged": {
-    "*.{js,ts,json,yml,md}": ["prettier --write", "eslint --fix"],
-    "*.ts": ["tsc --noEmit"]
-  },
   "engines": {
     "node": ">=18.0.0"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
+    "@biomejs/biome": "2.2.5",
     "@types/node": "^24.2.0",
-    "dependency-cruiser": "^17.0.2",
-    "husky": "^9.1.7",
-    "prettier": "^3.4.2",
-    "ts-node": "^10.9.1",
     "tsx": "^4.20.5",
     "typescript": "^5.7.3"
   },

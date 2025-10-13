@@ -20,7 +20,6 @@ ARG GITHUB_SHA
 ARG IMAGE_TITLE
 ARG IMAGE_DESCRIPTION
 ARG REPO_LICENSE
-ARG REPO_CATEGORIES
 
 LABEL org.opencontainers.image.title="${IMAGE_TITLE}"
 LABEL org.opencontainers.image.description="${IMAGE_DESCRIPTION}"
@@ -38,7 +37,6 @@ LABEL com.docker.desktop.extension.api.version="1.0.0"
 
 LABEL com.docker.extension.additional-urls="https://${GITHUB_OWNER}.github.io/${IMAGE_TITLE}"
 
-LABEL com.docker.extension.categories="${REPO_CATEGORIES}"
 LABEL com.docker.extension.screenshots="https://profile-images.xing.com/images/22b60162f0c35aafb7f44323785a5616-4/munir-mardinli.1024x1024.jpg"
 
 LABEL com.docker.extension.publisher-url="https://mardinli.de"

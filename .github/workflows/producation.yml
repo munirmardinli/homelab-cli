@@ -8,7 +8,6 @@ on:
       - main
 
 env:
-  GITGUARDIAN_API: ${{ secrets.GITGUARDIAN_API_KEY }}
   NPM_VERSION: "22"
   REGISTRY_URL: "https://npm.pkg.github.com"
   PYTHON_VERSION: "3.13"
@@ -59,49 +58,6 @@ jobs:
       - name: Set cache output
         id: set-cache-output
         run: echo "cache-hit=$(ls node_modules | wc -l | tr -d ' ')" >> $GITHUB_OUTPUT
-  eslint:
-    needs: prepare
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/cache@v4
-        with:
-          path: |
-            node_modules
-            .npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-      - name: Install ESLint package
-        run: npm install @munirmardinli-dev/eslint --save-dev --no-save
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Run eslint tool
-        run: npx @munirmardinli-dev/eslint . --fix
-  prettier:
-    needs: prepare
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/cache@v4
-        with:
-          path: |
-            node_modules
-            .npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-      - name: Run prettier tool
-        run: npx prettier '**/*.{ts,tsx}' --write
-  dependency-cruiser:
-    needs: prepare
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/cache@v4
-        with:
-          path: |
-            node_modules
-            .npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-      - name: Run dependency-cruiser tool
-        run: npx dependency-cruiser --validate .dependency-cruiser.cjs src
   typecheck:
     needs: prepare
     runs-on: ubuntu-latest
@@ -117,10 +73,7 @@ jobs:
         run: npx tsc --noEmit
   build-prod:
     needs:
-      - eslint
-      - prettier
       - typecheck
-      - dependency-cruiser
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -132,80 +85,6 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Build application
         run: npx tsc
-  deploy-docs:
-    needs: build-prod
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ env.PYTHON_VERSION }}
-
-      - name: Install Dependencies
-        run: |
-          pip install -r config/requirements.txt
-          pip install mkdocs-material \
-            mkdocs-git-authors-plugin \
-            mkdocs-git-revision-date-localized-plugin \
-            mkdocs-git-committers-plugin-2
-      - name: Create manifest.webmanifest
-        run: |
-          echo '{
-            "name": "${{ env.REPO_NAME }} Setup",
-            "short_name": "${{ env.REPO_NAME }} Setup",
-            "start_url": "${{ env.DEPLOYMENT_URL }}",
-            "display": "standalone",
-            "background_color": "#ffffff",
-            "theme_color": "#1565c0",
-            "icons": [
-              {
-                "src": "images/icons/icon-192.png",
-                "sizes": "192x192",
-                "type": "image/png"
-              },
-              {
-                "src": "images/icons/icon-512.png",
-                "sizes": "512x512",
-                "type": "image/png"
-              }
-            ]
-          }' > docs/manifest.webmanifest
-
-      - name: Create Robots
-        run: |
-          echo 'User-agent: *
-          Disallow:
-          Sitemap: ${{ env.DEPLOYMENT_URL }}/sitemap.xml' > docs/robots.txt
-
-      - name: Prepare Environment
-        run: |
-          sed -i 's/tags_file: tags.md/# tags_file: tags.md/' mkdocs.yml
-          echo "GH_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
-
-      - name: Deploy to docs branch
-        run: mkdocs gh-deploy --force --clean --no-history --remote-branch gh-pages
-  git_guardian-prod:
-    name: GitGuardian scan
-    needs: build-prod
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-      - name: GitGuardian scan
-        uses: GitGuardian/ggshield/actions/secret@v1.42.0
-        env:
-          GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
-          GITHUB_PUSH_BASE_SHA: ${{ github.event.base }}
-          GITHUB_PULL_BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-          GITGUARDIAN_API_KEY: ${{ env.GITGUARDIAN_API }}
   trivy-scans-prod:
     runs-on: ubuntu-latest
     needs: build-prod
@@ -243,12 +122,12 @@ jobs:
           package-lock.json
       - name: Scan Dockerfile
         run: |
-          trivy config config/.docker/Dockerfile \
+          trivy config .github/.docker/Dockerfile \
           --severity HIGH,CRITICAL \
           --format table \
           --exit-code 1
       - name: Build Docker image
-        run: docker build -f config/.docker/Dockerfile -t homelab-cli .
+        run: docker build -f .github/.docker/Dockerfile -t homelab-cli .
       - name: Scan Docker image
         run: |
           trivy image homelab-cli \
@@ -257,22 +136,6 @@ jobs:
           --ignore-unfixed \
           --format table \
           --exit-code 1
-  check-audit-prod:
-    needs: build-prod
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/checkout@v5
-      - uses: actions/cache@v4
-        with:
-          path: |
-            node_modules
-            .npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-      - name: Run npm audit
-        run: npm audit --audit-level=moderate
-        working-directory: ${{ github.workspace }}
-
   publish-package:
     needs: build-prod
     runs-on: ubuntu-latest
@@ -324,7 +187,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: config/.docker/Dockerfile
+          file: .github/.docker/Dockerfile
           push: true
           tags: ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -339,4 +202,3 @@ jobs:
             IMAGE_DESCRIPTION=${{ github.event.repository.description }}
             GITHUB_SHA=${{ github.sha }}
             REPO_LICENSE=${{ github.event.repository.license }}
-            REPO_CATEGORIES=${{ github.event.repository.topics }}

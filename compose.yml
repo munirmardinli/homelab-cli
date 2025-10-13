@@ -1,4 +1,16 @@
 ---
+x-logging: &default-logging
+  driver: loki
+  options: &default-logging-options
+    loki-url: https://loki.${SYNOLOGY_BASIC_URL}/loki/api/v1/push
+    loki-retries: 5
+    loki-batch-size: 400
+    loki-batch-wait: 2s
+    loki-timeout: 10s
+    loki-max-backoff: 5s
+    loki-min-backoff: 1s
+    loki-tenant-id: default
+
 x-labels: &default-labels
   com.centurylinklabs.watchtower.enable: true
   recreat.container: true
@@ -7,41 +19,34 @@ x-labels: &default-labels
 x-limits: &resource-limits
   mem_limit: 256m
   mem_reservation: 64m
-  cpu_shares: '512'
-  restart: always
-  tty: true
+  cpu_shares: "512"
 
 services:
   homelab-cli:
-    build:
-      context: .
-      dockerfile: config/.docker/Dockerfile.Dev
-    image: node-dev
+    image: mardinlimunir/homelab-cli:latest
     container_name: homelab-cli
+    restart: always
+    tty: true
     <<: *resource-limits
+    logging:
+      <<: *default-logging
+      options:
+        <<: *default-logging-options
     hostname: homelab-cli
     environment:
-      NODE_ENV: development
-      WINDOWS_USERNAME: ${WINDOWS_USERNAME}
-      WINDOWS_PASSWORD: ${USER}
-      WINDOWS_HOST: ${WINDOWS_HOST}
+      NODE_ENV: production
       DARWIN_USERNAME: ${DARWIN_USERNAME}
       DARWIN_PASSWORD: ${DARWIN_PASSWORD}
       DARWIN_HOST: ${DARWIN_HOST}
+
+      WINDOWS_USERNAME: ${WINDOWS_USERNAME}
+      WINDOWS_PASSWORD: ${USER}
+      WINDOWS_HOST: ${WINDOWS_HOST}
+      
       NAS_USERNAME: ${NAS_USERNAME}
       NAS_PASSWORD: ${NAS_PASSWORD}
       NAS_HOST: ${NAS_HOST}
       NAS_PORT: ${NAS_PORT}
-    develop:
-      watch:
-        - action: sync
-          path: ./src
-          target: /home/node/app/src
-          ignore:
-            - node_modules
-            - lib
-        - action: rebuild
-          path: package.json
     networks:
       dockerization:
     labels:
