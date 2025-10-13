@@ -1,8 +1,8 @@
 {
-  "name": "Homelab CLI Dev Container",
-  "dockerComposeFile": "sandbox.yml",
-  "service": "homelab-cli-dev",
-  "workspaceFolder": "/home/node/app",
-  "runArgs": ["--volume", "${localWorkspaceFolder}/lib:/home/node/app/lib"],
-  "remoteUser": "node"
+	"name": "Homelab CLI Dev Container",
+	"dockerComposeFile": "sandbox.yml",
+	"service": "homelab-cli-dev",
+	"workspaceFolder": "/home/node/app",
+	"runArgs": ["--volume", "${localWorkspaceFolder}/lib:/home/node/app/lib"],
+	"remoteUser": "node"
 }

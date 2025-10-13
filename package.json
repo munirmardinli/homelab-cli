@@ -1,82 +1,84 @@
 {
-  "name": "@munirmardinli/homelab-cli",
-  "description": "A CLI for managing your homelab infrastructure",
-  "private": false,
-  "version": "0.0.14",
-  "sideEffects": false,
-  "license": "MIT",
-  "type": "module",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "enginesStrict": true,
-  "homepage": "https://munirmardinli.github.io/homelab-cli",
-  "bin": {
-    "homelab-cli": "lib/bin/homelab-cli.js"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com",
-    "access": "public"
-  },
-  "packageManager": "npm@11.5.2",
-  "sponsor": {
-    "url": "https://linktr.ee/munirmardinli",
-    "type": "individual",
-    "name": "Munir Mardinli"
-  },
-  "publisher": "Munir Mardinli",
-  "keywords": [
-    "cli",
-    "homelab",
-    "infrastructure",
-    "management",
-    "typescript",
-    "nodejs"
-  ],
-  "files": ["lib"],
-  "exports": {
-    ".": {
-      "import": "./lib/index.js",
-      "require": "./lib/index.js"
-    }
-  },
-  "bugs": {
-    "url": "https://github.com/munirmardinli/homelab-cli/issues",
-    "email": "Munir@Mardinli.de"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/munirmardinli/homelab-cli.git",
-    "directory": "Munir Mardinli",
-    "homepage": "https://github.com/munirmardinli/homelab-cli#readme"
-  },
-  "author": {
-    "name": "Munir Mardinli",
-    "email": "Munir@Mardinli.de",
-    "url": "https://linktr.ee/munirmardinli"
-  },
-  "funding": {
-    "type": "individual",
-    "url": "https://linktr.ee/munirmardinli"
-  },
-  "contributors": [
-    {
-      "name": "Munir Mardinli",
-      "email": "Munir@Mardinli.de",
-      "url": "https://linktr.ee/munirmardinli"
-    }
-  ],
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "devDependencies": {
-    "@types/js-yaml": "^4.0.9",
-    "@biomejs/biome": "2.2.5",
-    "@types/node": "^24.2.0",
-    "tsx": "^4.20.5",
-    "typescript": "^5.7.3"
-  },
-  "dependencies": {
-    "dotenv": "^17.2.3",
-    "js-yaml": "^4.1.0"
-  }
+	"name": "@munirmardinli/homelab-cli",
+	"description": "A CLI for managing your homelab infrastructure",
+	"private": false,
+	"version": "0.0.14",
+	"sideEffects": false,
+	"license": "MIT",
+	"type": "module",
+	"main": "lib/index.js",
+	"types": "lib/index.d.ts",
+	"enginesStrict": true,
+	"homepage": "https://munirmardinli.github.io/homelab-cli",
+	"bin": {
+		"homelab-cli": "lib/bin/homelab-cli.js"
+	},
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com",
+		"access": "public"
+	},
+	"packageManager": "npm@11.5.2",
+	"sponsor": {
+		"url": "https://linktr.ee/munirmardinli",
+		"type": "individual",
+		"name": "Munir Mardinli"
+	},
+	"publisher": "Munir Mardinli",
+	"keywords": [
+		"cli",
+		"homelab",
+		"infrastructure",
+		"management",
+		"typescript",
+		"nodejs"
+	],
+	"files": [
+		"lib"
+	],
+	"exports": {
+		".": {
+			"import": "./lib/index.js",
+			"require": "./lib/index.js"
+		}
+	},
+	"bugs": {
+		"url": "https://github.com/munirmardinli/homelab-cli/issues",
+		"email": "Munir@Mardinli.de"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/munirmardinli/homelab-cli.git",
+		"directory": "Munir Mardinli",
+		"homepage": "https://github.com/munirmardinli/homelab-cli#readme"
+	},
+	"author": {
+		"name": "Munir Mardinli",
+		"email": "Munir@Mardinli.de",
+		"url": "https://linktr.ee/munirmardinli"
+	},
+	"funding": {
+		"type": "individual",
+		"url": "https://linktr.ee/munirmardinli"
+	},
+	"contributors": [
+		{
+			"name": "Munir Mardinli",
+			"email": "Munir@Mardinli.de",
+			"url": "https://linktr.ee/munirmardinli"
+		}
+	],
+	"engines": {
+		"node": ">=18.0.0"
+	},
+	"devDependencies": {
+		"@types/js-yaml": "^4.0.9",
+		"@biomejs/biome": "2.2.5",
+		"@types/node": "^24.2.0",
+		"tsx": "^4.20.5",
+		"typescript": "^5.7.3"
+	},
+	"dependencies": {
+		"dotenv": "^17.2.3",
+		"js-yaml": "^4.1.0"
+	}
 }
